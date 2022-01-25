@@ -5,17 +5,17 @@ using UnityEngine.Networking;
 
 public class GoogleSheetManager : MonoBehaviour
 {
-    const string monsterCardDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=0&range=A2:L";
+    const string monsterCardDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=0&range=A2:M";
     const string itemDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1165571065&range=A2:I";
     const string skillCardDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=626817391&range=A2:Q";
     const string linggoDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=457742873&range=A2:J";
-    private MonsterCardSo monsterCardSO;
+    public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
     public SkillCardSo skillCardSO;
     public LevelDataSo linggoLevelDataSO;
     public ItemSo itemSO;
     void Awake()
     {
-        //StartCoroutine(SettingMonserCardData());
+        StartCoroutine(SettingMonserCardData());
         StartCoroutine(SettingSkillCardData());
         StartCoroutine(SettingItemData());
         StartCoroutine(SettingLinggoLevelData());
@@ -155,31 +155,31 @@ public class GoogleSheetManager : MonoBehaviour
 
     void SetMonsterCardData(string data)
 	{
-        if (monsterCardSO.monsterCards != null || monsterCardSO.monsterCards.Count > 0) monsterCardSO.monsterCards.Clear();
+        if (monsterAppearanceLevelDataSO.monsterAppearanceLevelData != null || monsterAppearanceLevelDataSO.monsterAppearanceLevelData.Count > 0) monsterAppearanceLevelDataSO.monsterAppearanceLevelData.Clear();
 
         int lineSize;
         string[] line = data.Split('\n');
         lineSize = line.Length;
         for (int i = 0; i < lineSize; i++)
         {
-            MonsterCard monsterCard = new MonsterCard();
+            MonsterAppearanceLevelData monsterAppearanceLevelData = new MonsterAppearanceLevelData();
             string[] row = line[i].Split('\t');
 
-            monsterCard.monsterCardCode = row[0];
-            monsterCard.monsterCardName = row[1];
-            monsterCard.monsterCardTag = (MonsterCard.Tag)int.Parse(row[2]);
-            monsterCard.monsterCardAttackType = (MonsterCard.AttackType)int.Parse(row[3]);
-            monsterCard.monsterCardCost = int.Parse(row[4]);
+            monsterAppearanceLevelData.wave = int.Parse(row[0]);
+            monsterAppearanceLevelData.monsterHp = int.Parse(row[1]);
+            monsterAppearanceLevelData.monsterAtt = int.Parse(row[2]);
+            monsterAppearanceLevelData.nofe1 = int.Parse(row[3]);
+            monsterAppearanceLevelData.nofe2 = int.Parse(row[4]);
+            monsterAppearanceLevelData.nofe3 = int.Parse(row[5]);
+            monsterAppearanceLevelData.nofe4 = int.Parse(row[6]);
+            monsterAppearanceLevelData.nofe5 = int.Parse(row[7]);
+            monsterAppearanceLevelData.nofe6 = int.Parse(row[8]);
+            monsterAppearanceLevelData.nofe7 = int.Parse(row[9]);
+            monsterAppearanceLevelData.nofe8 = int.Parse(row[10]);
+            monsterAppearanceLevelData.nofe9 = int.Parse(row[11]);
+            monsterAppearanceLevelData.nofe10 = int.Parse(row[12]);
 
-            monsterCard.monsterCardHp = int.Parse(row[5]);
-            monsterCard.monsterCardAtt = int.Parse(row[6]);
-            monsterCard.monsterCardAttRange = float.Parse(row[7]);
-            monsterCard.monsterCardSpeed = float.Parse(row[8]);
-            monsterCard.monsterCardExp = row[9];
-            monsterCard.SprURL = row[10];
-            monsterCard.addProperties = row[11];
-
-            monsterCardSO.monsterCards.Add(monsterCard);
+            monsterAppearanceLevelDataSO.monsterAppearanceLevelData.Add(monsterAppearanceLevelData);
         }
     }
 	#endregion

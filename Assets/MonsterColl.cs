@@ -30,7 +30,7 @@ public class MonsterColl : MonoBehaviour
             if (coll.tag == "Player")
             {
                 
-                this.transform.DOMoveX(this.transform.position.x - 8.0f, 2.0f).SetEase(Ease.OutQuint);
+                this.transform.DOMoveX(this.transform.position.x - 6.0f, 2.0f).SetEase(Ease.OutQuint);
                 this.transform.DOMoveY(this.transform.position.y + Random.Range(-2.0f,2.1f), 2.0f).SetEase(Ease.OutQuint);
 
                 attackCnt--;

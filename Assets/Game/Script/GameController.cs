@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     private void Awake() => Inst = this;
 
     [SerializeField]public LevelDataSo linggoLevelDataSO;
+    [SerializeField]public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
 
     [Header("HP 관련")]
     public int maxHP;
@@ -64,6 +65,20 @@ public class GameController : MonoBehaviour
     public GameObject criticalDamageTPrefab;
     public GameObject healTPrefab;
     public GameObject dotDamageTPrefab;
+
+    [Header("몬스터관련")]
+    public Transform[] monsterCreatePos;
+    public GameObject[] nofes1;
+    public GameObject[] nofes2;
+    public GameObject[] nofes3;
+    public GameObject[] nofes4;
+    public GameObject[] nofes5;
+    public GameObject[] nofes6;
+    public GameObject[] nofes7;
+    public GameObject[] nofes8;
+    public GameObject[] nofes9;
+    public GameObject[] nofes10;
+    public List<Monster> fieldMonsters;
 void Start()
     {
         InitGame();
@@ -118,12 +133,27 @@ void Start()
                 StopCoroutine(timerCour);
             timerCour = TimerCour((int)linggoLevelDataSO.levelData[wave-1].waveTime);
             StartCoroutine(timerCour);
+            //필드위 몬스터 레벨업
+            FieldMonsterLevelUp();
             //몬스터생성
+            CreateMonster();
             //아직안함
             yield return new WaitUntil(()=> (isEndTimer || isWaveGoalComplete));            //타이머가 종료되거나 미션 성공할때까지
 
             //초기화(웨이브++, 웨이브 미션킬 초기화)
             NextWave();
+        }
+    }
+
+    public void FieldMonsterLevelUp()
+    {
+        for (int i = 0; i < fieldMonsters.Count; i++)
+        {
+            if (!fieldMonsters[i].gameObject.activeSelf) fieldMonsters.RemoveAt(i);
+        }
+        for (int i = 0; i < fieldMonsters.Count; i++)
+        {
+            fieldMonsters[i].LevelUpEffect();
         }
     }
     //웨이브 바 애니메이션
@@ -292,8 +322,53 @@ void Start()
         expBar.fillAmount = (float)currentExp / maxExp;
     }
 
-    //넥스트 타이머 아직 안만듬
+    //몬스터 생성
+    public void CreateMonster()
+    {
+        int nofe1 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe1;
+        int nofe2 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe2;
+        int nofe3 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe3;
+        int nofe4 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe4;
+        int nofe5 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe5;
+        int nofe6 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe6;
+        int nofe7 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe7;
+        int nofe8 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe8;
+        int nofe9 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe9;
+        int nofe10 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe10;
+        StartCoroutine(CreateMonsterCour(nofes1, nofe1));
+        StartCoroutine(CreateMonsterCour(nofes2, nofe2));
+        StartCoroutine(CreateMonsterCour(nofes3, nofe3));
+        StartCoroutine(CreateMonsterCour(nofes4, nofe4));
+        StartCoroutine(CreateMonsterCour(nofes5, nofe5));
+        StartCoroutine(CreateMonsterCour(nofes6, nofe6));
+        StartCoroutine(CreateMonsterCour(nofes7, nofe7));
+        StartCoroutine(CreateMonsterCour(nofes8, nofe8));
+        StartCoroutine(CreateMonsterCour(nofes9, nofe9));
+        StartCoroutine(CreateMonsterCour(nofes10, nofe10));
+    }
 
+    public IEnumerator CreateMonsterCour(GameObject[] nofe,int nofeCnt)
+    {
+        for (int i = 0; i < nofe.Length; i++)
+        {
+            if (nofeCnt > 0)
+            {
+                if (!nofe[i].activeSelf)
+                {
+                    int ranPos = Random.Range(0, monsterCreatePos.Length);
+                    nofe[i].SetActive(true);
+                    nofe[i].transform.position = monsterCreatePos[ranPos].position;
+                    nofe[i].GetComponent<SpriteRenderer>().sortingOrder = monsterCreatePos[ranPos].GetComponent<SpriteRenderer>().sortingOrder;
+                    nofe[i].GetComponent<Monster>().InitMonster();
+                    nofeCnt--;
+                    fieldMonsters.Add(nofe[i].GetComponent<Monster>());
+                    yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
+                }
+            }
+        }
+        yield return null;
+    }
+    
 
     #region 가이드 창 열기
     public void OpenGuidePop(string guideT)

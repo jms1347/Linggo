@@ -24,6 +24,7 @@ public class Linggo : MonoBehaviour
     [Header("АјАн")]
     public GameObject target;
     public bool isAttacking = false;
+
     void Awake()
     {
         SettingMissile();
@@ -83,14 +84,14 @@ public class Linggo : MonoBehaviour
 
             for (int i = 0; i < linggoMissiles.Count; i++)
             {
-                //if (!linggoMissiles[i].gameObject.activeSelf)
-                //{
-                //    linggoMissiles[i].transform.position = this.transform.position;
-                //    linggoMissiles[i].gameObject.SetActive(true);
-                //    Vector2 dir = target.transform.position - this.transform.position;
-                //    linggoMissiles[i].SettingTarget(dir);
-                //    break;
-                //}
+                if (!linggoMissiles[i].gameObject.activeSelf)
+                {
+                    linggoMissiles[i].transform.position = this.transform.position;
+                    linggoMissiles[i].gameObject.SetActive(true);
+                    Vector2 dir = target.transform.position - this.transform.position;
+                    linggoMissiles[i].SettingTarget(dir);
+                    break;
+                }
             }
         }
         isAttacking = false;
@@ -114,4 +115,6 @@ public class Linggo : MonoBehaviour
         return neareastObject;
     }
     #endregion
+
+
 }

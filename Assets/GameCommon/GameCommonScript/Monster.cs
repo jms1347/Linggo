@@ -137,14 +137,45 @@ public class Monster : MonoBehaviour
                     this.transform.DOScale(2.0f, 2.0f).SetEase(Ease.Flash);
                 }else if(attackType  == AttackType.FastAttack)
                 {
-                    moveSpeed =  2;
+                    moveSpeed =  3;
                 }
             }            
         }      
         
     }
 
+    #region 초기화(재활용)
+    public void InitMonster()
+    {
+        this.transform.DOKill();
+        StopAllCoroutines();
+        this.transform.localScale = Vector3.one;
+        ChangeState(MonsterState.move);
+        att = GameController.Inst.monsterAppearanceLevelDataSO.monsterAppearanceLevelData[GameController.Inst.wave - 1].monsterAtt;
+        SetMaxHp(GameController.Inst.monsterAppearanceLevelDataSO.monsterAppearanceLevelData[GameController.Inst.wave - 1].monsterHp);
+        stunEffect.SetActive(false);
+        slowEffect.SetActive(false);
+        dotEffect.SetActive(false);
+        levelUpEffect.SetActive(false);
+        shieldEffect.SetActive(false);
+    }
+    #endregion
+
     #region HP 관련 함수
+    public void PlusMaxHp(int changeValue)
+    {
+        maxHp = changeValue;
+        currentHp += changeValue;
+        hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
+    }
+    public void SetMaxHp(int changeValue)
+    {
+        maxHpBar.SetActive(false);
+        maxHp = changeValue;
+        currentHp = maxHp;
+        hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
+    }
+
     public void SettingHpMpBar()
 	{
         maxHpBar = this.transform.GetChild(0).gameObject;
@@ -401,12 +432,20 @@ public class Monster : MonoBehaviour
         var t = new WaitForSeconds(0.1f);
         levelUpEffect.SetActive(true);
         //성장 시켜야됨(실제)
+        LevelUp();
         for (int i = 0; i < 60; i++) yield return t;
         levelUpEffect.SetActive(false);       
 
     }
+
+    public void LevelUp()
+    {
+        att = GameController.Inst.monsterAppearanceLevelDataSO.monsterAppearanceLevelData[GameController.Inst.wave - 1].monsterAtt;
+        PlusMaxHp(GameController.Inst.monsterAppearanceLevelDataSO.monsterAppearanceLevelData[GameController.Inst.wave - 1].monsterHp);
+
+    }
     #endregion
-    
+
     #region 무적 함수
     public void ShieldEffect(float time)
     {
