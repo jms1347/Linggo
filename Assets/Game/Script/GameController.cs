@@ -47,12 +47,14 @@ public class GameController : MonoBehaviour
     [Header("링고 스텟")]
     public Linggo linggo;
     public int att;
+    public float attSpeed;
+    public float missileSpeed;
 
     [Header("그 외 변수")]
     public GameObject guidePop;
 
 
-    bool isStartGame = false;
+    public bool isStartGame = false;
     private IEnumerator startGameCour;
     private IEnumerator timerCour;
     private IEnumerator waveBarCour;
@@ -65,6 +67,7 @@ public class GameController : MonoBehaviour
     public GameObject criticalDamageTPrefab;
     public GameObject healTPrefab;
     public GameObject dotDamageTPrefab;
+    public GameObject deathPrefab;
 
     [Header("몬스터관련")]
     public Transform[] monsterCreatePos;
@@ -88,8 +91,9 @@ void Start()
         level = 1;
         levelText.text = "Lv." + level.ToString();
         att = linggoLevelDataSO.levelData[level - 1].upAtt;
+        attSpeed = linggoLevelDataSO.levelData[level - 1].attSpeed;
         SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp);
-        DecreaseHP(150);
+        //DecreaseHP(150);
         currentExp = 0;
         maxExp = linggoLevelDataSO.levelData[level - 1].upKillExp;
         expBar.fillAmount = (float)currentExp / maxExp;
@@ -243,12 +247,69 @@ void Start()
         hpText.text = currentHP + " / " + maxHP;
     }
 
-    //현재HP 감소
+    //현재HP 감소(일반)
     public void DecreaseHP(int decreaseHp)
     {
+        if (linggo.linggoState == Linggo.LinggoState.sheild) return;
+        linggo.ChangeColorEffect(Color.red);
+
         currentHP -= decreaseHp;
-        
-        if (currentHP < 0) currentHP = 0;
+        GameObject damageT = Instantiate(damageTPrefab, linggo.transform.position, Quaternion.identity);
+        damageT.GetComponent<DamageText>().SetDecreaseText(decreaseHp.ToString());
+
+        if (currentHP < 0)
+        {
+            currentHP = 0;
+            Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
+
+            //게임오버 관련함수
+            print("게임오버_일반");
+        }
+        hpBar.fillAmount = (float)currentHP / maxHP;
+        hpText.text = currentHP + " / " + maxHP;
+
+    }
+    //현재HP 감소(도트)
+    public void DotDecreaseHP(int decreaseHp)
+    {
+        if (linggo.linggoState == Linggo.LinggoState.sheild) return;
+        linggo.ChangeColorEffect(Color.red);
+
+        currentHP -= decreaseHp;
+        GameObject damageT = Instantiate(dotDamageTPrefab, linggo.transform.position, Quaternion.identity);
+        damageT.GetComponent<DamageText>().SetDecreaseText(decreaseHp.ToString());
+
+        if (currentHP < 0)
+        {
+            currentHP = 0;
+            Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
+
+            //게임오버 관련함수
+            print("게임오버_도트");
+        }
+        hpBar.fillAmount = (float)currentHP / maxHP;
+        hpText.text = currentHP + " / " + maxHP;
+
+    }
+    //현재HP 감소(크리티컬)
+    public void CriticalDecreaseHP(int decreaseHp)
+    {
+        if (linggo.linggoState == Linggo.LinggoState.sheild) return;
+        linggo.ChangeColorEffect(Color.red);
+
+        currentHP -= decreaseHp;
+        GameObject damageT = Instantiate(criticalDamageTPrefab, linggo.transform.position, Quaternion.identity);
+        damageT.GetComponent<DamageText>().SetDecreaseText(decreaseHp.ToString());
+
+        if (currentHP < 0)
+        {
+            currentHP = 0;
+            Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
+
+            //게임오버 관련함수
+            print("게임오버_크리티컬");
+
+        }
         hpBar.fillAmount = (float)currentHP / maxHP;
         hpText.text = currentHP + " / " + maxHP;
 
@@ -300,6 +361,8 @@ void Start()
         expBar.fillAmount = (float)currentExp / maxExp;
 
         att = linggoLevelDataSO.levelData[level - 1].upAtt;
+        attSpeed = linggoLevelDataSO.levelData[level - 1].attSpeed;
+
         SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp);
     }
     #endregion

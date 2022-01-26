@@ -4643,7 +4643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6607452972651247941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.48, y: 0.44, z: 0}
+  m_LocalPosition: {x: -0.4, y: 0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6607452974521009765}
@@ -4690,8 +4690,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 565963e2b6fcb714487427d38386b79c, type: 3}
-  m_Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 62b5c632025724a418c7b38012999d73, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -38190,6 +38190,9 @@ MonoBehaviour:
   explosionPrefab: {fileID: 130332, guid: 2e30d40b54f77704d815fabce00d7b2e, type: 3}
   monster: {fileID: 0}
   attackCnt: 1
+  isFire: 1
+  isLightning: 0
+  isIce: 0
 --- !u!95 &6607452973829874538
 Animator:
   serializedVersion: 3
@@ -62180,8 +62183,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 565963e2b6fcb714487427d38386b79c, type: 3}
-  m_Color: {r: 0.75294125, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ad2caca5c65cd8742a813e9ba5b79ee9, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1
   m_DrawMode: 0

@@ -6,10 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Ex
-  - Gas
-  - Slim
   - FxTemporaire
   - PlayerItemUnit
+  - Wall
   layers:
   - Default
   - TransparentFX

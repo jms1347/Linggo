@@ -11,11 +11,11 @@ public class SkillCard
         rare = 1,
         epic = 2
     }
-    public int cardIndex;
-    public string cardName;
-    public string cardExp;
-    public string cardEffectExp;
-    public string cardLvlUpEffectExp;
+    public int skillIndex;
+    public string skillName;
+    public string skillExp;
+    public string[] skillItemExp = new string[5];
+    public string[] skillLvUpItemExp = new string[3];
     public Grade cardGrade; //10%Â÷ÀÌ
     public float cardAppearPercent;
     public float cardCoolTime;

@@ -85,19 +85,25 @@ public class GoogleSheetManager : MonoBehaviour
             SkillCard skillCard = new SkillCard();
             string[] row = line[i].Split('\t');
 
-            skillCard.cardIndex = int.Parse(row[0]);
-            skillCard.cardName = row[1];
-            skillCard.cardExp = row[2];
-            skillCard.cardEffectExp = row[3];
-            skillCard.cardLvlUpEffectExp = row[4];
-            skillCard.cardGrade = (SkillCard.Grade)int.Parse(row[5]);
-            skillCard.cardAppearPercent = float.Parse(row[6]);
+            skillCard.skillIndex = int.Parse(row[0]);
+            skillCard.skillName = row[1];
+            skillCard.skillExp = row[2];
+            skillCard.skillItemExp[0] = row[3];
+            skillCard.skillItemExp[1] = row[4];
+            skillCard.skillItemExp[2] = row[5];
+            skillCard.skillItemExp[3] = row[6];
+            skillCard.skillItemExp[4] = row[7];
+            skillCard.skillLvUpItemExp[0] = row[8];
+            skillCard.skillLvUpItemExp[1] = row[9];
+            skillCard.skillLvUpItemExp[2] = row[10];
+            skillCard.cardGrade = (SkillCard.Grade)int.Parse(row[11]);
+            skillCard.cardAppearPercent = float.Parse(row[12]);
 
-            skillCard.cardCoolTime = float.Parse(row[7]);
-            skillCard.cardCoolTimeCoefficient = float.Parse(row[8]);
-            skillCard.cardDecreaseCoolTime = float.Parse(row[9]);
+            skillCard.cardCoolTime = float.Parse(row[13]);
+            skillCard.cardCoolTimeCoefficient = float.Parse(row[14]);
+            skillCard.cardDecreaseCoolTime = float.Parse(row[15]);
 
-            skillCard.isUse = int.Parse(row[10]) == 1 ? true :false ;
+            skillCard.isUse = int.Parse(row[16]) == 1 ? true :false ;
             if(skillCard.isUse)
                 skillCardSO.skillCards.Add(skillCard);
         }

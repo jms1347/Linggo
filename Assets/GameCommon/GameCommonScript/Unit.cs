@@ -105,7 +105,7 @@ public class Unit : MonoBehaviour
     //    else
     //    {
     //        //¿Ãµø
-    //        unitState = UnitState.idle;
+    //        linggoState = LinggoState.idle;
     //    }
     //}
     public virtual IEnumerator ATTACK(GameObject e)

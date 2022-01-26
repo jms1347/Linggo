@@ -13,8 +13,8 @@ public class Monster : MonoBehaviour
         FastAttack = 2,            //빨라짐
         BigAttack = 3,             //커짐
         FarAttribute = 4,     //원거리속성
-        OnlyPlayerTarget = 5  //플레이어만 타켓
-
+        OnlyPlayerTarget = 5,  //플레이어만 타켓
+        OnlyPlayerTargetNBigAttack = 6
 	}
 
     public enum MonsterState
@@ -96,6 +96,7 @@ public class Monster : MonoBehaviour
         saveSpeed = moveSpeed;
            monsterAni = this.GetComponent<Animator>();
            monsterImg = this.GetComponent<SpriteRenderer>();
+        linggo = GameObject.Find("Linggo");
         SettingHpMpBar();
         SettingEffect();
     }
@@ -111,18 +112,19 @@ public class Monster : MonoBehaviour
     public virtual void Update()
     {
         //링고만 공격
-        if (attackType == AttackType.OnlyPlayerTarget)
+        if (attackType == AttackType.OnlyPlayerTarget || attackType == AttackType.OnlyPlayerTargetNBigAttack)
         {
             if(linggo != null)
-                currentTarget = linggo;       
+                currentTarget = linggo;
 
         }
         else
         {
             currentTarget = FindNearestObjectByTag("Player");
+
         }
 
-        if(currentTarget != null)
+        if (currentTarget != null)
         {
             Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
             this.transform.Translate(moveSpeed * Time.deltaTime * dist);
@@ -131,19 +133,26 @@ public class Monster : MonoBehaviour
             if(attackDistance >= disF)
             {
                 ChangeState(MonsterState.attack);
-                if(attackType == AttackType.BigAttack)
-                {
-                    
+                if(attackType == AttackType.BigAttack || attackType == AttackType.OnlyPlayerTargetNBigAttack)
+                {                    
                     this.transform.DOScale(2.0f, 2.0f).SetEase(Ease.Flash);
                 }else if(attackType  == AttackType.FastAttack)
                 {
                     moveSpeed =  3;
                 }
             }            
-        }      
-        
+        }
+        else
+        {
+            currentTarget = FindNearestObjectByTag("Player");
+        }
+
     }
 
+    public void OnDisable()
+    {
+        this.transform.position = new Vector3(-15, 0, 0);
+    }
     #region 초기화(재활용)
     public void InitMonster()
     {
@@ -198,6 +207,9 @@ public class Monster : MonoBehaviour
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
             this.gameObject.SetActive(false);
+            GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
+            gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
+
             GameController.Inst.PlusKillCnt();
         }
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);

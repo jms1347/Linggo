@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BGController : MonoBehaviour
 {
 	[SerializeField] Transform[] bgs = null;
-	[SerializeField] float moveSpeed = 0f;
+	public float moveSpeed = 0f;
 	public bool isNotObj = false;
 	float resetPosX = 0;
 	float initPosX = 0;

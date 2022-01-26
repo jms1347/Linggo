@@ -113,7 +113,7 @@ public class SkillCardController : MonoBehaviour
 			SettingSkillCardList();
 		}
 		
-		GetSkillCardUI.GetComponent<SkillCardUI>().SettingCard(skillSprs[skillCardLists[0].cardIndex].skillCardSpr, skillCardLists[0]);
+		GetSkillCardUI.GetComponent<SkillCardUI>().SettingCard(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
 		GetSkillCardUI.SetActive(true);
 		selectSkillCard = skillCardLists[0];
 	}
@@ -125,7 +125,7 @@ public class SkillCardController : MonoBehaviour
 			int duplicardIndex = -1;
 			for (int i = 0; i < skillSlots.Length; i++)
 			{
-				if(skillSlots[i].skillImg.sprite == skillSprs[skillCardLists[0].cardIndex].skillCardSpr)
+				if(skillSlots[i].skillImg.sprite == skillSprs[skillCardLists[0].skillIndex].skillCardSpr)
 				{
 					duplicardIndex = i;
 					break;
@@ -144,7 +144,7 @@ public class SkillCardController : MonoBehaviour
 					if (skillSlots[i].isNull)
 					{
 						isAllNotNull = true;
-						skillSlots[i].SettingSkillSlot(skillSprs[skillCardLists[0].cardIndex].skillCardSpr, skillCardLists[0]);
+						skillSlots[i].SettingSkillSlot(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
 						break;
 					}
 				}
@@ -153,7 +153,7 @@ public class SkillCardController : MonoBehaviour
 				if (!isAllNotNull)
 				{
 					SkillSlot deleSlot = skillSlots[0].transform.parent.transform.GetChild(0).GetComponent<SkillSlot>();
-					deleSlot.SettingSkillSlot(skillSprs[skillCardLists[0].cardIndex].skillCardSpr, skillCardLists[0]);
+					deleSlot.SettingSkillSlot(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
 				}
 			}				
 		}

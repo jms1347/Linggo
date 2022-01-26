@@ -49,7 +49,7 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
     public void SelectSkill()
 	{
 		if(skillCard != null && !isCooldown)
-			SkillCardController.Inst.SelectSkillCard(index, skillCard.cardIndex, level);
+			SkillCardController.Inst.SelectSkillCard(index, skillCard.skillIndex, level);
 
 	}
     #endregion
