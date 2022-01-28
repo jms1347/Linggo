@@ -59,6 +59,7 @@ public class GameController : MonoBehaviour
     private IEnumerator timerCour;
     private IEnumerator waveBarCour;
     private IEnumerator BossBarCour;
+    private IEnumerator createMarbleCour;
     bool isEndTimer = false;
     bool isWaveGoalComplete = false;
 
@@ -82,6 +83,8 @@ public class GameController : MonoBehaviour
     public GameObject[] nofes9;
     public GameObject[] nofes10;
     public List<Monster> fieldMonsters;
+
+    
 void Start()
     {
         InitGame();
@@ -119,7 +122,7 @@ void Start()
         StartCoroutine(startGameCour);
     }
 
-    #region 코루틴 함수
+    #region 게임시작(Wave) 코루틴함수
 
     IEnumerator StartGameCour()
     {
@@ -137,6 +140,10 @@ void Start()
                 StopCoroutine(timerCour);
             timerCour = TimerCour((int)linggoLevelDataSO.levelData[wave-1].waveTime);
             StartCoroutine(timerCour);
+            if (createMarbleCour != null)
+                StopCoroutine(createMarbleCour);
+            createMarbleCour = CreateMarbleCour(linggoLevelDataSO.levelData[wave - 1].waveTime);
+            StartCoroutine(createMarbleCour);
             //필드위 몬스터 레벨업
             FieldMonsterLevelUp();
             //몬스터생성
@@ -148,6 +155,15 @@ void Start()
             NextWave();
         }
     }
+    #endregion
+
+    IEnumerator CreateMarbleCour(float time)
+    {
+        var t = new WaitForSeconds(0.1f);
+
+        for (int j = 0; j < time * 10; j++) yield return t;
+
+    }
 
     public void FieldMonsterLevelUp()
     {
@@ -158,9 +174,11 @@ void Start()
         for (int i = 0; i < fieldMonsters.Count; i++)
         {
             fieldMonsters[i].LevelUpEffect();
+            //fieldMonsters[i].LevelUp(); //이펙트 제거
         }
     }
-    //웨이브 바 애니메이션
+
+    #region 웨이브 바 애니메이션
     IEnumerator AnimationWaveBarCour()
     {
         var t = new WaitForSeconds(0.1f);
@@ -176,11 +194,9 @@ void Start()
         nextWaveBarWaveText.DOFade(0, 0.5f);
         for (int j = 0; j < 5; j++) yield return t;
         nextWaveBar.SetActive(false);
-
-
     }
-
-    //타이머
+    #endregion
+    #region 타이머
     IEnumerator TimerCour(int timer)
     {
         isEndTimer = false;
@@ -366,12 +382,13 @@ void Start()
         SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp);
     }
     #endregion
+    #region 킬 카운트
     public void PlusKillCnt()
     {
         killCnt++;
         currentExp++;
         nextWaveCurrentKillCnt++;
-        if (nextWaveCurrentKillCnt == nextWaveMaxKillCnt) isWaveGoalComplete = true;
+        if (nextWaveCurrentKillCnt >= nextWaveMaxKillCnt) isWaveGoalComplete = true;
         nextwaveKillText.text = nextWaveCurrentKillCnt + " / " + nextWaveMaxKillCnt;
 
         killCntText.text = "총킬수 : " + killCnt;
@@ -384,8 +401,9 @@ void Start()
         }
         expBar.fillAmount = (float)currentExp / maxExp;
     }
+    #endregion
 
-    //몬스터 생성
+    #region 몬스터 생성
     public void CreateMonster()
     {
         int nofe1 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe1;
@@ -431,7 +449,7 @@ void Start()
         }
         yield return null;
     }
-    
+    #endregion
 
     #region 가이드 창 열기
     public void OpenGuidePop(string guideT)

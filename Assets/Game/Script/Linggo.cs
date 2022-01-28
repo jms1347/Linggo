@@ -62,12 +62,15 @@ public class Linggo : MonoBehaviour
     public GameObject LightningEffect;
     [HideInInspector]
     public GameObject bossDBuffEffect;
+    [HideInInspector]
+    public GameObject fireDotEffect;
 
     //public GameObject goldPrefab;
 
     void Awake()
     {
         SettingMissile();
+        SettingEffect();
         saveBgTopSpeed = bgController_top.moveSpeed;
         saveBgBottomSpeed = bgController_bottom.moveSpeed;
         linggoAni = this.GetComponent<Animator>();
@@ -92,6 +95,7 @@ public class Linggo : MonoBehaviour
         iceStunEffect = this.transform.GetChild(6).gameObject;
         LightningEffect = this.transform.GetChild(7).gameObject;
         bossDBuffEffect = this.transform.GetChild(8).gameObject;
+        fireDotEffect = this.transform.GetChild(9).gameObject;
     }
     #endregion
 
@@ -216,6 +220,7 @@ public class Linggo : MonoBehaviour
     {
         var t = new WaitForSeconds(0.1f);
         ChangeState(LinggoState.stun);
+        ChangeColorEffect(new Color32(137, 210, 255, 255));
         iceStunEffect.SetActive(true);
 
         bgController_top.moveSpeed = 0;
@@ -305,6 +310,31 @@ public class Linggo : MonoBehaviour
             yield return t;
         }
         dotEffect.SetActive(false);
+    }
+
+    public void FireDotEffect(int time, float damage)
+    {
+        if (linggoState == LinggoState.sheild) return;
+        if (!this.gameObject.activeSelf) return;
+        if (dotCour != null)
+            StopCoroutine(dotCour);
+        dotCour = FireDotEffectCour(time, damage);
+        StartCoroutine(dotCour);
+
+    }
+    public IEnumerator FireDotEffectCour(int time, float damage)
+    {
+        var t = new WaitForSeconds(1.0f);
+        fireDotEffect.SetActive(true);
+        for (int i = 0; i < time; i++)
+        {
+            int dotDam = (int)(damage / time);
+            GameController.Inst.DotDecreaseHP(dotDam);
+            print("도트뎀 : " + dotDam + " / " + damage);
+
+            yield return t;
+        }
+        fireDotEffect.SetActive(false);
     }
     #endregion
     #region 색깔 변경 코루틴

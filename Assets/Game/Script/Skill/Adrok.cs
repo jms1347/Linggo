@@ -23,6 +23,9 @@ public class Adrok : Skill
 
 	public Transform startPos;
 	public GameObject adrokRange;
+
+    public List<GameObject> colls = new List<GameObject>();
+
     void Awake()
     {
 		boxColl = this.GetComponent<BoxCollider2D>();
@@ -64,14 +67,22 @@ public class Adrok : Skill
 		this.transform.rotation = Quaternion.identity;
 		this.transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel-1].nukbackX, 1.5f).SetEase(Ease.Linear);
 		for (int i = 0; i < 15; i++) yield return time;
+        for (int i = 0; i < colls.Count; i++)
+        {
+            colls[i].transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
+        }
+        for (int i = 0; i < 15; i++) yield return time;
+        this.gameObject.SetActive(false);
 
-		this.gameObject.SetActive(false);
+        colls.Clear();
 	}
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
 		if (coll.gameObject.tag == "Enemy")
-		{
+        {
+            colls.Add(coll.gameObject);
+
             if (skillLevel > 4)
             {
 				coll.gameObject.GetComponent<Monster>().StunEffect(levelUpData[skillLevel-1].stunTime);

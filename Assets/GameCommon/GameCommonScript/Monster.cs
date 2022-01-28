@@ -173,7 +173,7 @@ public class Monster : MonoBehaviour
     #region HP 관련 함수
     public void PlusMaxHp(int changeValue)
     {
-        maxHp = changeValue;
+        maxHp += changeValue;
         currentHp += changeValue;
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
     }
@@ -206,11 +206,13 @@ public class Monster : MonoBehaviour
         {
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
-            this.gameObject.SetActive(false);
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
             gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
+            this.gameObject.SetActive(false);
 
             GameController.Inst.PlusKillCnt();
+
+
         }
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
     }
@@ -227,10 +229,13 @@ public class Monster : MonoBehaviour
         {
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
-            this.gameObject.SetActive(false);
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
             gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
+            this.gameObject.SetActive(false);
+
             GameController.Inst.PlusKillCnt();
+
+
         }
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
     }
@@ -248,9 +253,10 @@ public class Monster : MonoBehaviour
         {
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
-            this.gameObject.SetActive(false);
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
             gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
+            this.gameObject.SetActive(false);
+
             GameController.Inst.PlusKillCnt();
         }
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
@@ -264,9 +270,9 @@ public class Monster : MonoBehaviour
         damageT.GetComponent<DamageText>().SetDecreaseText(currentHp.ToString());
         currentHp = 0;
         Instantiate(deathEffect, this.transform.position, Quaternion.identity);
-        this.gameObject.SetActive(false);
         GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
         gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
+        this.gameObject.SetActive(false);
 
         GameController.Inst.PlusKillCnt();
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
@@ -445,7 +451,7 @@ public class Monster : MonoBehaviour
         levelUpEffect.SetActive(true);
         //성장 시켜야됨(실제)
         LevelUp();
-        for (int i = 0; i < 60; i++) yield return t;
+        for (int i = 0; i < 10; i++) yield return t;
         levelUpEffect.SetActive(false);       
 
     }
