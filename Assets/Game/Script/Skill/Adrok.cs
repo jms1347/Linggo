@@ -65,23 +65,26 @@ public class Adrok : Skill
 
 		this.transform.DOScale(levelUpData[skillLevel-1].xRangeAdd, 1.5f);
 		this.transform.rotation = Quaternion.identity;
-		this.transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel-1].nukbackX, 1.5f).SetEase(Ease.Linear);
-		for (int i = 0; i < 15; i++) yield return time;
-        for (int i = 0; i < colls.Count; i++)
-        {
-            colls[i].transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
-        }
+
+        this.transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel-1].nukbackX, 1.5f).SetEase(Ease.Linear);
+        //yield return null;
+        //for (int i = 0; i < colls.Count; i++)
+        //{
+        //    colls[i].transform.DOMoveX(colls[i].transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
+        //}
         for (int i = 0; i < 15; i++) yield return time;
-        this.gameObject.SetActive(false);
 
         colls.Clear();
-	}
+        this.gameObject.SetActive(false);
+
+    }
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
 		if (coll.gameObject.tag == "Enemy")
         {
             colls.Add(coll.gameObject);
+            //coll.transform.DOMoveX(coll.transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
 
             if (skillLevel > 4)
             {
@@ -93,4 +96,20 @@ public class Adrok : Skill
 		}
 	}
 
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.tag == "Enemy")
+        {
+            colls.Add(coll.gameObject);
+            coll.transform.DOMoveX(coll.transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
+
+            if (skillLevel > 4)
+            {
+                coll.GetComponent<Monster>().StunEffect(levelUpData[skillLevel - 1].stunTime);
+
+            }
+            int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+            coll.GetComponent<Monster>().DecreaseHP(damage);
+        }
+    }
 }

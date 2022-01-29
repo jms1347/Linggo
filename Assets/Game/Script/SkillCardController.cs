@@ -14,7 +14,6 @@ public class SkillCardController : MonoBehaviour
 	public List<SkillCard> skillCardLists = new List<SkillCard>();
 	private SkillCard selectSkillCard;
 	public GameObject GetSkillCardUI;
-	public GameObject skillCardUIBtn;
 
 	public SkillSlot[] skillSlots = new SkillSlot[5];
 
@@ -203,24 +202,5 @@ public class SkillCardController : MonoBehaviour
 	}
     #endregion
 
-    #region 스킬UI 팝업 On버튼
-    public void OnSkillCardUI()
-	{
-		if (skillCardUICour != null)
-			StopCoroutine(skillCardUICour);
-		skillCardUICour = OnSkillCardUICour();
-		StartCoroutine(skillCardUICour);
-	}
-	public IEnumerator skillCardUICour;
 
-	public IEnumerator OnSkillCardUICour()
-	{
-		float x = Random.Range(-800f, 800f);
-		float y = Random.Range(-400f, 150f);
-		skillCardUIBtn.transform.localPosition = new Vector2(x, y);
-		skillCardUIBtn.SetActive(true);
-		yield return new WaitForSeconds(5.0f);
-		skillCardUIBtn.SetActive(false);
-	}
-	#endregion
 }

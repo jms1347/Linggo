@@ -38,7 +38,6 @@ public class Missile : MonoBehaviour
 	}
 	public void SettingTarget(GameObject target)
 	{
-        print("targetNAme : " + target.name);
         this.transform.position = GameController.Inst.linggo.transform.position;
         Vector2 dir = target.transform.position - GameController.Inst.linggo.transform.position;
         dir.Normalize();

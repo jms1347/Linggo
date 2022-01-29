@@ -50,6 +50,16 @@ public class GameController : MonoBehaviour
     public float attSpeed;
     public float missileSpeed;
 
+    [Header("구슬 관련")]
+    public Image marbleExpBar;
+    public int maxMarbleExp;
+    public int currentMarbleExp;
+    public float createMarblePosLeftX;
+    public float createMarblePosRightX;
+    public GameObject[] marbles;
+    public List<int> createMarbleTimes = new List<int>();
+    public List<int> createMarbleCnts = new List<int>();
+
     [Header("그 외 변수")]
     public GameObject guidePop;
 
@@ -140,6 +150,7 @@ void Start()
                 StopCoroutine(timerCour);
             timerCour = TimerCour((int)linggoLevelDataSO.levelData[wave-1].waveTime);
             StartCoroutine(timerCour);
+            //구슬 생성
             if (createMarbleCour != null)
                 StopCoroutine(createMarbleCour);
             createMarbleCour = CreateMarbleCour(linggoLevelDataSO.levelData[wave - 1].waveTime);
@@ -156,14 +167,66 @@ void Start()
         }
     }
     #endregion
-
+    #region 구슬 시스템
     IEnumerator CreateMarbleCour(float time)
     {
         var t = new WaitForSeconds(0.1f);
+        createMarbleTimes.Clear();
+        createMarbleCnts.Clear();
+        int minute = (int)time;
+        int cnt = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            int ranTime = Random.Range(10, 21);
+            createMarbleTimes.Add(ranTime);
+            minute -= ranTime;
+            if (minute < 10) break;
+        }
+        for (int i = 0; i < createMarbleTimes.Count; i++)
+        {
+            int turnMarbleCnt = Random.Range(1, 5);
+            createMarbleCnts.Add(turnMarbleCnt);
+            cnt += turnMarbleCnt;
+        }
 
-        for (int j = 0; j < time * 10; j++) yield return t;
+        if(cnt < 8)
+        {
+            for (int i = 0; i < createMarbleCnts.Count; i++)
+            {
+                if (createMarbleCnts[i] == 1) createMarbleCnts[i]++;
+            }
+        }else if(cnt > 20)
+        {
+            for (int i = 0; i < createMarbleCnts.Count; i++)
+            {
+                if (createMarbleCnts[i] == 4) createMarbleCnts[i]--;
+            }
+        }
+
+        for (int i = 0; i < createMarbleTimes.Count; i++)
+        {
+            for (int j = 0; j < createMarbleCnts[i]; j++)
+            {
+                marbles[j].transform.localPosition = new Vector3(Random.Range(createMarblePosLeftX, createMarblePosRightX), marbles[0].transform.position.y, 0);
+                marbles[j].SetActive(true);
+            }
+            for (int j = 0; j < createMarbleTimes[i] * 10; j++) yield return t;
+        }
 
     }
+    public void SettingMarbleExp(int plusExp)
+    {
+        currentMarbleExp += plusExp;
+        if(currentMarbleExp >= maxMarbleExp)
+        {
+            SkillCardController.Inst.OnPopUpUI();
+            int remindExp = currentMarbleExp - maxMarbleExp;
+            currentMarbleExp = remindExp;
+        }
+        marbleExpBar.fillAmount = (float)currentMarbleExp / maxMarbleExp;
+    
+    }
+    #endregion
 
     public void FieldMonsterLevelUp()
     {
@@ -458,4 +521,30 @@ void Start()
         guidePop.SetActive(true);
     }
     #endregion
+
+    public int[] GetRandomInt(int length, int min, int max)
+    {
+        int[] randArray = new int[length];
+        bool isSame;
+
+        for (int i = 0; i < length; ++i)
+        {
+            while (true)
+            {
+                randArray[i] = Random.Range(min, max);
+                isSame = false;
+
+                for (int j = 0; j < i; ++j)
+                {
+                    if (randArray[j] == randArray[i])
+                    {
+                        isSame = true;
+                        break;
+                    }
+                }
+                if (!isSame) break;
+            }
+        }
+        return randArray;
+    }
 }

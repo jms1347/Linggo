@@ -47,27 +47,44 @@ public class ApooApoo : Skill
 		this.transform.localScale = new Vector2(levelUpData[skillLevel - 1].xRangeAdd, levelUpData[skillLevel - 1].yRangeAdd);
 		for (int i = 0; i < 10; i++) yield return time;
 		boxColl.enabled = true;
-        
-		this.transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel].nukbackX, 1.0f).OnComplete(()=>
-		{
-			this.gameObject.SetActive(false);
-            for (int i = 0; i < colls.Count; i++)
-            {
-                colls[i].transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel].nukbackX, 1.0f);
-            }
-            
-        });
+
+        this.transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel].nukbackX, 1.0f);
+  //          .OnComplete(()=>
+		//{
+  //          for (int i = 0; i < colls.Count; i++)
+  //          {
+  //              colls[i].transform.DOMoveX(colls[i].transform.position.x - levelUpData[skillLevel].nukbackX, 1.0f);
+  //          }
+
+  //      });
+
         for (int i = 0; i < 10; i++) yield return time;
         colls.Clear();
+        this.gameObject.SetActive(false);
+
     }
 
-	private void OnCollisionEnter2D(Collision2D coll)
+    private void OnCollisionEnter2D(Collision2D coll)
 	{
 		if (coll.gameObject.tag == "Enemy")
 		{
             colls.Add(coll.gameObject);
-			int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+            //coll.transform.DOMoveX(coll.transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
+
+            int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
 			coll.gameObject.GetComponent<Monster>().DecreaseHP(damage);
 		}
 	}
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.tag == "Enemy")
+        {
+            colls.Add(coll.gameObject);
+            coll.transform.DOMoveX(coll.transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
+
+            int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+            coll.GetComponent<Monster>().DecreaseHP(damage);
+        }
+    }
 }

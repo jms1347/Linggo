@@ -26,7 +26,7 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 	{
 		skillImg = this.transform.GetChild(0).GetComponent<Image>();
 		coolTimeImg = this.transform.GetChild(1).GetComponent<Image>();
-		levelText = skillImg.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+		levelText = skillImg.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 		cardGrowColor = skillImg.transform.GetChild(1).GetComponent<Image>();
 
 		InitSkillSlot();
@@ -105,7 +105,7 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 			}
 			skillImg.gameObject.SetActive(true);
 			level = 1;
-			levelText.text = level.ToString();
+			levelText.text = "Lv."+level.ToString();
 			skillCard = sc;
 			this.GetComponent<Button>().interactable = true;
             switch (sc.cardGrade)
@@ -132,7 +132,11 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 	{
 		if(level < 10)
 			level++;
-		levelText.text = level.ToString();
+
+        if(level == 10)
+            levelText.text = "Lv.Max";
+        else
+		    levelText.text = "Lv."+level.ToString();
 	}
     #endregion
 
