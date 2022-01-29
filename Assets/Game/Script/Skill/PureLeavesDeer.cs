@@ -64,9 +64,7 @@ public class PureLeavesDeer : Skill
             if (targetCnt > 0)
             {
                 colls.Add(coll.gameObject);
-                targetCnt--;
-                
-
+                targetCnt--;              
             }
         }
     }

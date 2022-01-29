@@ -96,7 +96,7 @@ public class GraceCat : Skill
 	{
 		if (coll.tag == "Enemy")
 		{			
-			print("글래이스캣 첫번째 스킬 발동");
+			//print("글래이스캣 첫번째 스킬 발동");
 			//coll.GetComponent<Monster>().currentTarget = startPos.gameObject;
 			coll.transform.position = Vector2.Lerp(coll.transform.position, startPos.position, 0.2f / levelUpData[skillLevel - 1].skillCastTime * Time.deltaTime);
 		}
