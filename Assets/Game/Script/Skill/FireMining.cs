@@ -52,12 +52,12 @@ public class FireMining : Skill
                 targetCount--;
                 if (isCriticalMode)
                 {
-                    int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+                    int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient * levelUpData[skillLevel - 1].criticalCoefficient);
                     coll.GetComponent<Monster>().CriticalDecreaseHP(damage);
                 }
                 else
                 {
-                    int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient * levelUpData[skillLevel-1].criticalCoefficient);
+                    int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient );
                     coll.GetComponent<Monster>().DecreaseHP(damage);
                 }
             }

@@ -19,7 +19,7 @@ public class LightningMos : Skill
     BoxCollider2D boxColl;
     IEnumerator skillEffectCour;
 
-    void Start()
+    void Awake()
     {
         boxColl = this.GetComponent<BoxCollider2D>();
     }

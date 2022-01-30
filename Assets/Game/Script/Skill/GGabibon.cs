@@ -13,14 +13,14 @@ public class GGabibon : Skill
         public float addAttackCoefficient;
         public int targetNumber;
         public float stunTime;
+        public float skillDurationTime;
     }
     public LevelUpData[] levelUpData = new LevelUpData[10];
     BoxCollider2D boxColl;
     int targetCnt = 0;
 
     IEnumerator skillEffectCour;
-    public List<GameObject> colls = new List<GameObject>();
-    public List<GameObject> stunEffect = new List<GameObject>();
+   // public List<GameObject> colls = new List<GameObject>();
     void Awake()
     {
         boxColl = this.GetComponent<BoxCollider2D>();
@@ -41,12 +41,8 @@ public class GGabibon : Skill
     {
         var time = new WaitForSeconds(0.1f);
 
-        for (int i = 0; i < 40; i++) yield return time;
-        for (int i = 0; i < stunEffect.Count; i++)
-        {
-            stunEffect[i].SetActive(false); 
-        }
-        colls.Clear();
+        for (int i = 0; i < levelUpData[skillLevel - 1].skillDurationTime * 10; i++) yield return time;
+
         this.gameObject.SetActive(false);
 
     }
@@ -58,16 +54,11 @@ public class GGabibon : Skill
         {
             if(targetCnt > 0)
             {
-                colls.Add(coll.gameObject);
-                stunEffect[targetCnt].transform.position = coll.transform.position;
-                stunEffect[targetCnt].SetActive(true);
+                targetCnt--;
                 coll.gameObject.GetComponent<Monster>().StunEffect(levelUpData[skillLevel - 1].stunTime);
-
-                GameObject hit = Instantiate(hitEffect, coll.transform.position, Quaternion.identity);
                 int dotDam = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].addAttackCoefficient);
                 coll.gameObject.GetComponent<Monster>().DotEffect(levelUpData[skillLevel - 1].dotTime, dotDam);
 
-                targetCnt--;
             }
         }
     }

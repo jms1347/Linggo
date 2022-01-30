@@ -65,7 +65,7 @@ public class GraceCat : Skill
 			int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
 			colls[i].GetComponent<Monster>().DecreaseHP(damage);
 			colls[i].GetComponent<Monster>().StunEffect(levelUpData[skillLevel - 1].stunTime);
-			print("글래이스캣 두번째 스킬 발동");
+			//print("글래이스캣 두번째 스킬 발동");
 		}
 		for (int j = 0; j < 22; j++) yield return time;
 		isStartEffect = false;

@@ -11,8 +11,8 @@ public class Maniak : Skill
         public float attackCoefficient;
 
         public int targetNumber;
-        public int objCnt;
         public int criticalObjCnt;
+        public int criticalCoefficient;
         public float skillCastingTime;
 
     }
@@ -21,8 +21,10 @@ public class Maniak : Skill
 
     BoxCollider2D boxColl;
     IEnumerator skillEffectCour;
+    public List<GameObject> eyes = new List<GameObject>();
+    public List<GameObject> criticalEffect = new List<GameObject>();
+    public List<GameObject> basicEffect = new List<GameObject>();
     public List<GameObject> colls = new List<GameObject>();
-    public GameObject healObjPrefab;
 
     private void Awake()
     {
@@ -43,22 +45,45 @@ public class Maniak : Skill
     {
         var time = new WaitForSeconds(0.1f);
 
+        for (int i = 0; i < 5; i++) yield return time;
+        boxColl.enabled = false;
         for (int i = 0; i < levelUpData[skillLevel - 1].skillCastingTime * 10; i++) yield return time;
+        //눈 없애기
+        for (int i = 0; i < eyes.Count; i++)
+            eyes[i].SetActive(false);
+        
         for (int i = 0; i < colls.Count; i++)
         {
-            if (levelUpData[skillLevel - 1].healPercent > 0)
+            if (i < levelUpData[skillLevel - 1].criticalObjCnt)
             {
-                GameObject healObj = Instantiate(healObjPrefab, colls[i].transform.position, Quaternion.identity);
-                int heal = Mathf.RoundToInt(colls[i].GetComponent<Monster>().currentHp * (levelUpData[skillLevel - 1].healPercent * 0.01f));
-                healObj.GetComponent<HealObj>().MoveGoalPos(GameController.Inst.linggo.transform, heal);
-            }
+                criticalEffect[i].transform.position = colls[i].transform.position;
+                criticalEffect[i].SetActive(true);
+                //크리티컬 데미지
+                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient * levelUpData[skillLevel - 1].criticalCoefficient);
+                colls[i].GetComponent<Monster>().CriticalDecreaseHP(damage);
 
-            colls[i].GetComponent<Monster>().DeathSkill(hitEffect);
+
+            }
+            else
+            {
+                basicEffect[i].transform.position = colls[i].transform.position;
+                basicEffect[i].SetActive(true);
+                //일반 데미지
+                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+                colls[i].GetComponent<Monster>().DecreaseHP(damage);
+            }
         }
-        yield return null;
+        for (int i = 0; i < 15; i++) yield return time;
         colls.Clear();
+        for (int i = 0; i < criticalEffect.Count; i++)
+        {
+            basicEffect[i].SetActive(false);
+            criticalEffect[i].SetActive(false);
+        }
+        boxColl.enabled = true;
         this.gameObject.SetActive(false);
     }
+    
     [System.Obsolete]
     private void OnTriggerEnter2D(Collider2D coll)
     {
@@ -67,6 +92,8 @@ public class Maniak : Skill
             if (targetCnt > 0)
             {
                 colls.Add(coll.gameObject);
+                eyes[targetCnt - 1].transform.position = coll.transform.position; /*+ new Vector3(0, 0.5f, 0);*/
+                eyes[targetCnt-1].SetActive(true);
                 targetCnt--;
             }
         }

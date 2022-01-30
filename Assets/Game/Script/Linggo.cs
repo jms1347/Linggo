@@ -173,7 +173,18 @@ public class Linggo : MonoBehaviour
                 bgController_top.moveSpeed = saveBgTopSpeed;
                 break;
             case LinggoState.sheild:
-
+                if (slowCour != null)
+                    StopCoroutine(slowCour);
+                slowEffect.SetActive(false);                
+                if (stunCour != null)
+                    StopCoroutine(stunCour);
+                stunEffect.SetActive(false);
+                iceStunEffect.SetActive(false);
+                LightningEffect.SetActive(false);
+                if (dotCour != null)
+                    StopCoroutine(dotCour);
+                dotEffect.SetActive(false);
+                fireDotEffect.SetActive(false);
                 break;
         }
     }

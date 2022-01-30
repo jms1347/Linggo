@@ -148,10 +148,13 @@ public class Monster : MonoBehaviour
         }
 
     }
-
-    public void OnDisable()
+    public void DeathChangePos()
     {
         this.transform.position = new Vector3(-15, 0, 0);
+    }
+    public void OnDisable()
+    {
+        Invoke(nameof(DeathChangePos), 2.0f);
     }
     #region 초기화(재활용)
     public void InitMonster()
@@ -234,8 +237,31 @@ public class Monster : MonoBehaviour
             this.gameObject.SetActive(false);
 
             GameController.Inst.PlusKillCnt();
+        }
+        hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
+    }
+    public void DecreasePeachmonHP(int decreaseHp, int goldAcquisitionAmount)
+    {
+        if (monsterState == MonsterState.sheild) return;
+        ChangeColorEffect(Color.red);
 
+        maxHpBar.SetActive(true);
+        currentHp -= decreaseHp;
+        GameObject damageT = Instantiate(damageTPrefab, this.transform.position, Quaternion.identity);
+        damageT.GetComponent<DamageText>().SetDecreaseText(decreaseHp.ToString());
+        if (currentHp < 0)
+        {
+            currentHp = 0;
+            Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
+            for (int i = 0; i < goldAcquisitionAmount; i++)
+            {
+                GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
+                gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
+                this.gameObject.SetActive(false);
+            }
+           
 
+            GameController.Inst.PlusKillCnt();
         }
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
     }
@@ -404,7 +430,7 @@ public class Monster : MonoBehaviour
         {
             int dotDam = (int)(damage / time);
             DotDecreaseHP(dotDam);
-            print("도트뎀 : " + dotDam + " / " + damage);
+            //print("도트뎀 : " + dotDam + " / " + damage);
 
             yield return t;
         }

@@ -39,17 +39,17 @@ public class CaliRaim : Skill
             if (targetCnt > 0)
             {
                 targetCnt--;
-
-                coll.GetComponent<Monster>().SlowEffect(levelUpData[skillLevel - 1].slowTime, levelUpData[skillLevel - 1].slowPercent);
-                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
-                coll.GetComponent<Monster>().DecreaseHP(damage);
-
                 if (levelUpData[skillLevel - 1].healPercent > 0)
                 {
                     GameObject healObj = Instantiate(healObjPrefab, coll.transform.position, Quaternion.identity);
                     int heal = Mathf.RoundToInt(coll.GetComponent<Monster>().currentHp * (levelUpData[skillLevel - 1].healPercent * 0.01f));
                     healObj.GetComponent<HealObj>().MoveGoalPos(GameController.Inst.linggo.transform, heal);
                 }
+                coll.GetComponent<Monster>().SlowEffect(levelUpData[skillLevel - 1].slowTime, levelUpData[skillLevel - 1].slowPercent);
+                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+                coll.GetComponent<Monster>().DecreaseHP(damage);
+
+                
             }
         }
     }

@@ -11,21 +11,29 @@ public class Raining : Skill
         public float attackCoefficient;
         public float xRangeAdd;
         public float yRangeAdd;
-        public float delayTime;
+        public float skillDurationTime;
     }
     public LevelUpData[] levelUpData = new LevelUpData[10];
-
+    public GameObject rainingRange;
     BoxCollider2D boxColl;
     IEnumerator skillEffectCour;
-
-    void Start()
+    float time = 1.0f;
+    void Awake()
     {
         boxColl = this.GetComponent<BoxCollider2D>();
+        time = 1.0f;
+
     }
 
     [System.Obsolete]
     private void OnEnable()
     {
+        boxColl.size = new Vector2(levelUpData[skillLevel - 1].xRangeAdd, levelUpData[skillLevel - 1].yRangeAdd);
+        rainingRange.transform.localScale = new Vector2(levelUpData[skillLevel - 1].xRangeAdd, levelUpData[skillLevel - 1].yRangeAdd);
+        this.transform.localScale = new Vector3(levelUpData[skillLevel - 1].xRangeAdd == 2 ? 2 : 3
+            , levelUpData[skillLevel - 1].yRangeAdd == 1 ? 1 : 2
+            , levelUpData[skillLevel - 1].xRangeAdd == 2 ? 2 : 3);
+
         if (skillEffectCour != null)
             StopCoroutine(skillEffectCour);
         skillEffectCour = SkillEffect();
@@ -35,34 +43,27 @@ public class Raining : Skill
     IEnumerator SkillEffect()
     {
         var time = new WaitForSeconds(0.1f);
-        this.transform.localScale = Vector3.one;
-        yield return new WaitForSeconds(1.0f);
-
-        //this.transform.DOScale(10, levelUpData[skillLevel - 1].skillCastingTime).SetEase(Ease.Flash)
-        //    .OnComplete(() =>
-        //    {
-        //        boxColl.enabled = true;
-        //        hitEffect.transform.position = this.transform.position;
-        //        hitEffect.SetActive(true);
-        //    });
-        //for (int i = 0; i < levelUpData[skillLevel - 1].skillCastingTime * 10; i++) yield return time;
-        boxColl.enabled = false;
+        for (int i = 0; i < levelUpData[skillLevel - 1].skillDurationTime * 10; i++) yield return time;
         this.gameObject.SetActive(false);
     }
 
+
     [System.Obsolete]
-    private void OnTriggerEnter2D(Collider2D coll)
+    private void OnTriggerStay2D(Collider2D coll)
     {
+
         if (coll.tag == "Enemy")
         {
-            int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
-            coll.gameObject.GetComponent<Monster>().DecreaseHP(damage);
-           // coll.gameObject.GetComponent<Monster>().StunEffect(levelUpData[skillLevel - 1].stunTime);
-
-            if (skillLevel >= 5)
+            if (time <= 0)
             {
-             //   int dotDam = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].addAttackCoefficient);
-            //    coll.gameObject.GetComponent<Monster>().DotEffect(levelUpData[skillLevel - 1].dotTime, dotDam);
+                print("µô");
+                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+                coll.gameObject.GetComponent<Monster>().DecreaseHP(damage);
+                time = 1.0f;
+            }
+            else
+            {
+                time -= Time.deltaTime;
             }
         }
     }
