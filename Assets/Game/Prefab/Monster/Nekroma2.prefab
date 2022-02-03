@@ -14275,7 +14275,7 @@ Transform:
   m_GameObject: {fileID: 7615048194575083165}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8.463, y: 2.465, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children:
   - {fileID: 7615048194526987717}
   - {fileID: 8046186888293488982}
@@ -14392,7 +14392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 153568, guid: cca79b260878071418290367024a6716, type: 3}
   monster: {fileID: 0}
-  attackCnt: 20
+  attackCnt: 1
   isFire: 0
   isLightning: 0
   isIce: 0
@@ -14414,7 +14414,7 @@ MonoBehaviour:
   att: 20
   maxHp: 120
   currentHp: 120
-  moveSpeed: 0.2
+  moveSpeed: 0.3
   saveSpeed: 0
   attackDistance: 0.5
   hpBar: {fileID: 0}
@@ -38571,12 +38571,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6428af09d35616b4aa4e9c0a4b9fe02d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 6428af09d35616b4aa4e9c0a4b9fe02d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6428af09d35616b4aa4e9c0a4b9fe02d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6428af09d35616b4aa4e9c0a4b9fe02d, type: 3}
       propertyPath: m_LocalPosition.z

@@ -7,10 +7,13 @@ public class Gold : MonoBehaviour
 {
     public float moveTime;
     public float delayTime;
+    public float moveScale;
     
     public void MoveGoalPos(Transform goalPos)
     {
-        this.transform.DOMove(goalPos.position, Random.Range(moveTime - 0.5f, moveTime + 0.6f))
+        float ran = Random.Range(moveTime-0.5f, moveTime + 0.5f);
+        this.transform.DOScale(moveScale, ran).SetDelay(delayTime).SetEase(Ease.InQuart);
+        this.transform.DOMove(goalPos.position, ran)
             .SetEase(Ease.InQuart).SetDelay(delayTime)
             .OnComplete(() =>
             {

@@ -96,4 +96,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTime: 1
-  delayTime: 1
+  delayTime: 0
+  moveScale: 1.5

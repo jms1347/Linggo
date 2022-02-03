@@ -24030,7 +24030,7 @@ Transform:
   m_GameObject: {fileID: 2816014404177389889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.858, y: 2.077, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children:
   - {fileID: 2816014405143439353}
   - {fileID: 2816014404972517833}
@@ -24158,7 +24158,7 @@ MonoBehaviour:
   att: 20
   maxHp: 120
   currentHp: 120
-  moveSpeed: 0.2
+  moveSpeed: 0.3
   saveSpeed: 0
   attackDistance: 5
   hpBar: {fileID: 0}
@@ -38571,12 +38571,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6428af09d35616b4aa4e9c0a4b9fe02d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 6428af09d35616b4aa4e9c0a4b9fe02d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6428af09d35616b4aa4e9c0a4b9fe02d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6428af09d35616b4aa4e9c0a4b9fe02d, type: 3}
       propertyPath: m_LocalPosition.z
