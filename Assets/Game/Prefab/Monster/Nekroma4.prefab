@@ -24148,7 +24148,7 @@ MonoBehaviour:
   att: 20
   maxHp: 120
   currentHp: 120
-  moveSpeed: 0.2
+  moveSpeed: 0.4
   saveSpeed: 0
   attackDistance: 4
   hpBar: {fileID: 0}
