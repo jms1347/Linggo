@@ -148,14 +148,14 @@ public class Monster : MonoBehaviour
         }
 
     }
-    public void DeathChangePos()
-    {
-        this.transform.position = new Vector3(-15, 0, 0);
-    }
-    public void OnDisable()
-    {
-        Invoke(nameof(DeathChangePos), 2.0f);
-    }
+    //public void DeathChangePos()
+    //{
+    //    this.transform.position = new Vector3(-15, 0, 0);
+    //}
+    //public void OnDisable()
+    //{
+    //    Invoke(nameof(DeathChangePos), 3.0f);
+    //}
     #region 초기화(재활용)
     public void InitMonster()
     {

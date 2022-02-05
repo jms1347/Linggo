@@ -54,11 +54,8 @@ public class GameController : MonoBehaviour
     public Image marbleExpBar;
     public int maxMarbleExp;
     public int currentMarbleExp;
-    public float createMarblePosLeftX;
-    public float createMarblePosRightX;
     public GameObject[] marbles;
-    public List<int> createMarbleTimes = new List<int>();
-    public List<int> createMarbleCnts = new List<int>();
+
 
     [Header("그 외 변수")]
     public GameObject guidePop;
@@ -137,7 +134,13 @@ void Start()
     IEnumerator StartGameCour()
     {
         var t = new WaitForSeconds(0.1f);
-        for (int i = 0; i < 200; i++)
+        //구슬켜기
+        if (createMarbleCour != null)
+            StopCoroutine(createMarbleCour);
+        createMarbleCour = CreateMarbleCour();
+        StartCoroutine(createMarbleCour);
+
+        for (int i = 0; i < linggoLevelDataSO.levelData.Count; i++)
         {
             yield return null;
             //웨이브 바 켜기
@@ -150,11 +153,7 @@ void Start()
                 StopCoroutine(timerCour);
             timerCour = TimerCour((int)linggoLevelDataSO.levelData[wave-1].waveTime);
             StartCoroutine(timerCour);
-            //구슬 생성
-            if (createMarbleCour != null)
-                StopCoroutine(createMarbleCour);
-            createMarbleCour = CreateMarbleCour(linggoLevelDataSO.levelData[wave - 1].waveTime);
-            StartCoroutine(createMarbleCour);
+
             //필드위 몬스터 레벨업
             FieldMonsterLevelUp();
             //몬스터생성
@@ -168,51 +167,17 @@ void Start()
     }
     #endregion
     #region 구슬 시스템
-    IEnumerator CreateMarbleCour(float time)
+    IEnumerator CreateMarbleCour()
     {
         var t = new WaitForSeconds(0.1f);
-        createMarbleTimes.Clear();
-        createMarbleCnts.Clear();
-        int minute = (int)time;
-        int cnt = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            int ranTime = Random.Range(10, 21);
-            createMarbleTimes.Add(ranTime);
-            minute -= ranTime;
-            if (minute < 10) break;
-        }
-        for (int i = 0; i < createMarbleTimes.Count; i++)
-        {
-            int turnMarbleCnt = Random.Range(1, 5);
-            createMarbleCnts.Add(turnMarbleCnt);
-            cnt += turnMarbleCnt;
-        }
 
-        if(cnt < 8)
+        for (int i = 0; i < marbles.Length; i++)
         {
-            for (int i = 0; i < createMarbleCnts.Count; i++)
-            {
-                if (createMarbleCnts[i] == 1) createMarbleCnts[i]++;
-            }
-        }else if(cnt > 20)
-        {
-            for (int i = 0; i < createMarbleCnts.Count; i++)
-            {
-                if (createMarbleCnts[i] == 4) createMarbleCnts[i]--;
-            }
-        }
+            int createTime = Random.Range(0, 6);
 
-        for (int i = 0; i < createMarbleTimes.Count; i++)
-        {
-            for (int j = 0; j < createMarbleCnts[i]; j++)
-            {
-                marbles[j].transform.localPosition = new Vector3(Random.Range(createMarblePosLeftX, createMarblePosRightX), marbles[0].transform.position.y, 0);
-                marbles[j].SetActive(true);
-            }
-            for (int j = 0; j < createMarbleTimes[i] * 10; j++) yield return t;
+            for (int j = 0; j < createTime * 10; j++) yield return t;
+            marbles[i].SetActive(true);
         }
-
     }
     public void SettingMarbleExp(int plusExp)
     {
@@ -479,35 +444,42 @@ void Start()
         int nofe8 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe8;
         int nofe9 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe9;
         int nofe10 = monsterAppearanceLevelDataSO.monsterAppearanceLevelData[wave - 1].nofe10;
-        StartCoroutine(CreateMonsterCour(nofes1, nofe1));
-        StartCoroutine(CreateMonsterCour(nofes2, nofe2));
-        StartCoroutine(CreateMonsterCour(nofes3, nofe3));
-        StartCoroutine(CreateMonsterCour(nofes4, nofe4));
-        StartCoroutine(CreateMonsterCour(nofes5, nofe5));
-        StartCoroutine(CreateMonsterCour(nofes6, nofe6));
-        StartCoroutine(CreateMonsterCour(nofes7, nofe7));
-        StartCoroutine(CreateMonsterCour(nofes8, nofe8));
-        StartCoroutine(CreateMonsterCour(nofes9, nofe9));
-        StartCoroutine(CreateMonsterCour(nofes10, nofe10));
+        if(nofe1 > 0)
+            StartCoroutine(CreateMonsterCour(nofes1, nofe1));
+        if(nofe2 > 0)
+            StartCoroutine(CreateMonsterCour(nofes2, nofe2));
+        if (nofe3 > 0)
+            StartCoroutine(CreateMonsterCour(nofes3, nofe3));
+        if (nofe4 > 0)
+            StartCoroutine(CreateMonsterCour(nofes4, nofe4));
+        if (nofe5 > 0)
+            StartCoroutine(CreateMonsterCour(nofes5, nofe5));
+        if (nofe6 > 0)
+            StartCoroutine(CreateMonsterCour(nofes6, nofe6));
+        if (nofe7 > 0)
+            StartCoroutine(CreateMonsterCour(nofes7, nofe7));
+        if (nofe8 > 0)
+            StartCoroutine(CreateMonsterCour(nofes8, nofe8));
+        if (nofe9 > 0)
+            StartCoroutine(CreateMonsterCour(nofes9, nofe9));
+        if (nofe10 > 0)
+            StartCoroutine(CreateMonsterCour(nofes10, nofe10));
     }
 
     public IEnumerator CreateMonsterCour(GameObject[] nofe,int nofeCnt)
     {
         for (int i = 0; i < nofe.Length; i++)
         {
-            if (nofeCnt > 0)
+            if (!nofe[i].activeSelf)
             {
-                if (!nofe[i].activeSelf)
-                {
-                    int ranPos = Random.Range(0, monsterCreatePos.Length);
-                    nofe[i].SetActive(true);
-                    nofe[i].transform.position = monsterCreatePos[ranPos].position;
-                    nofe[i].GetComponent<SpriteRenderer>().sortingOrder = monsterCreatePos[ranPos].GetComponent<SpriteRenderer>().sortingOrder;
-                    nofe[i].GetComponent<Monster>().InitMonster();
-                    nofeCnt--;
-                    fieldMonsters.Add(nofe[i].GetComponent<Monster>());
-                    yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
-                }
+                int ranPos = Random.Range(0, monsterCreatePos.Length);
+                nofe[i].SetActive(true);
+                nofe[i].transform.position = monsterCreatePos[ranPos].position;
+                nofe[i].GetComponent<SpriteRenderer>().sortingOrder = monsterCreatePos[ranPos].GetComponent<SpriteRenderer>().sortingOrder;
+                nofe[i].GetComponent<Monster>().InitMonster();
+                nofeCnt--;
+                fieldMonsters.Add(nofe[i].GetComponent<Monster>());
+                yield return new WaitForSeconds(Random.Range(0.5f, 1.1f));
             }
         }
         yield return null;

@@ -7,32 +7,55 @@ using DG.Tweening;
 public class MarbleTab : MonoBehaviour
 {
     public Sprite[] marbleSprs;
-    private Image marbleImg;
+    [HideInInspector]
+    public Image marbleImg;
     public int tapCnt;
     public int tapEx;
     public bool[] tapCheck;
     public float fadeTime;
-    private GameObject[] tapEffect = new GameObject[6];
-    private GameObject exEffect;
-    IEnumerator tabCour;
-    private AudioSource audioSource;
+    public int minCreateTime;
+    public int maxCreateTime;
+    public GameObject marbleTab;
+    [HideInInspector]
+    public GameObject[] tapEffect = new GameObject[6];
+    [HideInInspector]
+    public GameObject exEffect;
+    public IEnumerator tabCour;
+    public IEnumerator createCycleCour;
+    [HideInInspector]
+    public AudioSource audioSource;
     public AudioClip[] audioClip;
 
     private void Awake()
     {
+        marbleTab = this.transform.GetChild(0).gameObject;
+
         audioSource = this.GetComponent<AudioSource>();
-           marbleImg = this.GetComponent<Image>();
+           marbleImg = marbleTab.GetComponent<Image>();
 
         for (int i = 0; i < tapEffect.Length; i++) 
-            tapEffect[i] = this.transform.GetChild(i).gameObject;
-        exEffect = this.transform.GetChild(6).gameObject;
+            tapEffect[i] = this.transform.GetChild(0).GetChild(i).gameObject;
+        exEffect = this.transform.GetChild(0).GetChild(6).gameObject;
+
+        fadeTime = 3.0f;
+
     }
 
 
-    private void OnEnable()
+
+    public IEnumerator CreateCycleCour()
     {
-        fadeTime = 3.0f;
-        tapCnt = Random.Range(1,4);
+        var t = new WaitForSeconds(1.0f);
+        int createTime = Random.Range(minCreateTime, maxCreateTime + 1);
+
+        for (int j = 0; j < createTime; j++) yield return t;
+        marbleImg.enabled = true;
+        marbleTab.SetActive(true);
+    }
+
+    public void OnMarble()
+    {
+        tapCnt = Random.Range(1, 4);
         marbleImg.sprite = marbleSprs[tapCnt - 1];
         tapEffect[tapCnt + 2].SetActive(true);
         tapEx = 0;
@@ -83,14 +106,16 @@ public class MarbleTab : MonoBehaviour
 
     public void SetFalse()
     {
-        this.gameObject.SetActive(false);
         this.DOKill();
+
+        marbleTab.SetActive(false);
+        EndInit();
     }
 
-    public void OnDisable()
+
+    public void EndInit()
     {
         this.DOKill();
-        this.marbleImg.enabled = true;
         exEffect.SetActive(false);
         for (int i = 0; i < tapCheck.Length; i++)
         {
@@ -103,14 +128,20 @@ public class MarbleTab : MonoBehaviour
         }
         if (tabCour != null)
             StopCoroutine(tabCour);
-    }
 
+
+        if (createCycleCour != null)
+            StopCoroutine(createCycleCour);
+        createCycleCour = CreateCycleCour();
+        StartCoroutine(createCycleCour);
+    }
     IEnumerator TabCour()
     {
         var t = new WaitForSeconds(1.0f);
         
         for (int i = 0; i < fadeTime; i++) yield return t;
-        this.gameObject.SetActive(false);
+        marbleTab.SetActive(false);
+        EndInit();
     }
 
 }
