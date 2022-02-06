@@ -45,7 +45,8 @@ public class PurePoisonDeer : Skill
             }
             else
             {
-                lights[i].transform.position = new Vector3(Random.Range(purePoisonDeerRange.transform.position.x - 9.0f, purePoisonDeerRange.transform.position.x + 9.1f), Random.Range(purePoisonDeerRange.transform.position.y - 4.5f, purePoisonDeerRange.transform.position.y + 2.1f), 0);
+                int targetIndex = Random.Range(0, GameController.Inst.fieldMonsters.Count);
+                lights[i].transform.position = GameController.Inst.fieldMonsters[targetIndex].transform.position;
             }
             lights[i].SetActive(true);
             

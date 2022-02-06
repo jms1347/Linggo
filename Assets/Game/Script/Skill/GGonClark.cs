@@ -21,10 +21,6 @@ public class GGonClark : Skill
 	public BoxCollider2D[] boxColl;
 	IEnumerator skillEffectCour;
 
-	//void Awake()
-	//{
-
-	//}
 
 	[System.Obsolete]
 	private void OnEnable()
