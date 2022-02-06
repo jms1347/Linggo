@@ -14,7 +14,7 @@ public class StarFish : Skill
         public float targetCnt;
         public float skillCastingTime;
         public float fallIntervalTime;
-
+        public float stunTime;
     }
     public LevelUpData[] levelUpData = new LevelUpData[10];
 

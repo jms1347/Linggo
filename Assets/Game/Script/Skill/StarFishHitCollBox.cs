@@ -38,6 +38,7 @@ public class StarFishHitCollBox : MonoBehaviour
     {
         if (coll.tag == "Enemy")
         {
+            coll.gameObject.GetComponent<Monster>().StunEffect(startFish.levelUpData[startFish.skillLevel - 1].stunTime);
             int damage = (int)(GameController.Inst.att * startFish.levelUpData[startFish.skillLevel - 1].attackCoefficient);
             coll.gameObject.GetComponent<Monster>().DecreaseHP(damage);
         }

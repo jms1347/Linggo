@@ -49,6 +49,7 @@ public class Monster : MonoBehaviour
     private IEnumerator dotCour;
     private IEnumerator levelUpCour;
     private IEnumerator shieldCour;
+    private IEnumerator bossBuffCour;
     private Animator monsterAni;
 
     [Header("이펙트 오브젝트")]
@@ -64,6 +65,9 @@ public class Monster : MonoBehaviour
     public GameObject levelUpEffect;
     [HideInInspector]
     public GameObject shieldEffect;
+    [HideInInspector]
+    public GameObject bossBuffEffect;
+     
 
     [Header("프리팹")]
     public GameObject deathPrefab;
@@ -435,6 +439,27 @@ public class Monster : MonoBehaviour
             yield return t;
         }
         dotEffect.SetActive(false);
+    }
+    #endregion
+    #region 보스버프 코루틴
+    public void BossBuffEffect(float time)
+    {
+        if (!this.gameObject.activeSelf) return;
+
+        if (bossBuffCour != null)
+            StopCoroutine(bossBuffCour);
+        bossBuffCour = BossBuffEffectCour(time);
+        StartCoroutine(bossBuffCour);
+    }
+    public IEnumerator BossBuffEffectCour(float time)
+    {
+        var t = new WaitForSeconds(0.1f);
+
+        bossBuffEffect.SetActive(true);
+
+        for (int i = 0; i < time*10; i++) yield return t;
+        bossBuffEffect.SetActive(false);
+
     }
     #endregion
     #region 색깔 변경 코루틴

@@ -468,19 +468,23 @@ void Start()
 
     public IEnumerator CreateMonsterCour(GameObject[] nofe,int nofeCnt)
     {
+        print("nofecnt : " + nofeCnt);
         for (int i = 0; i < nofe.Length; i++)
         {
-            if (!nofe[i].activeSelf)
+            if(nofeCnt > 0)
             {
-                int ranPos = Random.Range(0, monsterCreatePos.Length);
-                nofe[i].SetActive(true);
-                nofe[i].transform.position = monsterCreatePos[ranPos].position;
-                nofe[i].GetComponent<SpriteRenderer>().sortingOrder = monsterCreatePos[ranPos].GetComponent<SpriteRenderer>().sortingOrder;
-                nofe[i].GetComponent<Monster>().InitMonster();
-                nofeCnt--;
-                fieldMonsters.Add(nofe[i].GetComponent<Monster>());
-                yield return new WaitForSeconds(Random.Range(0.5f, 1.1f));
-            }
+                if (!nofe[i].activeSelf)
+                {
+                    int ranPos = Random.Range(0, monsterCreatePos.Length);
+                    nofe[i].SetActive(true);
+                    nofe[i].transform.position = monsterCreatePos[ranPos].position;
+                    nofe[i].GetComponent<SpriteRenderer>().sortingOrder = monsterCreatePos[ranPos].GetComponent<SpriteRenderer>().sortingOrder;
+                    nofe[i].GetComponent<Monster>().InitMonster();
+                    nofeCnt--;
+                    fieldMonsters.Add(nofe[i].GetComponent<Monster>());
+                    yield return new WaitForSeconds(Random.Range(0.5f, 1.1f));
+                }
+            }            
         }
         yield return null;
     }
