@@ -482,7 +482,7 @@ void Start()
                     nofe[i].GetComponent<Monster>().InitMonster();
                     nofeCnt--;
                     fieldMonsters.Add(nofe[i].GetComponent<Monster>());
-                    yield return new WaitForSeconds(Random.Range(0.5f, 1.1f));
+                    yield return new WaitForSeconds(Random.Range(0.5f, 2.1f));
                 }
             }            
         }
