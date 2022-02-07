@@ -363,7 +363,6 @@ void Start()
     {
         GameObject damageT = Instantiate(healTPrefab, linggo.transform.position, Quaternion.identity);
         damageT.GetComponent<DamageText>().SetIncreaseText(increaseHp.ToString());
-
         currentHP += increaseHp;
         
         if (currentHP > maxHP) currentHP = maxHP;
@@ -419,7 +418,7 @@ void Start()
         if (nextWaveCurrentKillCnt >= nextWaveMaxKillCnt) isWaveGoalComplete = true;
         nextwaveKillText.text = nextWaveCurrentKillCnt + " / " + nextWaveMaxKillCnt;
 
-        killCntText.text = "ÃÑÅ³¼ö : " + killCnt;
+        killCntText.text = killCnt.ToString();
 
         //IncreaseGold(linggoLevelDataSO.levelData[wave - 1].killRewardGold);
 

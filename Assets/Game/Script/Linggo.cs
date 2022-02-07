@@ -67,7 +67,8 @@ public class Linggo : MonoBehaviour
     public GameObject bossDBuffEffect;
     [HideInInspector]
     public GameObject fireDotEffect;
-
+    [HideInInspector]
+    public GameObject healEffect;
     //public GameObject goldPrefab;
 
     void Awake()
@@ -100,6 +101,7 @@ public class Linggo : MonoBehaviour
         LightningEffect = this.transform.GetChild(7).gameObject;
         bossDBuffEffect = this.transform.GetChild(8).gameObject;
         fireDotEffect = this.transform.GetChild(9).gameObject;
+        healEffect = this.transform.GetChild(10).gameObject;
     }
     #endregion
 
@@ -425,6 +427,4 @@ public class Linggo : MonoBehaviour
         ChangeState(LinggoState.move);
     }
     #endregion
-
-
 }

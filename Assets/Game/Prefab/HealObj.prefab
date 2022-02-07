@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 1
   delayTime: 1
+  healEffect: {fileID: 147890, guid: a4a1462c4d222c040ba20b5994e8a35f, type: 3}
 --- !u!222 &4454021314587431193
 CanvasRenderer:
   m_ObjectHideFlags: 0
