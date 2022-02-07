@@ -70,7 +70,9 @@ public class MarbleTab : MonoBehaviour
     {
         if(tapCnt > 0 && tapCnt != tapEx)
         {
-               tapCheck[tapEx] = true;
+            audioSource.PlayOneShot(audioClip[0]);
+
+            tapCheck[tapEx] = true;
             tapEffect[tapEx].SetActive(true);
             tapEx++;
             if(tapCnt == tapEx)
@@ -90,7 +92,7 @@ public class MarbleTab : MonoBehaviour
             }
             else
             {
-                audioSource.PlayOneShot(audioClip[0]);
+                
 
                 this.transform.DOShakePosition(1.0f, 10);
                 this.transform.DOShakeRotation(1.0f, 5);
@@ -128,7 +130,6 @@ public class MarbleTab : MonoBehaviour
         }
         if (tabCour != null)
             StopCoroutine(tabCour);
-
 
         if (createCycleCour != null)
             StopCoroutine(createCycleCour);

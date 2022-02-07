@@ -425,7 +425,7 @@ void Start()
 
         if(currentExp == maxExp)
         {
-            LevelUp();
+            linggo.LevelUpEffect();
         }
         expBar.fillAmount = (float)currentExp / maxExp;
     }

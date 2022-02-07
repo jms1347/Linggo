@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 //유닛 참조
 public class Linggo : MonoBehaviour
 {
@@ -55,6 +56,8 @@ public class Linggo : MonoBehaviour
     [HideInInspector]
     public GameObject levelUpEffect;
     [HideInInspector]
+    public TextMeshPro levelUpTObj;
+    [HideInInspector]
     public GameObject shieldEffect;
     [HideInInspector]
     public GameObject iceStunEffect;
@@ -91,6 +94,7 @@ public class Linggo : MonoBehaviour
         slowEffect = this.transform.GetChild(2).gameObject;
         dotEffect = this.transform.GetChild(3).gameObject;
         levelUpEffect = this.transform.GetChild(4).gameObject;
+        levelUpTObj = levelUpEffect.transform.GetChild(1).GetComponent<TextMeshPro>();
         shieldEffect = this.transform.GetChild(5).gameObject;
         iceStunEffect = this.transform.GetChild(6).gameObject;
         LightningEffect = this.transform.GetChild(7).gameObject;
@@ -387,7 +391,12 @@ public class Linggo : MonoBehaviour
     {
         var t = new WaitForSeconds(0.1f);
         levelUpEffect.SetActive(true);
-        //성장 시켜야됨(실제)
+        levelUpTObj.DOFade(1, 0.1f).OnComplete(() =>
+        {
+            levelUpTObj.DOFade(0, 2.0f);
+
+        }) ;
+
         GameController.Inst.LevelUp();
         for (int i = 0; i < 60; i++) yield return t;
         levelUpEffect.SetActive(false);
