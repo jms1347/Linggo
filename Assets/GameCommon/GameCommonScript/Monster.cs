@@ -115,7 +115,7 @@ public class Monster : MonoBehaviour
         levelUpEffect = this.transform.GetChild(4).gameObject;
         shieldEffect = this.transform.GetChild(5).gameObject;
     }
-    public virtual void Update()
+    private void Update()
     {
         //링고만 공격
         if (attackType == AttackType.OnlyPlayerTarget || attackType == AttackType.OnlyPlayerTargetNBigAttack)

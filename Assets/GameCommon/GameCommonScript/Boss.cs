@@ -31,41 +31,7 @@ public class Boss : Monster
         StartCoroutine(attackCour);
     }
 
-    public override void Update()
-    {
-        //링고만 공격
-        if (attackType == AttackType.OnlyPlayerTarget)
-        {
-            if (linggo != null)
-                currentTarget = linggo;
-
-        }
-        else
-        {
-            currentTarget = FindNearestObjectByTag("Player");
-
-        }
-
-        if (currentTarget != null)
-        {
-            Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
-
-            float disF = Vector2.Distance(this.transform.position, currentTarget.transform.position);
-            if (attackDistance >= disF)
-            {
-                ChangeState(MonsterState.attack);
-
-            }
-            else
-            {
-                this.transform.Translate(moveSpeed * Time.deltaTime * dist);
-            }
-        }
-        else
-        {
-            currentTarget = FindNearestObjectByTag("Player");
-        }
-    }
+    
     #region 미사일 세팅 및 미사일 생성(공격)
     public void SettingMissile()
     {
@@ -78,36 +44,47 @@ public class Boss : Monster
 
     public IEnumerator ATTACK(/*GameObject e*/)
     {
-        while (true)
+        if (attackType == AttackType.OnlyPlayerTarget)
         {
-            if (attackType == AttackType.OnlyPlayerTarget)
-            {
-                if (linggo != null)
-                    currentTarget = linggo;
+            if (linggo != null)
+                currentTarget = linggo;
 
-            }
-            else
-            {
-                currentTarget = FindNearestObjectByTag("Player");
+        }
+        else
+        {
+            currentTarget = FindNearestObjectByTag("Player");
 
-            }
+        }
 
+        while (true)
+        {     
             if (currentTarget != null)
             {
-                Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
-                this.transform.Translate(moveSpeed * Time.deltaTime * dist);
 
                 float disF = Vector2.Distance(this.transform.position, currentTarget.transform.position);
                 if (attackDistance >= disF)
                 {
+
+
+                    yield return new WaitUntil(() => monsterState != MonsterState.stun);
+                    
                     for (int i = 0; i < bossMissiles.Count; i++)
                     {
                         if (!bossMissiles[i].gameObject.activeSelf)
                         {
+                            moveSpeed = 0;
+                            monsterAni.SetTrigger("Attack");
                             bossMissiles[i].SettingTarget(currentTarget);
                             break;
                         }
                     }
+                }
+                else
+                {
+                    moveSpeed = saveSpeed;
+                    Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
+                    this.transform.Translate(moveSpeed * Time.deltaTime * dist);
+
                 }
             }
             else
@@ -140,7 +117,27 @@ public class Boss : Monster
     #region 몬스터 상태 관련 함수
     public override void ChangeState(MonsterState state)
     {
-        base.ChangeState(state);
+        monsterState = state;
+        monsterImg.color = Color.white;
+
+        switch (monsterState)
+        {
+            case MonsterState.stun:
+                monsterAni.speed = 0;
+                //monsterAni.SetBool("Attack", false);
+                break;
+            case MonsterState.move:
+                monsterAni.speed = 1;
+                //monsterAni.SetBool("Attack", false);
+                moveSpeed = saveSpeed;
+                break;
+            case MonsterState.attack:
+                //monsterAni.SetBool("Attack", true);
+                break;
+            case MonsterState.sheild:
+
+                break;
+        }
     }
 
     #endregion

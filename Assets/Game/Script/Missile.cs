@@ -9,6 +9,7 @@ public class Missile : MonoBehaviour
     private Vector2 targetDir;
 	private Rigidbody2D rigid;
     public GameObject master;
+    public GameObject missileStartPos;
     public GameObject exPrefab;
     public float missileSpeed;
 	private void Awake()
@@ -43,8 +44,13 @@ public class Missile : MonoBehaviour
 	}
 	public void SettingTarget(GameObject target)
 	{
-        this.transform.position = master.transform.position;
-        Vector2 dir = target.transform.position - master.transform.position;
+        if (isPlayer)
+            this.transform.position = master.transform.position;
+        else this.transform.position = missileStartPos.transform.position;
+        Vector2 dir;
+        if (isPlayer)
+            dir = target.transform.position - master.transform.position;
+        else dir = target.transform.position - missileStartPos.transform.position;
         dir.Normalize();
         targetDir = dir;
         this.gameObject.SetActive(true);
@@ -67,7 +73,8 @@ public class Missile : MonoBehaviour
         {
             if (coll.tag == "Player")
             {
-                Instantiate(exPrefab, coll.transform.position, Quaternion.identity);
+                if(exPrefab != null)
+                    Instantiate(exPrefab, coll.transform.position, Quaternion.identity);
                 GameController.Inst.DecreaseHP(master.GetComponent<Monster>().att);
 
                 this.gameObject.SetActive(false);
