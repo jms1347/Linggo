@@ -16,7 +16,7 @@ public class HealObj : MonoBehaviour
             .OnComplete(() =>
             {
                 GameController.Inst.IncreaseHP(healHP);
-                GameObject heal = Instantiate(healEffect, this.transform.position+ new Vector3(Random.Range(-0.2f, 0.5f), Random.Range(0.8f, 1.5f), 0), Quaternion.identity);
+                GameObject heal = Instantiate(healEffect, this.transform.position+ new Vector3(Random.Range(-0.2f, 0.5f), Random.Range(0f, 1.5f), 0), Quaternion.identity);
                 Destroy(this.gameObject);
             });
     }

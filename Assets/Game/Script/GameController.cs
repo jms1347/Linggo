@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
     public GameObject nextWaveBar;
     public TextMeshProUGUI nextWaveBarWaveText;
     public TextMeshProUGUI nextWaveBarWaveExText;
+    public GameObject bossBar;
 
     [Header("링고 스텟")]
     public Linggo linggo;
@@ -65,7 +66,7 @@ public class GameController : MonoBehaviour
     private IEnumerator startGameCour;
     private IEnumerator timerCour;
     private IEnumerator waveBarCour;
-    private IEnumerator BossBarCour;
+    private IEnumerator bossBarCour;
     private IEnumerator createMarbleCour;
     bool isEndTimer = false;
     bool isWaveGoalComplete = false;
@@ -90,6 +91,9 @@ public class GameController : MonoBehaviour
     public GameObject[] nofes9;
     public GameObject[] nofes10;
     public List<Monster> fieldMonsters;
+
+    [Header("보스관련")]
+    public GameObject[] bosses;
 
     
 void Start()
@@ -158,12 +162,33 @@ void Start()
             FieldMonsterLevelUp();
             //몬스터생성
             CreateMonster();
-            //아직안함
+            //보스생성
+            if(wave % 10 == 0)
+            {
+                if (bossBarCour != null)
+                    StopCoroutine(bossBarCour);
+                bossBarCour = BossBarCour();
+                StartCoroutine(bossBarCour);
+
+                bosses[wave / 10].SetActive(true);
+            }
             yield return new WaitUntil(()=> (isEndTimer || isWaveGoalComplete));            //타이머가 종료되거나 미션 성공할때까지
 
             //초기화(웨이브++, 웨이브 미션킬 초기화)
             NextWave();
         }
+    }
+    #endregion
+    #region 보스 바 애니메이션
+    IEnumerator BossBarCour()
+    {
+        var t = new WaitForSeconds(0.1f);
+        bossBar.SetActive(true);
+        bossBar.GetComponent<Image>().DOFade(1, 0.1f);
+        for (int j = 0; j < 6; j++) yield return t;
+        bossBar.GetComponent<Image>().DOFade(0, 0.5f);
+        for (int j = 0; j < 5; j++) yield return t;
+        bossBar.SetActive(false);
     }
     #endregion
     #region 구슬 시스템

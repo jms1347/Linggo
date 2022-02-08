@@ -61,11 +61,15 @@ public class PureLeavesDeer : Skill
     {
         if (coll.tag == "Enemy")
         {
-            if (targetCnt > 0)
+            if (!coll.name.Contains("Boss"))
             {
-                colls.Add(coll.gameObject);
-                targetCnt--;              
+                if (targetCnt > 0)
+                {
+                    colls.Add(coll.gameObject);
+                    targetCnt--;
+                }
             }
+            
         }
     }
 }

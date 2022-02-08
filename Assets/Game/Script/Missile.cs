@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
+    public bool isPlayer;
 	private IEnumerator shotCour;
     private Vector2 targetDir;
 	private Rigidbody2D rigid;
-
+    public GameObject master;
     public GameObject exPrefab;
+    public float missileSpeed;
 	private void Awake()
 	{
 		rigid = this.GetComponent<Rigidbody2D>();
-	}
+
+        if(isPlayer)
+            missileSpeed = GameController.Inst.missileSpeed;
+    }
 
 	private void Update()
 	{
@@ -24,7 +29,7 @@ public class Missile : MonoBehaviour
 	{
 		if (targetDir != null)
 		{
-			rigid.velocity = targetDir * GameController.Inst.missileSpeed;
+			rigid.velocity = targetDir * missileSpeed;
 		}
 	}
 	private void OnEnable()
@@ -38,8 +43,8 @@ public class Missile : MonoBehaviour
 	}
 	public void SettingTarget(GameObject target)
 	{
-        this.transform.position = GameController.Inst.linggo.transform.position;
-        Vector2 dir = target.transform.position - GameController.Inst.linggo.transform.position;
+        this.transform.position = master.transform.position;
+        Vector2 dir = target.transform.position - master.transform.position;
         dir.Normalize();
         targetDir = dir;
         this.gameObject.SetActive(true);
@@ -48,13 +53,28 @@ public class Missile : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D coll)
 	{
-        if (coll.tag == "Enemy")
+        if (isPlayer)
         {
-            Instantiate(exPrefab, coll.transform.position, Quaternion.identity);
-			coll.GetComponent<Monster>().DecreaseHP(GameController.Inst.att);
+            if (coll.tag == "Enemy")
+            {
+                Instantiate(exPrefab, coll.transform.position, Quaternion.identity);
+                coll.GetComponent<Monster>().DecreaseHP(GameController.Inst.att);
 
-            this.gameObject.SetActive(false);
+                this.gameObject.SetActive(false);
+            }
         }
+        else
+        {
+            if (coll.tag == "Player")
+            {
+                Instantiate(exPrefab, coll.transform.position, Quaternion.identity);
+                GameController.Inst.DecreaseHP(master.GetComponent<Monster>().att);
+
+                this.gameObject.SetActive(false);
+            }
+
+        }
+
 
         if(coll.tag == "Wall")
         {

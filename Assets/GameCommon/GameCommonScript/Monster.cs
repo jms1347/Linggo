@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class Monster : MonoBehaviour
 {
-    public enum AttackType
+    public bool isBoss;
+     public enum AttackType
 	{
         CloseExplosion = 0,  //자폭
         CloseAttribute = 1,  //자폭속성
@@ -14,7 +15,8 @@ public class Monster : MonoBehaviour
         BigAttack = 3,             //커짐
         FarAttribute = 4,     //원거리속성
         OnlyPlayerTarget = 5,  //플레이어만 타켓
-        OnlyPlayerTargetNBigAttack = 6
+        OnlyPlayerTargetNBigAttack = 6,
+        Boss = 7
 	}
 
     public enum MonsterState
@@ -43,14 +45,14 @@ public class Monster : MonoBehaviour
 
     public GameObject linggo;
     public SpriteRenderer monsterImg;
-    private IEnumerator changeColorCour;
-    private IEnumerator slowCour;
-    private IEnumerator stunCour;
-    private IEnumerator dotCour;
-    private IEnumerator levelUpCour;
-    private IEnumerator shieldCour;
-    private IEnumerator bossBuffCour;
-    private Animator monsterAni;
+    protected IEnumerator changeColorCour;
+    protected IEnumerator slowCour;
+    protected IEnumerator stunCour;
+    protected IEnumerator dotCour;
+    protected IEnumerator levelUpCour;
+    protected IEnumerator shieldCour;
+    protected IEnumerator bossBuffCour;
+    protected Animator monsterAni;
 
     [Header("이펙트 오브젝트")]
     [HideInInspector]
@@ -105,7 +107,7 @@ public class Monster : MonoBehaviour
         SettingEffect();
     }
 
-    public void SettingEffect()
+    public virtual void SettingEffect()
     {
         stunEffect = this.transform.GetChild(1).gameObject;
         slowEffect = this.transform.GetChild(2).gameObject;
@@ -161,7 +163,7 @@ public class Monster : MonoBehaviour
     //    Invoke(nameof(DeathChangePos), 3.0f);
     //}
     #region 초기화(재활용)
-    public void InitMonster()
+    public virtual void InitMonster()
     {
         this.transform.DOKill();
         StopAllCoroutines();
@@ -319,7 +321,7 @@ public class Monster : MonoBehaviour
     }
     #endregion
     #region 타켓 탐색 관련 함수
-    public virtual GameObject FindNearestObjectByTag(string tag)
+    public GameObject FindNearestObjectByTag(string tag)
     {
         // 탐색할 오브젝트 목록을 List 로 저장합니다.
         var objects = GameObject.FindGameObjectsWithTag(tag).ToList();
@@ -338,7 +340,7 @@ public class Monster : MonoBehaviour
     #endregion
 
     #region 몬스터 상태 관련 함수
-    public void ChangeState(MonsterState state)
+    public virtual void ChangeState(MonsterState state)
     {
          monsterState = state;
         monsterImg.color = Color.white;
