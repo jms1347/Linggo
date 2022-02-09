@@ -63,7 +63,9 @@ public class Missile : MonoBehaviour
         {
             if (coll.tag == "Enemy")
             {
-                Instantiate(exPrefab, coll.transform.position, Quaternion.identity);
+                GameObject ex = Instantiate(exPrefab);
+                ex.transform.position = coll.transform.position;
+
                 coll.GetComponent<Monster>().DecreaseHP(GameController.Inst.att);
 
                 this.gameObject.SetActive(false);
@@ -74,7 +76,10 @@ public class Missile : MonoBehaviour
             if (coll.tag == "Player")
             {
                 if(exPrefab != null)
-                    Instantiate(exPrefab, coll.transform.position, Quaternion.identity);
+                {
+                    GameObject ex = Instantiate(exPrefab);
+                    ex.transform.position = coll.transform.position;
+                }
                 GameController.Inst.DecreaseHP(master.GetComponent<Monster>().att);
 
                 this.gameObject.SetActive(false);

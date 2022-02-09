@@ -9,18 +9,58 @@ public class GoogleSheetManager : MonoBehaviour
     const string itemDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1165571065&range=A2:I";
     const string skillCardDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=626817391&range=A2:Q";
     const string linggoDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=457742873&range=A2:J";
+    const string bossDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1718384963&range=A2:I";
     public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
     public SkillCardSo skillCardSO;
     public LevelDataSo linggoLevelDataSO;
     public ItemSo itemSO;
+    public BossDataSo bossDataSO;
     void Awake()
     {
         StartCoroutine(SettingMonserCardData());
         StartCoroutine(SettingSkillCardData());
         StartCoroutine(SettingItemData());
         StartCoroutine(SettingLinggoLevelData());
-
+        StartCoroutine(SettingBossData());
     }
+    #region 보스 데이터 넣기
+    IEnumerator SettingBossData()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(bossDbURL))
+        {
+            yield return www.SendWebRequest();
+            string data = www.downloadHandler.text;
+
+            SetBossData(data);
+        }
+    }
+
+    void SetBossData(string data)
+    {
+        if (bossDataSO.bossDatas != null || bossDataSO.bossDatas.Count > 0) bossDataSO.bossDatas.Clear();
+
+        int lineSize;
+        string[] line = data.Split('\n');
+        lineSize = line.Length;
+        for (int i = 0; i < lineSize; i++)
+        {
+            BossData bossData = new BossData();
+            string[] row = line[i].Split('\t');
+
+            bossData.bossIndex = int.Parse(row[0]);
+            bossData.bossName = row[1];
+            bossData.bossAtt = int.Parse(row[2]);
+            bossData.bossHp = int.Parse(row[3]);
+            bossData.bossMoveSpeed = float.Parse(row[4]);
+            bossData.bossAttackDistance = float.Parse(row[5]);
+            bossData.bossAttSpeed = float.Parse(row[6]);
+            bossData.bossMissileSpeed = float.Parse(row[7]);
+            bossData.attType = int.Parse(row[8]);
+
+            bossDataSO.bossDatas.Add(bossData);
+        }
+    }
+    #endregion
     #region 링고 레벨 데이터 넣기
     IEnumerator SettingLinggoLevelData()
     {

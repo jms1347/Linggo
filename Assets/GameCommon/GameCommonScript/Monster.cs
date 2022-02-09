@@ -16,8 +16,9 @@ public class Monster : MonoBehaviour
         FarAttribute = 4,     //원거리속성
         OnlyPlayerTarget = 5,  //플레이어만 타켓
         OnlyPlayerTargetNBigAttack = 6,
-        Boss = 7
-	}
+        Boss = 7,
+        BossContinuousMissile = 8
+    }
 
     public enum MonsterState
     {
@@ -543,6 +544,18 @@ public class Monster : MonoBehaviour
     public void ChangeLayer(int layerIndex)
     {
         this.GetComponent<SpriteRenderer>().sortingOrder = layerIndex;
+    }
+    #endregion
+
+    #region 몬스터 이동속도 버프
+    public void OnBuffMoveSpeed(float pluseSpeed)
+    {
+        moveSpeed += pluseSpeed;
+    }
+
+    public void OffBuffMoveSpeed()
+    {
+        moveSpeed = saveSpeed;
     }
     #endregion
 }

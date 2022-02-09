@@ -119,7 +119,7 @@ void Start()
         SetGold(0);
 
         killCnt = 0;
-        killCntText.text = "ÃÑÅ³¼ö : " + killCnt.ToString();
+        killCntText.text = killCnt.ToString();
         
         StartGame();
     }
