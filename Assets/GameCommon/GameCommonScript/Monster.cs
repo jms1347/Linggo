@@ -183,8 +183,9 @@ public class Monster : MonoBehaviour
     #region HP 관련 함수
     public void PlusMaxHp(int changeValue)
     {
-        maxHp += changeValue;
-        currentHp += changeValue;
+        int plusValue = changeValue - maxHp;
+        maxHp += plusValue;
+        currentHp += plusValue;
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
     }
     public void SetMaxHp(int changeValue)
