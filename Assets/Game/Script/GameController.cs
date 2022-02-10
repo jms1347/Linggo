@@ -170,7 +170,7 @@ void Start()
                 bossBarCour = BossBarCour();
                 StartCoroutine(bossBarCour);
 
-                bosses[wave / 10].SetActive(true);
+                bosses[(wave / 10)-1].SetActive(true);
             }
             yield return new WaitUntil(()=> (isEndTimer || isWaveGoalComplete));            //타이머가 종료되거나 미션 성공할때까지
 
