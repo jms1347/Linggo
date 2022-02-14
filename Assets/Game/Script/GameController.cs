@@ -94,6 +94,7 @@ public class GameController : MonoBehaviour
 
     [Header("보스관련")]
     public GameObject[] bosses;
+    public GameObject[] bossPools;
 
     
 void Start()
