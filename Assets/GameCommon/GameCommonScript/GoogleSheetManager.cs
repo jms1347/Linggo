@@ -177,7 +177,7 @@ public class GoogleSheetManager : MonoBehaviour
             item.itemName = row[2];
             item.itemExp = row[3];
             item.itemPrice = int.Parse(row[4]);
-            item.itemValue = float.Parse(row[5]);
+            item.itemValue = int.Parse(row[5]);
             item.itemDuration = float.Parse(row[6]);
             item.itemCoolTime = float.Parse(row[7]);
 

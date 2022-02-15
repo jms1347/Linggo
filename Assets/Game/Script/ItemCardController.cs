@@ -15,6 +15,8 @@ public class ItemCardController : MonoBehaviour
     public List<ItemIcon> itemIcons = new List<ItemIcon>();
 	public List<Sprite> itemSprs = new List<Sprite>();
 
+    public List<GhostItem> ghostItems = new List<GhostItem>();
+    public List<GameObject> purificationEffects = new List<GameObject>();
     void Start()
     {
 		SettingItemCardList();
@@ -46,10 +48,73 @@ public class ItemCardController : MonoBehaviour
 				if (!itemIcons[i].isCooldown)
 				{
 					itemIcons[i].UseBuff(itemSlots[slotIndex].itemCard, itemSprs[itemSlots[slotIndex].itemCard.itemIndex]);
-					break;
+                    break;
 				}
 			}
-		}		
+		}
+        
+        //링고에 버프 이미지 생성(사용시)
+        GameController.Inst.linggo.ItemEffect(itemSprs[itemSlots[slotIndex].index]);
+
+        switch (itemSlots[slotIndex].itemCard.itemType)
+        {
+            case ItemCard.ItemType.potion :
+                GameController.Inst.IncreaseHP(itemSlots[slotIndex].itemCard.itemValue);
+                break;
+            case ItemCard.ItemType.percentPotion:
+                int plusPotion = Mathf.RoundToInt(GameController.Inst.maxHP * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
+                GameController.Inst.IncreaseHP(plusPotion);
+                break;
+            case ItemCard.ItemType.buff:
+                if(itemSlots[slotIndex].itemCard.itemIndex == 5)
+                {
+                    GameController.Inst.linggo.ShieldEffect(itemSlots[slotIndex].itemCard.itemValue);
+                }else if(itemSlots[slotIndex].itemCard.itemIndex == 6)
+                {
+                    int plusAtt = Mathf.RoundToInt(GameController.Inst.att * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
+                    GameController.Inst.ChangeAtt(plusAtt, 60);
+                }else if(itemSlots[slotIndex].itemCard.itemIndex == 7)
+                {
+                    GameController.Inst.linggo.ResistanceEffect(itemSlots[slotIndex].itemCard.itemValue);
+                }
+                else if(itemSlots[slotIndex].itemCard.itemIndex == 8)
+                {
+                    for (int i = 0; i < itemSlots[slotIndex].itemCard.itemValue; i++)
+                    {
+                        GameObject mon = GameController.Inst.linggo.FindNearestObjectByTag("Enemy");
+                        mon.GetComponent<Monster>().Betrayal();
+
+                        //이펙트
+                        for (int j = 0; j < purificationEffects.Count; j++)
+                        {
+                            if (!purificationEffects[j].activeSelf)
+                            {
+                                purificationEffects[j].transform.position = mon.transform.position + Vector3.up;
+                                purificationEffects[j].SetActive(true);
+                                break;
+                            }
+                        }
+                    }
+                }else if(itemSlots[slotIndex].itemCard.itemIndex == 9)
+                {
+                    int potion = Mathf.RoundToInt(GameController.Inst.maxHP * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
+                    GameController.Inst.ChangeAtt(GameController.Inst.att, 15);
+                    GameController.Inst.IncreaseHP(potion);
+                }
+                break;
+            case ItemCard.ItemType.summon:
+                for (int i = 0; i < ghostItems.Count; i++)
+                {
+                    if (!ghostItems[i].gameObject.activeSelf)
+                    {
+                        int hp = Mathf.RoundToInt(GameController.Inst.currentHP * 0.5f);
+                        ghostItems[i].InitUnit(hp);
+                        ghostItems[i].transform.position = Vector3.zero +  new Vector3(Random.Range(3.0f, 3.2f), Random.Range(-0.1f, 0.1f), 0);
+                        break;
+                    }
+                }
+                break;
+        }
 	}
 	#endregion
 	#region 아이템 리스트 세팅
