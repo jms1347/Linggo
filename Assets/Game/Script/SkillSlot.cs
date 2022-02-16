@@ -95,7 +95,7 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 		if (skillCard == sc) LevelUp();
 		else
 		{
-            //다른 스킬이면 스킬 초기화
+            //다른  초기화
             if (skillCour != null)
                 StopCoroutine(skillCour);
             coolTimeImg.gameObject.SetActive(false);
@@ -120,7 +120,7 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
             switch (sc.cardGrade)
             {
 				case SkillCard.Grade.epic:
-					cardGrowColor.color = new Color(255, 51, 155);
+					cardGrowColor.color = new Color32(255, 51, 155, 255);
 					break;
 				case SkillCard.Grade.normal:
 					cardGrowColor.color = Color.green;
@@ -133,8 +133,10 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 
 
 			}
-		}
-	}
+            cardGrowColor.gameObject.SetActive(true);
+
+        }
+    }
 
 	//스킬 레벨업
 	public void LevelUp()

@@ -82,25 +82,29 @@ public class ItemCardController : MonoBehaviour
                     for (int i = 0; i < itemSlots[slotIndex].itemCard.itemValue; i++)
                     {
                         GameObject mon = GameController.Inst.linggo.FindNearestObjectByTag("Enemy");
-                        mon.GetComponent<Monster>().Betrayal();
-                        for (int j = 0; j < GameController.Inst.fieldMonsters.Count; j++)
+                        if(mon != null)
                         {
-                            if (GameController.Inst.fieldMonsters[j].gameObject.Equals(mon.gameObject))
+                            mon.GetComponent<Monster>().Betrayal();
+                            for (int j = 0; j < GameController.Inst.fieldMonsters.Count; j++)
                             {
-                                GameController.Inst.fieldMonsters.RemoveAt(j);
-                                break;
+                                if (GameController.Inst.fieldMonsters[j].gameObject.Equals(mon.gameObject))
+                                {
+                                    GameController.Inst.fieldMonsters.RemoveAt(j);
+                                    break;
+                                }
+                            }
+                            //ÀÌÆåÆ®
+                            for (int j = 0; j < purificationEffects.Count; j++)
+                            {
+                                if (!purificationEffects[j].activeSelf)
+                                {
+                                    purificationEffects[j].transform.position = mon.transform.position + (Vector3.up * 0.5f);
+                                    purificationEffects[j].SetActive(true);
+                                    break;
+                                }
                             }
                         }
-                        //ÀÌÆåÆ®
-                        for (int j = 0; j < purificationEffects.Count; j++)
-                        {
-                            if (!purificationEffects[j].activeSelf)
-                            {
-                                purificationEffects[j].transform.position = mon.transform.position + Vector3.up;
-                                purificationEffects[j].SetActive(true);
-                                break;
-                            }
-                        }
+                            
                     }
                 }else if(itemSlots[slotIndex].itemCard.itemIndex == 9)
                 {
@@ -114,7 +118,7 @@ public class ItemCardController : MonoBehaviour
                 {
                     if (!ghostItems[i].gameObject.activeSelf)
                     {
-                        int hp = Mathf.RoundToInt(GameController.Inst.currentHP * 0.5f);
+                        int hp = Mathf.RoundToInt(GameController.Inst.currentHP * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
                         ghostItems[i].InitUnit(hp);
                         ghostItems[i].transform.position = Vector3.zero +  new Vector3(Random.Range(3.0f, 3.2f), Random.Range(-0.1f, 0.1f), 0);
                         break;
