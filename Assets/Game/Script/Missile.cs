@@ -75,13 +75,26 @@ public class Missile : MonoBehaviour
         {
             if (coll.tag == "Player")
             {
-                if(exPrefab != null)
+                if (coll.name.Contains("Linggo"))
+                {
+
+                    GameController.Inst.DecreaseHP(master.GetComponent<Monster>().att);
+                }
+                else if (coll.name.Contains("Item"))
+                {
+                    coll.gameObject.GetComponent<GhostItem>().DecreaseHP(master.GetComponent<Monster>().att);
+
+                }
+                else
+                {
+                    coll.gameObject.GetComponent<Monster>().DecreaseHP(master.GetComponent<Monster>().att);
+                }
+
+                if (exPrefab != null)
                 {
                     GameObject ex = Instantiate(exPrefab);
                     ex.transform.position = coll.transform.position;
                 }
-                GameController.Inst.DecreaseHP(master.GetComponent<Monster>().att);
-
                 this.gameObject.SetActive(false);
             }
 

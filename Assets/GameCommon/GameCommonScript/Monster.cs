@@ -53,7 +53,7 @@ public class Monster : MonoBehaviour
     protected IEnumerator levelUpCour;
     protected IEnumerator shieldCour;
     protected IEnumerator bossBuffCour;
-    protected Animator monsterAni;
+    public Animator monsterAni;
 
     [Header("이펙트 오브젝트")]
     [HideInInspector]

@@ -61,7 +61,7 @@ public class Boss : Monster
 
         while (true)
         {
-            if (currentTarget != null)
+            if (currentTarget != null || currentTarget.tag != "Player")
             {
 
                 float disF = Vector2.Distance(this.transform.position, currentTarget.transform.position);

@@ -53,6 +53,7 @@ public class BossMoveSpeedBuff : MonoBehaviour
     public IEnumerator BuffEffectCour()
     {
         var t = new WaitForSeconds(0.1f);
+        this.gameObject.GetComponent<Boss>().monsterAni.SetTrigger("Attack");
         buffObj.SetActive(true);
         buffObj.transform.position = new Vector2(-11f, -0.5f);
         for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)

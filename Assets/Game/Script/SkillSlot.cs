@@ -21,6 +21,7 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 	public Image cardGrowColor;
 
 	public Sprite noneSpr;
+    private GameObject levelUpEffect;
 	
 	private void Awake()
 	{
@@ -28,8 +29,9 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 		coolTimeImg = this.transform.GetChild(1).GetComponent<Image>();
 		levelText = skillImg.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 		cardGrowColor = skillImg.transform.GetChild(1).GetComponent<Image>();
+        levelUpEffect = this.transform.GetChild(2).gameObject;
 
-		InitSkillSlot();
+        InitSkillSlot();
 	}
     #region 스킬 초기화
     public void InitSkillSlot()
@@ -93,7 +95,14 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 		if (skillCard == sc) LevelUp();
 		else
 		{
-			isNull = false;
+            //다른 스킬이면 스킬 초기화
+            if (skillCour != null)
+                StopCoroutine(skillCour);
+            coolTimeImg.gameObject.SetActive(false);
+            coolTimeImg.fillAmount = 1;
+            isCooldown = false;
+
+            isNull = false;
 			if(cardImg != null)
 			{
 				skillImg.sprite = cardImg;
@@ -131,10 +140,22 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 	public void LevelUp()
 	{
 		if(level < 10)
-			level++;
+        {
+            level++;
+            levelUpEffect.SetActive(true);
+        }
+        else
+        {
+            //MAX 찍은 스킬은 쿨타임 초기화
+            if (skillCour != null)
+                StopCoroutine(skillCour);
+            coolTimeImg.gameObject.SetActive(false);
+            coolTimeImg.fillAmount = 1;
+            isCooldown = false;
+        }
 
         if(level == 10)
-            levelText.text = "Lv.Max";
+            levelText.text = "Max";
         else
 		    levelText.text = "Lv."+level.ToString();
 	}
