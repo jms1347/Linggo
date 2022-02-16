@@ -24032,13 +24032,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8bb08bc0819dc43ab4f713045f9345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
   monsterState: 0
   attackType: 0
   name: Nekroma5
   att: 20
   maxHp: 120
   currentHp: 120
-  moveSpeed: 0.3
+  moveSpeed: 0.6
   saveSpeed: 0
   attackDistance: 0.5
   hpBar: {fileID: 0}
@@ -24052,6 +24053,7 @@ MonoBehaviour:
   dotEffect: {fileID: 0}
   levelUpEffect: {fileID: 0}
   shieldEffect: {fileID: 0}
+  bossBuffEffect: {fileID: 0}
   deathPrefab: {fileID: 187952, guid: c05e92eaee7a00844867e5edc8e0dde1, type: 3}
   damageTPrefab: {fileID: 8918483966716264937, guid: 9564ed2fc79c4404da4a3ea62909b7e3, type: 3}
   dotDamageTPrefab: {fileID: 8918483966716264937, guid: fee21636c7705254ebaf5ac2646218ab, type: 3}
