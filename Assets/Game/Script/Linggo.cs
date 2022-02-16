@@ -13,7 +13,8 @@ public class Linggo : MonoBehaviour
         move = 0,   //일반
         stun = 1,   //스턴
         sheild = 2, //무적
-        bossDbuff = 3
+        bossDbuff = 3, //보스디버프
+        resistanceEffect = 4 //저항
     }
    
     public LinggoState linggoState = LinggoState.move;
@@ -43,6 +44,8 @@ public class Linggo : MonoBehaviour
     private IEnumerator dotCour;
     private IEnumerator levelUpCour;
     private IEnumerator shieldCour;
+    private IEnumerator itemCour;
+    private IEnumerator resistanceCour;
 
     [Header("이펙트 오브젝트")]
     [HideInInspector]
@@ -67,6 +70,11 @@ public class Linggo : MonoBehaviour
     public GameObject bossDBuffEffect;
     [HideInInspector]
     public GameObject fireDotEffect;
+    
+    [HideInInspector]
+    public GameObject itemEffect;
+    [HideInInspector]
+    public GameObject resistanceEffect;
 
     //public GameObject goldPrefab;
 
@@ -100,6 +108,8 @@ public class Linggo : MonoBehaviour
         LightningEffect = this.transform.GetChild(7).gameObject;
         bossDBuffEffect = this.transform.GetChild(8).gameObject;
         fireDotEffect = this.transform.GetChild(9).gameObject;
+        itemEffect = this.transform.GetChild(10).gameObject;
+        resistanceEffect = this.transform.GetChild(11).gameObject;
     }
     #endregion
 
@@ -117,7 +127,7 @@ public class Linggo : MonoBehaviour
     {
         while (true)
         {
-            if (target == null)
+            if (target == null || target.tag != "Enemy")
                 target = FindNearestObjectByTag("Enemy");
             if (target != null && target.activeSelf)
             {
@@ -177,9 +187,23 @@ public class Linggo : MonoBehaviour
                 bgController_top.moveSpeed = saveBgTopSpeed;
                 break;
             case LinggoState.sheild:
+                //if (slowCour != null)
+                //    StopCoroutine(slowCour);
+                //slowEffect.SetActive(false);                
+                //if (stunCour != null)
+                //    StopCoroutine(stunCour);
+                //stunEffect.SetActive(false);
+                //iceStunEffect.SetActive(false);
+                //LightningEffect.SetActive(false);
+                if (dotCour != null)
+                    StopCoroutine(dotCour);
+                dotEffect.SetActive(false);
+                fireDotEffect.SetActive(false);
+                break;
+            case LinggoState.resistanceEffect:
                 if (slowCour != null)
                     StopCoroutine(slowCour);
-                slowEffect.SetActive(false);                
+                slowEffect.SetActive(false);
                 if (stunCour != null)
                     StopCoroutine(stunCour);
                 stunEffect.SetActive(false);
@@ -198,6 +222,8 @@ public class Linggo : MonoBehaviour
     public void StunEffect(float time)
     {
         if (linggoState == LinggoState.sheild) return;
+        if (linggoState == LinggoState.resistanceEffect) return;
+
         if (!this.gameObject.activeSelf) return;
         if (stunCour != null)
             StopCoroutine(stunCour);
@@ -278,6 +304,7 @@ public class Linggo : MonoBehaviour
     public void SlowEffect(float time, float moveDecreasePercent)
     {
         if (!this.gameObject.activeSelf) return;
+        if (linggoState == LinggoState.resistanceEffect) return;
 
         if (slowCour != null)
             StopCoroutine(slowCour);
@@ -305,6 +332,7 @@ public class Linggo : MonoBehaviour
     public void DotEffect(int time, float damage)
     {
         if (linggoState == LinggoState.sheild) return;
+        if (linggoState == LinggoState.resistanceEffect) return;
         if (!this.gameObject.activeSelf) return;
         if (dotCour != null)
             StopCoroutine(dotCour);
@@ -422,6 +450,53 @@ public class Linggo : MonoBehaviour
 
         for (int i = 0; i < time * 10; i++) yield return t;
         shieldEffect.SetActive(false);
+        ChangeState(LinggoState.move);
+    }
+    #endregion
+
+    #region 아이템 함수
+    public void ItemEffect(Sprite itemSpr)
+    {
+        if (!this.gameObject.activeSelf) return;
+        if (itemCour != null)
+            StopCoroutine(itemCour);
+        itemCour = ItemEffectCour(itemSpr);
+        StartCoroutine(itemCour);
+    }
+
+    public IEnumerator ItemEffectCour(Sprite itemSpr)
+    {
+        var t = new WaitForSeconds(0.1f);
+
+        itemEffect.GetComponent<SpriteRenderer>().sprite = itemSpr;
+        itemEffect.GetComponent<SpriteRenderer>().DOFade(1, 0.1f);
+        itemEffect.SetActive(true);
+        itemEffect.GetComponent<SpriteRenderer>().DOFade(0, 1.0f);
+
+        for (int i = 0; i < 11; i++) yield return t;
+        itemEffect.SetActive(false);
+
+    }
+    #endregion
+
+    #region 저항 함수
+    public void ResistanceEffect(float time)
+    {
+        if (!this.gameObject.activeSelf) return;
+        if (resistanceCour != null)
+            StopCoroutine(resistanceCour);
+        resistanceCour = ResistanceCour(time);
+        StartCoroutine(resistanceCour);
+    }
+
+    public IEnumerator ResistanceCour(float time)
+    {
+        var t = new WaitForSeconds(0.1f);
+        resistanceEffect.SetActive(true);
+        ChangeState(LinggoState.resistanceEffect);
+
+        for (int i = 0; i < time * 10; i++) yield return t;
+        resistanceEffect.SetActive(false);
         ChangeState(LinggoState.move);
     }
     #endregion

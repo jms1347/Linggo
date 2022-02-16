@@ -7,7 +7,6 @@ TagManager:
   - Enemy
   - Ex
   - FxTemporaire
-  - PlayerItemUnit
   - Wall
   layers:
   - Default

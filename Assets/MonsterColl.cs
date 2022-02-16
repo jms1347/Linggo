@@ -22,22 +22,44 @@ public class MonsterColl : MonoBehaviour
         {
             if (coll.gameObject.tag == "Player")
             {
-                GameController.Inst.DecreaseHP(monster.att);
-                if (isFire)
+                if (coll.gameObject.name.Contains("Linggo"))
                 {
-                    int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
-                    coll.gameObject.GetComponent<Linggo>().FireDotEffect(4, dotAtt);
+                    GameController.Inst.DecreaseHP(monster.att);
+                    if (isFire)
+                    {
+                        int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
+                        coll.gameObject.GetComponent<Linggo>().FireDotEffect(4, dotAtt);
+
+                    }
+                    if (isLightning)
+                    {
+                        coll.gameObject.GetComponent<Linggo>().LightningStunEffect(2.0f);
+                    }
+                    if (isIce)
+                    {
+                        coll.gameObject.GetComponent<Linggo>().IceStunEffect(1.0f);
+                    }
+
 
                 }
-                if (isLightning)
+                else if(coll.gameObject.name.Contains("Item") )
                 {
-                    coll.gameObject.GetComponent<Linggo>().LightningStunEffect(2.0f);
+                    coll.gameObject.GetComponent<GhostItem>().DecreaseHP(monster.att);
+                    if (isFire)
+                    {
+                        int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
+                        coll.gameObject.GetComponent<GhostItem>().DotEffect(4, dotAtt);
+                    }
                 }
-                if (isIce)
+                else
                 {
-                    coll.gameObject.GetComponent<Linggo>().IceStunEffect(1.0f);
+                    coll.gameObject.GetComponent<Monster>().DecreaseHP(monster.att);
+                    if (isFire)
+                    {
+                        int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
+                        coll.gameObject.GetComponent<Monster>().DotEffect(4, dotAtt);
+                    }
                 }
-
                 Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
                 this.gameObject.SetActive(false);
             }
@@ -46,8 +68,19 @@ public class MonsterColl : MonoBehaviour
         {
             if (coll.gameObject.tag == "Player")
             {
-                GameController.Inst.CriticalDecreaseHP(monster.att * 2);
+                if (coll.gameObject.name.Contains("Linggo"))
+                {
+                    GameController.Inst.CriticalDecreaseHP(monster.att * 2);
+                }
+                else if (coll.gameObject.name.Contains("Item"))
+                {
+                    coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att); 
+                }
+                else
+                {
+                    coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att);
 
+                }
                 this.transform.DOMoveX(this.transform.position.x - 6.0f, 2.0f).SetEase(Ease.OutQuint);
                 this.transform.DOMoveY(this.transform.position.y + Random.Range(-2.0f, 2.1f), 2.0f).SetEase(Ease.OutQuint);
 
@@ -62,38 +95,71 @@ public class MonsterColl : MonoBehaviour
         {
             if (coll.tag == "Player")
             {
-                GameController.Inst.DecreaseHP(monster.att);
-                if (isFire)
+                if (coll.name.Contains("Linggo"))
                 {
-                    int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
-                    coll.gameObject.GetComponent<Linggo>().FireDotEffect(4, dotAtt);
+                    GameController.Inst.DecreaseHP(monster.att);
+                    if (isFire)
+                    {
+                        int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
+                        coll.gameObject.GetComponent<Linggo>().FireDotEffect(4, dotAtt);
 
+                    }
+                    if (isLightning)
+                    {
+                        coll.gameObject.GetComponent<Linggo>().LightningStunEffect(2.0f);
+                    }
+                    if (isIce)
+                    {
+                        coll.gameObject.GetComponent<Linggo>().IceStunEffect(1.0f);
+                    }
                 }
-                if (isLightning)
+                else if (coll.name.Contains("Item"))
                 {
-                    coll.gameObject.GetComponent<Linggo>().LightningStunEffect(2.0f);
+                    coll.gameObject.GetComponent<GhostItem>().DecreaseHP(monster.att);
+                    if (isFire)
+                    {
+                        int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
+                        coll.gameObject.GetComponent<GhostItem>().DotEffect(4, dotAtt);
+                    }
                 }
-                if (isIce)
+                else
                 {
-                    coll.gameObject.GetComponent<Linggo>().IceStunEffect(1.0f);
+                    coll.gameObject.GetComponent<Monster>().DecreaseHP(monster.att);
+                    if (isFire)
+                    {
+                        int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
+                        coll.gameObject.GetComponent<Monster>().DotEffect(4, dotAtt);
+                    }
                 }
 
                 Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
-                this.gameObject.SetActive(false);                
+                this.gameObject.SetActive(false);
             }
+            
         }
         else
         {
             if (coll.tag == "Player")
             {
-                GameController.Inst.CriticalDecreaseHP(monster.att*2);
+                if (coll.name.Contains("Linggo"))
+                {
+                    GameController.Inst.CriticalDecreaseHP(monster.att * 2);
+
+                }
+                else if (coll.name.Contains("Item"))
+                {
+                    coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att*2);
+                }
+                else
+                {
+                    coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att*2);
+                }
 
                 this.transform.DOMoveX(this.transform.position.x - 6.0f, 2.0f).SetEase(Ease.OutQuint);
-                this.transform.DOMoveY(this.transform.position.y + Random.Range(-2.0f,2.1f), 2.0f).SetEase(Ease.OutQuint);
+                this.transform.DOMoveY(this.transform.position.y + Random.Range(-2.0f, 2.1f), 2.0f).SetEase(Ease.OutQuint);
 
                 attackCnt--;
             }
-        }
-        
+        }        
     }
 }

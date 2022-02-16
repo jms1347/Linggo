@@ -8,8 +8,9 @@ public class ItemCard
     public enum ItemType
     {
         potion = 0,
-        buff =1,
-        summon = 2
+        percentPotion = 1,
+        buff =2,
+        summon = 3
     }
     public int itemIndex;
     public ItemType itemType;
@@ -17,7 +18,7 @@ public class ItemCard
     [TextArea]
     public string itemExp;
     public int itemPrice;
-    public float itemValue;
+    public int itemValue;
     public float itemDuration;
     public float itemCoolTime;
 }

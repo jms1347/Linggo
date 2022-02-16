@@ -70,7 +70,6 @@ public class Monster : MonoBehaviour
     public GameObject shieldEffect;
     [HideInInspector]
     public GameObject bossBuffEffect;
-     
 
     [Header("ÇÁ¸®ÆÕ")]
     public GameObject deathPrefab;
@@ -131,7 +130,7 @@ public class Monster : MonoBehaviour
 
         }
 
-        if (currentTarget != null)
+        if (currentTarget != null || currentTarget.tag != "Player")
         {
             Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
             this.transform.Translate(moveSpeed * Time.deltaTime * dist);
@@ -177,6 +176,11 @@ public class Monster : MonoBehaviour
         dotEffect.SetActive(false);
         levelUpEffect.SetActive(false);
         shieldEffect.SetActive(false);
+        this.transform.localScale = new Vector3(1.25f, 1.25f, 1);
+        this.maxHpBar.transform.localScale = new Vector3(1.25f, 1.25f, 1);
+        this.maxHpBar.transform.localPosition = new Vector3(-0.4f, 0.4f, 0);
+
+        this.tag = "Enemy";
     }
     #endregion
 
@@ -557,6 +561,17 @@ public class Monster : MonoBehaviour
     public void OffBuffMoveSpeed()
     {
         moveSpeed = saveSpeed;
+    }
+    #endregion
+
+    #region ¹è½Å
+    public void Betrayal()
+    {
+        this.tag = "Player";
+        this.transform.localScale = new Vector3(-1.25f, 1.25f, 1);
+        this.maxHpBar.transform.localScale = new Vector3(-1.25f, 1.25f, 1);
+        this.maxHpBar.transform.localPosition = new Vector3(0.4f, 0.4f, 0);
+        moveSpeed = 0;
     }
     #endregion
 }

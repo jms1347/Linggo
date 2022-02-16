@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour
     private IEnumerator waveBarCour;
     private IEnumerator bossBarCour;
     private IEnumerator createMarbleCour;
+    private IEnumerator attCour;
     bool isEndTimer = false;
     bool isWaveGoalComplete = false;
 
@@ -94,6 +95,7 @@ public class GameController : MonoBehaviour
 
     [Header("보스관련")]
     public GameObject[] bosses;
+    public GameObject[] bossPools;
 
     
 void Start()
@@ -306,6 +308,25 @@ void Start()
     {
         gold -= minusG;
         goldText.text = gold.ToString();
+    }
+    #endregion
+    #region 공격력 함수
+    public void ChangeAtt(int chageAttValue, float time)
+    {
+        if (attCour != null)
+            StopCoroutine(attCour);
+        attCour = AttCour(chageAttValue, time);
+        StartCoroutine(attCour);
+        
+    }
+
+    public IEnumerator AttCour(int chageAttValue, float time)
+    {
+        var t = new WaitForSeconds(0.1f);
+        int beforeAtt = att;
+        att += chageAttValue;
+        for (int i = 0; i < time * 10; i++) yield return t;
+        att = beforeAtt;
     }
     #endregion
     #region HP 함수
