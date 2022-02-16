@@ -83,7 +83,14 @@ public class ItemCardController : MonoBehaviour
                     {
                         GameObject mon = GameController.Inst.linggo.FindNearestObjectByTag("Enemy");
                         mon.GetComponent<Monster>().Betrayal();
-
+                        for (int j = 0; j < GameController.Inst.fieldMonsters.Count; j++)
+                        {
+                            if (GameController.Inst.fieldMonsters[j].gameObject.Equals(mon.gameObject))
+                            {
+                                GameController.Inst.fieldMonsters.RemoveAt(j);
+                                break;
+                            }
+                        }
                         //ÀÌÆåÆ®
                         for (int j = 0; j < purificationEffects.Count; j++)
                         {

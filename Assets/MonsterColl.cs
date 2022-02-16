@@ -62,6 +62,16 @@ public class MonsterColl : MonoBehaviour
                 }
                 Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
                 this.gameObject.SetActive(false);
+
+
+                for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
+                {
+                    if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
+                    {
+                        GameController.Inst.fieldMonsters.RemoveAt(i);
+                        break;
+                    }
+                }
             }
         }
         else
@@ -87,6 +97,8 @@ public class MonsterColl : MonoBehaviour
                 attackCnt--;
             }
         }
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
@@ -134,6 +146,15 @@ public class MonsterColl : MonoBehaviour
 
                 Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
                 this.gameObject.SetActive(false);
+
+                for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
+                {
+                    if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
+                    {
+                        GameController.Inst.fieldMonsters.RemoveAt(i);
+                        break;
+                    }
+                }
             }
             
         }

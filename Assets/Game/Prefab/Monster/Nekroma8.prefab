@@ -9885,7 +9885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 153568, guid: cca79b260878071418290367024a6716, type: 3}
   monster: {fileID: 0}
-  attackCnt: 2
+  attackCnt: 1
   isFire: 0
   isLightning: 0
   isIce: 0

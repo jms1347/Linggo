@@ -224,6 +224,14 @@ public class Monster : MonoBehaviour
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
             gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
             this.gameObject.SetActive(false);
+            for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
+            {
+                if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
+                {
+                    GameController.Inst.fieldMonsters.RemoveAt(i);
+                    break;
+                }
+            }
 
             GameController.Inst.PlusKillCnt();
 
@@ -247,7 +255,14 @@ public class Monster : MonoBehaviour
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
             gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
             this.gameObject.SetActive(false);
-
+            for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
+            {
+                if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
+                {
+                    GameController.Inst.fieldMonsters.RemoveAt(i);
+                    break;
+                }
+            }
             GameController.Inst.PlusKillCnt();
         }
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
@@ -269,10 +284,17 @@ public class Monster : MonoBehaviour
             {
                 GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
                 gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
-                this.gameObject.SetActive(false);
             }
-           
 
+            this.gameObject.SetActive(false);
+            for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
+            {
+                if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
+                {
+                    GameController.Inst.fieldMonsters.RemoveAt(i);
+                    break;
+                }
+            }
             GameController.Inst.PlusKillCnt();
         }
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
@@ -294,7 +316,14 @@ public class Monster : MonoBehaviour
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
             gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
             this.gameObject.SetActive(false);
-
+            for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
+            {
+                if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
+                {
+                    GameController.Inst.fieldMonsters.RemoveAt(i);
+                    break;
+                }
+            }
             GameController.Inst.PlusKillCnt();
         }
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
@@ -311,7 +340,14 @@ public class Monster : MonoBehaviour
         GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
         gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);
         this.gameObject.SetActive(false);
-
+        for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
+        {
+            if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
+            {
+                GameController.Inst.fieldMonsters.RemoveAt(i);
+                break;
+            }
+        }
         GameController.Inst.PlusKillCnt();
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
     }
