@@ -56,6 +56,8 @@ public class GGabibon : Skill
             {
                 targetCnt--;
                 coll.gameObject.GetComponent<Monster>().StunEffect(levelUpData[skillLevel - 1].stunTime);
+                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+                coll.GetComponent<Monster>().DecreaseHP(damage);
                 int dotDam = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].addAttackCoefficient);
                 coll.gameObject.GetComponent<Monster>().DotEffect(levelUpData[skillLevel - 1].dotTime, dotDam);
 

@@ -25,9 +25,10 @@ public class MarbleTab : MonoBehaviour
     [HideInInspector]
     public AudioSource audioSource;
     public AudioClip[] audioClip;
-
+    private Vector3 oriPos;
     private void Awake()
     {
+        oriPos = this.transform.position;
         marbleTab = this.transform.GetChild(0).gameObject;
 
         audioSource = this.GetComponent<AudioSource>();
@@ -55,6 +56,8 @@ public class MarbleTab : MonoBehaviour
 
     public void OnMarble()
     {
+        this.transform.position = oriPos;
+        this.transform.rotation = Quaternion.Euler(0, 0, 0);
         tapCnt = Random.Range(1, 4);
         marbleImg.sprite = marbleSprs[tapCnt - 1];
         tapEffect[tapCnt + 2].SetActive(true);
