@@ -9,7 +9,7 @@ public class GoogleSheetManager : MonoBehaviour
     const string itemDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1165571065&range=A2:I";
     const string skillCardDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=626817391&range=A2:Q";
     const string linggoDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=457742873&range=A2:J";
-    const string bossDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1718384963&range=A2:I";
+    const string bossDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1718384963&range=A2:K";
     public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
     public SkillCardSo skillCardSO;
     public LevelDataSo linggoLevelDataSO;
@@ -56,6 +56,8 @@ public class GoogleSheetManager : MonoBehaviour
             bossData.bossAttSpeed = float.Parse(row[6]);
             bossData.bossMissileSpeed = float.Parse(row[7]);
             bossData.attType = int.Parse(row[8]);
+            bossData.bossContinuousMissileCnt = int.Parse(row[9]);
+            bossData.bossContinuousMissileTime = int.Parse(row[10]);
 
             bossDataSO.bossDatas.Add(bossData);
         }

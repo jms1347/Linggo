@@ -93,7 +93,7 @@ public class ItemSlot : MonoBehaviour, IDragHandler, IEndDragHandler
     #region 아이템 세팅
     public void SettingItemSlot(Sprite cardImg, ItemCard ic,int cnt)
     {
-        if (itemCard == ic) PlusCount();
+        if (itemCard == ic) PlusCount(cnt);
         else
         {
             isNull = false;
@@ -115,9 +115,9 @@ public class ItemSlot : MonoBehaviour, IDragHandler, IEndDragHandler
     }
 
 	//아이템 수량 증가
-    public void PlusCount()
+    public void PlusCount(int cnt)
 	{
-		itemCnt++;
+		itemCnt+=cnt;
 		itemCntText.text = itemCnt.ToString();
 	}
 	#endregion

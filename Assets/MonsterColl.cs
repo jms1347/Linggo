@@ -53,12 +53,14 @@ public class MonsterColl : MonoBehaviour
                 }
                 else
                 {
-                    coll.gameObject.GetComponent<Monster>().DecreaseHP(monster.att);
-                    if (isFire)
-                    {
-                        int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
-                        coll.gameObject.GetComponent<Monster>().DotEffect(4, dotAtt);
-                    }
+                    coll.gameObject.GetComponent<Monster>().DecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
+
+                    //coll.gameObject.GetComponent<Monster>().DecreaseHP(monster.att);
+                    //if (isFire)
+                    //{
+                    //    int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
+                    //    coll.gameObject.GetComponent<Monster>().DotEffect(4, dotAtt);
+                    //}
                 }
                 Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
                 this.gameObject.SetActive(false);
@@ -88,7 +90,8 @@ public class MonsterColl : MonoBehaviour
                 }
                 else
                 {
-                    coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att);
+                    //coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att);
+                    coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
 
                 }
                 this.transform.DOMoveX(this.transform.position.x - 6.0f, 2.0f).SetEase(Ease.OutQuint);
@@ -136,12 +139,13 @@ public class MonsterColl : MonoBehaviour
                 }
                 else
                 {
-                    coll.gameObject.GetComponent<Monster>().DecreaseHP(monster.att);
-                    if (isFire)
-                    {
-                        int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
-                        coll.gameObject.GetComponent<Monster>().DotEffect(4, dotAtt);
-                    }
+                    coll.gameObject.GetComponent<Monster>().DecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
+                    //coll.gameObject.GetComponent<Monster>().DecreaseHP(monster.att);
+                    //if (isFire)
+                    //{
+                    //    int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
+                    //    coll.gameObject.GetComponent<Monster>().DotEffect(4, dotAtt);
+                    //}
                 }
 
                 Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
@@ -173,7 +177,8 @@ public class MonsterColl : MonoBehaviour
                 }
                 else
                 {
-                    coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att*2);
+                    //coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att*2);
+                    coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
                 }
 
                 this.transform.DOMoveX(this.transform.position.x - 6.0f, 2.0f).SetEase(Ease.OutQuint);

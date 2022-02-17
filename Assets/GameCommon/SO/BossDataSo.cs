@@ -14,7 +14,8 @@ public class BossData
     public float bossAttSpeed;
     public float bossMissileSpeed;
     public int attType;
-    
+    public int bossContinuousMissileCnt;
+    public float bossContinuousMissileTime;
 }
 [CreateAssetMenu(fileName = "BossDataSO", menuName = "ScriptableObject/BossDataSO")]
 public class BossDataSo : ScriptableObject

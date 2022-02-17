@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField]public LevelDataSo linggoLevelDataSO;
     [SerializeField]public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
+    [SerializeField]public BossDataSo bossDataSO;
 
     [Header("HP 관련")]
     public int maxHP;
@@ -60,6 +61,7 @@ public class GameController : MonoBehaviour
 
     [Header("그 외 변수")]
     public GameObject guidePop;
+    public GameObject shopIcon;
 
 
     public bool isStartGame = false;
@@ -149,11 +151,29 @@ void Start()
         for (int i = 0; i < linggoLevelDataSO.levelData.Count; i++)
         {
             yield return null;
-            //웨이브 바 켜기
-            if (waveBarCour != null)
-                StopCoroutine(waveBarCour);
-            waveBarCour = AnimationWaveBarCour();
-            StartCoroutine(waveBarCour);
+           
+            if(wave % 5 == 0)
+                shopIcon.SetActive(true);            
+            else shopIcon.SetActive(false);
+            //보스생성
+            if (wave % 10 == 0)
+            {
+                if (bossBarCour != null)
+                    StopCoroutine(bossBarCour);
+                bossBarCour = BossBarCour();
+                StartCoroutine(bossBarCour);
+
+                bosses[(wave / 10) - 1].SetActive(true);
+            }
+            else
+            {
+                //웨이브 바 켜기
+                if (waveBarCour != null)
+                    StopCoroutine(waveBarCour);
+                waveBarCour = AnimationWaveBarCour();
+                StartCoroutine(waveBarCour);
+            }
+
             //타이머 켜기
             if (timerCour != null)
                 StopCoroutine(timerCour);
@@ -164,21 +184,21 @@ void Start()
             FieldMonsterLevelUp();
             //몬스터생성
             CreateMonster();
-            //보스생성
-            if(wave % 10 == 0)
-            {
-                if (bossBarCour != null)
-                    StopCoroutine(bossBarCour);
-                bossBarCour = BossBarCour();
-                StartCoroutine(bossBarCour);
 
-                bosses[(wave / 10)-1].SetActive(true);
-            }
             yield return new WaitUntil(()=> (isEndTimer || isWaveGoalComplete || fieldMonsters.Count == 0));            //타이머가 종료되거나 미션 성공할때까지
 
             //초기화(웨이브++, 웨이브 미션킬 초기화)
             NextWave();
         }
+    }
+    #endregion
+    #region 보스 데이터 세팅
+    public void SettingBossData()
+    {
+        for (int i = 0; i < bossPools.Length; i++)
+        {
+            bossPools[i].GetComponent<Boss>().SettingBossData(bossDataSO.bossDatas[i]);
+        } 
     }
     #endregion
     #region 보스 바 애니메이션
@@ -222,10 +242,10 @@ void Start()
 
     public void FieldMonsterLevelUp()
     {
-        for (int i = 0; i < fieldMonsters.Count; i++)
-        {
-            if (!fieldMonsters[i].gameObject.activeSelf) fieldMonsters.RemoveAt(i);
-        }
+        //for (int i = 0; i < fieldMonsters.Count; i++)
+        //{
+        //    if (!fieldMonsters[i].gameObject.activeSelf) fieldMonsters.RemoveAt(i);
+        //}
         for (int i = 0; i < fieldMonsters.Count; i++)
         {
             fieldMonsters[i].LevelUpEffect();

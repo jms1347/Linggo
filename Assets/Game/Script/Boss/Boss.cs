@@ -34,6 +34,38 @@ public class Boss : Monster
         StartCoroutine(attackCour);
     }
 
+    public void SettingBossData(BossData data)
+    {
+        this.name = data.bossName;
+        this.att = data.bossAtt;
+        this.maxHp = data.bossHp;
+        this.currentHp = maxHp;
+        this.moveSpeed = data.bossMoveSpeed;
+        this.attackDistance = data.bossAttackDistance;
+        this.attSpeed = data.bossAttSpeed;
+        for (int i = 0; i < bossMissiles.Count; i++)
+        {
+            bossMissiles[i].missileSpeed = data.bossMissileSpeed;
+        }
+
+        switch (data.attType)
+        {
+            case 0:
+                this.attackType = AttackType.Boss;
+                break;
+            case 1:
+                this.attackType = AttackType.OnlyPlayerTarget;
+                break;
+            case 2:
+                this.attackType = AttackType.BossContinuousMissile;
+                break;
+            default:
+                this.attackType = AttackType.Boss;
+                break;
+        }
+        this.continuousMissileCnt = data.bossContinuousMissileCnt;
+        this.continuousMissileTime = data.bossContinuousMissileTime;
+    }
     
     #region 미사일 세팅 및 미사일 생성(공격)
     public void SettingMissile()
