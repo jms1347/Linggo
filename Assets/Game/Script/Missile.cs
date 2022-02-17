@@ -12,7 +12,9 @@ public class Missile : MonoBehaviour
     public GameObject missileStartPos;
     public GameObject exPrefab;
     public float missileSpeed;
-	private void Awake()
+    public bool attackItem = true;
+
+    private void Awake()
 	{
 		rigid = this.GetComponent<Rigidbody2D>();
 
@@ -80,7 +82,7 @@ public class Missile : MonoBehaviour
 
                     GameController.Inst.DecreaseHP(master.GetComponent<Monster>().att);
                 }
-                else if (coll.name.Contains("Item"))
+                else if (coll.name.Contains("Item") && attackItem)
                 {
                     coll.gameObject.GetComponent<GhostItem>().DecreaseHP(master.GetComponent<Monster>().att);
 

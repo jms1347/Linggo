@@ -12,6 +12,7 @@ public class MonsterColl : MonoBehaviour
     public bool isFire = false;
     public bool isLightning = false;
     public bool isIce = false;
+    public bool attackItem = true;
     private void Awake()
     {
         monster = this.GetComponent<Monster>();
@@ -42,7 +43,7 @@ public class MonsterColl : MonoBehaviour
 
 
                 }
-                else if(coll.gameObject.name.Contains("Item") )
+                else if(coll.gameObject.name.Contains("Item") && attackItem)
                 {
                     coll.gameObject.GetComponent<GhostItem>().DecreaseHP(monster.att);
                     if (isFire)
@@ -84,7 +85,7 @@ public class MonsterColl : MonoBehaviour
                 {
                     GameController.Inst.CriticalDecreaseHP(monster.att * 2);
                 }
-                else if (coll.gameObject.name.Contains("Item"))
+                else if (coll.gameObject.name.Contains("Item") && attackItem)
                 {
                     coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att); 
                 }
@@ -128,7 +129,7 @@ public class MonsterColl : MonoBehaviour
                         coll.gameObject.GetComponent<Linggo>().IceStunEffect(1.0f);
                     }
                 }
-                else if (coll.name.Contains("Item"))
+                else if (coll.name.Contains("Item") && attackItem)
                 {
                     coll.gameObject.GetComponent<GhostItem>().DecreaseHP(monster.att);
                     if (isFire)
@@ -171,7 +172,7 @@ public class MonsterColl : MonoBehaviour
                     GameController.Inst.CriticalDecreaseHP(monster.att * 2);
 
                 }
-                else if (coll.name.Contains("Item"))
+                else if (coll.name.Contains("Item") && attackItem)
                 {
                     coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att*2);
                 }

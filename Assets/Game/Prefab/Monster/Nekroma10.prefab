@@ -4996,6 +4996,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   linggo: {fileID: 0}
   monsterImg: {fileID: 0}
+  monsterAni: {fileID: 0}
   hitEffect: {fileID: 0}
   slowEffect: {fileID: 0}
   stunEffect: {fileID: 0}
@@ -5027,6 +5028,7 @@ MonoBehaviour:
   isFire: 0
   isLightning: 0
   isIce: 1
+  attackItem: 0
 --- !u!95 &2529610829703091909
 Animator:
   serializedVersion: 3

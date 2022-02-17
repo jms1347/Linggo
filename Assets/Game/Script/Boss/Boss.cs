@@ -54,6 +54,8 @@ public class Boss : Monster
                 this.attackType = AttackType.Boss;
                 break;
             case 1:
+                print("세팅하나");
+
                 this.attackType = AttackType.OnlyPlayerTarget;
                 break;
             case 2:
@@ -93,12 +95,14 @@ public class Boss : Monster
 
         while (true)
         {
-            if (currentTarget != null || currentTarget.tag != "Player")
+            if (currentTarget != null || currentTarget.tag != "Player" || currentTarget.activeSelf)
             {
-
+                print("보스타켓이상없음");
                 float disF = Vector2.Distance(this.transform.position, currentTarget.transform.position);
                 if (attackDistance >= disF)
                 {
+                    print("보스공격시작");
+
                     yield return new WaitUntil(() => monsterState != MonsterState.stun);
                     if(attackType == AttackType.BossContinuousMissile)
                     {
@@ -135,6 +139,8 @@ public class Boss : Monster
                 }
                 else
                 {
+                    print("보스타켓 재세팅");
+
                     moveSpeed = saveSpeed;
                     Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
                     this.transform.Translate(moveSpeed * Time.deltaTime * dist);

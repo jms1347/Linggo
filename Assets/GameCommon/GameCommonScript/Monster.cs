@@ -130,7 +130,7 @@ public class Monster : MonoBehaviour
 
         }
 
-        if (currentTarget != null || currentTarget.tag != "Player")
+        if (currentTarget != null || currentTarget.tag != "Player" || currentTarget.activeSelf)
         {
             Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
             this.transform.Translate(moveSpeed * Time.deltaTime * dist);

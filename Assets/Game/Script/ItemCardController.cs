@@ -82,7 +82,7 @@ public class ItemCardController : MonoBehaviour
                     for (int i = 0; i < itemSlots[slotIndex].itemCard.itemValue; i++)
                     {
                         GameObject mon = GameController.Inst.linggo.FindNearestObjectByTag("Enemy");
-                        if(mon != null)
+                        if(mon != null && !mon.name.Contains("Boss"))
                         {
                             mon.GetComponent<Monster>().Betrayal();
                             for (int j = 0; j < GameController.Inst.fieldMonsters.Count; j++)
@@ -121,6 +121,7 @@ public class ItemCardController : MonoBehaviour
                         int hp = Mathf.RoundToInt(GameController.Inst.currentHP * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
                         ghostItems[i].InitUnit(hp);
                         ghostItems[i].transform.position = Vector3.zero +  new Vector3(Random.Range(3.0f, 3.2f), Random.Range(-0.1f, 0.1f), 0);
+                        ghostItems[i].transform.localRotation = Quaternion.Euler(0, 0, 0);
                         break;
                     }
                 }

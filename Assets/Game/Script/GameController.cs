@@ -106,6 +106,8 @@ void Start()
     }
     public void InitGame()
     {
+        SettingBossData();
+
         level = 1;
         levelText.text = "Lv." + level.ToString();
         att = linggoLevelDataSO.levelData[level - 1].upAtt;
