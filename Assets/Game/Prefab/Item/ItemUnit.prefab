@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7627155460347847334}
   - component: {fileID: 550272927707792975}
   - component: {fileID: 5781016380949803191}
+  - component: {fileID: 8230573408349096830}
   m_Layer: 0
   m_Name: ItemUnit
   m_TagString: Player
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 976a144c453705c47a5b2a612727dc1a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a21f5003485a08a41b83287748220528, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,9 +122,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.43
+  m_Radius: 0.5
 --- !u!114 &5781016380949803191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +148,25 @@ MonoBehaviour:
   dotDamageTPrefab: {fileID: 8918483966716264937, guid: fee21636c7705254ebaf5ac2646218ab, type: 3}
   healTPrefab: {fileID: 8918483966716264937, guid: e4845fffe19ba734f94ee7aceda3c9c5, type: 3}
   criticalDamageTPrefab: {fileID: 8918483966716264937, guid: 9b2f9499bc54be7408ba9bffb8bee6e2, type: 3}
+--- !u!95 &8230573408349096830
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927572071976606970}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a80d55b7d72e56f479c62be08a934dec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2439607887034253105
 GameObject:
   m_ObjectHideFlags: 0

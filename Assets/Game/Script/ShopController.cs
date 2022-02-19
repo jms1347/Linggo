@@ -61,62 +61,61 @@ public class ShopController : MonoBehaviour
             else{
                 buyItemCnt += index;
                 buyItemCntText.text = buyItemCnt.ToString() + "개";
-            }
-            
+            }           
         }
     }
-    public void BuyItem()
-    {
-        if(GameController.Inst.gold < (int.Parse(buyITemPriceText.text)*buyItemCnt))
-        {
-            GameController.Inst.OpenGuidePop("골드가 부족합니다.");
+    //public void BuyItem()
+    //{
+    //    if(GameController.Inst.gold < (int.Parse(buyITemPriceText.text)*buyItemCnt))
+    //    {
+    //        GameController.Inst.OpenGuidePop("골드가 부족합니다.");
 
-            return;
-        }
+    //        return;
+    //    }
         
-        bool isDupli = false;
-        for (int i = 0; i < ItemCardController.Inst.itemSlots.Length; i++)
-        {
-            if (ItemCardController.Inst.itemSlots[i].itemCard == ItemCardController.Inst.itemCardList[buyIndex])
-            {
-                ItemCardController.Inst.itemSlots[i].SettingItemSlot(
-                    ItemCardController.Inst.itemSprs[buyIndex], ItemCardController.Inst.itemCardList[buyIndex]
-                    , buyItemCnt);
+    //    bool isDupli = false;
+    //    for (int i = 0; i < ItemCardController.Inst.itemSlots.Length; i++)
+    //    {
+    //        if (ItemCardController.Inst.itemSlots[i].itemCard == ItemCardController.Inst.itemCardList[buyIndex])
+    //        {
+    //            ItemCardController.Inst.itemSlots[i].SettingItemSlot(
+    //                ItemCardController.Inst.itemSprs[buyIndex], ItemCardController.Inst.itemCardList[buyIndex]
+    //                , buyItemCnt);
                 
-                isDupli = true;
-                GameController.Inst.DecreaseGold((int.Parse(buyITemPriceText.text) * buyItemCnt));
-                break;
-            }
-        }
-        if (!isDupli)
-        {
-            for (int i = 0; i < ItemCardController.Inst.itemSlots.Length; i++)
-            {
-                if (ItemCardController.Inst.itemSlots[i].isNull || ItemCardController.Inst.itemSlots[i].itemCnt <= 0)
-                {
-                    ItemCardController.Inst.itemSlots[i].SettingItemSlot(
-                        ItemCardController.Inst.itemSprs[buyIndex], ItemCardController.Inst.itemCardList[buyIndex]
-                        , buyItemCnt);
-                    isDupli = true;
-                    GameController.Inst.DecreaseGold((int.Parse(buyITemPriceText.text) * buyItemCnt));
-                    break;
-                }
-            }
-        }
+    //            isDupli = true;
+    //            GameController.Inst.DecreaseGold((int.Parse(buyITemPriceText.text) * buyItemCnt));
+    //            break;
+    //        }
+    //    }
+    //    if (!isDupli)
+    //    {
+    //        for (int i = 0; i < ItemCardController.Inst.itemSlots.Length; i++)
+    //        {
+    //            if (ItemCardController.Inst.itemSlots[i].isNull || ItemCardController.Inst.itemSlots[i].itemCnt <= 0)
+    //            {
+    //                ItemCardController.Inst.itemSlots[i].SettingItemSlot(
+    //                    ItemCardController.Inst.itemSprs[buyIndex], ItemCardController.Inst.itemCardList[buyIndex]
+    //                    , buyItemCnt);
+    //                isDupli = true;
+    //                GameController.Inst.DecreaseGold((int.Parse(buyITemPriceText.text) * buyItemCnt));
+    //                break;
+    //            }
+    //        }
+    //    }
 
-        //계속 펄스면 아이템창이 꽉차서 주문 못한다는 팝업 메시지 띄움
-        if (!isDupli)
-        {
-            GameController.Inst.OpenGuidePop("아이템을 배치할 공간이 없어서 구매할 수 없습니다.");
-        }
-        else
-        {
-            buyPanel.SetActive(false);
-            this.gameObject.SetActive(false);
-            Time.timeScale = 1;
-        }
+    //    //계속 펄스면 아이템창이 꽉차서 주문 못한다는 팝업 메시지 띄움
+    //    if (!isDupli)
+    //    {
+    //        GameController.Inst.OpenGuidePop("아이템을 배치할 공간이 없어서 구매할 수 없습니다.");
+    //    }
+    //    else
+    //    {
+    //        buyPanel.SetActive(false);
+    //        this.gameObject.SetActive(false);
+    //        Time.timeScale = 1;
+    //    }
 
-    }
+    //}
 
     public void Btn(int index)
     {

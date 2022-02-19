@@ -467,11 +467,10 @@ public class Linggo : MonoBehaviour
     public IEnumerator ItemEffectCour(Sprite itemSpr)
     {
         var t = new WaitForSeconds(0.1f);
-
         itemEffect.GetComponent<SpriteRenderer>().sprite = itemSpr;
-        itemEffect.GetComponent<SpriteRenderer>().DOFade(1, 0.1f);
+        itemEffect.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         itemEffect.SetActive(true);
-        itemEffect.GetComponent<SpriteRenderer>().DOFade(0, 1.0f);
+        itemEffect.GetComponent<SpriteRenderer>().DOFade(0, 1.0f).SetEase(Ease.InExpo);
 
         for (int i = 0; i < 11; i++) yield return t;
         itemEffect.SetActive(false);

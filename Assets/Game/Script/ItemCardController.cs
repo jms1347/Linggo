@@ -9,14 +9,15 @@ public class ItemCardController : MonoBehaviour
     private void Awake() => Inst = this;
 
     [SerializeField] ItemSo itemCardSO;
-    public List<ItemCard> itemCardList = new List<ItemCard>();
+    public List<ItemCard> itemCardList = new List<ItemCard>();  //DB 아이템 리스트
 
-	public ItemSlot[] itemSlots = new ItemSlot[4];
-    public List<ItemIcon> itemIcons = new List<ItemIcon>();
-	public List<Sprite> itemSprs = new List<Sprite>();
+	public ItemSlot[] itemSlots = new ItemSlot[4];          //우측 하단 아이템 슬롯
+    public List<ItemIcon> itemIcons = new List<ItemIcon>(); //좌측 상단 버프 아이콘
+	public List<Sprite> itemSprs = new List<Sprite>();      //아이템 아이콘(이미지)
 
-    public List<GhostItem> ghostItems = new List<GhostItem>();
-    public List<GameObject> purificationEffects = new List<GameObject>();
+    public List<GhostItem> ghostItems = new List<GhostItem>();      //유닛 20마리 미리 생성
+    public List<Transform> ghostItemPos = new List<Transform>();    //유닛 생성 포스 20개
+    public List<GameObject> purificationEffects = new List<GameObject>();   //정화 이펙트
     void Start()
     {
 		SettingItemCardList();
@@ -66,23 +67,16 @@ public class ItemCardController : MonoBehaviour
                 GameController.Inst.IncreaseHP(plusPotion);
                 break;
             case ItemCard.ItemType.buff:
-                if(itemSlots[slotIndex].itemCard.itemIndex == 5)
+                if(itemSlots[slotIndex].itemCard.itemIndex == 3)
                 {
                     GameController.Inst.linggo.ShieldEffect(itemSlots[slotIndex].itemCard.itemValue);
-                }else if(itemSlots[slotIndex].itemCard.itemIndex == 6)
-                {
-                    int plusAtt = Mathf.RoundToInt(GameController.Inst.att * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
-                    GameController.Inst.ChangeAtt(plusAtt, 60);
-                }else if(itemSlots[slotIndex].itemCard.itemIndex == 7)
-                {
-                    GameController.Inst.linggo.ResistanceEffect(itemSlots[slotIndex].itemCard.itemValue);
                 }
-                else if(itemSlots[slotIndex].itemCard.itemIndex == 8)
+                else if (itemSlots[slotIndex].itemCard.itemIndex == 1)
                 {
                     for (int i = 0; i < itemSlots[slotIndex].itemCard.itemValue; i++)
                     {
                         GameObject mon = GameController.Inst.linggo.FindNearestObjectByTag("Enemy");
-                        if(mon != null && !mon.name.Contains("Boss"))
+                        if (mon != null && !mon.name.Contains("Boss"))
                         {
                             mon.GetComponent<Monster>().Betrayal();
                             for (int j = 0; j < GameController.Inst.fieldMonsters.Count; j++)
@@ -104,14 +98,23 @@ public class ItemCardController : MonoBehaviour
                                 }
                             }
                         }
-                            
+
                     }
-                }else if(itemSlots[slotIndex].itemCard.itemIndex == 9)
-                {
-                    int potion = Mathf.RoundToInt(GameController.Inst.maxHP * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
-                    GameController.Inst.ChangeAtt(GameController.Inst.att, 15);
-                    GameController.Inst.IncreaseHP(potion);
                 }
+                //else if(itemSlots[slotIndex].itemCard.itemIndex == 6)
+                //{
+                //    int plusAtt = Mathf.RoundToInt(GameController.Inst.att * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
+                //    GameController.Inst.ChangeAtt(plusAtt, 60);
+                //}else if(itemSlots[slotIndex].itemCard.itemIndex == 7)
+                //{
+                //    GameController.Inst.linggo.ResistanceEffect(itemSlots[slotIndex].itemCard.itemValue);
+                //}
+                //else if(itemSlots[slotIndex].itemCard.itemIndex == 9)
+                //{
+                //    int potion = Mathf.RoundToInt(GameController.Inst.maxHP * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
+                //    GameController.Inst.ChangeAtt(GameController.Inst.att, 15);
+                //    GameController.Inst.IncreaseHP(potion);
+                //}
                 break;
             case ItemCard.ItemType.summon:
                 for (int i = 0; i < ghostItems.Count; i++)
@@ -120,7 +123,7 @@ public class ItemCardController : MonoBehaviour
                     {
                         int hp = Mathf.RoundToInt(GameController.Inst.currentHP * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
                         ghostItems[i].InitUnit(hp);
-                        ghostItems[i].transform.position = Vector3.zero +  new Vector3(Random.Range(3.0f, 3.2f), Random.Range(-0.1f, 0.1f), 0);
+                        ghostItems[i].transform.position = ghostItemPos[i].transform.position;
                         ghostItems[i].transform.localRotation = Quaternion.Euler(0, 0, 0);
                         break;
                     }
@@ -137,13 +140,13 @@ public class ItemCardController : MonoBehaviour
 			ItemCard item = itemCardSO.items[i];
 			itemCardList.Add(item);
 		}
-		
-		//임시세팅
-		//     for (int i = 0; i < itemSlots.Length; i++)
-		//     {
-		//itemSlots[i].SettingItemSlot(itemSprs[i], itemCardList[i]);
-		//     }
-	}
+
+        //세팅
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            itemSlots[i].SettingItemSlot(itemCardList[i]);
+        }
+    }
     #endregion
 
     
