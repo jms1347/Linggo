@@ -21,6 +21,8 @@ public class LinggoStatBoard : MonoBehaviour
     public TextMeshProUGUI linggoHpText;
     public TextMeshProUGUI linggoAttSpeedText;
 
+    public GameObject[] levelUpBtns;
+
     public void OnEnable()
     {
         levelText.text = "Lv."+ GameController.Inst.level.ToString();
@@ -66,6 +68,9 @@ public class LinggoStatBoard : MonoBehaviour
         linggoAccumulatedHpText.text = "";
         linggoAccumulatedAttText.text = "";
         linggoAccumulatedAttSpeedText.text = "";
+
+        levelUpBtns[2].SetActive(true);
+
     }
 
     public void PlusStat(string btnKey)
@@ -116,6 +121,7 @@ public class LinggoStatBoard : MonoBehaviour
                 print("±¸½½ È®·ü MAX");
                 plusMarbleAppearanceText.text = "100% (MAX)";
                 plusMarbleAppearanceGoldText.text = "";
+                levelUpBtns[2].SetActive(false);
             }
             else
             {
