@@ -30,7 +30,7 @@ public class LinggoStatBoard : MonoBehaviour
         plusAttText.text = "(+" + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel+1].plusAtt + ")";
         plusAttGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel+1].plusAttGold.ToString();
         
-        plusMarbleAppearanceText.text = (10 + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel+1].plusAppearPercent).ToString() + "%";
+        plusMarbleAppearanceText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel+1].plusAppearPercent.ToString() + "%";
         plusMarbleAppearanceGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel+1].plusAppearPercentGold.ToString();
 
         int plusHP = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel].plusHp;
