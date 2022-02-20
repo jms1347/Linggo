@@ -10,11 +10,14 @@ public class GoogleSheetManager : MonoBehaviour
     const string skillCardDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=626817391&range=A2:Q";
     const string linggoDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=457742873&range=A2:J";
     const string bossDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1718384963&range=A2:K";
+    const string stateDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=610984273&range=A2:G";
     public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
     public SkillCardSo skillCardSO;
     public LevelDataSo linggoLevelDataSO;
     public ItemSo itemSO;
     public BossDataSo bossDataSO;
+    public StateLevelDataSo stateLevelDataSO;
+
     void Awake()
     {
         StartCoroutine(SettingMonserCardData());
@@ -22,7 +25,45 @@ public class GoogleSheetManager : MonoBehaviour
         StartCoroutine(SettingItemData());
         StartCoroutine(SettingLinggoLevelData());
         StartCoroutine(SettingBossData());
+        StartCoroutine(SettingStateLevelData());
     }
+    #region 스탯 레벨데이터 넣기
+    IEnumerator SettingStateLevelData()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(stateDbURL))
+        {
+            yield return www.SendWebRequest();
+            string data = www.downloadHandler.text;
+
+            SetStateLevelData(data);
+        }
+    }
+
+    void SetStateLevelData(string data)
+    {
+        if (stateLevelDataSO.stateLevelData != null || stateLevelDataSO.stateLevelData.Count > 0) stateLevelDataSO.stateLevelData.Clear();
+
+        int lineSize;
+        string[] line = data.Split('\n');
+        lineSize = line.Length;
+        for (int i = 0; i < lineSize; i++)
+        {
+            StateLevelData stateLevelData = new StateLevelData();
+            string[] row = line[i].Split('\t');
+
+            stateLevelData.plusLevel = int.Parse(row[0]);
+            stateLevelData.plusAtt = int.Parse(row[1]);
+            stateLevelData.plusAttGold = int.Parse(row[2]);
+            stateLevelData.plusHp = int.Parse(row[3]);
+            stateLevelData.plusHpGold = int.Parse(row[4]);
+            stateLevelData.plusAppearPercent = float.Parse(row[5]);
+            stateLevelData.plusAppearPercentGold = int.Parse(row[6]);
+
+            stateLevelDataSO.stateLevelData.Add(stateLevelData);
+        }
+    }
+    #endregion
+
     #region 보스 데이터 넣기
     IEnumerator SettingBossData()
     {

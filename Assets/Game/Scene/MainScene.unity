@@ -619,7 +619,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -180}
+  m_AnchoredPosition: {x: 0, y: -177.34497}
   m_SizeDelta: {x: 1582, y: 1707.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114592741
@@ -1472,6 +1472,7 @@ MonoBehaviour:
   linggoLevelDataSO: {fileID: 11400000, guid: 38874e1799bd75046bab3aaab7c9f1b7, type: 2}
   itemSO: {fileID: 11400000, guid: ad913927410e27e499fa4d6425d2b0d2, type: 2}
   bossDataSO: {fileID: 11400000, guid: d99a31c7cc6640e4bba2e9eb443ee118, type: 2}
+  stateLevelDataSO: {fileID: 11400000, guid: aef153021e2becd46815b567404c9e7a, type: 2}
 --- !u!4 &616608138
 Transform:
   m_ObjectHideFlags: 0
@@ -3545,8 +3546,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b622e053da3e7034ebea8c48a2b0cdec, type: 3}
   - {fileID: 21300000, guid: 00b306b7f58b0e647bccb9825f559fd6, type: 3}
   - {fileID: 21300000, guid: f8a23732f5813be448940345d4d0e6e4, type: 3}
-  - {fileID: 21300000, guid: d133ee8c45bb1904c98b3389a17eacec, type: 3}
-  - {fileID: 21300000, guid: b6b3826a3c46faf40b3dba2a8a981ac9, type: 3}
+  - {fileID: 21300000, guid: f229a775610aa904f865cac0ce25f4db, type: 3}
+  - {fileID: 21300000, guid: dd4da18013601fd4e921712b493ca3e4, type: 3}
   - {fileID: 21300000, guid: bb716ec73bf0d7f4d8e1c60e49d9b578, type: 3}
   - {fileID: 21300000, guid: 144cadbd65b057f4dabf8b67397b8c19, type: 3}
   - {fileID: 21300000, guid: 8797e987c84a22a4e894c3f115b07090, type: 3}
@@ -3616,7 +3617,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b6b3826a3c46faf40b3dba2a8a981ac9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd4da18013601fd4e921712b493ca3e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5206,7 +5207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d133ee8c45bb1904c98b3389a17eacec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f229a775610aa904f865cac0ce25f4db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

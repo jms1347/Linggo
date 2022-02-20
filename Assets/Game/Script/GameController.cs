@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField]public LevelDataSo linggoLevelDataSO;
     [SerializeField]public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
     [SerializeField]public BossDataSo bossDataSO;
+    [SerializeField]public StateLevelDataSo stateLevelDataSO;
 
     [Header("HP 관련")]
     public int maxHP;
@@ -61,8 +62,7 @@ public class GameController : MonoBehaviour
 
     [Header("그 외 변수")]
     public GameObject guidePop;
-    public GameObject shopIcon;
-
+    //public GameObject shopIcon;
 
     public bool isStartGame = false;
     private IEnumerator startGameCour;
@@ -99,6 +99,12 @@ public class GameController : MonoBehaviour
     public GameObject[] bosses;
     public GameObject[] bossPools;
 
+    [Header("스탯보드관련 변수")]
+    public int plusHpLevel;
+    public int plusAttLevel;
+    public int plusMarbleAppearPercentLevel;
+    public LinggoStatBoard linggoStateBoard;
+
     
 void Start()
     {
@@ -126,7 +132,10 @@ void Start()
 
         killCnt = 0;
         killCntText.text = killCnt.ToString();
-        
+
+        plusHpLevel = 0;
+        plusAttLevel = 0;
+        plusMarbleAppearPercentLevel = 0;
         StartGame();
     }
 
@@ -154,9 +163,6 @@ void Start()
         {
             yield return null;
            
-            if(wave % 5 == 0)
-                shopIcon.SetActive(true);            
-            else shopIcon.SetActive(false);
             //보스생성
             if (wave % 10 == 0)
             {
@@ -225,7 +231,13 @@ void Start()
             int createTime = Random.Range(0, 6);
 
             for (int j = 0; j < createTime * 10; j++) yield return t;
-            marbles[i].SetActive(true);
+            int ranPercent = Random.Range(0, 100);
+            float Percent = stateLevelDataSO.stateLevelData[plusMarbleAppearPercentLevel].plusAppearPercent;
+            print("Percent : " + Percent);
+            if (ranPercent > Percent)
+            {
+                print(Percent + "% 확률로 정화구슬 생성실패");
+            }else marbles[i].SetActive(true);
         }
     }
     public void SettingMarbleExp(int plusExp)

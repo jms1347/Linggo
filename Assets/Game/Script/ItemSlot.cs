@@ -59,7 +59,7 @@ public class ItemSlot : MonoBehaviour
                 return;
             }
 
-            GameController.Inst.gold -= itemCard.itemPrice;
+            GameController.Inst.DecreaseGold(itemCard.itemPrice);
             ItemCardController.Inst.UseItemCard(index);
 		}
 	}    

@@ -26,6 +26,8 @@ public class MarbleTab : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip[] audioClip;
     private Vector3 oriPos;
+
+    
     private void Awake()
     {
         oriPos = this.transform.position;
@@ -56,9 +58,14 @@ public class MarbleTab : MonoBehaviour
 
     public void OnMarble()
     {
+
         this.transform.position = oriPos;
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
-        tapCnt = Random.Range(1, 4);
+        int ranNum = Random.Range(0, 100);
+        if (ranNum < 10) tapCnt = 3;        
+        else if (ranNum < 30) tapCnt = 2;
+        else tapCnt = 1;
+        //tapCnt = Random.Range(1, 4);
         marbleImg.sprite = marbleSprs[tapCnt - 1];
         tapEffect[tapCnt + 2].SetActive(true);
         tapEx = 0;
