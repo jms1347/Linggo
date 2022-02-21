@@ -9852,12 +9852,13 @@ MonoBehaviour:
   currentHp: 120
   moveSpeed: 0.8
   saveSpeed: 0
-  attackDistance: 8
+  attackDistance: 6
   hpBar: {fileID: 0}
   maxHpBar: {fileID: 0}
   currentTarget: {fileID: 0}
   linggo: {fileID: 0}
   monsterImg: {fileID: 0}
+  monsterAni: {fileID: 0}
   hitEffect: {fileID: 0}
   slowEffect: {fileID: 0}
   stunEffect: {fileID: 0}

@@ -228,7 +228,7 @@ void Start()
 
         for (int i = 0; i < marbles.Length; i++)
         {
-            int createTime = Random.Range(0, 6);
+            int createTime = Random.Range(0, 3);
 
             for (int j = 0; j < createTime * 10; j++) yield return t;
             int ranPercent = Random.Range(0, 100);
@@ -472,7 +472,15 @@ void Start()
     }
     #endregion
     #region 레벨 함수
+    public void PlusAtt()
+    {
+        att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusHpLevel].plusAtt;
 
+    }
+    public void PlusHp()
+    {
+        SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp + stateLevelDataSO.stateLevelData[plusHpLevel].plusHp);
+    }
     public void LevelUp()
     {
         level++;
@@ -483,10 +491,10 @@ void Start()
         maxExp = linggoLevelDataSO.levelData[level - 1].upKillExp;
         expBar.fillAmount = (float)currentExp / maxExp;
 
-        att = linggoLevelDataSO.levelData[level - 1].upAtt;
+        att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusHpLevel].plusAtt;
         attSpeed = linggoLevelDataSO.levelData[level - 1].attSpeed;
 
-        SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp);
+        SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp + stateLevelDataSO.stateLevelData[plusHpLevel].plusHp);
     }
     #endregion
     #region 킬 카운트

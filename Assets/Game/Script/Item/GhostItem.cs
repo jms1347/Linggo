@@ -73,6 +73,13 @@ public class GhostItem : MonoBehaviour
         currentHp += plusValue;
         hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
     }
+    public void UpMaxHp(int changeValue)
+    {
+        int changeHp = changeValue - maxHp; 
+        maxHp = changeValue;
+        currentHp += changeHp;
+        hpBar.localScale = new Vector3((float)currentHp / maxHp, 1, 1);
+    }
     public void SetMaxHp(int changeValue)
     {
         maxHpBar.SetActive(false);

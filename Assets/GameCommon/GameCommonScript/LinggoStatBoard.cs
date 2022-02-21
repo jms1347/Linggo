@@ -85,6 +85,14 @@ public class LinggoStatBoard : MonoBehaviour
             //DB보고 추가하기
             GameController.Inst.plusHpLevel++;
             GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHpGold);
+            GameController.Inst.PlusHp();
+
+            //유닛 체력 증가
+            for (int i = 0; i < ItemCardController.Inst.ghostItems.Count; i++)
+            {
+                ItemCardController.Inst.ghostItems[i].UpMaxHp(GameController.Inst.currentHP);
+            } 
+
             plusHpText.text = "(+" + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHp + ")";
             plusHpGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHpGold.ToString();
 
@@ -101,6 +109,7 @@ public class LinggoStatBoard : MonoBehaviour
             }
             GameController.Inst.plusAttLevel++;
             GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel + 1].plusAttGold);
+            GameController.Inst.PlusAtt();
             plusAttText.text = "(+" + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel + 1].plusAtt + ")";
             plusAttGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel + 1].plusAttGold.ToString();
             int plusATT = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel].plusAtt;
@@ -116,7 +125,7 @@ public class LinggoStatBoard : MonoBehaviour
             }
             GameController.Inst.plusMarbleAppearPercentLevel++;
             GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel + 1].plusAppearPercentGold);
-            if (GameController.Inst.plusMarbleAppearPercentLevel == 90)
+            if (GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel].plusAppearPercent == 100)
             {
                 print("구슬 확률 MAX");
                 plusMarbleAppearanceText.text = "100% (MAX)";
