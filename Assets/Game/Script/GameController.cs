@@ -203,6 +203,8 @@ void Start()
     #region 보스 데이터 세팅
     public void SettingBossData()
     {
+        print("bossDataSO.bossDatas : " + bossDataSO.bossDatas.Count);
+        print(" bossPools.Length : " + bossPools.Length);
         for (int i = 0; i < bossPools.Length; i++)
         {
             bossPools[i].GetComponent<Boss>().SettingBossData(bossDataSO.bossDatas[i]);

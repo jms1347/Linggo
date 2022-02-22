@@ -27,6 +27,11 @@ public class GoogleSheetManager : MonoBehaviour
         StartCoroutine(SettingBossData());
         StartCoroutine(SettingStateLevelData());
     }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
     #region 스탯 레벨데이터 넣기
     IEnumerator SettingStateLevelData()
     {
