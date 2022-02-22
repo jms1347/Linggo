@@ -43,34 +43,49 @@ public class SkillCardController : MonoBehaviour
 		SettingSkillCardList();
 	}
 
-	
 
+    bool PosSelecting = false;
     void Update()
 	{
 		if (isSelectSkill)
-		{
-			skillUseRange.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -Camera.main.ScreenToWorldPoint(Input.mousePosition).z);
-			if (Input.GetMouseButtonDown(0))
-			{
-				skillUseRange.SetActive(false);
-				clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-				if (selectSkillIndex != -1)
-				{
-					selectSlot.OpenSkill(); //스킬슬롯 쿨타임
-					UseSkill(selectSkillIndex);
-					//GoSkill(selectSkillIndex, clickPos); //스킬 발동
-					StartCoroutine(GoSkillCour(selectSkillIndex, clickPos));
-					isSelectSkill = false;
-					skillUseRange = null;
-				}
-			}
-		}
+        {
+            
+            skillUseRange.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -Camera.main.ScreenToWorldPoint(Input.mousePosition).z);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                print("다운");
+                PosSelecting = true;
+                skillUseRange.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -Camera.main.ScreenToWorldPoint(Input.mousePosition).z);
+
+                
+                
+            }
+            if (Input.GetMouseButtonUp(0) && PosSelecting)
+            {
+                print("업");
+
+                skillUseRange.SetActive(false);
+                clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (selectSkillIndex != -1)
+                {
+                    selectSlot.OpenSkill(); //스킬슬롯 쿨타임
+                    UseSkill(selectSkillIndex);
+                    //GoSkill(selectSkillIndex, clickPos); //스킬 발동
+                    StartCoroutine(GoSkillCour(selectSkillIndex, clickPos));
+                    isSelectSkill = false;
+                    skillUseRange = null;
+                    PosSelecting = false;
+                }
+            }
+        }
 	}
 
     #region 스킬 선택
     public void SelectSkillCard(int slotIndex, int skillIndex,int level)
 	{
-		selectSlot = skillSlots[slotIndex];
+        PosSelecting = false;
+        selectSlot = skillSlots[slotIndex];
 		selectSkillIndex = skillIndex;
 		skillSprs[skillIndex].skillObj.GetComponent<Skill>().skillLevel = level;
 		skillUseRange = skillSprs[skillIndex].skillRangeObj;

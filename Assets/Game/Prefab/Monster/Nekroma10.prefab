@@ -4990,7 +4990,7 @@ MonoBehaviour:
   currentHp: 120
   moveSpeed: 1.5
   saveSpeed: 0
-  attackDistance: 8
+  attackDistance: 6
   hpBar: {fileID: 0}
   maxHpBar: {fileID: 0}
   currentTarget: {fileID: 0}
