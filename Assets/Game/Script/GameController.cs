@@ -468,18 +468,28 @@ void Start()
         currentHP = maxHP;
         hpBar.fillAmount = 1;
         hpText.text = currentHP + " / " + maxHP;
+        hpBar.fillAmount = (float)currentHP / maxHP;
+        hpText.text = currentHP + " / " + maxHP;
+    }
 
+    public void PlusMaxHp(int changeValue)
+    {
+        int plusValue = changeValue - maxHP;
+        maxHP += plusValue;
+        currentHP += plusValue;
+        hpBar.fillAmount = (float)currentHP / maxHP;
+        hpText.text = currentHP + " / " + maxHP;
     }
     #endregion
     #region 레벨 함수
     public void PlusAtt()
     {
-        att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusHpLevel].plusAtt;
+        att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusAttLevel].plusAtt;
 
     }
     public void PlusHp()
     {
-        SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp + stateLevelDataSO.stateLevelData[plusHpLevel].plusHp);
+        PlusMaxHp(linggoLevelDataSO.levelData[level - 1].upHp + stateLevelDataSO.stateLevelData[plusHpLevel].plusHp);
     }
     public void LevelUp()
     {

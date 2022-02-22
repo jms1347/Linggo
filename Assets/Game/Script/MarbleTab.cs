@@ -62,8 +62,8 @@ public class MarbleTab : MonoBehaviour
         this.transform.position = oriPos;
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
         int ranNum = Random.Range(0, 100);
-        if (ranNum < 10) tapCnt = 3;        
-        else if (ranNum < 30) tapCnt = 2;
+        if (ranNum < 1) tapCnt = 3;        
+        else if (ranNum < 6) tapCnt = 2;
         else tapCnt = 1;
         //tapCnt = Random.Range(1, 4);
         marbleImg.sprite = marbleSprs[tapCnt - 1];

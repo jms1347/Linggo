@@ -7,6 +7,6 @@ public class MainController : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        LoadingScene.LoadScene("GameScene");
     }
 }
