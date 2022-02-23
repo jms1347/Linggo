@@ -104,8 +104,12 @@ public class GameController : MonoBehaviour
     public int plusAttLevel;
     public int plusMarbleAppearPercentLevel;
     public LinggoStatBoard linggoStateBoard;
+    public GameObject linggoStateIcon;
 
-    
+
+
+
+
 void Start()
     {
         InitGame();
@@ -162,7 +166,10 @@ void Start()
         for (int i = 0; i < linggoLevelDataSO.levelData.Count; i++)
         {
             yield return null;
-           
+            //성장 시스템
+            if (wave % 5 == 0) linggoStateIcon.SetActive(true);           
+            else linggoStateIcon.SetActive(false);
+
             //보스생성
             if (wave % 10 == 0)
             {
@@ -173,7 +180,7 @@ void Start()
 
                 bosses[(wave / 10) - 1].SetActive(true);
             }
-            else
+            else if(wave != 1)
             {
                 //웨이브 바 켜기
                 if (waveBarCour != null)
@@ -203,8 +210,6 @@ void Start()
     #region 보스 데이터 세팅
     public void SettingBossData()
     {
-        print("bossDataSO.bossDatas : " + bossDataSO.bossDatas.Count);
-        print(" bossPools.Length : " + bossPools.Length);
         for (int i = 0; i < bossPools.Length; i++)
         {
             bossPools[i].GetComponent<Boss>().SettingBossData(bossDataSO.bossDatas[i]);

@@ -12,7 +12,7 @@ public class SkillCardController : MonoBehaviour
 
     [SerializeField] SkillCardSo skillCardSO;
 	public List<SkillCard> skillCardLists = new List<SkillCard>();
-	private SkillCard selectSkillCard;
+	//private SkillCard selectSkillCard;
 	public GameObject GetSkillCardUI;
 
 	public SkillSlot[] skillSlots = new SkillSlot[5];
@@ -36,15 +36,88 @@ public class SkillCardController : MonoBehaviour
 	public SkillSprs[] skillSprs;
 	public GameObject dimmedObj;
 
-	void Start()
+    [Header("0Wave 시스템 관련 변수")]
+    public GameObject skillSupportSystem;
+    public GameObject[] skillSupportEffect;
+    public Image[] supportCardImg;
+    public Image[] supportEffectCardImg;
+    public TextMeshProUGUI[] supportCardText;
+
+    public List<SkillCard> mixList = new List<SkillCard>();
+    bool PosSelecting = false;
+
+    void Start()
 	{
 		oriSkillStartPos = skillStartEffectSprR.transform.position;
 
 		SettingSkillCardList();
-	}
+        Mix();
+        SettingSupportCard();
+    }
 
+    #region 0Wave 함수
+    public void SettingSupportCard()
+    {
+        Time.timeScale = 0;
+        for (int i = 0; i < mixList.Count; i++)
+        {
+            supportCardImg[i].sprite = skillSprs[mixList[i].skillIndex].skillCardSpr;
+            supportEffectCardImg[i].sprite = skillSprs[mixList[i].skillIndex].skillCardSpr;
+            supportCardText[i].text = mixList[i].skillName;
+        }
+        skillSupportSystem.SetActive(true);
+    }
+    public void SupportCardBtn()
+    {
+        Time.timeScale = 1;
 
-    bool PosSelecting = false;
+        StartCoroutine(SupportCardBtnCour());
+    }
+
+    IEnumerator SupportCardBtnCour()
+    {
+        skillSupportSystem.SetActive(false);
+        for (int i = 0; i < skillSupportEffect.Length; i++)
+        {
+            skillSupportEffect[i].transform.position = supportCardImg[i].transform.position;
+
+            supportEffectCardImg[i].gameObject.SetActive(true);
+            supportEffectCardImg[i].GetComponent<Image>().DOFade(0, 1.0f);
+            skillSupportEffect[i].SetActive(true);            
+        }
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < skillSupportEffect.Length; i++)
+        {
+            skillSupportEffect[i].SetActive(true);
+            skillSupportEffect[i].transform.DOMove(skillSlots[i].transform.position, 1.0f)
+                .SetEase(Ease.InExpo);
+        }
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < skillSupportEffect.Length; i++)
+        {
+            skillSlots[i].SettingSkillSlot(supportCardImg[i].sprite, mixList[i]);
+
+            supportEffectCardImg[i].gameObject.SetActive(false);
+            skillSupportEffect[i].SetActive(false);
+        }
+    }
+    public void Mix()
+    {
+        
+        List<SkillCard> list = new List<SkillCard>();
+        //int count = mixList.Count;
+        int count = 3;
+        for (int i = 0; i < count; i++)
+        {
+            int rand = Random.Range(0, mixList.Count);
+            list.Add(mixList[rand]);
+            mixList.RemoveAt(rand);
+        }
+        mixList = list;
+    }
+    #endregion
     void Update()
 	{
 		if (isSelectSkill)
@@ -99,10 +172,14 @@ public class SkillCardController : MonoBehaviour
 	#region 스킬 리스트 세팅
 	void SettingSkillCardList()
 	{
-		for (int i = 0; i < skillCardSO.skillCards.Count; i++)
+
+        for (int i = 0; i < skillCardSO.skillCards.Count; i++)
 		{
             SkillCard skillCard = skillCardSO.skillCards[i];
-			for (int j = 0; j < skillCard.cardAppearPercent; j++)
+            if(skillCard.cardGrade == SkillCard.Grade.normal)
+                mixList.Add(skillCard);
+
+            for (int j = 0; j < skillCard.cardAppearPercent; j++)
 			{
                 skillCardLists.Add(skillCard);
 			}
@@ -122,59 +199,39 @@ public class SkillCardController : MonoBehaviour
 	public void OnPopUpUI()
 	{
 		Time.timeScale = 0;
-		if(skillCardLists.Count == 0)
+		if(skillCardLists.Count < 2)
 		{
 			SettingSkillCardList();
 		}
-		
-		GetSkillCardUI.GetComponent<SkillCardUI>().SettingCard(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
-		GetSkillCardUI.SetActive(true);
-		selectSkillCard = skillCardLists[0];
+
+        //GetSkillCardUI.GetComponent<SkillCardUI>().SettingCard(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
+        //2개씩으로 변경
+        Sprite[] sprs = new Sprite[]{skillSprs[skillCardLists[0].skillIndex].skillCardSpr,
+            skillSprs[skillCardLists[1].skillIndex].skillCardSpr
+        };
+        SkillCard[] cards = new SkillCard[]
+        {
+             skillCardLists[0],  skillCardLists[1]
+        };
+        GetSkillCardUI.GetComponent<DoubleSkillCardUI>().SettingCards(sprs, cards);
+
+        skillCardLists.RemoveAt(0);
+        skillCardLists.RemoveAt(0);
+        GetSkillCardUI.SetActive(true);
+        //GetSkillCardUI.GetComponent<DoubleSkillCardUI>().farmingCardUI.SetActive(true);
+		//selectSkillCard = skillCardLists[0];
 	}
 
-	public void OffPopUpUi(bool isOk)
-	{
-		if (isOk)
-		{
-			int duplicardIndex = -1;
-			for (int i = 0; i < skillSlots.Length; i++)
-			{
-				if(skillSlots[i].skillImg.sprite == skillSprs[skillCardLists[0].skillIndex].skillCardSpr)
-				{
-					duplicardIndex = i;
-					break;
-				}
-			}
+    //일단 이제 안씀(1스킬 파밍 일때)
+	public void OffFarmingSKillCardSystem()
+    {
+        //Time.timeScale = 1;
 
-			bool isAllNotNull = false;
-			if (duplicardIndex != -1)
-			{
-				skillSlots[duplicardIndex].LevelUp();
-			}
-			else
-			{
-				for (int i = 0; i < skillSlots.Length; i++)
-				{
-					if (skillSlots[i].isNull)
-					{
-						isAllNotNull = true;
-						skillSlots[i].SettingSkillSlot(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
-						break;
-					}
-				}
-
-				//다 꽉차있는데 승인하면 무조건0번 교체
-				if (!isAllNotNull)
-				{
-					SkillSlot deleSlot = skillSlots[0].transform.parent.transform.GetChild(0).GetComponent<SkillSlot>();
-					deleSlot.SettingSkillSlot(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
-				}
-			}				
-		}
-		
-		GetSkillCardUI.SetActive(false);
-		Time.timeScale = 1;
-		skillCardLists.RemoveAt(0);
+        for (int i = 0; i < skillSlots.Length; i++)
+        {
+            skillSlots[i].SelectSkillPostProcessing();
+        }
+		//GetSkillCardUI.SetActive(false);
 
 	}
 	#endregion
@@ -215,6 +272,28 @@ public class SkillCardController : MonoBehaviour
 		skillSprs[skillIndex].skillObj.transform.position = clickPos;
 		skillSprs[skillIndex].skillObj.SetActive(true);
 	}
+    #endregion
+
+    #region 스킬슬롯에서 중복되는 것 찾기
+    public int CheckDupliSkillCard(int cardIndex)
+    {
+        int duplicardIndex = -1;
+        for (int i = 0; i < skillSlots.Length; i++)
+        {
+            if(skillSlots[i].skillCard != null)
+            {
+                if (skillSlots[i].skillCard.skillIndex == cardIndex)
+                {
+                    duplicardIndex = i;
+                    break;
+                }
+            }           
+        }
+
+        return duplicardIndex;
+    }
+
+
     #endregion
 
 

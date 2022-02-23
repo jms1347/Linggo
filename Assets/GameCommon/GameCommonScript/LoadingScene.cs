@@ -34,7 +34,7 @@ public class LoadingScene : MonoBehaviour
         {
             yield return null;
 
-            timer += Time.unscaledDeltaTime;
+            timer += Time.deltaTime;
 
             if (op.progress < 0.9f)
             {
