@@ -142,8 +142,6 @@ public class ItemCardController : MonoBehaviour
 		}
 
         //¼¼ÆÃ
-        print("itemSlots.Length : " + itemSlots.Length);
-        print("itemCardList.Length : " + itemCardList.Count);
         for (int i = 0; i < itemSlots.Length; i++)
         {
             itemSlots[i].SettingItemSlot(itemCardList[i]);

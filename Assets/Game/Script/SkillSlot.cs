@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
+public class SkillSlot : MonoBehaviour/*, IDragHandler, IEndDragHandler*/
 {
 	public Image[] skillSlots;
 	public bool isNull = true;
@@ -22,6 +22,10 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 
 	public Sprite noneSpr;
     private GameObject levelUpEffect;
+    private GameObject normalEffect;
+    private GameObject rareEffect;
+    private GameObject epicEffect;
+    public GameObject selectBtn;
 	
 	private void Awake()
 	{
@@ -30,7 +34,10 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 		levelText = skillImg.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 		cardGrowColor = skillImg.transform.GetChild(1).GetComponent<Image>();
         levelUpEffect = this.transform.GetChild(2).gameObject;
-
+        normalEffect = this.transform.GetChild(3).gameObject;
+        rareEffect = this.transform.GetChild(4).gameObject;
+        epicEffect = this.transform.GetChild(5).gameObject;
+        selectBtn = this.transform.GetChild(6).gameObject;
         InitSkillSlot();
 	}
     #region 스킬 초기화
@@ -121,14 +128,15 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
             {
 				case SkillCard.Grade.epic:
 					cardGrowColor.color = new Color32(255, 51, 155, 255);
+                    epicEffect.SetActive(true);
 					break;
 				case SkillCard.Grade.normal:
 					cardGrowColor.color = Color.green;
-
+                    normalEffect.SetActive(true);
 					break;
 				case SkillCard.Grade.rare:
 					cardGrowColor.color = Color.blue;
-
+                    rareEffect.SetActive(true);
 					break;
 
 
@@ -162,57 +170,61 @@ public class SkillSlot : MonoBehaviour, IDragHandler, IEndDragHandler
 		    levelText.text = "Lv."+level.ToString();
 	}
     #endregion
+    #region 슬롯 선택
+    public void SelectSkillPostProcessing()
+    {
+        selectBtn.SetActive(false);
+    }
+    #endregion
+    //   public void OnDrag(PointerEventData eventData)
+    //{
+    //	if (skillCard != null)
+    //	{
+    //		skillImg.transform.SetParent(this.transform.parent);
+    //		skillImg.transform.SetAsLastSibling();
+    //		skillImg.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -Camera.main.transform.position.z);
+    //	}
+    //}
 
-    public void OnDrag(PointerEventData eventData)
-	{
-		if (skillCard != null)
-		{
-			skillImg.transform.SetParent(this.transform.parent);
-			skillImg.transform.SetAsLastSibling();
-			skillImg.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -Camera.main.transform.position.z);
-		}
-	}
+    //public void OnEndDrag(PointerEventData eventData)
+    //{
+    //	if (skillCard != null)
+    //	{
+    //		for (int i = 0; i < skillSlots.Length; i++)
+    //		{
+    //			if (RectTransformUtility.RectangleContainsScreenPoint(skillSlots[i].rectTransform, skillImg.transform.position))
+    //			{
+    //				SkillSlot collSlot = skillSlots[i].GetComponent<SkillSlot>();
+    //				if (collSlot.isNull)
+    //				{
+    //					Vector2 tempPos = collSlot.transform.position;
+    //					collSlot.transform.position = this.transform.position;
+    //					this.transform.position = tempPos;
+    //					int thisIndex = this.transform.GetSiblingIndex();
+    //					int collIndex = collSlot.transform.GetSiblingIndex();
+    //					collSlot.transform.SetSiblingIndex(thisIndex);
+    //					this.transform.SetSiblingIndex(collIndex);
 
-	public void OnEndDrag(PointerEventData eventData)
-	{
-		if (skillCard != null)
-		{
-			for (int i = 0; i < skillSlots.Length; i++)
-			{
-				if (RectTransformUtility.RectangleContainsScreenPoint(skillSlots[i].rectTransform, skillImg.transform.position))
-				{
-					SkillSlot collSlot = skillSlots[i].GetComponent<SkillSlot>();
-					if (collSlot.isNull)
-					{
-						Vector2 tempPos = collSlot.transform.position;
-						collSlot.transform.position = this.transform.position;
-						this.transform.position = tempPos;
-						int thisIndex = this.transform.GetSiblingIndex();
-						int collIndex = collSlot.transform.GetSiblingIndex();
-						collSlot.transform.SetSiblingIndex(thisIndex);
-						this.transform.SetSiblingIndex(collIndex);
+    //				}
+    //				else
+    //				{
 
-					}
-					else
-					{
-
-						Vector2 tempPos = this.transform.position;
-						this.transform.position = collSlot.transform.position;
-						//collSlot.transform.SetSiblingIndex(collSlot.index);
-						collSlot.transform.position = tempPos;
-						int thisIndex = this.transform.GetSiblingIndex();
-						int collIndex = collSlot.transform.GetSiblingIndex();
-						collSlot.transform.SetSiblingIndex(thisIndex);
-						this.transform.SetSiblingIndex(collIndex);
-					}
-					break;
-				}
-			}
-			skillImg.transform.SetParent(this.transform);
-			skillImg.transform.SetAsFirstSibling();
-			skillImg.transform.localPosition = Vector2.zero;
-		}
-			
-	}
+    //					Vector2 tempPos = this.transform.position;
+    //					this.transform.position = collSlot.transform.position;
+    //					//collSlot.transform.SetSiblingIndex(collSlot.index);
+    //					collSlot.transform.position = tempPos;
+    //					int thisIndex = this.transform.GetSiblingIndex();
+    //					int collIndex = collSlot.transform.GetSiblingIndex();
+    //					collSlot.transform.SetSiblingIndex(thisIndex);
+    //					this.transform.SetSiblingIndex(collIndex);
+    //				}
+    //				break;
+    //			}
+    //		}
+    //		skillImg.transform.SetParent(this.transform);
+    //		skillImg.transform.SetAsFirstSibling();
+    //		skillImg.transform.localPosition = Vector2.zero;
+    //	}
+    //}
 
 }
