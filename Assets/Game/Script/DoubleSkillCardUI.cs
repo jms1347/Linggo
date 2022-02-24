@@ -138,4 +138,12 @@ public class DoubleSkillCardUI : MonoBehaviour
 
     }
     #endregion
+
+    public void RefuseFarmingCard()
+    {
+        Time.timeScale = 1f;
+
+        this.gameObject.SetActive(false);
+
+    }
 }
