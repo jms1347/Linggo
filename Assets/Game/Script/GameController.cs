@@ -103,6 +103,7 @@ public class GameController : MonoBehaviour
     public int plusHpLevel;
     public int plusAttLevel;
     public int plusMarbleAppearPercentLevel;
+    public int plusPenetratingCntLevel;
     public LinggoStatBoard linggoStateBoard;
     public GameObject linggoStateIcon;
 
@@ -140,6 +141,7 @@ void Start()
         plusHpLevel = 0;
         plusAttLevel = 0;
         plusMarbleAppearPercentLevel = 0;
+        plusPenetratingCntLevel = 0;
         StartGame();
     }
 
@@ -167,8 +169,8 @@ void Start()
         {
             yield return null;
             //성장 시스템
-            if (wave % 5 == 0) linggoStateIcon.SetActive(true);           
-            else linggoStateIcon.SetActive(false);
+            //if (wave % 5 == 0) linggoStateIcon.SetActive(true);           
+            //else linggoStateIcon.SetActive(false);
 
             //보스생성
             if (wave % 10 == 0)
@@ -235,7 +237,7 @@ void Start()
 
         for (int i = 0; i < marbles.Length; i++)
         {
-            int createTime = Random.Range(0, 3);
+            int createTime = Random.Range(0, 6);
 
             for (int j = 0; j < createTime * 10; j++) yield return t;
             int ranPercent = Random.Range(0, 100);
@@ -244,7 +246,8 @@ void Start()
             if (ranPercent > Percent)
             {
                 print(Percent + "% 확률로 정화구슬 생성실패");
-            }else marbles[i].SetActive(true);
+            }
+            else marbles[i].SetActive(true);
         }
     }
     public void SettingMarbleExp(int plusExp)
@@ -497,6 +500,13 @@ void Start()
     public void PlusHp()
     {
         PlusMaxHp(linggoLevelDataSO.levelData[level - 1].upHp + stateLevelDataSO.stateLevelData[plusHpLevel].plusHp);
+    }
+    public void PlusPenetratingCnt()
+    {
+        for (int i = 0; i < linggo.linggoMissiles.Count; i++)
+        {
+            linggo.linggoMissiles[i].penetrateCnt =stateLevelDataSO.stateLevelData[plusPenetratingCntLevel].penetratingCnt;
+        }
     }
     public void LevelUp()
     {

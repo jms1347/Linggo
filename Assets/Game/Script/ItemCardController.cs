@@ -121,7 +121,7 @@ public class ItemCardController : MonoBehaviour
                 {
                     if (!ghostItems[i].gameObject.activeSelf)
                     {
-                        int hp = Mathf.RoundToInt(GameController.Inst.currentHP * itemSlots[slotIndex].itemCard.itemValue * 0.01f);
+                        int hp = Mathf.RoundToInt(GameController.Inst.currentHP * (itemSlots[slotIndex].itemCard.itemValue * 0.01f));
                         ghostItems[i].InitUnit(hp);
                         ghostItems[i].transform.position = ghostItemPos[i].transform.position;
                         ghostItems[i].transform.localRotation = Quaternion.Euler(0, 0, 0);

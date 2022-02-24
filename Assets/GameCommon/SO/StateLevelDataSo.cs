@@ -12,6 +12,8 @@ public class StateLevelData
     public int plusHpGold;
     public float plusAppearPercent;
     public int plusAppearPercentGold;
+    public int penetratingCnt;
+    public int penetratingCntGold;
 }
 
 [CreateAssetMenu(fileName = "StateLevelDataSo", menuName = "ScriptableObject/StateLevelDataSo")]

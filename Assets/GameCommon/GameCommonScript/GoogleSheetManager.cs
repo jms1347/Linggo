@@ -10,7 +10,7 @@ public class GoogleSheetManager : MonoBehaviour
     const string skillCardDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=626817391&range=A2:Q";
     const string linggoDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=457742873&range=A2:J";
     const string bossDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1718384963&range=A2:K";
-    const string stateDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=610984273&range=A2:G";
+    const string stateDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=610984273&range=A2:I";
     public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
     public SkillCardSo skillCardSO;
     public LevelDataSo linggoLevelDataSO;
@@ -63,6 +63,8 @@ public class GoogleSheetManager : MonoBehaviour
             stateLevelData.plusHpGold = int.Parse(row[4]);
             stateLevelData.plusAppearPercent = float.Parse(row[5]);
             stateLevelData.plusAppearPercentGold = int.Parse(row[6]);
+            stateLevelData.penetratingCnt = int.Parse(row[7]);
+            stateLevelData.penetratingCntGold = int.Parse(row[8]);
 
             stateLevelDataSO.stateLevelData.Add(stateLevelData);
         }

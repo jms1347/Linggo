@@ -54,8 +54,6 @@ public class Boss : Monster
                 this.attackType = AttackType.Boss;
                 break;
             case 1:
-                print("세팅하나");
-
                 this.attackType = AttackType.OnlyPlayerTarget;
                 break;
             case 2:

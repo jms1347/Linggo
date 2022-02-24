@@ -127,7 +127,6 @@ public class SkillCardController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                print("다운");
                 PosSelecting = true;
                 skillUseRange.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -Camera.main.ScreenToWorldPoint(Input.mousePosition).z);
 
@@ -136,8 +135,6 @@ public class SkillCardController : MonoBehaviour
             }
             if (Input.GetMouseButtonUp(0) && PosSelecting)
             {
-                print("업");
-
                 skillUseRange.SetActive(false);
                 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (selectSkillIndex != -1)
@@ -204,20 +201,32 @@ public class SkillCardController : MonoBehaviour
 			SettingSkillCardList();
 		}
 
-        //GetSkillCardUI.GetComponent<SkillCardUI>().SettingCard(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
-        //2개씩으로 변경
-        Sprite[] sprs = new Sprite[]{skillSprs[skillCardLists[0].skillIndex].skillCardSpr,
-            skillSprs[skillCardLists[1].skillIndex].skillCardSpr
-        };
-        SkillCard[] cards = new SkillCard[]
+        for (int i = 0; i < skillCardLists.Count; i++)
         {
+            if(skillSprs[skillCardLists[0].skillIndex].skillCardSpr != skillSprs[skillCardLists[1].skillIndex].skillCardSpr)
+            {
+                //2개씩으로 변경
+                Sprite[] sprs = new Sprite[]{skillSprs[skillCardLists[0].skillIndex].skillCardSpr,
+            skillSprs[skillCardLists[1].skillIndex].skillCardSpr};
+                SkillCard[] cards = new SkillCard[]
+                {
              skillCardLists[0],  skillCardLists[1]
-        };
-        GetSkillCardUI.GetComponent<DoubleSkillCardUI>().SettingCards(sprs, cards);
+                };
+                GetSkillCardUI.GetComponent<DoubleSkillCardUI>().SettingCards(sprs, cards);
 
-        skillCardLists.RemoveAt(0);
-        skillCardLists.RemoveAt(0);
-        GetSkillCardUI.SetActive(true);
+                skillCardLists.RemoveAt(0);
+                skillCardLists.RemoveAt(0);
+                GetSkillCardUI.SetActive(true);
+                break;
+            }
+            else
+            {
+                skillCardLists.RemoveAt(0);
+
+            }
+        }
+        //GetSkillCardUI.GetComponent<SkillCardUI>().SettingCard(skillSprs[skillCardLists[0].skillIndex].skillCardSpr, skillCardLists[0]);
+        
         //GetSkillCardUI.GetComponent<DoubleSkillCardUI>().farmingCardUI.SetActive(true);
 		//selectSkillCard = skillCardLists[0];
 	}

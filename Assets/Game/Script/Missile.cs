@@ -13,6 +13,8 @@ public class Missile : MonoBehaviour
     public GameObject exPrefab;
     public float missileSpeed;
     public bool attackItem = true;
+    public int penetrateCnt = 1;
+    public int currentPenetrateCnt;
 
     private void Awake()
 	{
@@ -37,6 +39,7 @@ public class Missile : MonoBehaviour
 	}
 	private void OnEnable()
 	{
+        currentPenetrateCnt = penetrateCnt;
 		Invoke(nameof(DisableMissile), 10.0f);
 	}
 	void DisableMissile() => this.gameObject.SetActive(false);
@@ -65,12 +68,14 @@ public class Missile : MonoBehaviour
         {
             if (coll.tag == "Enemy")
             {
+                currentPenetrateCnt--;
                 GameObject ex = Instantiate(exPrefab);
                 ex.transform.position = coll.transform.position;
 
                 coll.GetComponent<Monster>().DecreaseHP(GameController.Inst.att);
 
-                this.gameObject.SetActive(false);
+                if(currentPenetrateCnt == 0)
+                    this.gameObject.SetActive(false);
             }
         }
         else

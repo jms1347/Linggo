@@ -32,8 +32,8 @@ public class LinggoStatBoard : MonoBehaviour
         plusAttText.text = "(+" + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel+1].plusAtt + ")";
         plusAttGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel+1].plusAttGold.ToString();
         
-        plusMarbleAppearanceText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel+1].plusAppearPercent.ToString() + "%";
-        plusMarbleAppearanceGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel+1].plusAppearPercentGold.ToString();
+        plusMarbleAppearanceText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel+1].penetratingCnt.ToString();
+        plusMarbleAppearanceGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel + 1].penetratingCntGold.ToString();
 
         int plusHP = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel].plusHp;
         int plusATT = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel].plusAtt;
@@ -87,12 +87,6 @@ public class LinggoStatBoard : MonoBehaviour
             GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHpGold);
             GameController.Inst.PlusHp();
 
-            //유닛 체력 증가
-            for (int i = 0; i < ItemCardController.Inst.ghostItems.Count; i++)
-            {
-                ItemCardController.Inst.ghostItems[i].UpMaxHp(GameController.Inst.currentHP);
-            } 
-
             plusHpText.text = "(+" + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHp + ")";
             plusHpGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHpGold.ToString();
 
@@ -115,6 +109,29 @@ public class LinggoStatBoard : MonoBehaviour
             int plusATT = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel].plusAtt;
             linggoAttText.text = (GameController.Inst.att + plusATT).ToString();
             linggoAccumulatedAttText.text = "(+" + plusATT.ToString() + ")";
+        }else if(btnKey == "PenetratingCnt")
+        {
+            if (GameController.Inst.gold < GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel + 1].penetratingCntGold)
+            {
+                GameController.Inst.OpenGuidePop("골드가 부족합니다.");
+                return;
+            }
+            GameController.Inst.plusPenetratingCntLevel++;
+            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel + 1].penetratingCntGold);
+            GameController.Inst.PlusPenetratingCnt();
+            if (GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel].penetratingCnt == 100)
+            {
+                plusMarbleAppearanceText.text = "100 (MAX)";
+                plusMarbleAppearanceGoldText.text = "";
+                levelUpBtns[2].SetActive(false);
+            }
+            else
+            {
+                plusMarbleAppearanceText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel + 1].penetratingCnt.ToString();
+                plusMarbleAppearanceGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel + 1].penetratingCntGold.ToString();
+            }
+
+
         }
         else if (btnKey == "Marble")
         {
@@ -127,7 +144,6 @@ public class LinggoStatBoard : MonoBehaviour
             GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel + 1].plusAppearPercentGold);
             if (GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel].plusAppearPercent == 100)
             {
-                print("구슬 확률 MAX");
                 plusMarbleAppearanceText.text = "100% (MAX)";
                 plusMarbleAppearanceGoldText.text = "";
                 levelUpBtns[2].SetActive(false);
