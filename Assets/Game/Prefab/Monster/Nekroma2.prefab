@@ -14396,6 +14396,7 @@ MonoBehaviour:
   isFire: 0
   isLightning: 0
   isIce: 0
+  attackItem: 1
 --- !u!114 &7615048194575083155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14415,7 +14416,7 @@ MonoBehaviour:
   att: 20
   maxHp: 120
   currentHp: 120
-  moveSpeed: 0.4
+  moveSpeed: 0.6
   saveSpeed: 0
   attackDistance: 0.5
   hpBar: {fileID: 0}
@@ -14423,6 +14424,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   linggo: {fileID: 0}
   monsterImg: {fileID: 0}
+  monsterAni: {fileID: 0}
   hitEffect: {fileID: 0}
   slowEffect: {fileID: 0}
   stunEffect: {fileID: 0}
@@ -14430,7 +14432,6 @@ MonoBehaviour:
   levelUpEffect: {fileID: 0}
   shieldEffect: {fileID: 0}
   bossBuffEffect: {fileID: 0}
-  betrayalEffect: {fileID: 0}
   deathPrefab: {fileID: 187952, guid: c05e92eaee7a00844867e5edc8e0dde1, type: 3}
   damageTPrefab: {fileID: 8918483966716264937, guid: 9564ed2fc79c4404da4a3ea62909b7e3, type: 3}
   dotDamageTPrefab: {fileID: 8918483966716264937, guid: fee21636c7705254ebaf5ac2646218ab, type: 3}

@@ -23958,7 +23958,7 @@ MonoBehaviour:
   att: 20
   maxHp: 120
   currentHp: 120
-  moveSpeed: 0.6
+  moveSpeed: 0.8
   saveSpeed: 0
   attackDistance: 0.5
   hpBar: {fileID: 0}
@@ -23966,6 +23966,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   linggo: {fileID: 0}
   monsterImg: {fileID: 0}
+  monsterAni: {fileID: 0}
   hitEffect: {fileID: 0}
   slowEffect: {fileID: 0}
   stunEffect: {fileID: 0}
@@ -23997,6 +23998,7 @@ MonoBehaviour:
   isFire: 0
   isLightning: 1
   isIce: 0
+  attackItem: 1
 --- !u!95 &7015108306560741881
 Animator:
   serializedVersion: 3
