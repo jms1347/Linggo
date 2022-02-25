@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Monster : MonoBehaviour
 {
     public bool isBoss;
+    public bool isOnlyPlater;
      public enum AttackType
 	{
         CloseExplosion = 0,  //자폭
@@ -118,7 +119,7 @@ public class Monster : MonoBehaviour
     private void Update()
     {
         //링고만 공격
-        if (attackType == AttackType.OnlyPlayerTarget || attackType == AttackType.OnlyPlayerTargetNBigAttack)
+        if (attackType == AttackType.OnlyPlayerTarget || attackType == AttackType.OnlyPlayerTargetNBigAttack || isOnlyPlater)
         {
             if(linggo != null)
                 currentTarget = linggo;

@@ -84,7 +84,7 @@ public class LinggoStatBoard : MonoBehaviour
             }
             //DB보고 추가하기
             GameController.Inst.plusHpLevel++;
-            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHpGold);
+            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel].plusHpGold);
             GameController.Inst.PlusHp();
 
             plusHpText.text = "(+" + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHp + ")";
@@ -102,7 +102,7 @@ public class LinggoStatBoard : MonoBehaviour
                 return;
             }
             GameController.Inst.plusAttLevel++;
-            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel + 1].plusAttGold);
+            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel].plusAttGold);
             GameController.Inst.PlusAtt();
             plusAttText.text = "(+" + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel + 1].plusAtt + ")";
             plusAttGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel + 1].plusAttGold.ToString();
@@ -117,9 +117,9 @@ public class LinggoStatBoard : MonoBehaviour
                 return;
             }
             GameController.Inst.plusPenetratingCntLevel++;
-            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel + 1].penetratingCntGold);
+            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel].penetratingCntGold);
             GameController.Inst.PlusPenetratingCnt();
-            if (GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel].penetratingCnt == 20)
+            if (GameController.Inst.plusPenetratingCntLevel == 19)
             {
                 plusMarbleAppearanceText.text = "20 (MAX)";
                 plusMarbleAppearanceGoldText.text = "";
@@ -141,7 +141,7 @@ public class LinggoStatBoard : MonoBehaviour
                 return;
             }
             GameController.Inst.plusMarbleAppearPercentLevel++;
-            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel + 1].plusAppearPercentGold);
+            GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel].plusAppearPercentGold);
             if (GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel].plusAppearPercent == 100)
             {
                 plusMarbleAppearanceText.text = "100% (MAX)";

@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour
 
     [Header("¸µ°í ½ºÅÝ")]
     public Linggo linggo;
+    public int sumAtt;
     public int att;
     public float attSpeed;
     public float missileSpeed;
@@ -123,6 +124,7 @@ void Start()
         level = 1;
         levelText.text = "Lv." + level.ToString();
         att = linggoLevelDataSO.levelData[level - 1].upAtt;
+        sumAtt = att;
         attSpeed = linggoLevelDataSO.levelData[level - 1].attSpeed;
         SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp);
         //DecreaseHP(150);

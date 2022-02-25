@@ -108,6 +108,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c15ccc831f90d8b40ad2f76a7ee85449, type: 3}
   - {fileID: 21300000, guid: ba2fed930e5fe1145b5b3d6c915e8e18, type: 3}
   - {fileID: 21300000, guid: eb8baea37796f9040a4eacd1e394e3a2, type: 3}
+  - {fileID: 21300000, guid: fbfcfdc3af1df7f48b2351eb49bf887b, type: 3}
   - {fileID: 21300000, guid: 40b602e39763f6d40919fd02332da292, type: 3}
   - {fileID: 21300000, guid: 12119ee306c2fcd478dbf11ac314ffaa, type: 3}
   - {fileID: 21300000, guid: 5b4e11f38fb4c0c419086a26e3f4b552, type: 3}
@@ -183,6 +184,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3a361248dac96de4685b02e5712319ca, type: 3}
   - {fileID: 21300000, guid: 32cae5486b1124c4e9b9f3e6a54e3237, type: 3}
   - {fileID: 21300000, guid: 5f9d7a486755b934d9bec4f62dd4a20d, type: 3}
+  - {fileID: 21300000, guid: 575b0b483be082f4c8e40004658d4dad, type: 3}
   - {fileID: 21300000, guid: b6bf317875b59dd4c95c870a10460b47, type: 3}
   - {fileID: 21300000, guid: c0421e781e4c03c48aeb59ec2306ee9d, type: 3}
   - {fileID: 21300000, guid: ff5b2098ac30dd84184d2b3cabde2873, type: 3}
@@ -192,6 +194,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bfe1e7f80954275469086804f3a981b0, type: 3}
   - {fileID: 21300000, guid: a4ad10097e864fd4a905721164515fff, type: 3}
   - {fileID: 21300000, guid: 5c69b909c96980b408576c69bac73783, type: 3}
+  - {fileID: 21300000, guid: 45c7161962818894495498c66ab222c1, type: 3}
   - {fileID: 21300000, guid: 08fe2439baf6f2e40902eba1cf31923a, type: 3}
   - {fileID: 21300000, guid: af54dd391dca71047b74dbab89ff962f, type: 3}
   - {fileID: 21300000, guid: af6e2e3989f377a4b8d9f70e09c61539, type: 3}
@@ -210,6 +213,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bf58ffd9c8e14d74b8d0dd224c026cb5, type: 3}
   - {fileID: 21300000, guid: d46bb4e93de0e794d9f9006de4cdf962, type: 3}
   - {fileID: 21300000, guid: d3525de9f4579a64e849f1a284b23bff, type: 3}
+  - {fileID: 21300000, guid: 78ba6df9fc551e8458629902e1b657f8, type: 3}
   - {fileID: 21300000, guid: 017c440ab60db2440a4d27cc5fae5a5f, type: 3}
   - {fileID: 21300000, guid: fa8e7f1afeb28db4887317230e68464e, type: 3}
   - {fileID: 21300000, guid: bd99a53a8ff765f4495447e18ab1132e, type: 3}
@@ -236,6 +240,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 84b0f18b6e435b745a0824754f27d01f, type: 3}
   - {fileID: 21300000, guid: 8778fe8bdeb9ccb4a9e2971eaf690422, type: 3}
   - {fileID: 21300000, guid: 8af0cf8b7cb9100428253f69286a1fa9, type: 3}
+  - {fileID: 21300000, guid: e99b09db2e2f7d04081c48bd0f3d698d, type: 3}
   - {fileID: 21300000, guid: be49a9db3cf27b649a1dac5fa1c39317, type: 3}
   - {fileID: 21300000, guid: d3e9abeb61323cb46bee464f1d469fd8, type: 3}
   - {fileID: 21300000, guid: 040fcceb208e93c489dac95d553f403a, type: 3}
@@ -288,6 +293,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 76de70ce0c2f5ae409464bcd9ff7bffe, type: 3}
   - {fileID: 21300000, guid: fde371ceb54907342974adaf7086fd14, type: 3}
   - {fileID: 21300000, guid: f343f8de2607b1145944b4ca5e8b8549, type: 3}
+  - {fileID: 21300000, guid: fc5d35eedafa8f14fad3060b6801a881, type: 3}
   - {fileID: 21300000, guid: b84babeea69ec7141a333b90372a27dd, type: 3}
   - {fileID: 21300000, guid: d82f942f4fb2f5c4e83d9dcf4b17baaf, type: 3}
   - {fileID: 21300000, guid: a0f3563f14fbf0e41a4097a154ddf4f7, type: 3}
@@ -360,6 +366,7 @@ SpriteAtlas:
   - "\uC131\uC7A5\uC2DC\uC2A4\uD15Cui_\uAC00\uC774\uB4DC"
   - Marble2_Epik
   - UnitIcon
+  - stat_penetratingIcon
   - necroma9_move1
   - Boss_Marbas_Move1
   - Unit3
@@ -435,6 +442,7 @@ SpriteAtlas:
   - necroma2_move1
   - stat_blackBox
   - bg_hagol
+  - revive_BG
   - Boss_Belial_Attack
   - necroma1_move1
   - ItemListXbtn
@@ -444,6 +452,7 @@ SpriteAtlas:
   - necroma2
   - Sorricat_Card2
   - bg2_Deco
+  - revive_Icon
   - ItemListBox
   - Farming_CardShadow
   - CaliRaim_Card2
@@ -462,6 +471,7 @@ SpriteAtlas:
   - bg_bosuk2
   - Boss_Amon_Move2
   - Flong_Card2
+  - revive_TitleText
   - Boss_Death_Move1
   - Boss_Naberoos_Move2
   - shopItemCntPanel
@@ -488,6 +498,7 @@ SpriteAtlas:
   - necroma1_move2
   - necroma8_move1
   - necroma4_attack
+  - revive_AdBtn
   - bg_bosuk
   - stat_bg1
   - stat_GrowthText
@@ -540,6 +551,7 @@ SpriteAtlas:
   - Flong_Start2
   - necroma4_move2
   - Adrok_Start2
+  - revive_SmallBG
   - bg2_bottom
   - SkillCard_LvBox
   - illustrated_Icon

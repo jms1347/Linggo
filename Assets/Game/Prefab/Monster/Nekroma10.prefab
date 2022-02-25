@@ -4982,6 +4982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoss: 0
+  isOnlyPlater: 1
   monsterState: 0
   attackType: 4
   name: Nekroma10

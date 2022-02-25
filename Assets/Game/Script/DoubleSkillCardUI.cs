@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DoubleSkillCardUI : MonoBehaviour
 {
     //public GameObject farmingCardUI;
+    public FarmingCardLevelExpDataSo farmingCardLevelExpDataSo;
     [System.Serializable]
     public class SelectBox
     {
@@ -27,14 +28,21 @@ public class DoubleSkillCardUI : MonoBehaviour
 
     public SelectBox[] selectBoxes;
     public SelectBox selectFarmingSkillCard;
-    public SkillLvExpData[] skillLvExpDataes;
+    public List<SkillLvExpData> skillLvExpDataes = new List<SkillLvExpData>();
     public void Awake()
     {
-        for (int i = 0; i < skillLvExpDataes.Length; i++)
+        
+        for (int i = 0; i < farmingCardLevelExpDataSo.farmingCardLevelExpData.Count; i++)
         {
-            skillLvExpDataes[i].skillIndex = i / 10;
-            skillLvExpDataes[i].skillLevel = i % 10;
-            skillLvExpDataes[i].skillLvExp = (i / 10).ToString() + "번 스킬의 "+ skillLvExpDataes[i].skillLevel.ToString() + "레벨업 설명";
+            SkillLvExpData skillLvExpData = new SkillLvExpData();
+            skillLvExpData.skillIndex = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardIndex;
+            skillLvExpData.skillLevel = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardLevel;
+            skillLvExpData.skillLvExp = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardLevelExpStr;
+
+            skillLvExpDataes.Add(skillLvExpData);
+            //skillLvExpDataes[i].skillIndex = i / 10;
+            //skillLvExpDataes[i].skillLevel = i % 10;
+            //skillLvExpDataes[i].skillLvExp = (i / 10).ToString() + "번 스킬의 "+ skillLvExpDataes[i].skillLevel.ToString() + "레벨업 설명";
         }
     }
 

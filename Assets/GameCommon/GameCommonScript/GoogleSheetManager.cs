@@ -11,12 +11,14 @@ public class GoogleSheetManager : MonoBehaviour
     const string linggoDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=457742873&range=A2:J";
     const string bossDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1718384963&range=A2:K";
     const string stateDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=610984273&range=A2:I";
+    const string farmingCardLvExpDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1625268690&range=A2:C";
     public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
     public SkillCardSo skillCardSO;
     public LevelDataSo linggoLevelDataSO;
     public ItemSo itemSO;
     public BossDataSo bossDataSO;
     public StateLevelDataSo stateLevelDataSO;
+    public FarmingCardLevelExpDataSo farmingCardLevelExpDataSO;
 
     void Awake()
     {
@@ -26,12 +28,44 @@ public class GoogleSheetManager : MonoBehaviour
         StartCoroutine(SettingLinggoLevelData());
         StartCoroutine(SettingBossData());
         StartCoroutine(SettingStateLevelData());
+        StartCoroutine(SettingFarmingCardLevelData());
     }
 
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
     }
+    #region 파밍카드 레벨별 설명 데이터 넣기
+    IEnumerator SettingFarmingCardLevelData()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(farmingCardLvExpDbURL))
+        {
+            yield return www.SendWebRequest();
+            string data = www.downloadHandler.text;
+
+            SetFarmingCardLevelData(data);
+        }
+    }
+
+    void SetFarmingCardLevelData(string data)
+    {
+        if (farmingCardLevelExpDataSO.farmingCardLevelExpData != null || farmingCardLevelExpDataSO.farmingCardLevelExpData.Count > 0) farmingCardLevelExpDataSO.farmingCardLevelExpData.Clear();
+
+        int lineSize;
+        string[] line = data.Split('\n');
+        lineSize = line.Length;
+        for (int i = 0; i < lineSize; i++)
+        {
+            FarmingCardLevelExpData farmingCardLevelExpData = new FarmingCardLevelExpData();
+            string[] row = line[i].Split('\t');
+
+            farmingCardLevelExpData.farmingCardIndex = int.Parse(row[0]);
+            farmingCardLevelExpData.farmingCardLevel = int.Parse(row[1]);
+            farmingCardLevelExpData.farmingCardLevelExpStr = row[2];
+            farmingCardLevelExpDataSO.farmingCardLevelExpData.Add(farmingCardLevelExpData);
+        }
+    }
+    #endregion
     #region 스탯 레벨데이터 넣기
     IEnumerator SettingStateLevelData()
     {
