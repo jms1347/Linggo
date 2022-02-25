@@ -92,7 +92,7 @@ public class Missile : MonoBehaviour
                     coll.gameObject.GetComponent<GhostItem>().DecreaseHP(master.GetComponent<Monster>().att);
 
                 }
-                else
+                else if (coll.name.Contains("Nek"))
                 {
                     coll.gameObject.GetComponent<Monster>().DecreaseHP(master.GetComponent<Monster>().att);
                 }

@@ -518,7 +518,7 @@ void Start()
         maxExp = linggoLevelDataSO.levelData[level - 1].upKillExp;
         expBar.fillAmount = (float)currentExp / maxExp;
 
-        att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusHpLevel].plusAtt;
+        att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusAttLevel].plusAtt;
         print("att : " + att);
 
         attSpeed = linggoLevelDataSO.levelData[level - 1].attSpeed;
