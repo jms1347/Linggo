@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class LoadingScene : MonoBehaviour
 {
     static string nextScene;
 
     [SerializeField]
     Image progressBar;
-
+    public TextMeshProUGUI loadingText;
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
@@ -29,13 +29,13 @@ public class LoadingScene : MonoBehaviour
         //에셋번들로부터 리소쓰를 읽어와야할때
 
         float timer = 0.0f;
-
+        loadingText.text = Mathf.RoundToInt(progressBar.fillAmount*100).ToString();
         while (!op.isDone)
         {
             yield return null;
 
             timer += Time.deltaTime;
-
+            
             if (op.progress < 0.9f)
             {
                 progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, op.progress, timer);

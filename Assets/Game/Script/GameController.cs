@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
 
     [Header("그 외 변수")]
     public GameObject guidePop;
+    public GameObject gameOverPop;
     //public GameObject shopIcon;
 
     public bool isStartGame = false;
@@ -397,7 +398,7 @@ void Start()
             Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
 
             //게임오버 관련함수
-            print("게임오버_일반");
+            gameOverPop.SetActive(true);
         }
         hpBar.fillAmount = (float)currentHP / maxHP;
         hpText.text = currentHP + " / " + maxHP;
@@ -419,7 +420,7 @@ void Start()
             Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
 
             //게임오버 관련함수
-            print("게임오버_도트");
+            gameOverPop.SetActive(true);
         }
         hpBar.fillAmount = (float)currentHP / maxHP;
         hpText.text = currentHP + " / " + maxHP;
@@ -441,8 +442,8 @@ void Start()
             Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
 
             //게임오버 관련함수
-            print("게임오버_크리티컬");
 
+            gameOverPop.SetActive(true);
         }
         hpBar.fillAmount = (float)currentHP / maxHP;
         hpText.text = currentHP + " / " + maxHP;
@@ -610,6 +611,14 @@ void Start()
         guidePop.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = guideT;
         guidePop.SetActive(true);
     }
+    #endregion
+
+    #region 링고 사망(죽음)_게임오버
+    public void GameOver()
+    {
+        LoadingScene.LoadScene("MainScene");
+    }
+
     #endregion
 
     public int[] GetRandomInt(int length, int min, int max)

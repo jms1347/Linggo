@@ -119,9 +119,9 @@ public class LinggoStatBoard : MonoBehaviour
             GameController.Inst.plusPenetratingCntLevel++;
             GameController.Inst.DecreaseGold(GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel + 1].penetratingCntGold);
             GameController.Inst.PlusPenetratingCnt();
-            if (GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel].penetratingCnt == 100)
+            if (GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusPenetratingCntLevel].penetratingCnt == 20)
             {
-                plusMarbleAppearanceText.text = "100 (MAX)";
+                plusMarbleAppearanceText.text = "20 (MAX)";
                 plusMarbleAppearanceGoldText.text = "";
                 levelUpBtns[2].SetActive(false);
             }
