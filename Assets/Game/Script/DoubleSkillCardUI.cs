@@ -28,22 +28,19 @@ public class DoubleSkillCardUI : MonoBehaviour
 
     public SelectBox[] selectBoxes;
     public SelectBox selectFarmingSkillCard;
-    public List<SkillLvExpData> skillLvExpDataes = new List<SkillLvExpData>();
+    //public List<SkillLvExpData> skillLvExpDataes = new List<SkillLvExpData>();
     public void Awake()
     {
         
-        for (int i = 0; i < farmingCardLevelExpDataSo.farmingCardLevelExpData.Count; i++)
-        {
-            SkillLvExpData skillLvExpData = new SkillLvExpData();
-            skillLvExpData.skillIndex = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardIndex;
-            skillLvExpData.skillLevel = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardLevel;
-            skillLvExpData.skillLvExp = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardLevelExpStr;
+        //for (int i = 0; i < farmingCardLevelExpDataSo.farmingCardLevelExpData.Count; i++)
+        //{
+        //    SkillLvExpData skillLvExpData = new SkillLvExpData();
+        //    skillLvExpData.skillIndex = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardIndex;
+        //    skillLvExpData.skillLevel = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardLevel;
+        //    skillLvExpData.skillLvExp = farmingCardLevelExpDataSo.farmingCardLevelExpData[i].farmingCardLevelExpStr;
 
-            skillLvExpDataes.Add(skillLvExpData);
-            //skillLvExpDataes[i].skillIndex = i / 10;
-            //skillLvExpDataes[i].skillLevel = i % 10;
-            //skillLvExpDataes[i].skillLvExp = (i / 10).ToString() + "번 스킬의 "+ skillLvExpDataes[i].skillLevel.ToString() + "레벨업 설명";
-        }
+        //    skillLvExpDataes.Add(skillLvExpData);
+        //}
     }
 
     #region 파밍 카드 세팅(2개)
@@ -79,13 +76,15 @@ public class DoubleSkillCardUI : MonoBehaviour
             if(dupliIndex != -1)
             {
                 selectBoxes[i].skillNameText.text = "Lv." + (SkillCardController.Inst.skillSlots[dupliIndex].level+1) +" " +cardInfos[i].skillName;
-                selectBoxes[i].skillLvExpText.text = skillLvExpDataes[cardInfos[i].skillIndex * 10 + (SkillCardController.Inst.skillSlots[dupliIndex].level + 1)].skillLvExp;
+                //selectBoxes[i].skillLvExpText.text = skillLvExpDataes[cardInfos[i].skillIndex * 10 + (SkillCardController.Inst.skillSlots[dupliIndex].level + 1)].skillLvExp;
+                selectBoxes[i].skillLvExpText.text = farmingCardLevelExpDataSo.farmingCardLevelExpData[cardInfos[i].skillIndex * 10 + (SkillCardController.Inst.skillSlots[dupliIndex].level + 1)].farmingCardLevelExpStr;
 
             }
             else
             {
                 selectBoxes[i].skillNameText.text = "Lv.1 "+ cardInfos[i].skillName;
-                selectBoxes[i].skillLvExpText.text = skillLvExpDataes[cardInfos[i].skillIndex * 10].skillLvExp;
+                //selectBoxes[i].skillLvExpText.text = skillLvExpDataes[cardInfos[i].skillIndex * 10].skillLvExp;
+                selectBoxes[i].skillLvExpText.text = farmingCardLevelExpDataSo.farmingCardLevelExpData[cardInfos[i].skillIndex * 10].farmingCardLevelExpStr;  
             }
 
             selectBoxes[i].skillExpText.text = cardInfos[i].skillExp;

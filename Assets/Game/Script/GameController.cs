@@ -49,7 +49,6 @@ public class GameController : MonoBehaviour
 
     [Header("링고 스텟")]
     public Linggo linggo;
-    public int sumAtt;
     public int att;
     public float attSpeed;
     public float missileSpeed;
@@ -124,7 +123,6 @@ void Start()
         level = 1;
         levelText.text = "Lv." + level.ToString();
         att = linggoLevelDataSO.levelData[level - 1].upAtt;
-        sumAtt = att;
         attSpeed = linggoLevelDataSO.levelData[level - 1].attSpeed;
         SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp);
         //DecreaseHP(150);
@@ -245,7 +243,6 @@ void Start()
             for (int j = 0; j < createTime * 10; j++) yield return t;
             int ranPercent = Random.Range(0, 100);
             float Percent = stateLevelDataSO.stateLevelData[plusMarbleAppearPercentLevel].plusAppearPercent;
-            print("Percent : " + Percent);
             if (ranPercent > Percent)
             {
                 print(Percent + "% 확률로 정화구슬 생성실패");
@@ -357,7 +354,7 @@ void Start()
         goldText.text = gold.ToString();
     }
     #endregion
-    #region 공격력 함수
+    #region 공격력 일시적 증가 함수
     public void ChangeAtt(int chageAttValue, float time)
     {
         if (attCour != null)
@@ -498,7 +495,7 @@ void Start()
     public void PlusAtt()
     {
         att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusAttLevel].plusAtt;
-
+        print("att : " + att);
     }
     public void PlusHp()
     {
@@ -522,6 +519,8 @@ void Start()
         expBar.fillAmount = (float)currentExp / maxExp;
 
         att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusHpLevel].plusAtt;
+        print("att : " + att);
+
         attSpeed = linggoLevelDataSO.levelData[level - 1].attSpeed;
 
         SetMaxHp(linggoLevelDataSO.levelData[level - 1].upHp + stateLevelDataSO.stateLevelData[plusHpLevel].plusHp);
@@ -585,7 +584,7 @@ void Start()
 
     public IEnumerator CreateMonsterCour(GameObject[] nofe,int nofeCnt)
     {
-        print("nofecnt : " + nofeCnt);
+        //print("nofecnt : " + nofeCnt);
         for (int i = 0; i < nofe.Length; i++)
         {
             if(nofeCnt > 0)

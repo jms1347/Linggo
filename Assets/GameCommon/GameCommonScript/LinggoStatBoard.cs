@@ -39,9 +39,9 @@ public class LinggoStatBoard : MonoBehaviour
         int plusATT = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel].plusAtt;
         //float plusMarbleAppearPerct = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusMarbleAppearPercentLevel].plusAppearPercent;
 
-        linggoHpText.text = (GameController.Inst.maxHP + plusHP).ToString();
+        linggoHpText.text = (GameController.Inst.maxHP).ToString();
         linggoAccumulatedHpText.text = "(+" + plusHP.ToString() + ")";
-        linggoAttText.text = (GameController.Inst.att + plusATT).ToString();
+        linggoAttText.text = (GameController.Inst.att).ToString();
         linggoAccumulatedAttText.text = "(+" + plusATT.ToString() + ")";
         linggoAttSpeedText.text = GameController.Inst.attSpeed.ToString() + "√  ¥Á 1»∏";
         linggoAccumulatedAttSpeedText.text = "";
@@ -91,7 +91,7 @@ public class LinggoStatBoard : MonoBehaviour
             plusHpGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHpGold.ToString();
 
             int plusHP = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel].plusHp;
-            linggoHpText.text = (GameController.Inst.maxHP + plusHP).ToString();
+            linggoHpText.text = (GameController.Inst.maxHP).ToString();
             linggoAccumulatedHpText.text = "(+" + plusHP.ToString() + ")";
         }
         else if (btnKey == "Att")
@@ -107,7 +107,7 @@ public class LinggoStatBoard : MonoBehaviour
             plusAttText.text = "(+" + GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel + 1].plusAtt + ")";
             plusAttGoldText.text = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel + 1].plusAttGold.ToString();
             int plusATT = GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusAttLevel].plusAtt;
-            linggoAttText.text = (GameController.Inst.att + plusATT).ToString();
+            linggoAttText.text = (GameController.Inst.att).ToString();
             linggoAccumulatedAttText.text = "(+" + plusATT.ToString() + ")";
         }else if(btnKey == "PenetratingCnt")
         {

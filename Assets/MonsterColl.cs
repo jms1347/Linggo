@@ -52,7 +52,7 @@ public class MonsterColl : MonoBehaviour
                         coll.gameObject.GetComponent<GhostItem>().DotEffect(4, dotAtt);
                     }
                 }
-                else
+                else if (coll.gameObject.name.Contains("Nek"))
                 {
                     coll.gameObject.GetComponent<Monster>().DecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
 
@@ -89,7 +89,7 @@ public class MonsterColl : MonoBehaviour
                 {
                     coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att); 
                 }
-                else
+                else if (coll.gameObject.name.Contains("Nek"))
                 {
                     //coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att);
                     coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
@@ -138,7 +138,7 @@ public class MonsterColl : MonoBehaviour
                         coll.gameObject.GetComponent<GhostItem>().DotEffect(4, dotAtt);
                     }
                 }
-                else
+                else if(coll.name.Contains("Nek"))
                 {
                     coll.gameObject.GetComponent<Monster>().DecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
                     //coll.gameObject.GetComponent<Monster>().DecreaseHP(monster.att);
@@ -176,7 +176,7 @@ public class MonsterColl : MonoBehaviour
                 {
                     coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att*2);
                 }
-                else
+                else if (coll.name.Contains("Nek"))
                 {
                     //coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att*2);
                     coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
