@@ -19,12 +19,14 @@ public class ItemSlot : MonoBehaviour
     public GameObject itemGuideBar;
     public TextMeshProUGUI guideTitle;
     public TextMeshProUGUI guideContent;
+    public TextMeshProUGUI timerText;
     bool isGuide = true;
 	private void Awake()
 	{
 		itemIconImg = this.transform.GetChild(0).GetComponent<Image>();
 		coolTimeImg = this.transform.GetChild(1).GetComponent<Image>();
         itemPriceText = this.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+        timerText = coolTimeImg.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         isGuide = true;
 
         InitItemSlot();
@@ -87,7 +89,9 @@ public class ItemSlot : MonoBehaviour
         while (isCooldown)
 		{
 			coolTimeImg.fillAmount -= 1 / itemCard.itemCoolTime * Time.deltaTime;
-			if (coolTimeImg.fillAmount <= 0)
+            timerText.text = Mathf.RoundToInt(coolTimeImg.fillAmount * itemCard.itemCoolTime).ToString();
+
+            if (coolTimeImg.fillAmount <= 0)
 			{
 				coolTimeImg.fillAmount = 0;
 				isCooldown = false;

@@ -26,6 +26,7 @@ public class SkillSlot : MonoBehaviour/*, IDragHandler, IEndDragHandler*/
     private GameObject rareEffect;
     private GameObject epicEffect;
     public GameObject selectBtn;
+    public TextMeshProUGUI timerText;
 	
 	private void Awake()
 	{
@@ -38,6 +39,7 @@ public class SkillSlot : MonoBehaviour/*, IDragHandler, IEndDragHandler*/
         rareEffect = this.transform.GetChild(4).gameObject;
         epicEffect = this.transform.GetChild(5).gameObject;
         selectBtn = this.transform.GetChild(6).gameObject;
+        timerText = coolTimeImg.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         InitSkillSlot();
 	}
     #region 스킬 초기화
@@ -85,7 +87,9 @@ public class SkillSlot : MonoBehaviour/*, IDragHandler, IEndDragHandler*/
 		while (isCooldown)
 		{
 			coolTimeImg.fillAmount -= 1/ coolTime * Time.deltaTime;
-			if (coolTimeImg.fillAmount <= 0)
+            timerText.text = Mathf.RoundToInt(coolTimeImg.fillAmount*coolTime).ToString();
+
+            if (coolTimeImg.fillAmount <= 0)
 			{
 				coolTimeImg.fillAmount = 0;
 				isCooldown = false;

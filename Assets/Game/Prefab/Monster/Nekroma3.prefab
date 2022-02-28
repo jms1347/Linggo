@@ -24153,6 +24153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoss: 0
+  isOnlyPlayer: 0
   monsterState: 0
   attackType: 3
   name: Nekroma3
@@ -24199,7 +24200,7 @@ MonoBehaviour:
   isFire: 0
   isLightning: 0
   isIce: 0
-  attackItem: 0
+  attackItem: 1
 --- !u!95 &2816014404177389914
 Animator:
   serializedVersion: 3

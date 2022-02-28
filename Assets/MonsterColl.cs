@@ -40,7 +40,7 @@ public class MonsterColl : MonoBehaviour
                     {
                         coll.gameObject.GetComponent<Linggo>().IceStunEffect(1.0f);
                     }
-
+                    Explosion();
 
                 }
                 else if(coll.gameObject.name.Contains("Item") && attackItem)
@@ -51,6 +51,7 @@ public class MonsterColl : MonoBehaviour
                         int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
                         coll.gameObject.GetComponent<GhostItem>().DotEffect(4, dotAtt);
                     }
+                    Explosion();
                 }
                 else if (coll.gameObject.name.Contains("Nek"))
                 {
@@ -62,19 +63,9 @@ public class MonsterColl : MonoBehaviour
                     //    int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
                     //    coll.gameObject.GetComponent<Monster>().DotEffect(4, dotAtt);
                     //}
+                    Explosion();
                 }
-                Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
-                this.gameObject.SetActive(false);
-
-
-                for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
-                {
-                    if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
-                    {
-                        GameController.Inst.fieldMonsters.RemoveAt(i);
-                        break;
-                    }
-                }
+                
             }
         }
         else
@@ -84,25 +75,21 @@ public class MonsterColl : MonoBehaviour
                 if (coll.gameObject.name.Contains("Linggo"))
                 {
                     GameController.Inst.CriticalDecreaseHP(monster.att * 2);
+                    DecreaseAttackCnt();
                 }
                 else if (coll.gameObject.name.Contains("Item") && attackItem)
                 {
-                    coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att); 
+                    coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att);
+                    DecreaseAttackCnt();
                 }
                 else if (coll.gameObject.name.Contains("Nek"))
                 {
                     //coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att);
                     coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
-
+                    DecreaseAttackCnt();
                 }
-                this.transform.DOMoveX(this.transform.position.x - 6.0f, 2.0f).SetEase(Ease.OutQuint);
-                this.transform.DOMoveY(this.transform.position.y + Random.Range(-2.0f, 2.1f), 2.0f).SetEase(Ease.OutQuint);
-
-                attackCnt--;
             }
         }
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
@@ -128,6 +115,7 @@ public class MonsterColl : MonoBehaviour
                     {
                         coll.gameObject.GetComponent<Linggo>().IceStunEffect(1.0f);
                     }
+                    Explosion();
                 }
                 else if (coll.name.Contains("Item") && attackItem)
                 {
@@ -137,6 +125,7 @@ public class MonsterColl : MonoBehaviour
                         int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
                         coll.gameObject.GetComponent<GhostItem>().DotEffect(4, dotAtt);
                     }
+                    Explosion();
                 }
                 else if(coll.name.Contains("Nek"))
                 {
@@ -147,19 +136,11 @@ public class MonsterColl : MonoBehaviour
                     //    int dotAtt = Mathf.RoundToInt(monster.att * 0.05f);
                     //    coll.gameObject.GetComponent<Monster>().DotEffect(4, dotAtt);
                     //}
+
+                    Explosion();
                 }
 
-                Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
-                this.gameObject.SetActive(false);
-
-                for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
-                {
-                    if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
-                    {
-                        GameController.Inst.fieldMonsters.RemoveAt(i);
-                        break;
-                    }
-                }
+                
             }
             
         }
@@ -170,23 +151,47 @@ public class MonsterColl : MonoBehaviour
                 if (coll.name.Contains("Linggo"))
                 {
                     GameController.Inst.CriticalDecreaseHP(monster.att * 2);
-
+                    DecreaseAttackCnt();
                 }
                 else if (coll.name.Contains("Item") && attackItem)
                 {
                     coll.gameObject.GetComponent<GhostItem>().CriticalDecreaseHP(monster.att*2);
+                    DecreaseAttackCnt();
                 }
                 else if (coll.name.Contains("Nek"))
                 {
                     //coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(monster.att*2);
                     coll.gameObject.GetComponent<Monster>().CriticalDecreaseHP(coll.gameObject.GetComponent<Monster>().maxHp);
+                    DecreaseAttackCnt();
                 }
 
-                this.transform.DOMoveX(this.transform.position.x - 6.0f, 2.0f).SetEase(Ease.OutQuint);
-                this.transform.DOMoveY(this.transform.position.y + Random.Range(-2.0f, 2.1f), 2.0f).SetEase(Ease.OutQuint);
 
-                attackCnt--;
             }
         }        
+    }
+
+    public void Explosion()
+    {
+
+        Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
+        this.gameObject.SetActive(false);
+
+
+        for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)
+        {
+            if (GameController.Inst.fieldMonsters[i].gameObject.Equals(this.gameObject))
+            {
+                GameController.Inst.fieldMonsters.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    public void DecreaseAttackCnt()
+    {
+        this.transform.DOMoveX(this.transform.position.x - 6.0f, 2.0f).SetEase(Ease.OutQuint);
+        this.transform.DOMoveY(this.transform.position.y + Random.Range(-2.0f, 2.1f), 2.0f).SetEase(Ease.OutQuint);
+
+        attackCnt--;
     }
 }

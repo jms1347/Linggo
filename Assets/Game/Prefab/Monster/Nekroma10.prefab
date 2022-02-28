@@ -4982,7 +4982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoss: 0
-  isOnlyPlater: 1
+  isOnlyPlayer: 0
   monsterState: 0
   attackType: 4
   name: Nekroma10
@@ -5029,7 +5029,7 @@ MonoBehaviour:
   isFire: 0
   isLightning: 0
   isIce: 1
-  attackItem: 0
+  attackItem: 1
 --- !u!95 &2529610829703091909
 Animator:
   serializedVersion: 3

@@ -28,6 +28,7 @@ public class DoubleSkillCardUI : MonoBehaviour
 
     public SelectBox[] selectBoxes;
     public SelectBox selectFarmingSkillCard;
+    public GameObject[] selectRedBoxes;
     //public List<SkillLvExpData> skillLvExpDataes = new List<SkillLvExpData>();
     public void Awake()
     {
@@ -136,6 +137,8 @@ public class DoubleSkillCardUI : MonoBehaviour
                 }
             }
         }
+        selectRedBoxes[0].SetActive(false);
+        selectRedBoxes[1].SetActive(false);
     }
 
     public void SelectSkillSlot(int index)
@@ -149,7 +152,8 @@ public class DoubleSkillCardUI : MonoBehaviour
     public void RefuseFarmingCard()
     {
         Time.timeScale = 1f;
-
+        selectRedBoxes[0].SetActive(false);
+        selectRedBoxes[1].SetActive(false);
         this.gameObject.SetActive(false);
 
     }
