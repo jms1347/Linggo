@@ -29,6 +29,7 @@ public class DoubleSkillCardUI : MonoBehaviour
     public SelectBox[] selectBoxes;
     public SelectBox selectFarmingSkillCard;
     public GameObject[] selectRedBoxes;
+    public GameObject oBtn;
     //public List<SkillLvExpData> skillLvExpDataes = new List<SkillLvExpData>();
     public void Awake()
     {
@@ -94,11 +95,20 @@ public class DoubleSkillCardUI : MonoBehaviour
     }
     #endregion
     #region 파밍카드 선택
-    public void SelectFarmingCard(int index)
+    int index;
+
+    public void SelectFarmingCard()
     {
         Time.timeScale = 1f;
         SkillCardController.Inst.GetSkillCardUI.SetActive(false);
-
+        if (selectRedBoxes[0].activeSelf)
+        {
+            index = 0;
+        }
+        else if (selectRedBoxes[1].activeSelf)
+        {
+            index = 1;
+        }
         int dupliIndex = SkillCardController.Inst.CheckDupliSkillCard(selectBoxes[index].skillCard.skillIndex);
         selectFarmingSkillCard = selectBoxes[index];
         if (index == 0)
@@ -143,7 +153,8 @@ public class DoubleSkillCardUI : MonoBehaviour
 
     public void SelectSkillSlot(int index)
     {
-        SkillCardController.Inst.skillSlots[index].SettingSkillSlot(selectFarmingSkillCard.cardImg.sprite,selectFarmingSkillCard.skillCard);
+        SkillCardController.Inst.skillSlots[index].SettingSkillSlot(selectFarmingSkillCard.cardImg.sprite, selectFarmingSkillCard.skillCard);
+
         SkillCardController.Inst.OffFarmingSKillCardSystem();
 
     }
@@ -155,6 +166,6 @@ public class DoubleSkillCardUI : MonoBehaviour
         selectRedBoxes[0].SetActive(false);
         selectRedBoxes[1].SetActive(false);
         this.gameObject.SetActive(false);
-
+        oBtn.SetActive(false);
     }
 }
