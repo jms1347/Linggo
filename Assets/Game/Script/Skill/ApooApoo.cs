@@ -81,7 +81,7 @@ public class ApooApoo : Skill
         if (coll.tag == "Enemy")
         {
             colls.Add(coll.gameObject);
-            coll.transform.DOMoveX(coll.transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
+            coll.transform.DOMoveX(coll.transform.position.x - levelUpData[skillLevel-1].nukbackX, 1.5f).SetEase(Ease.Linear);
 
             int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
             coll.GetComponent<Monster>().DecreaseHP(damage);

@@ -54,6 +54,8 @@ public class BossMonsterControllerBuff : MonoBehaviour
         while (this.gameObject.activeSelf)
         {
             for (int i = 0; i < buffCoolTime * 10; i++) yield return t;
+
+            yield return new WaitUntil(() => GameController.Inst.fieldMonsters.Count >= 3);
             if (buffEfectCour != null)
                 StopCoroutine(buffEfectCour);
             buffEfectCour = BuffEffectCour();
@@ -68,13 +70,14 @@ public class BossMonsterControllerBuff : MonoBehaviour
         selectMonsters.Clear();
         for (int i = 0; i < buffObj.Length; i++)
         {
-            if(GameController.Inst.fieldMonsters[ran[i]] != null)
+            if (GameController.Inst.fieldMonsters[ran[i]] != null)
             {
                 selectMonsters.Add(GameController.Inst.fieldMonsters[ran[i]].gameObject);
                 buffObj[i].transform.position = GameController.Inst.fieldMonsters[ran[i]].transform.position;
                 buffObj[i].SetActive(true);
             }
         }
+
         for (int i = 0; i < selectMonsters.Count; i++)
         {
             selectMonsters[i].GetComponent<Monster>().moveSpeed = 0;

@@ -495,7 +495,6 @@ void Start()
     public void PlusAtt()
     {
         att = linggoLevelDataSO.levelData[level - 1].upAtt + stateLevelDataSO.stateLevelData[plusAttLevel].plusAtt;
-        print("att : " + att);
     }
     public void PlusHp()
     {

@@ -69,10 +69,10 @@ public class Missile : MonoBehaviour
             if (coll.tag == "Enemy")
             {
                 currentPenetrateCnt--;
+                coll.GetComponent<Monster>().DecreaseHP(GameController.Inst.att);
+
                 GameObject ex = Instantiate(exPrefab);
                 ex.transform.position = coll.transform.position;
-
-                coll.GetComponent<Monster>().DecreaseHP(GameController.Inst.att);
 
                 if(currentPenetrateCnt == 0)
                     this.gameObject.SetActive(false);
@@ -84,25 +84,21 @@ public class Missile : MonoBehaviour
             {
                 if (coll.name.Contains("Linggo"))
                 {
-
                     GameController.Inst.DecreaseHP(master.GetComponent<Monster>().att);
+                    ExEffect(coll.gameObject);
                 }
                 else if (coll.name.Contains("Item") && attackItem)
                 {
                     coll.gameObject.GetComponent<GhostItem>().DecreaseHP(master.GetComponent<Monster>().att);
-
+                    ExEffect(coll.gameObject);
                 }
                 else if (coll.name.Contains("Nek"))
                 {
                     coll.gameObject.GetComponent<Monster>().DecreaseHP(master.GetComponent<Monster>().att);
+                    ExEffect(coll.gameObject);
                 }
 
-                if (exPrefab != null)
-                {
-                    GameObject ex = Instantiate(exPrefab);
-                    ex.transform.position = coll.transform.position;
-                }
-                this.gameObject.SetActive(false);
+                
             }
 
         }
@@ -112,5 +108,15 @@ public class Missile : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+    }
+
+    public void ExEffect(GameObject coll)
+    {
+        if (exPrefab != null)
+        {
+            GameObject ex = Instantiate(exPrefab);
+            ex.transform.position = coll.transform.position;
+        }
+        this.gameObject.SetActive(false);
     }
 }

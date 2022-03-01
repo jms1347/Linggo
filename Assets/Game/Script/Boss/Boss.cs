@@ -12,7 +12,6 @@ public class Boss : Monster
     public bool isAttacking = false;
     protected IEnumerator attackCour;
     public float attSpeed;
-
     public int continuousMissileCnt;
     public float continuousMissileTime;
 
@@ -26,12 +25,51 @@ public class Boss : Monster
         SettingMissile();
         SettingEffect();
     }
-    private void Start()
+
+    public override void Update()
     {
-        if (attackCour != null)
-            StopCoroutine(attackCour);
-        attackCour = ATTACK();
-        StartCoroutine(attackCour);
+        if (attackType == AttackType.OnlyPlayerTarget || isOnlyPlayer)
+        {
+            if (linggo != null)
+                currentTarget = linggo;
+
+        }
+        else
+        {
+            currentTarget = FindNearestObjectByTag("Player");
+        }
+
+        if (currentTarget != null || currentTarget.tag != "Player" || currentTarget.activeSelf)
+        {
+            print("보스타켓이상없음");
+            float disF = Vector2.Distance(this.transform.position, currentTarget.transform.position);
+            if (attackDistance >= disF)
+            {
+                if (!isAttacking)
+                {
+                    ChangeState(MonsterState.attack);
+
+                    if (attackCour != null)
+                        StopCoroutine(attackCour);
+                    attackCour = ATTACK();
+                    StartCoroutine(attackCour);
+                }
+            }
+            else
+            {
+                print("보스 이동");
+                ChangeState(MonsterState.move);
+
+                moveSpeed = saveSpeed;
+                Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
+                this.transform.Translate(moveSpeed * Time.deltaTime * dist);
+            }
+        }
+        else
+        {
+            print("보스타켓 재세팅");
+            currentTarget = FindNearestObjectByTag("Player");
+        }
     }
 
     public void SettingBossData(BossData data)
@@ -79,79 +117,43 @@ public class Boss : Monster
 
     public IEnumerator ATTACK(/*GameObject e*/)
     {
-        if (attackType == AttackType.OnlyPlayerTarget)
-        {
-            if (linggo != null)
-                currentTarget = linggo;
+        isAttacking = true;
 
+        print("보스공격시작");
+        yield return new WaitUntil(() => monsterState != MonsterState.stun);
+
+        if (attackType == AttackType.BossContinuousMissile)
+        {
+            int missileCnt = continuousMissileCnt;
+            for (int i = 0; i < bossMissiles.Count; i++)
+            {
+                if (!bossMissiles[i].gameObject.activeSelf)
+                {
+                    moveSpeed = 0;
+                    monsterAni.SetTrigger("Attack");
+                    bossMissiles[i].SettingTarget(currentTarget);
+                    missileCnt--;
+
+                    if (missileCnt == 0) break;
+                    yield return new WaitForSeconds(continuousMissileTime);
+
+                }
+            }
         }
         else
         {
-            currentTarget = FindNearestObjectByTag("Player");
-
-        }
-
-        while (true)
-        {
-            if (currentTarget != null || currentTarget.tag != "Player" || currentTarget.activeSelf)
+            for (int i = 0; i < bossMissiles.Count; i++)
             {
-                print("보스타켓이상없음");
-                float disF = Vector2.Distance(this.transform.position, currentTarget.transform.position);
-                if (attackDistance >= disF)
+                if (!bossMissiles[i].gameObject.activeSelf)
                 {
-                    print("보스공격시작");
-
-                    yield return new WaitUntil(() => monsterState != MonsterState.stun);
-                    if(attackType == AttackType.BossContinuousMissile)
-                    {
-                        int missileCnt = continuousMissileCnt;
-                        for (int i = 0; i < bossMissiles.Count; i++)
-                        {
-                            if (!bossMissiles[i].gameObject.activeSelf)
-                            {
-                                moveSpeed = 0;
-                                monsterAni.SetTrigger("Attack");
-                                bossMissiles[i].SettingTarget(currentTarget);
-                                missileCnt--;
-
-                                if (missileCnt == 0) break;
-                                yield return new WaitForSeconds(continuousMissileTime);
-
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < bossMissiles.Count; i++)
-                        {
-                            if (!bossMissiles[i].gameObject.activeSelf)
-                            {
-                                moveSpeed = 0;
-                                monsterAni.SetTrigger("Attack");
-                                bossMissiles[i].SettingTarget(currentTarget);
-                                break;
-                            }
-                        }
-                    }
-                    
-                }
-                else
-                {
-                    print("보스타켓 재세팅");
-
-                    moveSpeed = saveSpeed;
-                    Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
-                    this.transform.Translate(moveSpeed * Time.deltaTime * dist);
-
+                    moveSpeed = 0;
+                    monsterAni.SetTrigger("Attack");
+                    bossMissiles[i].SettingTarget(currentTarget);
+                    break;
                 }
             }
-            else
-            {
-                currentTarget = FindNearestObjectByTag("Player");
-            }
-            yield return new WaitForSeconds(attSpeed);
-
         }
+        yield return new WaitForSeconds(attSpeed);
     }
     #endregion
     #region 초기화(재활용)
@@ -178,6 +180,8 @@ public class Boss : Monster
                 moveSpeed = saveSpeed;
                 break;
             case MonsterState.attack:
+                monsterAni.speed = 0;
+
                 //monsterAni.SetBool("Attack", true);
                 break;
             case MonsterState.sheild:
