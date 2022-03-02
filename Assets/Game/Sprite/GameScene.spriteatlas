@@ -276,7 +276,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a31ea14d383d3ac4089e9cafb588c262, type: 3}
   - {fileID: 21300000, guid: 462afa6d69598ca45a2b2fe8e92b504e, type: 3}
   - {fileID: 21300000, guid: 0e36358df9c9fe5458ef6572f9bc4cda, type: 3}
-  - {fileID: 21300000, guid: 6a11ed8ddf3a63f4a8428fe5e6ad8782, type: 3}
   - {fileID: 21300000, guid: 144cadbd65b057f4dabf8b67397b8c19, type: 3}
   - {fileID: 21300000, guid: a659fdbd54249cd49b062b24d13fbb4b, type: 3}
   - {fileID: 21300000, guid: 683c17cd1f0a1f446acbbb8e4f098cb3, type: 3}
@@ -540,7 +539,6 @@ SpriteAtlas:
   - shop_nextBtn
   - Boss_Kaim_Move1
   - loading_DecoAni3
-  - main2_bg1
   - DDonggoos_Card2
   - SkillCardPopUp_BGBox
   - prayerOfPurification

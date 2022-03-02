@@ -159,6 +159,8 @@ public class DoubleSkillCardUI : MonoBehaviour
         }
         selectRedBoxes[0].SetActive(false);
         selectRedBoxes[1].SetActive(false);
+        this.gameObject.SetActive(false);
+        oBtn.SetActive(false);
     }
 
     public void SelectSkillSlot(int index)

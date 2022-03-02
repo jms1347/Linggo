@@ -144,7 +144,7 @@ public class ItemCardController : MonoBehaviour
         //¼¼ÆÃ
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            itemSlots[i].SettingItemSlot(itemCardList[i]);
+            itemSlots[i].SettingItemSlot(itemCardList[i], itemSprs[i]);
         }
     }
     #endregion

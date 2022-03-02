@@ -105,9 +105,10 @@ public class ItemSlot : MonoBehaviour
     #endregion
 
     #region 아이템 세팅
-    public void SettingItemSlot(ItemCard ic)
+    public void SettingItemSlot(ItemCard ic, Sprite icSpr)
     {
         itemCard = ic;
+        itemIconImg.sprite = icSpr;
         itemPriceText.text = itemCard.itemPrice.ToString();
     }
 
