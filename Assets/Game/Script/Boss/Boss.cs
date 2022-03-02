@@ -41,7 +41,6 @@ public class Boss : Monster
 
         if (currentTarget != null || currentTarget.tag != "Player" || currentTarget.activeSelf)
         {
-            print("보스타켓이상없음");
             float disF = Vector2.Distance(this.transform.position, currentTarget.transform.position);
             if (attackDistance >= disF)
             {
@@ -57,7 +56,6 @@ public class Boss : Monster
             }
             else
             {
-                print("보스 이동");
                 ChangeState(MonsterState.move);
 
                 moveSpeed = saveSpeed;
@@ -67,7 +65,6 @@ public class Boss : Monster
         }
         else
         {
-            print("보스타켓 재세팅");
             currentTarget = FindNearestObjectByTag("Player");
         }
     }
@@ -119,7 +116,6 @@ public class Boss : Monster
     {
         isAttacking = true;
 
-        print("보스공격시작");
         yield return new WaitUntil(() => monsterState != MonsterState.stun);
 
         if (attackType == AttackType.BossContinuousMissile)

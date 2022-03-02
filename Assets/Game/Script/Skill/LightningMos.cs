@@ -37,13 +37,15 @@ public class LightningMos : Skill
     {
         var time = new WaitForSeconds(0.1f);
         this.transform.localScale = Vector3.one;
-        yield return new WaitForSeconds(1.0f);
+        boxColl.enabled = false;
 
+        //for (int i = 0; i < 10; i++) yield return time;
         this.transform.DOScale(10, levelUpData[skillLevel - 1].skillCastingTime).SetEase(Ease.Flash)
             .OnComplete(()=>
-        {
-            boxColl.enabled = true;
-            hitEffect.transform.position = this.transform.position;
+            {
+                boxColl.enabled = true;
+
+                hitEffect.transform.position = this.transform.position;
             hitEffect.SetActive(true);
         });
         for (int i = 0; i < levelUpData[skillLevel - 1].skillCastingTime * 10; i++) yield return time;

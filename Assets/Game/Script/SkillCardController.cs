@@ -201,9 +201,10 @@ public class SkillCardController : MonoBehaviour
 			SettingSkillCardList();
 		}
 
+
         for (int i = 0; i < skillCardLists.Count; i++)
         {
-            if(skillSprs[skillCardLists[0].skillIndex].skillCardSpr != skillSprs[skillCardLists[1].skillIndex].skillCardSpr)
+            if (skillSprs[skillCardLists[0].skillIndex].skillCardSpr != skillSprs[skillCardLists[1].skillIndex].skillCardSpr)
             {
                 //2개씩으로 변경
                 Sprite[] sprs = new Sprite[]{skillSprs[skillCardLists[0].skillIndex].skillCardSpr,

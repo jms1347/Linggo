@@ -77,7 +77,17 @@ public class DoubleSkillCardUI : MonoBehaviour
             int dupliIndex = SkillCardController.Inst.CheckDupliSkillCard(cardInfos[i].skillIndex);
             if(dupliIndex != -1)
             {
-                selectBoxes[i].skillNameText.text = "Lv." + (SkillCardController.Inst.skillSlots[dupliIndex].level+1) +" " +cardInfos[i].skillName;
+                if((SkillCardController.Inst.skillSlots[dupliIndex].level + 1) == 10)
+                {
+                    selectBoxes[i].skillNameText.text = "Lv.Max " + cardInfos[i].skillName;
+                }else if ((SkillCardController.Inst.skillSlots[dupliIndex].level + 1) == 11)
+                {
+                    selectBoxes[i].skillNameText.text = "쿨타임 초기화 : " + cardInfos[i].skillName;
+                }
+                else
+                {
+                    selectBoxes[i].skillNameText.text = "Lv." + (SkillCardController.Inst.skillSlots[dupliIndex].level + 1) + " " + cardInfos[i].skillName;
+                }
                 //selectBoxes[i].skillLvExpText.text = skillLvExpDataes[cardInfos[i].skillIndex * 10 + (SkillCardController.Inst.skillSlots[dupliIndex].level + 1)].skillLvExp;
                 selectBoxes[i].skillLvExpText.text = farmingCardLevelExpDataSo.farmingCardLevelExpData[cardInfos[i].skillIndex * 10 + (SkillCardController.Inst.skillSlots[dupliIndex].level + 1)].farmingCardLevelExpStr;
 
