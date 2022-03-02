@@ -86,7 +86,7 @@ public class Linggo : MonoBehaviour
         saveBgBottomSpeed = bgController_bottom.moveSpeed;
         linggoAni = this.GetComponent<Animator>();
         linggoImg = this.GetComponent<SpriteRenderer>();
-        linggoAni.SetBool("isMove", true);
+        //linggoAni.SetBool("isMove", true);
     }
     private void Start()
     {

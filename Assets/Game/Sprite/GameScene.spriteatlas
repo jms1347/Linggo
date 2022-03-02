@@ -47,6 +47,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 17d005f3a48a2194dad15fa6a091df7e, type: 3}
     - {fileID: 102900000, guid: c923f4bf7557f0d42ae890355568ed81, type: 3}
     - {fileID: 102900000, guid: 90a4a8f8e0a41774bb6dc1308a326898, type: 3}
+    - {fileID: 102900000, guid: b9fc6a3e560d3874fb72465e2649cd8b, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -155,6 +156,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 35f50c365e652db4aba3da727fe7b17d, type: 3}
   - {fileID: 21300000, guid: b29fef469eda57e49a5f98e5d44b5dfe, type: 3}
   - {fileID: 21300000, guid: 219568769e60f844ab77a33f7a63120a, type: 3}
+  - {fileID: 21300000, guid: 9866e3968b6f43e4389bc2f3a7ff9ff9, type: 3}
   - {fileID: 21300000, guid: 03652aa61d527704d956cd6c8116db0b, type: 3}
   - {fileID: 21300000, guid: 6fb0f8d6451b9604daa9b5dba037946c, type: 3}
   - {fileID: 21300000, guid: fd0e4ee694decaa4e8eed1f9fd1dd442, type: 3}
@@ -418,6 +420,7 @@ SpriteAtlas:
   - Boss_Booer_Move2
   - Boss_Botis_Attack
   - SkillCardPopUp_DetailBox
+  - linggoIcon
   - Boss_Belial_Move1
   - necroma6_move3
   - LightningMos_Card2
