@@ -82,10 +82,13 @@ public class Flong : Skill
 				}
 			}
 			
-			yield return new WaitForSeconds(1.1f);
+			yield return null;
 
 		}
 		colls.Clear();
-		this.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1.11f);
+
+        this.gameObject.SetActive(false);
 	}
 }

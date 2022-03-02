@@ -63,6 +63,7 @@ public class GhostItem : MonoBehaviour
     public void InitUnit(int hp)
     {
         SetMaxHp(hp);
+        dotEffect.gameObject.SetActive(false);
         this.gameObject.SetActive(true);
     }
     #region HP 관련 함수

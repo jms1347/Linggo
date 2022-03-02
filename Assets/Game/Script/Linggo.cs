@@ -127,6 +127,8 @@ public class Linggo : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitUntil(() => linggoState != LinggoState.stun);
+
             if (target == null || target.tag != "Enemy" || !target.activeSelf)
                 target = FindNearestObjectByTag("Enemy");
             if (target != null && target.activeSelf)

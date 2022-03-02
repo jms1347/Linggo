@@ -45,7 +45,7 @@ public class ItemSlot : MonoBehaviour
 	{
         if (isGuide)
         {
-            isGuide = false;
+            //isGuide = false;
             guideTitle.text = itemCard.itemName;
             guideContent.text = itemCard.itemExp;
             itemGuideBar.SetActive(true);
