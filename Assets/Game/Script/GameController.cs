@@ -615,6 +615,7 @@ void Start()
     #region 링고 사망(죽음)_게임오버
     public void GameOver()
     {
+        Time.timeScale = 1;
         LoadingScene.LoadScene("MainScene");
     }
 

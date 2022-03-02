@@ -150,6 +150,7 @@ public class Boss : Monster
             }
         }
         yield return new WaitForSeconds(attSpeed);
+        isAttacking = false;
     }
     #endregion
     #region 초기화(재활용)
