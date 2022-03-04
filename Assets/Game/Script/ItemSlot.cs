@@ -20,6 +20,7 @@ public class ItemSlot : MonoBehaviour
     public TextMeshProUGUI guideTitle;
     public TextMeshProUGUI guideContent;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI notMoneyText;
     bool isGuide = true;
 	private void Awake()
 	{
@@ -43,24 +44,27 @@ public class ItemSlot : MonoBehaviour
 	#region 아이템 사용
 	public void SelectItem()
 	{
-        if (isGuide)
-        {
-            //isGuide = false;
-            guideTitle.text = itemCard.itemName;
-            guideContent.text = itemCard.itemExp;
-            itemGuideBar.SetActive(true);
-        }
+
 		if (itemCard != null && !isCooldown)
         {
             if (GameController.Inst.gold < itemCard.itemPrice)
             {
                 guideTitle.text = "";
 
-                guideContent.text = "골드가 부족합니다";
-                itemGuideBar.SetActive(true);
+                guideContent.text = "";
+
+                notMoneyText.text = "골드가 부족합니다";
+                notMoneyText.gameObject.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1f);
+                notMoneyText.gameObject.SetActive(true);
                 return;
             }
-
+            if (isGuide)
+            {
+                //isGuide = false;
+                guideTitle.text = itemCard.itemName;
+                guideContent.text = itemCard.itemExp;
+                itemGuideBar.SetActive(true);
+            }
             GameController.Inst.DecreaseGold(itemCard.itemPrice);
             ItemCardController.Inst.UseItemCard(index);
 		}

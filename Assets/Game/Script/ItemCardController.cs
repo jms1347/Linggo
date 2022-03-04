@@ -67,7 +67,7 @@ public class ItemCardController : MonoBehaviour
                 GameController.Inst.IncreaseHP(plusPotion);
                 break;
             case ItemCard.ItemType.buff:
-                if(itemSlots[slotIndex].itemCard.itemIndex == 3)
+                if(itemSlots[slotIndex].itemCard.itemIndex == 2)
                 {
                     GameController.Inst.linggo.ShieldEffect(itemSlots[slotIndex].itemCard.itemValue);
                 }
