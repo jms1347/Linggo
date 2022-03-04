@@ -98,6 +98,7 @@ public class MarbleTab : MonoBehaviour
                 });
 
                 GameController.Inst.SettingMarbleExp(tapEx);
+                GameController.Inst.marbleExpEffect.SetActive(true);
                 Invoke(nameof(SetFalse), 2.0f);
             }
             else

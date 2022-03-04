@@ -58,6 +58,7 @@ public class GameController : MonoBehaviour
     public int maxMarbleExp;
     public int currentMarbleExp;
     public GameObject[] marbles;
+    public GameObject marbleExpEffect;
 
 
     [Header("그 외 변수")]
