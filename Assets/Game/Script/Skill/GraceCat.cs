@@ -60,6 +60,7 @@ public class GraceCat : Skill
 		lastEffectPool.SetActive(true);
 		isStartEffect = false;
 		isLastEffect = true;
+        yield return null;
         for (int i = 0; i < colls.Count; i++)
         {
 			int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);

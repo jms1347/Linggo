@@ -38,6 +38,7 @@ public class LightningMos : Skill
         var time = new WaitForSeconds(0.1f);
         this.transform.localScale = Vector3.one;
         boxColl.enabled = false;
+        yield return null;
 
         //for (int i = 0; i < 10; i++) yield return time;
         this.transform.DOScale(10, levelUpData[skillLevel - 1].skillCastingTime).SetEase(Ease.Flash)

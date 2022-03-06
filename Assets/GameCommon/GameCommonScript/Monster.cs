@@ -35,7 +35,7 @@ public class Monster : MonoBehaviour
     public int maxHp;
     public int currentHp;
     public float moveSpeed;
-
+    public float fastAttackSpeed;
     [HideInInspector]
     public float saveSpeed;
     public float attackDistance;
@@ -145,7 +145,7 @@ public class Monster : MonoBehaviour
                     this.transform.DOScale(2.0f, 2.0f).SetEase(Ease.Flash);
                 }else if(attackType  == AttackType.FastAttack)
                 {
-                    moveSpeed =  3;
+                    moveSpeed = fastAttackSpeed;
                 }
             }            
         }

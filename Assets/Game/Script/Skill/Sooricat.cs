@@ -44,17 +44,17 @@ public class Sooricat : Skill
 
     private void OnTriggerExit2D(Collider2D coll)
     {
-		if (coll.tag == "Enemy" )
-		{
-            for (int i = 0; i < colls.Count; i++)
-            {
-				if(colls[i] == coll.gameObject)
-                {
-					colls.RemoveAt(i);
-					break;
-                }
-            }
-		}
+		//if (coll.tag == "Enemy" )
+		//{
+  //          for (int i = 0; i < colls.Count; i++)
+  //          {
+		//		if(colls[i] == coll.gameObject)
+  //              {
+		//			colls.RemoveAt(i);
+		//			break;
+  //              }
+  //          }
+		//}
 	}
 
     [System.Obsolete]

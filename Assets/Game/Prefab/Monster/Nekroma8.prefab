@@ -9844,6 +9844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoss: 0
+  isOnlyPlayer: 0
   monsterState: 0
   attackType: 2
   name: Nekroma8
@@ -9851,6 +9852,7 @@ MonoBehaviour:
   maxHp: 120
   currentHp: 120
   moveSpeed: 1.2
+  fastAttackSpeed: 3
   saveSpeed: 0
   attackDistance: 6
   hpBar: {fileID: 0}

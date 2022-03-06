@@ -12,12 +12,12 @@ public class Flong : Skill
 		public float bossAddDamageCoefficient;
 	}
 	public LevelUpData[] levelUpData = new LevelUpData[10];
-	int targetCnt = 0;
 	public List<GameObject> colls = new List<GameObject>();
 
 	BoxCollider2D boxColl;
 	IEnumerator skillEffectCour;
 	public GameObject flongEffect;
+    public Transform flongPos;
 	private void Awake()
 	{
 		boxColl = this.GetComponent<BoxCollider2D>();
@@ -27,10 +27,10 @@ public class Flong : Skill
 	[System.Obsolete]
 	private void OnEnable()
 	{
-		targetCnt = 1;
-		//OffTimeCount();
+        //OffTimeCount();
+        
 
-		if (skillEffectCour != null)
+        if (skillEffectCour != null)
 			StopCoroutine(skillEffectCour);
 		skillEffectCour = SkillEffect();
 		StartCoroutine(skillEffectCour);
@@ -42,53 +42,31 @@ public class Flong : Skill
 	{
 		if (coll.tag == "Enemy")
         {
-			colls.Add(coll.gameObject);
-		}
+            for (int i = 0; i < colls.Count; i++)
+            {
+                if (colls[i].name.Contains("Boss"))
+                {
+                    int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient * levelUpData[skillLevel - 1].bossAddDamageCoefficient);
+                    colls[i].GetComponent<Monster>().DecreaseHP(damage);
+                }
+                else
+                {
+                    int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+                    colls[i].GetComponent<Monster>().DecreaseHP(damage);
+                }
+            }
+        }
 	}
 
 	[System.Obsolete]
 	IEnumerator SkillEffect()
-	{
-		while (targetCnt > 0)
-		{
-			bool isBoss = false;
-            for (int i = 0; i < colls.Count; i++)
-            {
-                if (colls[i].name.Contains("Boss"))
-				{
+    {
+        var time = new WaitForSeconds(0.1f);
 
-					targetCnt--;
-					print("ÇÃ·Õº¸½º : " + targetCnt);
-					flongEffect.transform.position = colls[i].transform.position;
-					flongEffect.SetActive(true);
-					int damage = (int)(GameController.Inst.att * levelUpData[skillLevel-1].attackCoefficient * levelUpData[skillLevel-1].bossAddDamageCoefficient);
-					colls[i].GetComponent<Monster>().DecreaseHP(damage);
-					isBoss = true;
-					break;
-				}
-            }
-            if (!isBoss)
-            {
-				for (int i = 0; i < colls.Count; i++)
-				{
+        flongEffect.transform.position = flongPos.position;
+        flongEffect.SetActive(true);
+        for (int j = 0; j < 12; j++) yield return time;
+        flongEffect.SetActive(false);
 
-					targetCnt--;
-					print("ÇÃ·Õ³ëº¸½º : " + targetCnt);
-					flongEffect.transform.position = colls[i].transform.position;
-					flongEffect.SetActive(true);
-					int damage = (int)(GameController.Inst.att * levelUpData[skillLevel-1].attackCoefficient);
-					colls[i].GetComponent<Monster>().DecreaseHP(damage);
-					break;
-				}
-			}
-			
-			yield return null;
-
-		}
-		colls.Clear();
-
-        yield return new WaitForSeconds(1.11f);
-
-        this.gameObject.SetActive(false);
-	}
+    }
 }
