@@ -29015,13 +29015,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoss: 0
+  isOnlyPlayer: 0
   monsterState: 0
   attackType: 0
   name: Nekroma1
   att: 20
   maxHp: 120
   currentHp: 120
-  moveSpeed: 0.5
+  moveSpeed: 0.8
   saveSpeed: 0
   attackDistance: 0.5
   hpBar: {fileID: 0}
