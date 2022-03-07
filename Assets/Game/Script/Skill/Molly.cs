@@ -26,6 +26,8 @@ public class Molly : Skill
     private void OnEnable()
     {
         Invoke(nameof(OffSkill), levelUpData[skillLevel-1].durationTime);
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("Molly", effectSound[0]);
     }
 
     [System.Obsolete]

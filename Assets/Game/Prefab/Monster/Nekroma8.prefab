@@ -9874,6 +9874,7 @@ MonoBehaviour:
   healTPrefab: {fileID: 8918483966716264937, guid: e4845fffe19ba734f94ee7aceda3c9c5, type: 3}
   criticalDamageTPrefab: {fileID: 8918483966716264937, guid: 9b2f9499bc54be7408ba9bffb8bee6e2, type: 3}
   goldPrefab: {fileID: 6883956604281184498, guid: 3e6e751c796381e42b390f447fc8adaf, type: 3}
+  deathSound: {fileID: 8300000, guid: a5f3dc046dd558946a7aa3e29d8f92bb, type: 3}
 --- !u!114 &4778212885510351138
 MonoBehaviour:
   m_ObjectHideFlags: 0

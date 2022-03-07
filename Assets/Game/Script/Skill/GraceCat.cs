@@ -27,8 +27,9 @@ public class GraceCat : Skill
 	public bool isStartEffect = false;
 	public bool isLastEffect = false;
 	public List<GameObject> colls = new List<GameObject>();
+    public float slowCoefficient;
 
-	void Awake()
+    void Awake()
 	{
 		coll = this.GetComponent<BoxCollider2D>();
 
@@ -54,13 +55,17 @@ public class GraceCat : Skill
 		lastEffectPool.SetActive(false);
 		isStartEffect = true;
 		isLastEffect = false;
-		coll.enabled = true;
-		for (int j = 0; j < levelUpData[skillLevel-1].skillCastTime*10; j++) yield return time;
+		//coll.enabled = true;
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("GraceCat", effectSound[0]);
+        for (int j = 0; j < levelUpData[skillLevel-1].skillCastTime*10; j++) yield return time;
 		startEffectPool.SetActive(false);
 		lastEffectPool.SetActive(true);
 		isStartEffect = false;
 		isLastEffect = true;
         yield return null;
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("GraceCatHit", effectSound[1]);
         for (int i = 0; i < colls.Count; i++)
         {
 			int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
@@ -99,7 +104,7 @@ public class GraceCat : Skill
 		{			
 			//print("글래이스캣 첫번째 스킬 발동");
 			//coll.GetComponent<Monster>().currentTarget = startPos.gameObject;
-			coll.transform.position = Vector2.Lerp(coll.transform.position, startPos.position, 0.2f / levelUpData[skillLevel - 1].skillCastTime * Time.deltaTime);
+			coll.transform.position = Vector2.Lerp(coll.transform.position, startPos.position, slowCoefficient / levelUpData[skillLevel - 1].skillCastTime * Time.deltaTime);
 		}
 	}
 }

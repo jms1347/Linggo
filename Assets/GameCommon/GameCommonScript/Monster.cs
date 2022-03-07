@@ -80,6 +80,8 @@ public class Monster : MonoBehaviour
     public GameObject criticalDamageTPrefab;
     public GameObject goldPrefab;
 
+    [Header("사운드")]
+    public AudioClip deathSound;
 
     public int CurrentHp { 
         get => currentHp; 
@@ -220,6 +222,9 @@ public class Monster : MonoBehaviour
         damageT.GetComponent<DamageText>().SetDecreaseText(decreaseHp.ToString());
         if (currentHp < 0)
         {
+            SoundManager.Inst.SFXPlay("DeathMon", deathSound);            //사운드
+
+
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
@@ -251,6 +256,7 @@ public class Monster : MonoBehaviour
         damageT.GetComponent<DamageText>().SetDecreaseText(decreaseHp.ToString());
         if (currentHp < 0)
         {
+            SoundManager.Inst.SFXPlay("DeathMon", deathSound);            //사운드
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
@@ -279,6 +285,7 @@ public class Monster : MonoBehaviour
         damageT.GetComponent<DamageText>().SetDecreaseText(decreaseHp.ToString());
         if (currentHp < 0)
         {
+            SoundManager.Inst.SFXPlay("DeathMon", deathSound);            //사운드
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
             for (int i = 0; i < goldAcquisitionAmount; i++)
@@ -312,6 +319,7 @@ public class Monster : MonoBehaviour
         damageT.GetComponent<DamageText>().SetDecreaseText(decreaseHp.ToString());
         if (currentHp < 0)
         {
+            SoundManager.Inst.SFXPlay("DeathMon", deathSound);            //사운드
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
             GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
@@ -337,6 +345,7 @@ public class Monster : MonoBehaviour
         GameObject damageT = Instantiate(criticalDamageTPrefab, this.transform.position, Quaternion.identity);
         damageT.GetComponent<DamageText>().SetDecreaseText(currentHp.ToString());
         currentHp = 0;
+        SoundManager.Inst.SFXPlay("DeathMon", deathSound);            //사운드
         Instantiate(deathEffect, this.transform.position, Quaternion.identity);
         GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);
         gold.GetComponent<Gold>().MoveGoalPos(GameController.Inst.goldText.transform.parent);

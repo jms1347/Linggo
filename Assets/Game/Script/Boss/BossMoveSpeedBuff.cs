@@ -11,6 +11,9 @@ public class BossMoveSpeedBuff : MonoBehaviour
     public float buffDurationTime;
     public float buffCoolTime;
 
+    [Header("»ç¿îµå")]
+    public AudioClip skillCastingSound;
+
     private void OnEnable()
     {
         BuffEffect();
@@ -54,6 +57,8 @@ public class BossMoveSpeedBuff : MonoBehaviour
     {
         var t = new WaitForSeconds(0.1f);
         this.gameObject.GetComponent<Boss>().monsterAni.SetTrigger("Attack");
+        if (skillCastingSound != null)
+            SoundManager.Inst.SFXPlay("bossMoveSkill", skillCastingSound);
         buffObj.SetActive(true);
         buffObj.transform.position = new Vector2(-11f, -0.5f);
         for (int i = 0; i < GameController.Inst.fieldMonsters.Count; i++)

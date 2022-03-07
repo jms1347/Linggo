@@ -12,6 +12,9 @@ public class BossMonsterControllerBuff : MonoBehaviour
     public float buffDurationTime;
     public float buffCoolTime;
     public List<GameObject> selectMonsters = new List<GameObject>();
+
+    [Header("»ç¿îµå")]
+    public AudioClip[] skillCastingSound;
     private void OnEnable()
     {
         BuffEffect();
@@ -68,6 +71,9 @@ public class BossMonsterControllerBuff : MonoBehaviour
         var t = new WaitForSeconds(0.1f);
         int[] ran = GameController.Inst.GetRandomInt(GameController.Inst.fieldMonsters.Count, 0, GameController.Inst.fieldMonsters.Count);
         selectMonsters.Clear();
+
+        if (skillCastingSound.Length > 0)
+            SoundManager.Inst.SFXPlay("bossAttackSkill", skillCastingSound[0]);
         for (int i = 0; i < buffObj.Length; i++)
         {
             if (GameController.Inst.fieldMonsters[ran[i]] != null)
@@ -83,7 +89,8 @@ public class BossMonsterControllerBuff : MonoBehaviour
             selectMonsters[i].GetComponent<Monster>().moveSpeed = 0;
         }
         for (int i = 0; i < buffDurationTime * 10; i++) yield return t;
-
+        if (skillCastingSound.Length > 0)
+            SoundManager.Inst.SFXPlay("bossAttackSkill", skillCastingSound[1]);
         for (int i = 0; i < buffObj.Length; i++)
         {
             if (selectMonsters[i] != null)

@@ -51,7 +51,8 @@ public class Maniak : Skill
         //´« ¾ø¾Ö±â
         for (int i = 0; i < eyes.Count; i++)
             eyes[i].SetActive(false);
-        
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("ManiakHit", effectSound[0]);
         for (int i = 0; i < colls.Count; i++)
         {
             if (i < levelUpData[skillLevel - 1].criticalObjCnt)

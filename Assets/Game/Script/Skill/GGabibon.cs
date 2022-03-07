@@ -40,7 +40,8 @@ public class GGabibon : Skill
     IEnumerator SkillEffect()
     {
         var time = new WaitForSeconds(0.1f);
-
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("GGabibon", effectSound[0]);
         for (int i = 0; i < levelUpData[skillLevel - 1].skillDurationTime * 10; i++) yield return time;
 
         this.gameObject.SetActive(false);

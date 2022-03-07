@@ -9,6 +9,8 @@ public class BossSmogBuff : MonoBehaviour
     public GameObject buffObj;
     public float buffDurationTime;
     public float buffCoolTime;
+    [Header("»ç¿îµå")]
+    public AudioClip skillCastingSound;
     private void OnEnable()
     {
         BuffEffect();
@@ -46,6 +48,9 @@ public class BossSmogBuff : MonoBehaviour
     public IEnumerator BuffEffectCour()
     {
         var t = new WaitForSeconds(0.1f);
+
+        if (skillCastingSound != null)
+            SoundManager.Inst.SFXPlay("bossSmogSkill", skillCastingSound);
         buffObj.SetActive(true);
         buffObj.transform.localPosition = Vector2.zero;
 

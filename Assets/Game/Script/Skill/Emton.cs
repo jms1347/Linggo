@@ -59,7 +59,9 @@ public class Emton : Skill
         {
 			emtons[i].SetActive(true);
 			boxColl.enabled =true;
-			yield return new WaitForSeconds(1.0f);
+            if (effectSound.Length > 0)
+                SoundManager.Inst.SFXPlay("Emton", effectSound[0]);
+            yield return new WaitForSeconds(1.0f);
 			emtons[i].SetActive(false);
 			boxColl.enabled = false;
 			yield return new WaitForSeconds(0.2f);

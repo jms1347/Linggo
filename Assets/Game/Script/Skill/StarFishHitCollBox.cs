@@ -20,9 +20,13 @@ public class StarFishHitCollBox : MonoBehaviour
     IEnumerator SkillEffect2(Vector3 goalPos, int index)
     {
         var time = new WaitForSeconds(0.1f);
+        if (startFish.effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("StarFishDrop", startFish.effectSound[0]);
         this.transform.DOMove(goalPos, startFish.levelUpData[startFish.skillLevel - 1].fallIntervalTime)
                 .SetEase(Ease.InQuad).OnComplete(() =>
                 {
+                    if (startFish.effectSound.Length > 0)
+                        SoundManager.Inst.SFXPlay("StarFishHit", startFish.effectSound[1]);
                     this.GetComponent<BoxCollider2D>().enabled = true;
                     GameObject exEffect = Instantiate(startFish.hitEffect);
                     exEffect.transform.position = this.transform.position;

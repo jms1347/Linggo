@@ -49,10 +49,11 @@ public class PurePeachmon : Skill
         for (int j = 0; j < 20; j++) yield return time;
         isStartEffect = false;
         coll.size = new Vector2(5, 5);
-
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("PurePeachmon", effectSound[0]);
         for (int i = 0; i < colls.Count; i++)
         {
-            print("복숭아 스킬 발동");
+            //print("복숭아 스킬 발동");
             if (levelUpData[skillLevel - 1].healPercent > 0)
             {
                 GameObject healObj = Instantiate(healObjPrefab, colls[i].transform.position, Quaternion.identity);

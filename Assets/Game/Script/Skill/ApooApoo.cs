@@ -45,19 +45,22 @@ public class ApooApoo : Skill
 		boxColl.enabled = false;
 		boxColl.size = new Vector2(levelUpData[skillLevel - 1].xRangeAdd, levelUpData[skillLevel - 1].yRangeAdd * 4);
 		this.transform.localScale = new Vector2(levelUpData[skillLevel - 1].xRangeAdd, levelUpData[skillLevel - 1].yRangeAdd);
-		for (int i = 0; i < 10; i++) yield return time;
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("ApooApoo", effectSound[0]);
+        for (int i = 0; i < 10; i++) yield return time;
 		boxColl.enabled = true;
 
         this.transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel].nukbackX, 1.0f);
-  //          .OnComplete(()=>
-		//{
-  //          for (int i = 0; i < colls.Count; i++)
-  //          {
-  //              colls[i].transform.DOMoveX(colls[i].transform.position.x - levelUpData[skillLevel].nukbackX, 1.0f);
-  //          }
+        //          .OnComplete(()=>
+        //{
+        //          for (int i = 0; i < colls.Count; i++)
+        //          {
+        //              colls[i].transform.DOMoveX(colls[i].transform.position.x - levelUpData[skillLevel].nukbackX, 1.0f);
+        //          }
 
-  //      });
-
+        //      });
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("ApooApooPush", effectSound[1]);
         for (int i = 0; i < 10; i++) yield return time;
         colls.Clear();
         this.gameObject.SetActive(false);

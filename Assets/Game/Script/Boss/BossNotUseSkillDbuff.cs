@@ -12,6 +12,9 @@ public class BossNotUseSkillDbuff : MonoBehaviour
     public GameObject[] buffObj;
     public float buffDurationTime;
     public float buffCoolTime;
+    [Header("»ç¿îµå")]
+    public AudioClip skillCastingSound;
+
     private void OnEnable()
     {
         BuffEffect();
@@ -51,7 +54,8 @@ public class BossNotUseSkillDbuff : MonoBehaviour
     public IEnumerator BuffEffectCour()
     {
         var t = new WaitForSeconds(0.1f);
-        
+        if (skillCastingSound != null)
+            SoundManager.Inst.SFXPlay("bossNotUseSkill", skillCastingSound);
         for (int i = 0; i < skillSlot.Length; i++)
         {
             if (!skillSlot[i].isNull)

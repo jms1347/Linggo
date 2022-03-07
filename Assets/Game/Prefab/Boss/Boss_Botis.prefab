@@ -71195,7 +71195,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25907512138566211}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dbc17452b5c57c74381e22f45a9e5b2e, type: 3}
@@ -71354,6 +71354,7 @@ MonoBehaviour:
   attackItem: 0
   penetrateCnt: 1
   currentPenetrateCnt: 0
+  missileHitSound: {fileID: 8300000, guid: dbc17452b5c57c74381e22f45a9e5b2e, type: 3}
 --- !u!1 &25907512157032281
 GameObject:
   m_ObjectHideFlags: 0
@@ -95141,7 +95142,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25907512363632918}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dbc17452b5c57c74381e22f45a9e5b2e, type: 3}
@@ -95300,6 +95301,7 @@ MonoBehaviour:
   attackItem: 0
   penetrateCnt: 1
   currentPenetrateCnt: 0
+  missileHitSound: {fileID: 8300000, guid: dbc17452b5c57c74381e22f45a9e5b2e, type: 3}
 --- !u!1 &25907512432140433
 GameObject:
   m_ObjectHideFlags: 0
@@ -148026,7 +148028,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25907513161792242}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dbc17452b5c57c74381e22f45a9e5b2e, type: 3}
@@ -148185,6 +148187,7 @@ MonoBehaviour:
   attackItem: 0
   penetrateCnt: 1
   currentPenetrateCnt: 0
+  missileHitSound: {fileID: 8300000, guid: dbc17452b5c57c74381e22f45a9e5b2e, type: 3}
 --- !u!1 &25907513231439864
 GameObject:
   m_ObjectHideFlags: 0
@@ -148253,6 +148256,7 @@ MonoBehaviour:
   maxHp: 15136
   currentHp: 15136
   moveSpeed: 0.8
+  fastAttackSpeed: 0
   saveSpeed: 0
   attackDistance: 13
   hpBar: {fileID: 0}
@@ -148274,11 +148278,14 @@ MonoBehaviour:
   healTPrefab: {fileID: 8918483966716264937, guid: e4845fffe19ba734f94ee7aceda3c9c5, type: 3}
   criticalDamageTPrefab: {fileID: 8918483966716264937, guid: 9b2f9499bc54be7408ba9bffb8bee6e2, type: 3}
   goldPrefab: {fileID: 6883956604281184498, guid: 3e6e751c796381e42b390f447fc8adaf, type: 3}
+  deathSound: {fileID: 8300000, guid: 8e2e1aa92b286674d9bcc6111fc6211c, type: 3}
   bossMissiles: []
   isAttacking: 0
   attSpeed: 30
   continuousMissileCnt: 0
   continuousMissileTime: 0
+  missileSound: {fileID: 8300000, guid: f9ccdb916ca1dea4ea6ecbdd7dc4d9f9, type: 3}
+  moveSound: {fileID: 0}
 --- !u!212 &25907513231439870
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -148415,6 +148422,9 @@ MonoBehaviour:
   buffDurationTime: 3
   buffCoolTime: 20
   selectMonsters: []
+  skillCastingSound:
+  - {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+  - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
 --- !u!1 &25907513244034617
 GameObject:
   m_ObjectHideFlags: 0

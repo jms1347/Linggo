@@ -41,6 +41,8 @@ public class PureLeavesDeer : Skill
         var time = new WaitForSeconds(0.1f);
         
         for (int i = 0; i < levelUpData[skillLevel - 1].skillCastingTime * 10; i++) yield return time;
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("PureLeavesDeer", effectSound[0]);
         for (int i = 0; i < colls.Count; i++)
         {
             if(levelUpData[skillLevel-1].healPercent > 0)

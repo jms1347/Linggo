@@ -4886,6 +4886,7 @@ MonoBehaviour:
   maxHp: 1530
   currentHp: 1530
   moveSpeed: 0.6
+  fastAttackSpeed: 0
   saveSpeed: 0
   attackDistance: 10
   hpBar: {fileID: 0}
@@ -4907,11 +4908,15 @@ MonoBehaviour:
   healTPrefab: {fileID: 8918483966716264937, guid: e4845fffe19ba734f94ee7aceda3c9c5, type: 3}
   criticalDamageTPrefab: {fileID: 8918483966716264937, guid: 9b2f9499bc54be7408ba9bffb8bee6e2, type: 3}
   goldPrefab: {fileID: 6883956604281184498, guid: 3e6e751c796381e42b390f447fc8adaf, type: 3}
+  deathSound: {fileID: 8300000, guid: 8e2e1aa92b286674d9bcc6111fc6211c, type: 3}
   bossMissiles: []
   isAttacking: 0
   attSpeed: 10
   continuousMissileCnt: 0
   continuousMissileTime: 0
+  missileHitSound: {fileID: 8300000, guid: 50da54e056958de4dbd27924371d6a59, type: 3}
+  missileSound: {fileID: 8300000, guid: ad1d53c0f474ff84192988e0d17a82fa, type: 3}
+  skillCastingSound: {fileID: 8300000, guid: ad1d53c0f474ff84192988e0d17a82fa, type: 3}
 --- !u!212 &3294971641064282490
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33411,6 +33416,7 @@ MonoBehaviour:
   attackItem: 0
   penetrateCnt: 1
   currentPenetrateCnt: 0
+  missileHitSound: {fileID: 8300000, guid: 50da54e056958de4dbd27924371d6a59, type: 3}
 --- !u!1 &3294971641719111283
 GameObject:
   m_ObjectHideFlags: 0
@@ -66694,6 +66700,7 @@ MonoBehaviour:
   attackItem: 0
   penetrateCnt: 1
   currentPenetrateCnt: 0
+  missileHitSound: {fileID: 8300000, guid: 50da54e056958de4dbd27924371d6a59, type: 3}
 --- !u!1 &3294971642410629587
 GameObject:
   m_ObjectHideFlags: 0
@@ -85549,6 +85556,7 @@ MonoBehaviour:
   attackItem: 0
   penetrateCnt: 1
   currentPenetrateCnt: 0
+  missileHitSound: {fileID: 8300000, guid: 50da54e056958de4dbd27924371d6a59, type: 3}
 --- !u!1 &3294971642633582437
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,14 +45,17 @@ public class GGonClark : Skill
 
 		for (int i = 0; i < levelUpData[skillLevel-1].objectCnt; i++)
         {
-			//moveObjs[i].transform.localScale = Vector3.one;
-			moveObjs[i].transform.rotation = Quaternion.Euler(0, 0, 45);
+            //moveObjs[i].transform.localScale = Vector3.one;
+
+            moveObjs[i].transform.rotation = Quaternion.Euler(0, 0, 45);
 			moveObjs[i].transform.position = startPos.position + new Vector3(Random.Range(-2f, 2.1f), 0, 0) + Vector3.one * 10;
 			moveObjs[i].SetActive(true);
 
 			moveObjs[i].transform.DOMove(startPos.position + new Vector3(Random.Range(-2f, 2.1f), Random.Range(-2f, 2.1f)), 0.5f).SetEase(Ease.InQuad).OnComplete(() =>
-			{
-				GameObject exEffect = Instantiate(hitEffect);
+            {
+                if (effectSound.Length > 0)
+                    SoundManager.Inst.SFXPlay("GGonClark", effectSound[0]);
+                GameObject exEffect = Instantiate(hitEffect);
 				boxColl[i].transform.position = moveObjs[i].transform.position;
 				exEffect.transform.position = moveObjs[i].transform.position;
 				boxColl[i].gameObject.SetActive(true);

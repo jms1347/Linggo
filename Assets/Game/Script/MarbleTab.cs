@@ -23,7 +23,6 @@ public class MarbleTab : MonoBehaviour
     public IEnumerator tabCour;
     public IEnumerator createCycleCour;
     [HideInInspector]
-    public AudioSource audioSource;
     public AudioClip[] audioClip;
     private Vector3 oriPos;
 
@@ -33,7 +32,6 @@ public class MarbleTab : MonoBehaviour
         oriPos = this.transform.position;
         marbleTab = this.transform.GetChild(0).gameObject;
 
-        audioSource = this.GetComponent<AudioSource>();
            marbleImg = marbleTab.GetComponent<Image>();
 
         for (int i = 0; i < tapEffect.Length; i++) 
@@ -80,15 +78,17 @@ public class MarbleTab : MonoBehaviour
     {
         if(tapCnt > 0 && tapCnt != tapEx)
         {
-            audioSource.PlayOneShot(audioClip[0]);
-
+            //audioSource.PlayOneShot(audioClip[0]);
+            if (audioClip.Length > 0)
+                SoundManager.Inst.SFXPlay("MarbleTab", audioClip[0]);
             tapCheck[tapEx] = true;
             tapEffect[tapEx].SetActive(true);
             tapEx++;
             if(tapCnt == tapEx)
             {
-                audioSource.PlayOneShot(audioClip[1]);
-
+                //audioSource.PlayOneShot(audioClip[1]);
+                if (audioClip.Length > 0)
+                    SoundManager.Inst.SFXPlay("MarbleTab", audioClip[1]);
                 tapEffect[tapEx + 2].SetActive(false);
                 this.transform.DOShakeRotation(1.0f, 5);
                 this.transform.DOShakePosition(1.0f, 1, 0).OnComplete(()=>

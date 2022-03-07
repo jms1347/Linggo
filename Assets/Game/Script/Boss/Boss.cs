@@ -15,6 +15,10 @@ public class Boss : Monster
     public int continuousMissileCnt;
     public float continuousMissileTime;
 
+    [Header("»ç¿îµå")]
+    public AudioClip missileSound;
+    public AudioClip moveSound;
+
     void Awake()
     {
         saveSpeed = moveSpeed;
@@ -56,6 +60,8 @@ public class Boss : Monster
             }
             else
             {
+                if (moveSound != null)
+                    SoundManager.Inst.SFXPlay("bossMove", moveSound);
                 ChangeState(MonsterState.move);
 
                 moveSpeed = saveSpeed;
@@ -125,6 +131,8 @@ public class Boss : Monster
             {
                 if (!bossMissiles[i].gameObject.activeSelf)
                 {
+                    if (missileSound != null)
+                        SoundManager.Inst.SFXPlay("bossMissile", missileSound);
                     moveSpeed = 0;
                     monsterAni.SetTrigger("Attack");
                     bossMissiles[i].SettingTarget(currentTarget);
@@ -142,6 +150,8 @@ public class Boss : Monster
             {
                 if (!bossMissiles[i].gameObject.activeSelf)
                 {
+                    if (missileSound != null)
+                        SoundManager.Inst.SFXPlay("bossMissileSound", missileSound);
                     moveSpeed = 0;
                     monsterAni.SetTrigger("Attack");
                     bossMissiles[i].SettingTarget(currentTarget);

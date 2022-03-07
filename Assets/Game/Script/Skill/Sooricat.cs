@@ -71,7 +71,9 @@ public class Sooricat : Skill
 				sooricats[i].transform.position = colls[ran].transform.position;
 				//sooricats[i].transform.position = new Vector2(colls[ran].transform.position.x, colls[ran].transform.position.y - 0.5f);
 				sooricats[i].SetActive(true);
-				int damage = (int)(GameController.Inst.att * levelUpData[skillLevel-1].attackCoefficient);
+                if (effectSound.Length > 0)
+                    SoundManager.Inst.SFXPlay("Sooricat", effectSound[0]);
+                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel-1].attackCoefficient);
 				colls[ran].GetComponent<Monster>().DecreaseHP(damage);
 				yield return new WaitForSeconds(1.0f);
 				sooricats[i].SetActive(false);

@@ -19,7 +19,7 @@ public class PurePoisonDeerHitCollBox : MonoBehaviour
         {
             if(time <= 0)
             {
-                print("µô");
+                //print("µô");
                 int damage = (int)(GameController.Inst.att * purePoisonDeer.levelUpData[purePoisonDeer.skillLevel - 1].attackCoefficient);
                 coll.gameObject.GetComponent<Monster>().DecreaseHP(damage);
                 time = 0.5f;

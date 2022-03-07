@@ -109,7 +109,8 @@ public class GameController : MonoBehaviour
     public LinggoStatBoard linggoStateBoard;
     public GameObject linggoStateIcon;
 
-
+    [Header("»ç¿îµå")]
+    public AudioClip bossWaringSound;
 
 
 
@@ -226,6 +227,8 @@ void Start()
         var t = new WaitForSeconds(0.1f);
         bossBar.SetActive(true);
         bossBar.GetComponent<Image>().DOFade(1, 0.1f);
+        if (bossWaringSound != null)
+            SoundManager.Inst.SFXPlay("BossWaring", bossWaringSound);
         for (int j = 0; j < 6; j++) yield return t;
         bossBar.GetComponent<Image>().DOFade(0, 0.5f);
         for (int j = 0; j < 5; j++) yield return t;

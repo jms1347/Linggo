@@ -35,7 +35,8 @@ public class PurePoisonDeer : Skill
     {
         var time = new WaitForSeconds(0.1f);
         //for (int i = 0; i < levelUpData[skillLevel - 1].skillCastingTime * 10; i++) yield return time;
-
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("PurePoisonDeer", effectSound[0]);
         lightPool.localScale = new Vector3(levelUpData[skillLevel - 1].xRangeAdd, levelUpData[skillLevel - 1].yRangeAdd, levelUpData[skillLevel - 1].xRangeAdd);
         for (int i = 0; i < levelUpData[skillLevel - 1].objectCnt; i++)
         {

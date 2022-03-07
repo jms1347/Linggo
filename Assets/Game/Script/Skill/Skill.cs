@@ -10,6 +10,9 @@ public class Skill : MonoBehaviour
 
     public float effectLifeTime;
 
+    [Header("»ç¿îµå")]
+    public AudioClip[] effectSound;
+
     [System.Obsolete]
     public void OffTimeCount()
     {

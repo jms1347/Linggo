@@ -26,34 +26,31 @@ public class Flong : Skill
 
 	[System.Obsolete]
 	private void OnEnable()
-	{
-        //OffTimeCount();
-        
+    {
+        flongEffect.SetActive(false);
 
         if (skillEffectCour != null)
 			StopCoroutine(skillEffectCour);
 		skillEffectCour = SkillEffect();
 		StartCoroutine(skillEffectCour);
-
-	}
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("Flong", effectSound[0]);
+    }
 
 	[System.Obsolete]
 	private void OnTriggerEnter2D(Collider2D coll)
 	{
 		if (coll.tag == "Enemy")
         {
-            for (int i = 0; i < colls.Count; i++)
+            if (coll.name.Contains("Boss"))
             {
-                if (colls[i].name.Contains("Boss"))
-                {
-                    int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient * levelUpData[skillLevel - 1].bossAddDamageCoefficient);
-                    colls[i].GetComponent<Monster>().DecreaseHP(damage);
-                }
-                else
-                {
-                    int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
-                    colls[i].GetComponent<Monster>().DecreaseHP(damage);
-                }
+                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient * levelUpData[skillLevel - 1].bossAddDamageCoefficient);
+                coll.GetComponent<Monster>().DecreaseHP(damage);
+            }
+            else
+            {
+                int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
+                coll.GetComponent<Monster>().DecreaseHP(damage);
             }
         }
 	}

@@ -51,10 +51,14 @@ public class Adrok : Skill
 		this.transform.localScale = Vector3.one;
 		this.transform.rotation = Quaternion.Euler(0, 0, 45);
 		this.transform.position = startPos.position + Vector3.one*10;
-		this.transform.DOMove(startPos.position, 0.5f).SetEase(Ease.InQuad).OnComplete(()=>
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("AdrokDrop", effectSound[0]);
+        this.transform.DOMove(startPos.position, 0.5f).SetEase(Ease.InQuad).OnComplete(()=>
 		{
 			GameObject exEffect = Instantiate(hitEffect);
-			exEffect.transform.localScale = new Vector3(levelUpData[skillLevel-1].xRangeAdd, levelUpData[skillLevel-1].yRangeAdd, levelUpData[skillLevel].yRangeAdd);
+            if (effectSound.Length > 0)
+                SoundManager.Inst.SFXPlay("AdrokPush", effectSound[1]);
+            exEffect.transform.localScale = new Vector3(levelUpData[skillLevel-1].xRangeAdd, levelUpData[skillLevel-1].yRangeAdd, levelUpData[skillLevel].yRangeAdd);
 			exEffect.transform.position = this.transform.position; 
 		});
 		for (int i = 0; i < 5; i++) yield return time;

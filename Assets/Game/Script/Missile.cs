@@ -16,6 +16,10 @@ public class Missile : MonoBehaviour
     public int penetrateCnt = 1;
     public int currentPenetrateCnt;
 
+    [Header("»ç¿îµå")]
+    public AudioClip missileHitSound;
+
+
     private void Awake()
 	{
 		rigid = this.GetComponent<Rigidbody2D>();
@@ -71,6 +75,9 @@ public class Missile : MonoBehaviour
                 currentPenetrateCnt--;
                 coll.GetComponent<Monster>().DecreaseHP(GameController.Inst.att);
 
+                if (missileHitSound != null)
+                    SoundManager.Inst.SFXPlay("missileHit", missileHitSound);
+
                 GameObject ex = Instantiate(exPrefab);
                 ex.transform.position = coll.transform.position;
 
@@ -114,6 +121,8 @@ public class Missile : MonoBehaviour
     {
         if (exPrefab != null)
         {
+            if (missileHitSound != null)
+                SoundManager.Inst.SFXPlay("missileHit", missileHitSound);
             GameObject ex = Instantiate(exPrefab);
             ex.transform.position = coll.transform.position;
         }

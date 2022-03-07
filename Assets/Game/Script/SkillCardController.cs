@@ -46,6 +46,9 @@ public class SkillCardController : MonoBehaviour
     public List<SkillCard> mixList = new List<SkillCard>();
     bool PosSelecting = false;
 
+    [Header("»ç¿îµå")]
+    public AudioClip clickSound;
+
     void Start()
 	{
 		oriSkillStartPos = skillStartEffectSprR.transform.position;
@@ -119,8 +122,9 @@ public class SkillCardController : MonoBehaviour
     }
     #endregion
     void Update()
-	{
-		if (isSelectSkill)
+    {
+        
+        if (isSelectSkill)
         {
             
             skillUseRange.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -Camera.main.ScreenToWorldPoint(Input.mousePosition).z);
@@ -147,6 +151,12 @@ public class SkillCardController : MonoBehaviour
                     skillUseRange = null;
                     PosSelecting = false;
                 }
+            }
+        }else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                SoundManager.Inst.SFXPlay("BasicTab", clickSound);
             }
         }
 	}

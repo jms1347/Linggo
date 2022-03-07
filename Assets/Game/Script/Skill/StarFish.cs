@@ -41,7 +41,6 @@ public class StarFish : Skill
             objects[i].transform.position = new Vector3(starFishRange.transform.position.x + (1f * i), 4.5f, 0) + new Vector3(1, 0, 0) * 4.5f;
             objects[i].SetActive(true);
             objects[i].GetComponent<BoxCollider2D>().enabled = false;
-
         }
 
         for (int i = 0; i < levelUpData[skillLevel-1].objectCnt; i++)

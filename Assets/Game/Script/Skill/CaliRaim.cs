@@ -28,6 +28,9 @@ public class CaliRaim : Skill
     {
         targetCnt = levelUpData[skillLevel - 1].targetNumber;
         OffTimeCount();
+
+        if (effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("CaliRaim", effectSound[0]);
     }
     
 

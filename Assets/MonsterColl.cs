@@ -172,6 +172,7 @@ public class MonsterColl : MonoBehaviour
 
     public void Explosion()
     {
+        SoundManager.Inst.SFXPlay("DeathMon", monster.deathSound);            //»ç¿îµå
 
         Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
         this.gameObject.SetActive(false);

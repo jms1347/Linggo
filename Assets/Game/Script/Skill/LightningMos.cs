@@ -44,6 +44,8 @@ public class LightningMos : Skill
         this.transform.DOScale(10, levelUpData[skillLevel - 1].skillCastingTime).SetEase(Ease.Flash)
             .OnComplete(()=>
             {
+                if (effectSound.Length > 0)
+                    SoundManager.Inst.SFXPlay("LightningMos", effectSound[0]);
                 boxColl.enabled = true;
 
                 hitEffect.transform.position = this.transform.position;

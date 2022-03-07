@@ -77,6 +77,8 @@ public class Linggo : MonoBehaviour
     public GameObject resistanceEffect;
 
     //public GameObject goldPrefab;
+    [Header("사운드")]
+    public AudioClip missileSound;
 
     void Awake()
     {
@@ -137,6 +139,8 @@ public class Linggo : MonoBehaviour
                 {
                     if (!linggoMissiles[i].gameObject.activeSelf)
                     {
+                        if (missileSound != null)
+                            SoundManager.Inst.SFXPlay("linggoMissile", missileSound);
                         linggoMissiles[i].SettingTarget(target);
                         break;
                     }
@@ -375,7 +379,7 @@ public class Linggo : MonoBehaviour
         {
             int dotDam = (int)(damage / time);
             GameController.Inst.DotDecreaseHP(dotDam);
-            print("도트뎀 : " + dotDam + " / " + damage);
+            //print("도트뎀 : " + dotDam + " / " + damage);
 
             yield return t;
         }

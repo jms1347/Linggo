@@ -35,8 +35,14 @@ public class FireMining : Skill
         int ran = Random.Range(1, 101);
         if (ran <= levelUpData[skillLevel-1].criticalPercent)
         {
+            if (effectSound.Length > 0)
+                SoundManager.Inst.SFXPlay("FireMiningCritical", effectSound[1]);
             hitEffect.SetActive(true);
             isCriticalMode = true;
+        }else
+        {
+            if (effectSound.Length > 0)
+                SoundManager.Inst.SFXPlay("FireMining", effectSound[0]);
         }
         OffTimeCount();
     }

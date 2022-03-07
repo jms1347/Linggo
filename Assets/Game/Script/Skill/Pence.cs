@@ -16,6 +16,8 @@ public class Pence : Skill
 	public LevelUpData[] levelUpData = new LevelUpData[10];
 	int targetCnt = 0;
 	BoxCollider2D boxColl;
+
+
 	private void Awake()
 	{
 		boxColl = this.GetComponent<BoxCollider2D>();
@@ -27,7 +29,11 @@ public class Pence : Skill
 	{
 		targetCnt = levelUpData[skillLevel-1].targetNumber;
 		OffTimeCount();
-	}
+
+        if(effectSound.Length > 0)
+            SoundManager.Inst.SFXPlay("Pence", effectSound[0]);
+        
+    }
 
 	[System.Obsolete]
     private void OnTriggerEnter2D(Collider2D coll)
