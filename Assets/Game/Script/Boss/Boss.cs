@@ -63,7 +63,6 @@ public class Boss : Monster
                 if (moveSound != null)
                     SoundManager.Inst.SFXPlay("bossMove", moveSound);
                 ChangeState(MonsterState.move);
-
                 moveSpeed = saveSpeed;
                 Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
                 this.transform.Translate(moveSpeed * Time.deltaTime * dist);
@@ -179,17 +178,13 @@ public class Boss : Monster
         {
             case MonsterState.stun:
                 monsterAni.speed = 0;
-                //monsterAni.SetBool("Attack", false);
                 break;
             case MonsterState.move:
                 monsterAni.speed = 1;
-                //monsterAni.SetBool("Attack", false);
                 moveSpeed = saveSpeed;
                 break;
             case MonsterState.attack:
                 monsterAni.speed = 0;
-
-                //monsterAni.SetBool("Attack", true);
                 break;
             case MonsterState.sheild:
 

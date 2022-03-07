@@ -55,6 +55,7 @@ public class GraceCat : Skill
 		lastEffectPool.SetActive(false);
 		isStartEffect = true;
 		isLastEffect = false;
+        yield return null;
 		//coll.enabled = true;
         if (effectSound.Length > 0)
             SoundManager.Inst.SFXPlay("GraceCat", effectSound[0]);
@@ -73,7 +74,8 @@ public class GraceCat : Skill
 			colls[i].GetComponent<Monster>().StunEffect(levelUpData[skillLevel - 1].stunTime);
 			//print("글래이스캣 두번째 스킬 발동");
 		}
-		for (int j = 0; j < 22; j++) yield return time;
+        yield return null;
+        for (int j = 0; j < 22; j++) yield return time;
 		isStartEffect = false;
 		isLastEffect = false;
 		colls.Clear();

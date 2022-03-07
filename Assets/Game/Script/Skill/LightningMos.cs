@@ -51,7 +51,9 @@ public class LightningMos : Skill
                 hitEffect.transform.position = this.transform.position;
             hitEffect.SetActive(true);
         });
-        for (int i = 0; i < levelUpData[skillLevel - 1].skillCastingTime * 10; i++) yield return time;
+        yield return null;
+
+        for (int i = 0; i < levelUpData[skillLevel - 1].skillCastingTime * 11; i++) yield return time;
         boxColl.enabled = false;
         this.gameObject.SetActive(false);
     }
