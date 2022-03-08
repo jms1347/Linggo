@@ -50,7 +50,6 @@ public class Boss : Monster
             {
                 if (!isAttacking)
                 {
-                    ChangeState(MonsterState.attack);
 
                     if (attackCour != null)
                         StopCoroutine(attackCour);
@@ -120,6 +119,7 @@ public class Boss : Monster
     public IEnumerator ATTACK(/*GameObject e*/)
     {
         isAttacking = true;
+        ChangeState(MonsterState.attack);
 
         yield return new WaitUntil(() => monsterState != MonsterState.stun);
 
@@ -132,7 +132,6 @@ public class Boss : Monster
                 {
                     if (missileSound != null)
                         SoundManager.Inst.SFXPlay("bossMissile", missileSound);
-                    moveSpeed = 0;
                     monsterAni.SetTrigger("Attack");
                     bossMissiles[i].SettingTarget(currentTarget);
                     missileCnt--;
@@ -151,7 +150,6 @@ public class Boss : Monster
                 {
                     if (missileSound != null)
                         SoundManager.Inst.SFXPlay("bossMissileSound", missileSound);
-                    moveSpeed = 0;
                     monsterAni.SetTrigger("Attack");
                     bossMissiles[i].SettingTarget(currentTarget);
                     break;
@@ -184,7 +182,8 @@ public class Boss : Monster
                 moveSpeed = saveSpeed;
                 break;
             case MonsterState.attack:
-                monsterAni.speed = 0;
+                monsterAni.speed = 1;
+                moveSpeed = 0;
                 break;
             case MonsterState.sheild:
 
