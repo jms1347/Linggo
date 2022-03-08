@@ -8,7 +8,7 @@ public class MainController : MonoBehaviour
     public AudioClip clickSound;
     public void StartGame()
     {
-        LoadingScene.LoadScene("GameScene");
+        LoadingScene.LoadScene("StoryScene");
     }
 
     private void Update()
