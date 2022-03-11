@@ -652,7 +652,6 @@ public class GameController : MonoBehaviour
     }
     public void GameOver()
     {
-        Time.timeScale = 1;
         LoadingScene.LoadScene("MainScene");
     }
 
