@@ -58,7 +58,7 @@ public class AdmonManager : MonoBehaviour
 
     #region Àü¸é ±¤°í
     const string frontTestID = "ca-app-pub-3940256099942544/8691691433";
-    const string frontID = "";
+    const string frontID = "ca-app-pub-3819330341227143/9853527457";
     InterstitialAd frontAd;
 
 
@@ -69,13 +69,16 @@ public class AdmonManager : MonoBehaviour
         frontAd.OnAdClosed += (sender, e) =>
         {
             print("Àü¸é±¤°í ¼º°ø");
+            Time.timeScale = 1;
+            GameController.Inst.GameOver();
         };
     }
 
     public void ShowFrontAd()
     {
-        frontAd.Show();
         LoadFrontAd();
+        frontAd.Show();
+
     }
     #endregion
 
