@@ -277,6 +277,7 @@ public class Monster : MonoBehaviour
     public void DecreasePeachmonHP(int decreaseHp, int goldAcquisitionAmount)
     {
         if (monsterState == MonsterState.sheild) return;
+        
         ChangeColorEffect(Color.red);
 
         maxHpBar.SetActive(true);
@@ -288,6 +289,13 @@ public class Monster : MonoBehaviour
             SoundManager.Inst.SFXPlay("DeathMon", deathSound);            //»ç¿îµå
             currentHp = 0;
             Instantiate(deathPrefab, this.transform.position, Quaternion.identity);
+
+            if (GameController.Inst.isDoubleGold)
+            {
+                goldAcquisitionAmount *= 2;
+            }
+            print("goldAcquisitionAmount : " + goldAcquisitionAmount);
+
             for (int i = 0; i < goldAcquisitionAmount; i++)
             {
                 GameObject gold = Instantiate(goldPrefab, this.transform.position, Quaternion.identity);

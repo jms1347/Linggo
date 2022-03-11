@@ -61,9 +61,12 @@ public class Flong : Skill
         var time = new WaitForSeconds(0.1f);
 
         flongEffect.transform.position = flongPos.position;
+        this.gameObject.SetActive(true);
+
         flongEffect.SetActive(true);
         for (int j = 0; j < 12; j++) yield return time;
         flongEffect.SetActive(false);
+        this.gameObject.SetActive(false);
 
     }
 }

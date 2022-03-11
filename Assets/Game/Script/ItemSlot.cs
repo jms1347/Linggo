@@ -22,7 +22,8 @@ public class ItemSlot : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI notMoneyText;
     bool isGuide = true;
-	private void Awake()
+
+    private void Awake()
 	{
 		itemIconImg = this.transform.GetChild(0).GetComponent<Image>();
 		coolTimeImg = this.transform.GetChild(1).GetComponent<Image>();
@@ -44,8 +45,8 @@ public class ItemSlot : MonoBehaviour
 	#region 아이템 사용
 	public void SelectItem()
 	{
-
-		if (itemCard != null && !isCooldown)
+        GameController.Inst.ClickSound();   //버튼 사운드
+        if (itemCard != null && !isCooldown)
         {
             if (GameController.Inst.gold < itemCard.itemPrice)
             {

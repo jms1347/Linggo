@@ -46,8 +46,7 @@ public class SkillCardController : MonoBehaviour
     public List<SkillCard> mixList = new List<SkillCard>();
     bool PosSelecting = false;
 
-    [Header("사운드")]
-    public AudioClip clickSound;
+    
 
     void Start()
 	{
@@ -152,18 +151,13 @@ public class SkillCardController : MonoBehaviour
                     PosSelecting = false;
                 }
             }
-        }else
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                SoundManager.Inst.SFXPlay("BasicTab", clickSound);
-            }
         }
 	}
 
-    #region 스킬 선택
+    #region 스킬 선택    
     public void SelectSkillCard(int slotIndex, int skillIndex,int level)
 	{
+        GameController.Inst.ClickSound();   //버튼 사운드
         PosSelecting = false;
         selectSlot = skillSlots[slotIndex];
 		selectSkillIndex = skillIndex;
@@ -200,10 +194,43 @@ public class SkillCardController : MonoBehaviour
 			skillCardLists[rand] = temp;
 		}
 	}
-	#endregion
+    #endregion
+    #region 스킬 보상 함수
+    public void ChangeCardRewardAD()
+    {
+        if (skillCardLists.Count < 2)
+        {
+            SettingSkillCardList();
+        }
 
-	#region 스킬UI 팝업 On/Off
-	public void OnPopUpUI()
+        for (int i = 0; i < skillCardLists.Count; i++)
+        {
+            if (skillSprs[skillCardLists[0].skillIndex].skillCardSpr != skillSprs[skillCardLists[1].skillIndex].skillCardSpr)
+            {
+                //2개씩으로 변경
+                Sprite[] sprs = new Sprite[]{skillSprs[skillCardLists[0].skillIndex].skillCardSpr,
+            skillSprs[skillCardLists[1].skillIndex].skillCardSpr};
+                SkillCard[] cards = new SkillCard[]
+                {
+             skillCardLists[0],  skillCardLists[1]
+                };
+                GetSkillCardUI.GetComponent<DoubleSkillCardUI>().SettingCards(sprs, cards);
+
+                skillCardLists.RemoveAt(0);
+                skillCardLists.RemoveAt(0);
+                //GetSkillCardUI.SetActive(true);
+                break;
+            }
+            else
+            {
+                skillCardLists.RemoveAt(0);
+
+            }
+        }
+    }
+    #endregion
+    #region 스킬UI 팝업 On/Off
+    public void OnPopUpUI()
 	{
 		Time.timeScale = 0;
 		if(skillCardLists.Count < 2)

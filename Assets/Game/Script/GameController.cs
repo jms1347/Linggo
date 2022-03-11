@@ -64,6 +64,9 @@ public class GameController : MonoBehaviour
     [Header("그 외 변수")]
     public GameObject guidePop;
     public GameObject gameOverPop;
+    public GameObject rebirthPop;
+    public bool canRebirth = true;
+    
     //public GameObject shopIcon;
 
     public bool isStartGame = false;
@@ -73,6 +76,7 @@ public class GameController : MonoBehaviour
     private IEnumerator bossBarCour;
     private IEnumerator createMarbleCour;
     private IEnumerator attCour;
+    private IEnumerator doubleGoldCour;
     bool isEndTimer = false;
     bool isWaveGoalComplete = false;
 
@@ -111,10 +115,17 @@ public class GameController : MonoBehaviour
 
     [Header("사운드")]
     public AudioClip bossWaringSound;
+    public AudioClip btnClickSound;
+
+    [Header("리워드 버튼")]
+    public GameObject doubleGoldADBtn;
+    public GameObject FarmingCardADBtn;
+    public bool isDoubleGold = false;
+    public float doubleGold = 60.0f;
 
 
 
-void Start()
+    void Start()
     {
         InitGame();
     }
@@ -174,6 +185,21 @@ void Start()
             //성장 시스템
             //if (wave % 5 == 0) linggoStateIcon.SetActive(true);           
             //else linggoStateIcon.SetActive(false);
+
+            //리워드 시스템
+            int ranR = Random.Range(0, 100);
+            if (ranR < 30)
+            {
+                int ranK = Random.Range(0, 3);
+
+                if (ranK == 0) doubleGoldADBtn.SetActive(true);
+                else FarmingCardADBtn.SetActive(true);
+            }
+            else
+            {
+                doubleGoldADBtn.SetActive(false);
+                FarmingCardADBtn.SetActive(false);
+            }
 
             //보스생성
             if (wave % 10 == 0)
@@ -401,7 +427,7 @@ void Start()
             Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
 
             //게임오버 관련함수
-            gameOverPop.SetActive(true);
+            DeathLinggo();
         }
         hpBar.fillAmount = (float)currentHP / maxHP;
         hpText.text = currentHP + " / " + maxHP;
@@ -423,7 +449,7 @@ void Start()
             Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
 
             //게임오버 관련함수
-            gameOverPop.SetActive(true);
+            DeathLinggo();
         }
         hpBar.fillAmount = (float)currentHP / maxHP;
         hpText.text = currentHP + " / " + maxHP;
@@ -445,8 +471,7 @@ void Start()
             Instantiate(deathPrefab, linggo.transform.position, Quaternion.identity);
 
             //게임오버 관련함수
-
-            gameOverPop.SetActive(true);
+            DeathLinggo();
         }
         hpBar.fillAmount = (float)currentHP / maxHP;
         hpText.text = currentHP + " / " + maxHP;
@@ -617,6 +642,14 @@ void Start()
     #endregion
 
     #region 링고 사망(죽음)_게임오버
+    public void DeathLinggo()
+    {
+        if (canRebirth)
+            rebirthPop.SetActive(true);
+        else
+            gameOverPop.SetActive(true);
+        Time.timeScale = 0;
+    }
     public void GameOver()
     {
         Time.timeScale = 1;
@@ -624,7 +657,46 @@ void Start()
     }
 
     #endregion
+    #region 더블 골드 함수
+    public void DoubleGold()
+    {
+        if (doubleGoldCour != null)
+            StopCoroutine(doubleGoldCour);
+        doubleGoldCour = DoubleGoldCour();
+        StartCoroutine(doubleGoldCour);
+    }
 
+    IEnumerator DoubleGoldCour()
+    {
+        var t = new WaitForSeconds(1f);
+        isDoubleGold = true;
+        for (int i = 0; i < doubleGold; i++) yield return t;
+        isDoubleGold = false;
+    }
+    #endregion
+    public void SettingRebirth()
+    {
+        Time.timeScale = 1;
+
+        linggo.ShieldEffect(3.0f);
+        canRebirth = false;
+        for (int i = 0; i < fieldMonsters.Count; i++)
+        {
+            fieldMonsters[i].gameObject.SetActive(false);
+        }
+        fieldMonsters.Clear();
+
+        IncreaseHP(maxHP);
+        rebirthPop.SetActive(false);
+    }
+
+    #region 사운드
+    public void ClickSound()
+    {
+        if (btnClickSound != null)
+            SoundManager.Inst.SFXPlay("BtnSound", btnClickSound);
+    }
+    #endregion
     public int[] GetRandomInt(int length, int min, int max)
     {
         int[] randArray = new int[length];

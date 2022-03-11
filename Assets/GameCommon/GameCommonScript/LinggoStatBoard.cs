@@ -22,7 +22,7 @@ public class LinggoStatBoard : MonoBehaviour
     public TextMeshProUGUI linggoAttSpeedText;
 
     public GameObject[] levelUpBtns;
-
+    public AudioClip btnSound;
     public void OnEnable()
     {
         levelText.text = "Lv."+ GameController.Inst.level.ToString();
@@ -75,6 +75,8 @@ public class LinggoStatBoard : MonoBehaviour
 
     public void PlusStat(string btnKey)
     {
+        if(btnSound != null)
+            SoundManager.Inst.SFXPlay("StatBtn", btnSound);
         if (btnKey == "Hp")
         {
             if (GameController.Inst.gold < GameController.Inst.stateLevelDataSO.stateLevelData[GameController.Inst.plusHpLevel + 1].plusHpGold)

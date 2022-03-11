@@ -17,7 +17,16 @@ public class Gold : MonoBehaviour
             .SetEase(Ease.InQuart).SetDelay(delayTime)
             .OnComplete(() =>
             {
-                GameController.Inst.IncreaseGold(GameController.Inst.linggoLevelDataSO.levelData[GameController.Inst.wave - 1].killRewardGold);
+                if (GameController.Inst.isDoubleGold)
+                {
+                    GameController.Inst.IncreaseGold(GameController.Inst.linggoLevelDataSO.levelData[GameController.Inst.wave - 1].killRewardGold *2);
+
+                }
+                else
+                {
+                    GameController.Inst.IncreaseGold(GameController.Inst.linggoLevelDataSO.levelData[GameController.Inst.wave - 1].killRewardGold);
+
+                }
                 Destroy(this.gameObject);
             });
     }
