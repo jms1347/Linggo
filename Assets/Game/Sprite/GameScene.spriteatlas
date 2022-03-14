@@ -111,7 +111,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0de4295380e8f7a4abfc88767ab7ee85, type: 3}
   - {fileID: 21300000, guid: bc3715639b953fb4b896ea6047ce9be0, type: 3}
   - {fileID: 21300000, guid: c2b44b63889ed874bbf8a92713107b77, type: 3}
-  - {fileID: 21300000, guid: c15ccc831f90d8b40ad2f76a7ee85449, type: 3}
   - {fileID: 21300000, guid: ba2fed930e5fe1145b5b3d6c915e8e18, type: 3}
   - {fileID: 21300000, guid: eb8baea37796f9040a4eacd1e394e3a2, type: 3}
   - {fileID: 21300000, guid: fbfcfdc3af1df7f48b2351eb49bf887b, type: 3}
@@ -133,6 +132,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a4c26894f32aa7049875b14e20b5bb1a, type: 3}
   - {fileID: 21300000, guid: 6872099468af801439bb8ae43e88022d, type: 3}
   - {fileID: 21300000, guid: 100b4da455e949c49ba0c9eef35963f9, type: 3}
+  - {fileID: 21300000, guid: ee59edb4f039faf40bb425b463facdb3, type: 3}
   - {fileID: 21300000, guid: a585feb4d3eeeb8468736afdc686ca74, type: 3}
   - {fileID: 21300000, guid: 1a04a1c4210551945a31cb54bb7f928e, type: 3}
   - {fileID: 21300000, guid: 87685bd461b531e46a16bf2c660ad7e8, type: 3}
@@ -298,6 +298,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 66bae03ecba58e9479ddf15411c51589, type: 3}
   - {fileID: 21300000, guid: 209ef64ee27b1874b91a2d18b4636af2, type: 3}
   - {fileID: 21300000, guid: cc85dd4ef53df9b4cab9415c8fb56409, type: 3}
+  - {fileID: 21300000, guid: dff8077e793df894eb3d5eae489e3829, type: 3}
   - {fileID: 21300000, guid: 80ef587e0e0ffea4496fe0850edb8f0d, type: 3}
   - {fileID: 21300000, guid: af0ecf7eaed429c498259686a850cc27, type: 3}
   - {fileID: 21300000, guid: 9290a18e923a337429a8143cec917d3a, type: 3}
@@ -383,7 +384,6 @@ SpriteAtlas:
   - necroma3
   - Adv_BlueBtn
   - Unit2
-  - "\uC131\uC7A5\uC2DC\uC2A4\uD15Cui_\uAC00\uC774\uB4DC"
   - Marble2_Epik
   - UnitIcon
   - stat_penetratingIcon
@@ -405,6 +405,7 @@ SpriteAtlas:
   - GGabibon_Start
   - circleEffect_Pink3
   - PurePoisonDeer_Start
+  - stat2_BG
   - "\uAD11\uACE0_\uBC14\uAFB8\uAE30"
   - Boss_Army_Move3
   - Boss_Death_Move2
@@ -570,6 +571,7 @@ SpriteAtlas:
   - PurePeachmon_Start
   - Boss_Kaim_Move2
   - necroma3_big2
+  - stat2_upBtn
   - PurePeachmon_Card
   - Farming_BG
   - stat_StartBtn
