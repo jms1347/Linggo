@@ -74,6 +74,7 @@ MonoBehaviour:
   skillLevel: 1
   hitEffect: {fileID: 0}
   effectLifeTime: 0
+  effectSound: []
   levelUpData:
   - level: 1
     attackCoefficient: 1.5
@@ -104,19 +105,19 @@ MonoBehaviour:
     targetNumber: 5
     slowTime: 3
     slowPercent: 0.8
-    healPercent: 0
+    healPercent: 5
   - level: 6
     attackCoefficient: 3
     targetNumber: 5
     slowTime: 3
     slowPercent: 0.8
-    healPercent: 0
+    healPercent: 5
   - level: 7
     attackCoefficient: 3.3
     targetNumber: 5
     slowTime: 3
     slowPercent: 0.8
-    healPercent: 0
+    healPercent: 5
   - level: 8
     attackCoefficient: 3.6
     targetNumber: 5
@@ -135,6 +136,7 @@ MonoBehaviour:
     slowTime: 3
     slowPercent: 0.8
     healPercent: 5
+  healObjPrefab: {fileID: 0}
 --- !u!1 &2154141400191832810
 GameObject:
   m_ObjectHideFlags: 0
