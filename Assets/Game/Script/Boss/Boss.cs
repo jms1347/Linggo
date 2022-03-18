@@ -59,12 +59,16 @@ public class Boss : Monster
             }
             else
             {
-                if (moveSound != null)
-                    SoundManager.Inst.SFXPlay("bossMove", moveSound);
-                ChangeState(MonsterState.move);
-                moveSpeed = saveSpeed;
-                Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
-                this.transform.Translate(moveSpeed * Time.deltaTime * dist);
+                if(monsterState != MonsterState.stun)
+                {
+                    if (moveSound != null)
+                        SoundManager.Inst.SFXPlay("bossMove", moveSound);
+                    ChangeState(MonsterState.move);
+                    moveSpeed = saveSpeed;
+                    Vector2 dist = (currentTarget.transform.position - this.transform.position).normalized;
+                    this.transform.Translate(moveSpeed * Time.deltaTime * dist);
+                }
+
             }
         }
         else

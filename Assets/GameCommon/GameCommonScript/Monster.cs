@@ -442,13 +442,13 @@ public class Monster : MonoBehaviour
         var t = new WaitForSeconds(0.1f);
         ChangeState(MonsterState.stun);
         stunEffect.SetActive(true);
-        float tempMove = moveSpeed;
+        //float tempMove = moveSpeed;
         moveSpeed = 0;
         for (int i = 0; i < time * 10; i++) yield return t;
         ChangeState(MonsterState.move);
 
         stunEffect.SetActive(false);
-        moveSpeed = tempMove;
+        moveSpeed = saveSpeed;
     }
     #endregion
     #region 슬로우 함수
