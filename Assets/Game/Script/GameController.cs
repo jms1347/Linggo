@@ -156,7 +156,9 @@ public class GameController : MonoBehaviour
         plusAttLevel = 0;
         plusMarbleAppearPercentLevel = 0;
         plusPenetratingCntLevel = 0;
-        StartGame();
+
+        if(!isStartGame)
+            StartGame();
     }
 
     public void StartGame()
@@ -186,20 +188,7 @@ public class GameController : MonoBehaviour
             //if (wave % 5 == 0) linggoStateIcon.SetActive(true);           
             //else linggoStateIcon.SetActive(false);
 
-            //리워드 시스템
-            int ranR = Random.Range(0, 100);
-            if (ranR < 30)
-            {
-                int ranK = Random.Range(0, 3);
-
-                if (ranK == 0) doubleGoldADBtn.SetActive(true);
-                else FarmingCardADBtn.SetActive(true);
-            }
-            else
-            {
-                doubleGoldADBtn.SetActive(false);
-                FarmingCardADBtn.SetActive(false);
-            }
+            
 
             //보스생성
             if (wave % 10 == 0)
@@ -213,6 +202,21 @@ public class GameController : MonoBehaviour
             }
             else if(wave != 1)
             {
+                //리워드 시스템
+                int ranR = Random.Range(0, 100);
+                if (ranR < 30)
+                {
+                    int ranK = Random.Range(0, 3);
+
+                    if (ranK == 0) doubleGoldADBtn.SetActive(true);
+                    else FarmingCardADBtn.SetActive(true);
+                }
+                else
+                {
+                    doubleGoldADBtn.SetActive(false);
+                    FarmingCardADBtn.SetActive(false);
+                }
+
                 //웨이브 바 켜기
                 if (waveBarCour != null)
                     StopCoroutine(waveBarCour);

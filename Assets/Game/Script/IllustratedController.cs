@@ -8,10 +8,7 @@ public class IllustratedController : MonoBehaviour
     public SkillCardUI illDetailPanel;
     public Sprite[] skillStartSpr;
 
-    void Start()
-    {
-        
-    }
+
 
     public void IllCardBtn(int index)
     {

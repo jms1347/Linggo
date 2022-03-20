@@ -10,7 +10,10 @@ public class MainController : MonoBehaviour
     {
         LoadingScene.LoadScene("GameScene");
     }
-
+    public void Tutorial()
+    {
+        LoadingScene.LoadScene("TutorialScene");
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
