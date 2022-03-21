@@ -512,6 +512,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 765519414}
   loadingText: {fileID: 1707906151}
+  guideTexts:
+  - "\uC815\uD654\uAD6C\uC2AC\uC744 \uBAA8\uC73C\uBA74 \uC2A4\uD0AC\uC744 \uC5BB\uC744
+    \uC218 \uC788\uC5B4\uC694."
+  - "\uAD00\uD1B5\uB825\uC744 \uC62C\uB9AC\uBA74 \uB9C1\uACE0\uC758 \uBBF8\uC0AC\uC77C\uC774
+    \uC801\uC744 \uAD00\uD1B5\uD574\uC694!"
+  guideText: {fileID: 1565711502}
 --- !u!4 &1185502002
 Transform:
   m_ObjectHideFlags: 0

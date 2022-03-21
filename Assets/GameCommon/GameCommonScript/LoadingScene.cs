@@ -6,11 +6,15 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class LoadingScene : MonoBehaviour
 {
+    
     static string nextScene;
 
     [SerializeField]
     Image progressBar;
     public TextMeshProUGUI loadingText;
+
+    public string[] guideTexts;
+    public TextMeshProUGUI guideText;
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
@@ -27,7 +31,8 @@ public class LoadingScene : MonoBehaviour
         op.allowSceneActivation = false;
         //생각보다 씬로딩속도가 빠를 수 있다. 그래서 페이크 로딩을 넣어줌
         //에셋번들로부터 리소쓰를 읽어와야할때
-
+        int ranGuideNum = Random.Range(0, guideTexts.Length);
+        guideText.text = guideTexts[ranGuideNum];
         float timer = 0.0f;
         while (!op.isDone)
         {
