@@ -324,7 +324,7 @@ public class TutorialSkillController : MonoBehaviour
         skillSprs[skillIndex].skillObj.transform.position = clickPos;
         skillSprs[skillIndex].skillObj.SetActive(true);
 
-        //tuto3.SetActive(false);
+        tuto3.SetActive(false);
         tuto4.SetActive(true);
     }
     #endregion
