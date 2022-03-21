@@ -107,10 +107,10 @@ public class TutorialMarbleTab : MonoBehaviour
                 this.transform.DOShakePosition(1.0f, 10);
                 this.transform.DOShakeRotation(1.0f, 5);
 
-                if (tabCour != null)
-                    StopCoroutine(tabCour);
-                tabCour = TabCour();
-                StartCoroutine(tabCour);
+                //if (tabCour != null)
+                //    StopCoroutine(tabCour);
+                //tabCour = TabCour();
+                //StartCoroutine(tabCour);
             }
 
         }
@@ -141,10 +141,10 @@ public class TutorialMarbleTab : MonoBehaviour
         if (tabCour != null)
             StopCoroutine(tabCour);
 
-        if (createCycleCour != null)
-            StopCoroutine(createCycleCour);
-        createCycleCour = CreateCycleCour();
-        StartCoroutine(createCycleCour);
+        //if (createCycleCour != null)
+        //    StopCoroutine(createCycleCour);
+        //createCycleCour = CreateCycleCour();
+        //StartCoroutine(createCycleCour);
     }
     IEnumerator TabCour()
     {

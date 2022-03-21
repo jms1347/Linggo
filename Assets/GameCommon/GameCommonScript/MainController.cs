@@ -14,6 +14,12 @@ public class MainController : MonoBehaviour
     {
         LoadingScene.LoadScene("TutorialScene");
     }
+
+    public void StoryScene()
+    {
+        LoadingScene.LoadScene("StoryScene");
+
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))

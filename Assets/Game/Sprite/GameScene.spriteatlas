@@ -317,6 +317,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 316f75be33827ed49ae53a89664f6b54, type: 3}
   - {fileID: 21300000, guid: 76de70ce0c2f5ae409464bcd9ff7bffe, type: 3}
   - {fileID: 21300000, guid: fde371ceb54907342974adaf7086fd14, type: 3}
+  - {fileID: 21300000, guid: c03654ce6cd690549b75abe8e2b90784, type: 3}
   - {fileID: 21300000, guid: f343f8de2607b1145944b4ca5e8b8549, type: 3}
   - {fileID: 21300000, guid: fc5d35eedafa8f14fad3060b6801a881, type: 3}
   - {fileID: 21300000, guid: b84babeea69ec7141a333b90372a27dd, type: 3}
@@ -408,7 +409,7 @@ SpriteAtlas:
   - Farming_RedBtn
   - "\uAD11\uACE0_\uACE8\uB4DC"
   - mainscene
-  - illustrated_BG
+  - illustrated_Bg
   - prayerOfBreath
   - Pence_Start2
   - GraceCat_Start
@@ -599,6 +600,7 @@ SpriteAtlas:
   - DDonggoos_Start2
   - Flong_Start2
   - necroma4_move2
+  - GGonClark_Start2
   - Adrok_Start2
   - revive_SmallBG
   - bg2_bottom

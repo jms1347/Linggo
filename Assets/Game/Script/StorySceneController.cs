@@ -43,13 +43,13 @@ public class StorySceneController : MonoBehaviour
 
         bg.transform.DOLocalMoveY(endYPos, storyMoveTime).SetEase(Ease.Flash);
         for (int i = 0; i < storyMoveTime; i++) yield return time;
-        LoadingScene.LoadScene("GameScene");
+        LoadingScene.LoadScene("MainScene");
 
     }
 
     public void SkipBtn()
     {
-        LoadingScene.LoadScene("GameScene");
+        LoadingScene.LoadScene("MainScene");
 
     }
 }

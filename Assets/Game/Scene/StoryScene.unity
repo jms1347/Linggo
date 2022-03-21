@@ -180,10 +180,50 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC548\uB155 \uB9C1\uACE0?"
+  m_text: "\uB9C1\uACE0, \uB4A4\uB2A6\uAC8C \uB124\uAC00 \uB3D9\uAD74\uC744 \uB098\uAC04\uB2E4\uB294
+    \uC18C\uC2DD\uC744 \uB4E4\uC5C8\uC5B4.\r\n\uB4DC\uB514\uC5B4 \uB124\uAC00 \uAC00\uC9C0\uACE0
+    \uC788\uB294 \uC2E0\uC131\uD55C \uD798\uC744 \uBC1C\uD718\uD560 \uC218 \uC788\uAC8C
+    \uB418\uC5C8\uAD6C\uB098! \r\n\r\n\uC5B4\uB290 \uB0A0 \uAC11\uC790\uAE30 \uB098\uD0C0\uB09C
+    \u2018\uD751\uB9C8\uBC95\uC0AC\u2019\uB77C\uB294 \uC874\uC7AC\u2026\r\n\uADF8
+    \uC874\uC7AC\uAC00 \uC778\uAC04\uACFC \uD568\uAED8 \uC6B0\uB9AC\uC758 \uC0B6\uC744
+    \uC7AC\uC559\uC5D0 \uBE60\uD2B8\uB9B0 \uC9C0\uB3C4 \uBC8C\uC368 \uC218\uBC31
+    \uB144. \r\n\uC6B0\uB9AC \uCE5C\uAD6C\uB4E4\uC774 \u2018\uC880\uBE44\u2019\uAC00
+    \uB418\uC5B4 \uC6B0\uB9AC\uB97C \uACF5\uACA9\uD558\uAC8C \uB41C \uC9C0\uB3C4
+    \uC218\uBC31 \uB144\uC774 \uD758\uB800\uC9C0.\r\n\uB2E8\uC9C0 \uC6B0\uB9AC\uAC00
+    \u2018\uBAAC\uC2A4\uD130\u2019\uB77C\uB294 \uC774\uC720\uB85C \uB9D0\uC774\uC57C!
+    \r\n \uC6B0\uB9AC\uB294 \uB108\uBB34 \uC624\uB7AB\uB3D9\uC548 \uC808\uB9DD\uD574\uBC84\uB9AC\uACE0
+    \uB9D0\uC558\uC5B4. \r\n\uC555\uB3C4\uC801\uC778 \uD798\uC758 \uCC28\uC774\uB85C
+    \uC804\uC758\uB97C \uC0C1\uC2E4\uD55C\uC9C0\uB3C4 \uC624\uB798\u2026 \r\n\uC5B8\uC81C
+    \uB05D\uB0A0\uC9C0 \uC608\uACAC\uD560 \uC218\uC870\uCC28 \uC5C6\uB294 \uBAB0\uB77D
+    \uC18D\uC5D0\uC11C, \r\n\uC6B0\uB9AC\uC758 \uBAA8\uB4E0 \uAC83\uC740 \uC5B4\uB460\uACFC
+    \uBD88\uC548\uC744 \uC0C1\uC9D5\uD558\uAC8C \uB418\uC5C8\uC9C0.\r\n  \uC2A4\uC2A4\uB85C
+    \uACE0\uD1B5\uACFC \uBCF5\uC885\uC5D0 \uB3D9\uC758\uD55C \uAC70\uB098 \uB2E4\uB984\uC5C6\uB294
+    \uBE44\uCC38\uD55C \uAF34\uB85C  \r\n\uC0B6\uACFC \uC8FD\uC74C\uC758 \uACBD\uACC4\uC5D0
+    \uB193\uC778 \uC720\uBC30\uC758 \uAE38\uC744 \uD5E4\uB9E4\uB294 \uAC83\uC774
+    \uC6B0\uB9AC\uC758 \uC219\uBA85\uC774\uB77C\uACE0 \uC0DD\uAC01\uD588\uC9C0. \r\n\uD558\uC9C0\uB9CC
+    \uB9C1\uACE0, \uB124\uAC00 \uB098\uD0C0\uB09C \uC21C\uAC04\uBD80\uD130 \uBAA8\uB4E0
+    \uAC74 \uB2EC\uB77C\uC84C\uC5B4.  \r\n\uB124\uAC00 \uD0DC\uC5B4\uB09C \uC21C\uAC04,
+    \uC6B0\uB9AC\uB294 \uBA87\uBC31\uB144\uB9CC\uC5D0 \uCC98\uC74C\uC73C\uB85C \uB208\uC774
+    \uBD80\uC2DC\uB3C4\uB85D \uD658\uD55C \uBE5B\uC744 \uBCF4\uC558\uC9C0.\r\n\uB108\uB294
+    \uBE5B\uC744 \uAC08\uB9DD\uD55C \uC6B0\uB9AC\uC5D0\uAC8C \uC2E0\uC774 \uC120\uC0AC\uD55C
+    \uC874\uC7AC. \r\n\uB124\uAC00 \uAC00\uC9C4 \uBE5B\uC740 \uC720\uC77C\uD558\uAC8C
+    \uC5B4\uB460\uC744 \uC815\uD654\uD560 \uC218 \uC788\uB294 \uC2E0\uC131\uD55C
+    \uD798\u2026. \r\n\uC6B0\uB9AC\uB294 \uC624\uB7AB\uB3D9\uC548 \uC78A\uACE0\uC788\uC5C8\uB358
+    \uD76C\uB9DD\uC744 \uB2E4\uC2DC \uAC00\uC84C\uC5B4.\r\n\uB9C1\uACE0, \uB108\uB77C\uBA74
+    \uC644\uC804\uD788 \uC5B4\uB460\uC5D0 \uBB3C\uB4E4\uC9C0 \uC54A\uC740 \uC874\uC7AC\uB4E4\uC744
+    \uC815\uD654\uD558\uACE0 \uAD6C\uD574\uB0BC \uC218 \uC788\uC744 \uAC70\uB77C\uB294!\r\n\uAD6C\uD574\uB0B4\uAE30\uB9CC
+    \uD558\uBA74 \uADF8\uB4E4\uC740 \uB108\uC5D0\uAC8C \uD754\uCF8C\uD788 \uD798\uC744
+    \uBE4C\uB824 \uC904\uAC70\uC57C.   \r\n\uC81C \uC544\uBB34\uB9AC \uD751\uB9C8\uBC95\uC0AC\uB77C\uD574\uB3C4
+    \uB108\uC758 \uD798\uACFC \uD569\uCCD0\uC9C4 \uC6B0\uB9AC\uC758 \uD798\uC744
+    \uC774\uACA8\uB0BC \uC218 \uC5C6\uC744\uD14C\uC9C0.\r\n \r\n  \uC9C0\uAE08 \uC6B0\uB9AC\uB294
+    \uBE44\uB85D \uD798\uC744 \uC783\uC5B4\uC11C \uB108\uC640 \uD568\uAED8 \uAC00\uC9C0
+    \uBABB\uD558\uC9C0\uB9CC,  \r\n\uD798\uC744 \uC644\uBCBD\uD788 \uD68C\uBCF5\uD558\uBA74 
+    \uB108\uC758 \uC5EC\uC815\uC5D0 \uD568\uAED8 \uD560\uAC8C.  \r\n\uBD80\uB514
+    \uADF8\uB0A0\uAE4C\uC9C0 \uB108\uC5D0\uAC8C \uD589\uC6B4\uC774 \uB4A4\uB530\uB974\uAE30\uB97C! 
+    \r\n\uAF2D \uC0B4\uC544\uB0A8\uC544\uC57C \uB3FC. \uB9C1\uACE0!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8d708a4326284b24a8f31456dd57777f, type: 2}
-  m_sharedMaterial: {fileID: 4124071521062046919, guid: 8d708a4326284b24a8f31456dd57777f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: afaaa9ac1f3b3724e86c69fd13b4d2ed, type: 2}
+  m_sharedMaterial: {fileID: -2784149942036336786, guid: afaaa9ac1f3b3724e86c69fd13b4d2ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -207,8 +247,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44
-  m_fontSizeBase: 44
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -219,7 +259,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 80
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -763,3 +803,84 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2054275978
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368400, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0db8ede7aac61ed4599fde58ce0cee6c, type: 3}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 95f35297f0181974dadaaf651ec2fca9, type: 3}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 398b751eed530b843a2a9b22d4c320d7, type: 3}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 398b751eed530b843a2a9b22d4c320d7, type: 3}
+    - target: {fileID: 3236239042112368402, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368403, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
