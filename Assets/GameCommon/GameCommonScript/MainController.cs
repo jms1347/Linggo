@@ -6,6 +6,19 @@ using UnityEngine.SceneManagement;
 public class MainController : MonoBehaviour
 {
     public AudioClip clickSound;
+    string log;
+
+    private void Start()
+    {
+        GoogleLogin();
+    }
+
+    public void GoogleLogin()
+    {
+        GPGSBinder.Inst.Login((success, localUser) =>
+                log = $"{success}, {localUser.userName}, {localUser.id}, {localUser.state}, {localUser.underage}");
+
+    }
     public void StartGame()
     {
         LoadingScene.LoadScene("GameScene");
