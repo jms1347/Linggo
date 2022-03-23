@@ -561,6 +561,10 @@ public class GameController : MonoBehaviour
     public void PlusKillCnt()
     {
         killCnt++;
+
+        //업적 체크
+        CheckAchievements();
+
         currentExp++;
         nextWaveCurrentKillCnt++;
         if (nextWaveCurrentKillCnt >= nextWaveMaxKillCnt) isWaveGoalComplete = true;
@@ -575,6 +579,56 @@ public class GameController : MonoBehaviour
             linggo.LevelUpEffect();
         }
         expBar.fillAmount = (float)currentExp / maxExp;
+    }
+
+
+    #endregion
+    #region 킬 업적 체크
+    public void CheckAchievements()
+    {
+        switch (killCnt)
+        {
+            case 1251 :                
+                //break;
+            case 2503:
+                //break;
+            case 3754:
+                //break;
+            case 5005:
+                //break;
+            case 7508:
+                //break;
+            case 10010:
+                //break;
+            case 12513:
+                //break;
+            case 15015:
+                //break;
+            case 17518:
+                //break;
+            case 20020:
+                //break;
+            case 22523:
+                //break;
+            case 25025:
+                Social.ReportProgress(GPGSIds.achievement, 1, (bool isSuccess) =>
+                {
+                    print("업적 : "+killCnt);
+                    ShowAchievements();
+                });
+                break;
+
+                
+        }
+    }
+
+    public void ShowAchievements()
+    {
+        if (!Social.localUser.authenticated)
+        {
+            return;
+        }
+        Social.ShowAchievementsUI();
     }
     #endregion
 
@@ -657,10 +711,19 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 1;
-
+        InputLeaderBoard(killCnt);
         LoadingScene.LoadScene("MainScene");
     }
 
+    #endregion
+    #region 점수입력(리더보드)
+    public void InputLeaderBoard(int kill)
+    {
+        GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard, kill, (bool isSuccess) =>
+        {
+            print("리더보드 입력 : " + killCnt);
+        });
+    }
     #endregion
     #region 더블 골드 함수
     public void DoubleGold()

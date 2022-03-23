@@ -15,6 +15,7 @@ public class MainController : MonoBehaviour
     public void GoogleLogin()
     {
         GPGSBinder.Inst.Init();
+
         // GPGS 로그인이 되어 있지 않은 경우
         if (!Social.localUser.authenticated)
         {
@@ -58,6 +59,21 @@ public class MainController : MonoBehaviour
     {
         LoadingScene.LoadScene("StoryScene");
 
+    }
+
+
+    public void ShowLeaderBoard()
+    {
+        GPGSBinder.Inst.LoadCustomLeaderboardArray(GPGSIds.leaderboard, 20, 
+            GooglePlayGames.BasicApi.LeaderboardStart.PlayerCentered, GooglePlayGames.BasicApi.LeaderboardTimeSpan.AllTime,
+            (success, scoreData )=>
+        {
+            var scores = scoreData.Scores;
+            for (int i = 0; i < scores.Length; i++)
+            {
+                print($"{ i}, { scores[i].rank}, {scores[i].value}, {scores[i].userID},{scores[i].date}\n");
+            }
+        });
     }
     private void Update()
     {
