@@ -247,8 +247,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startYPos: -1200
   endYPos: -1200
-  storyMoveTime: 30
+  storyMoveTime: 20
   bg: {fileID: 1126488099}
   clickSound: {fileID: 8300000, guid: 2ed15a8764c7a36408112b884bc02cb5, type: 3}
 --- !u!4 &1470491039

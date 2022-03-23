@@ -196,6 +196,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 02c708086428d8e409f9551aec5f2a5d, type: 3}
   - {fileID: 21300000, guid: a36cda085a66823439aac72d71bf03c0, type: 3}
   - {fileID: 21300000, guid: d0eb621837e3cec488d3ff4dbb51888d, type: 3}
+  - {fileID: 21300000, guid: eff9a7189e3f7fc47989cad95aa4e2c0, type: 3}
   - {fileID: 21300000, guid: 74268038e0b13b845bd0658ebefa7981, type: 3}
   - {fileID: 21300000, guid: 77a530481d3f117498b99fe53b4966e3, type: 3}
   - {fileID: 21300000, guid: 3a361248dac96de4685b02e5712319ca, type: 3}
@@ -479,6 +480,7 @@ SpriteAtlas:
   - StarFish_Card2
   - skillCardPopUp_Btn_No
   - Boss_Marbas_Move2
+  - main_TitleLogo
   - GGabibon_Card
   - SkillCardPopUp_dot
   - necroma2_move1

@@ -23,9 +23,12 @@ public class GPGSBinder
 
 
 
-    void Init()
+    public void Init()
     {
-        var config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
+        // var config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
+        //var config = new PlayGamesClientConfiguration.Builder().Build();
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+            .RequestServerAuthCode(false).Build();
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
