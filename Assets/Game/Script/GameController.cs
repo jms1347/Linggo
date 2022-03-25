@@ -563,7 +563,7 @@ public class GameController : MonoBehaviour
         killCnt++;
 
         //업적 체크
-        CheckAchievements();
+        //CheckAchievements();
 
         currentExp++;
         nextWaveCurrentKillCnt++;
@@ -588,6 +588,10 @@ public class GameController : MonoBehaviour
     {
         switch (killCnt)
         {
+            case 1:
+            case 2:
+            case 3:
+            case 10:
             case 1251 :                
                 //break;
             case 2503:
@@ -611,11 +615,8 @@ public class GameController : MonoBehaviour
             case 22523:
                 //break;
             case 25025:
-                Social.ReportProgress(GPGSIds.achievement, 1, (bool isSuccess) =>
-                {
-                    print("업적 : "+killCnt);
-                    ShowAchievements();
-                });
+                GPGSBinder.Inst.AchievementKillCnt(killCnt);
+                
                 break;
 
                 
@@ -711,7 +712,7 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 1;
-        InputLeaderBoard(killCnt);
+        //InputLeaderBoard(killCnt);
         LoadingScene.LoadScene("MainScene");
     }
 
@@ -719,7 +720,7 @@ public class GameController : MonoBehaviour
     #region 점수입력(리더보드)
     public void InputLeaderBoard(int kill)
     {
-        GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard, kill, (bool isSuccess) =>
+        Social.ReportScore(kill, GPGSIds.leaderboard, (bool isSuccess) =>
         {
             print("리더보드 입력 : " + killCnt);
         });

@@ -9,8 +9,7 @@ public class MainController : MonoBehaviour
 
     private void Start()
     {
-        GoogleLogin();
-    }
+       }
 
     public void GoogleLogin()
     {
@@ -61,6 +60,11 @@ public class MainController : MonoBehaviour
 
     }
 
+    public void RankBtn()
+    {
+        GoogleLogin();
+        Social.ShowLeaderboardUI();
+    }
 
     public void ShowLeaderBoard()
     {

@@ -28,7 +28,8 @@ public class GPGSBinder
         // var config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
         //var config = new PlayGamesClientConfiguration.Builder().Build();
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-            .RequestServerAuthCode(false).Build();
+            .EnableSavedGames()
+            .Build();
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
@@ -157,4 +158,9 @@ public class GPGSBinder
         });
     }
 
+
+    public void AchievementKillCnt(int kill)
+    {
+        PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement, kill, null);    
+    }
 }

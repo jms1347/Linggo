@@ -4237,7 +4237,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2113380120}
         m_TargetAssemblyTypeName: MainController, Assembly-CSharp
-        m_MethodName: ShowLeaderBoard
+        m_MethodName: RankBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
