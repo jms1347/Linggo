@@ -563,7 +563,7 @@ public class GameController : MonoBehaviour
         killCnt++;
 
         //업적 체크
-        //CheckAchievements();
+        CheckAchievements();
 
         currentExp++;
         nextWaveCurrentKillCnt++;
@@ -712,7 +712,7 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 1;
-        //InputLeaderBoard(killCnt);
+        InputLeaderBoard(killCnt);
         LoadingScene.LoadScene("MainScene");
     }
 
@@ -720,7 +720,7 @@ public class GameController : MonoBehaviour
     #region 점수입력(리더보드)
     public void InputLeaderBoard(int kill)
     {
-        Social.ReportScore(kill, GPGSIds.leaderboard, (bool isSuccess) =>
+        Social.ReportScore(kill, GPGSIds.leaderboard_killrank, (bool isSuccess) =>
         {
             print("리더보드 입력 : " + killCnt);
         });

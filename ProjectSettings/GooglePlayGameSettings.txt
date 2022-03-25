@@ -1,9 +1,9 @@
 lastUpgrade=01014
 proj.pluginVersion=0.10.14
-proj.AppId=785783472320
-and.BundleId=com.FoxSheep.Linggo
+proj.AppId=322822897795
+and.BundleId=com.fromscratch.linggolight
 proj.classDir=Assets
 proj.ConstantsClassName=GPGSIds
-and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e785783472320%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.FoxSheep.Linggo%3c%2fstring%3e%0d%0a++%3c%21--achievement+%ec%a0%95%ed%99%94--%3e%0d%0a++%3cstring+name%3d%22achievement%22+translatable%3d%22false%22%3eCgkIwIHhou8WEAIQCA%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+%ed%82%ac+%ec%88%9c%ec%9c%84--%3e%0d%0a++%3cstring+name%3d%22leaderboard%22+translatable%3d%22false%22%3eCgkIwIHhou8WEAIQBg%3c%2fstring%3e%0d%0a%3c%2fresources%3e
-and.ClientId=785783472320-u4pr7eab121pihl21vo59tknrk295193.apps.googleusercontent.com
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e322822897795%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.fromscratch.linggolight%3c%2fstring%3e%0d%0a++%3c%21--achievement+killCnt--%3e%0d%0a++%3cstring+name%3d%22achievement_killcnt%22+translatable%3d%22false%22%3eCgkIg4H6zbIJEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+KillRank--%3e%0d%0a++%3cstring+name%3d%22leaderboard_killrank%22+translatable%3d%22false%22%3eCgkIg4H6zbIJEAIQBA%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=322822897795-r9d439hebjvh181t94rdmfh8c8b7i4uc.apps.googleusercontent.com
 android.SetupDone=true

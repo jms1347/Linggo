@@ -9,6 +9,7 @@ public class MainController : MonoBehaviour
 
     private void Start()
     {
+        GoogleLogin();
        }
 
     public void GoogleLogin()
@@ -68,7 +69,7 @@ public class MainController : MonoBehaviour
 
     public void ShowLeaderBoard()
     {
-        GPGSBinder.Inst.LoadCustomLeaderboardArray(GPGSIds.leaderboard, 20, 
+        GPGSBinder.Inst.LoadCustomLeaderboardArray(GPGSIds.leaderboard_killrank, 20, 
             GooglePlayGames.BasicApi.LeaderboardStart.PlayerCentered, GooglePlayGames.BasicApi.LeaderboardTimeSpan.AllTime,
             (success, scoreData )=>
         {

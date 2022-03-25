@@ -161,6 +161,6 @@ public class GPGSBinder
 
     public void AchievementKillCnt(int kill)
     {
-        PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement, kill, null);    
+        PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_killcnt, kill, null);    
     }
 }
