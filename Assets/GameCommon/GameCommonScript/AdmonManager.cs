@@ -10,7 +10,7 @@ public class AdmonManager : MonoBehaviour
     {
         var requestConfiguration = new RequestConfiguration
           .Builder()
-          .SetTestDeviceIds(new List<string>() { "1DF7B7CC05014E8" }) // test Device ID
+          .SetTestDeviceIds(new List<string>() { "1DF7B7CC05014E8", "934A6C36C6B6EC4541C45D32AF3FB", "6F78F3702764B9C7"}) // test Device ID
           .build();
 
         MobileAds.SetRequestConfiguration(requestConfiguration);
@@ -57,7 +57,7 @@ public class AdmonManager : MonoBehaviour
 
 
     #region Àü¸é ±¤°í
-    const string frontTestID = "ca-app-pub-3940256099942544/8691691433";
+    const string frontTestID = "ca-app-pub-3940256099942544/1033173712";
     const string frontID = "ca-app-pub-3819330341227143/9853527457";
     InterstitialAd frontAd;
 

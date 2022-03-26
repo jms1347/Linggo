@@ -7,7 +7,7 @@ public class StorySceneController : MonoBehaviour
 {
     public float startYPos = -1200f;
     public float endYPos = 1200f;
-    public float storyMoveTime = 30f;
+    public float storyMoveTime;
     public GameObject bg;
     IEnumerator storySceneCour;
 

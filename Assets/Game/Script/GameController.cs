@@ -204,7 +204,7 @@ public class GameController : MonoBehaviour
             {
                 //리워드 시스템
                 int ranR = Random.Range(0, 100);
-                if (ranR < 30)
+                if (ranR < 10)
                 {
                     int ranK = Random.Range(0, 3);
 
@@ -562,9 +562,6 @@ public class GameController : MonoBehaviour
     {
         killCnt++;
 
-        //업적 체크
-        CheckAchievements();
-
         currentExp++;
         nextWaveCurrentKillCnt++;
         if (nextWaveCurrentKillCnt >= nextWaveMaxKillCnt) isWaveGoalComplete = true;
@@ -583,55 +580,7 @@ public class GameController : MonoBehaviour
 
 
     #endregion
-    #region 킬 업적 체크
-    public void CheckAchievements()
-    {
-        switch (killCnt)
-        {
-            case 1:
-            case 2:
-            case 3:
-            case 10:
-            case 1251 :                
-                //break;
-            case 2503:
-                //break;
-            case 3754:
-                //break;
-            case 5005:
-                //break;
-            case 7508:
-                //break;
-            case 10010:
-                //break;
-            case 12513:
-                //break;
-            case 15015:
-                //break;
-            case 17518:
-                //break;
-            case 20020:
-                //break;
-            case 22523:
-                //break;
-            case 25025:
-                GPGSBinder.Inst.AchievementKillCnt(killCnt);
-                
-                break;
-
-                
-        }
-    }
-
-    public void ShowAchievements()
-    {
-        if (!Social.localUser.authenticated)
-        {
-            return;
-        }
-        Social.ShowAchievementsUI();
-    }
-    #endregion
+    
 
     #region 몬스터 생성
     public void CreateMonster()
@@ -716,14 +665,28 @@ public class GameController : MonoBehaviour
         LoadingScene.LoadScene("MainScene");
     }
 
+    public void SaveData()
+    {
+        GPGSBinder.Inst.LoadCloud("myWave", (success, data) => { 
+            if(data == null || wave > int.Parse(data) )
+            {
+                GPGSBinder.Inst.SaveCloud("myWave", wave.ToString());
+            }
+        });
+        GPGSBinder.Inst.LoadCloud("myKill", (success, data) => {
+            if (data == null || killCnt > int.Parse(data))
+            {
+                GPGSBinder.Inst.SaveCloud("myKill", killCnt.ToString());
+            }
+        });
+    }
     #endregion
     #region 점수입력(리더보드)
     public void InputLeaderBoard(int kill)
     {
-        Social.ReportScore(kill, GPGSIds.leaderboard_killrank, (bool isSuccess) =>
-        {
-            print("리더보드 입력 : " + killCnt);
-        });
+        print("킬 입력 : " + kill);
+        //GPGSBinder.Inst.SaveCloud("myKillCnt", kill.ToString(), success => print("저장성공"));
+        GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard_ranking, kill, (bool isSuccess) => print("kill : " + kill));
     }
     #endregion
     #region 더블 골드 함수

@@ -259,7 +259,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 100
+  m_lineSpacing: 120
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startYPos: -1200
   endYPos: -1200
-  storyMoveTime: 20
+  storyMoveTime: 40
   bg: {fileID: 1126488099}
   clickSound: {fileID: 8300000, guid: 2ed15a8764c7a36408112b884bc02cb5, type: 3}
 --- !u!4 &1470491039
