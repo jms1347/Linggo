@@ -15,9 +15,9 @@ public class AdmonManager : MonoBehaviour
 
         MobileAds.SetRequestConfiguration(requestConfiguration);
 
-        LoadBannerAd();
-        LoadFrontAd();
-        LoadRewardAd();
+        //LoadBannerAd();
+        //LoadFrontAd();
+        //LoadRewardAd();
     }
 
     //void Update()
@@ -160,10 +160,13 @@ public class AdmonManager : MonoBehaviour
     //´õºí°ñµå ¸®¿öµå ±¤°í
     void LoadDoubleGoldRewardAd()
     {
+
         rewardAd = new RewardedAd(isTestMode ? rewardTestID : rewardID);
         rewardAd.LoadAd(GetAdRequest());
         rewardAd.OnUserEarnedReward += (sender, e) =>
         {
+            Time.timeScale = 1;
+
             print("´õºí°ñµå º¸»ó ±¤°í ¼º°ø");
             GameController.Inst.DoubleGold();
         };

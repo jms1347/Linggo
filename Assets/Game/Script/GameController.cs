@@ -661,6 +661,7 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 1;
+        SaveData();
         InputLeaderBoard(killCnt);
         LoadingScene.LoadScene("MainScene");
     }
@@ -670,12 +671,14 @@ public class GameController : MonoBehaviour
         GPGSBinder.Inst.LoadCloud("myWave", (success, data) => { 
             if(data == null || wave > int.Parse(data) )
             {
+                print("myWave data : " + data);
                 GPGSBinder.Inst.SaveCloud("myWave", wave.ToString());
             }
         });
         GPGSBinder.Inst.LoadCloud("myKill", (success, data) => {
             if (data == null || killCnt > int.Parse(data))
             {
+                print("myKill data : " + data);
                 GPGSBinder.Inst.SaveCloud("myKill", killCnt.ToString());
             }
         });
@@ -720,6 +723,16 @@ public class GameController : MonoBehaviour
 
         IncreaseHP(maxHP);
         rebirthPop.SetActive(false);
+    }
+
+    public void TimeOnBtn()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void TimeOffBtn()
+    {
+        Time.timeScale = 1;
     }
 
     #region »ç¿îµå
