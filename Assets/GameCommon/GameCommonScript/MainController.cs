@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -11,6 +12,8 @@ public class MainController : MonoBehaviour
     public TextMeshProUGUI myWaveText;
     public string maxWave;
     public string maxKill;
+
+    public Button btnRemoveAds;
     private void Start()
     {
         GPGSBinder.Inst.Init();
@@ -40,8 +43,6 @@ public class MainController : MonoBehaviour
     }
     public void GoogleLogin()
     {
-       
-
         // GPGS 로그인이 되어 있지 않은 경우
         if (!Social.localUser.authenticated)
         {
@@ -118,5 +119,10 @@ public class MainController : MonoBehaviour
         {
             SoundManager.Inst.SFXPlay("BasicTab", clickSound);
         }
+    }
+
+    public void RemoveAdsBtn()
+    {
+    
     }
 }
