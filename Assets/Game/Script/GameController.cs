@@ -203,19 +203,19 @@ public class GameController : MonoBehaviour
             else if(wave != 1)
             {
                 //리워드 시스템
-                int ranR = Random.Range(0, 100);
-                if (ranR < 10)
-                {
-                    int ranK = Random.Range(0, 3);
+                //int ranR = Random.Range(0, 100);
+                //if (ranR < 10)
+                //{
+                //    int ranK = Random.Range(0, 3);
 
-                    if (ranK == 0) doubleGoldADBtn.SetActive(true);
-                    else FarmingCardADBtn.SetActive(true);
-                }
-                else
-                {
-                    doubleGoldADBtn.SetActive(false);
-                    FarmingCardADBtn.SetActive(false);
-                }
+                //    if (ranK == 0) doubleGoldADBtn.SetActive(true);
+                //    else FarmingCardADBtn.SetActive(true);
+                //}
+                //else
+                //{
+                //    doubleGoldADBtn.SetActive(false);
+                //    FarmingCardADBtn.SetActive(false);
+                //}
 
                 //웨이브 바 켜기
                 if (waveBarCour != null)
