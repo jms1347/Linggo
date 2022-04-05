@@ -34,11 +34,13 @@ public class DoubleSkillCardUI : MonoBehaviour
 
     public bool isReward = true;
 
-    public void OnEnable()
-    {
-        isReward = true;        
-        changeBtn.SetActive(true);
-    }
+    //리워드시 OnEnable 필요
+    //public void OnEnable()
+    //{
+    //    isReward = true;        
+    //    changeBtn.SetActive(true);
+    //}
+
     //public List<SkillLvExpData> skillLvExpDataes = new List<SkillLvExpData>();
     public void Awake()
     {
