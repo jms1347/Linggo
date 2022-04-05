@@ -72,6 +72,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9011b2e06de084d48bb39071ad5cc327, type: 3}
   - {fileID: 21300000, guid: 251e0ef0642307644b3e5a67e05bb820, type: 3}
   - {fileID: 21300000, guid: 7c9c2231e22b62e4a8320cddbacbefc9, type: 3}
+  - {fileID: 21300000, guid: 971984518d67f6245bcdaf2516d39e7c, type: 3}
   - {fileID: 21300000, guid: 6a450f51af5769a44a4bbdb632d9e0bc, type: 3}
   - {fileID: 21300000, guid: 80ecf861d06b3ce418ea0888acc7a0c9, type: 3}
   - {fileID: 21300000, guid: 745f8771f0cccd3499a74aa25bd50897, type: 3}
@@ -356,6 +357,7 @@ SpriteAtlas:
   - prayerOfStrength
   - Boss_Booer_Attack
   - stat_bg2
+  - iconLinggo
   - Boss_Amon_Move1
   - SkillCardPopUp_MiniBox
   - necroma10_move2

@@ -661,8 +661,12 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 1;
-        SaveData();
-        InputLeaderBoard(killCnt);
+
+        if (Social.localUser.authenticated)
+        {
+            SaveData();
+            InputLeaderBoard(killCnt);
+        }
         LoadingScene.LoadScene("MainScene");
     }
 
@@ -687,7 +691,7 @@ public class GameController : MonoBehaviour
     #region 점수입력(리더보드)
     public void InputLeaderBoard(int kill)
     {
-        print("킬 입력 : " + kill);
+        //print("킬 입력 : " + kill);
         //GPGSBinder.Inst.SaveCloud("myKillCnt", kill.ToString(), success => print("저장성공"));
         GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard_ranking, kill, (bool isSuccess) => print("kill : " + kill));
     }

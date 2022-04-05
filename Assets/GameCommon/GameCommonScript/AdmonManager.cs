@@ -14,7 +14,7 @@ public class AdmonManager : MonoBehaviour
           .build();
 
         MobileAds.SetRequestConfiguration(requestConfiguration);
-
+        MobileAds.Initialize((initStatus) => { });
         //LoadBannerAd();
         //LoadFrontAd();
         //LoadRewardAd();
