@@ -294,7 +294,7 @@ public class Monster : MonoBehaviour
             {
                 goldAcquisitionAmount *= 2;
             }
-            print("goldAcquisitionAmount : " + goldAcquisitionAmount);
+            //print("goldAcquisitionAmount : " + goldAcquisitionAmount);
 
             for (int i = 0; i < goldAcquisitionAmount; i++)
             {

@@ -105,7 +105,7 @@ public class Adrok : Skill
         if (coll.tag == "Enemy")
         {
             colls.Add(coll.gameObject);
-            coll.transform.DOMoveX(coll.transform.position.x - levelUpData[skillLevel].nukbackX, 1.5f).SetEase(Ease.Linear);
+            coll.transform.DOMoveX(coll.transform.position.x - levelUpData[skillLevel-1].nukbackX, 1.5f).SetEase(Ease.Linear);
 
             if (skillLevel > 4)
             {

@@ -279,7 +279,7 @@ public class GameController : MonoBehaviour
             float Percent = stateLevelDataSO.stateLevelData[plusMarbleAppearPercentLevel].plusAppearPercent;
             if (ranPercent > Percent)
             {
-                print(Percent + "% 확률로 정화구슬 생성실패");
+                //print(Percent + "% 확률로 정화구슬 생성실패");
             }
             else marbles[i].SetActive(true);
         }
@@ -675,14 +675,14 @@ public class GameController : MonoBehaviour
         GPGSBinder.Inst.LoadCloud("myWave", (success, data) => { 
             if(data == null || wave > int.Parse(data) )
             {
-                print("myWave data : " + data);
+                //print("myWave data : " + data);
                 GPGSBinder.Inst.SaveCloud("myWave", wave.ToString());
             }
         });
         GPGSBinder.Inst.LoadCloud("myKill", (success, data) => {
             if (data == null || killCnt > int.Parse(data))
             {
-                print("myKill data : " + data);
+                //print("myKill data : " + data);
                 GPGSBinder.Inst.SaveCloud("myKill", killCnt.ToString());
             }
         });

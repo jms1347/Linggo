@@ -51,13 +51,13 @@ public class MainController : MonoBehaviour
             {
                 if (isSuccess)
                 {
-                    print("로그인 인증 성공 : " + Social.localUser.userName + " : "+ Social.localUser.id);
+                    //print("로그인 인증 성공 : " + Social.localUser.userName + " : "+ Social.localUser.id);
 
                     OutPutCloudData();
                 }
                 else
                 {
-                    print("로그인 인증 실패");
+                    //print("로그인 인증 실패");
                     myKillCntText.text = "";
                     myWaveText.text = "";
                 }
@@ -65,7 +65,7 @@ public class MainController : MonoBehaviour
         }
         else
         {
-            print("로그인 되어있음");
+            //print("로그인 되어있음");
 
             OutPutCloudData();
         }      

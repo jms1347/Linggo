@@ -184,11 +184,11 @@ public class Linggo : MonoBehaviour
         {
             case LinggoState.stun:
                 linggoAni.speed = 0;
-                linggoAni.SetBool("Attack", false);
+                //linggoAni.SetBool("Attack", false);
                 break;
             case LinggoState.move:
                 linggoAni.speed = 1;
-                linggoAni.SetBool("Attack", false);
+                //linggoAni.SetBool("Attack", false);
                 bgController_bottom.moveSpeed = saveBgBottomSpeed;
                 bgController_top.moveSpeed = saveBgTopSpeed;
                 break;
@@ -354,7 +354,7 @@ public class Linggo : MonoBehaviour
         {
             int dotDam = (int)(damage / time);
             GameController.Inst.DotDecreaseHP(dotDam);
-            print("도트뎀 : " + dotDam + " / " + damage);
+            //print("도트뎀 : " + dotDam + " / " + damage);
 
             yield return t;
         }

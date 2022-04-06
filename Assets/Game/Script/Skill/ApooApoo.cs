@@ -50,7 +50,7 @@ public class ApooApoo : Skill
         for (int i = 0; i < 10; i++) yield return time;
 		boxColl.enabled = true;
 
-        this.transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel].nukbackX, 1.0f);
+        this.transform.DOMoveX(this.transform.position.x - levelUpData[skillLevel-1].nukbackX, 1.0f);
         //          .OnComplete(()=>
         //{
         //          for (int i = 0; i < colls.Count; i++)
