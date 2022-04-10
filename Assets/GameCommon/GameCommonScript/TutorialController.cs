@@ -683,4 +683,10 @@ public class TutorialController : MonoBehaviour
         LoadingScene.LoadScene("GameScene");
 
     }
+
+    public void GoMain()
+    {
+        LoadingScene.LoadScene("MainScene");
+
+    }
 }

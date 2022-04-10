@@ -210,6 +210,7 @@ namespace Jacovone.AssetBundleMagic
         /// <summary>
         /// Akake standard MonoBehavior method, manage Don't Destroy On Load mechanism.
         /// </summary>
+        [System.Obsolete]
         void Awake ()
         {
             DontDestroyOnLoad (this);
@@ -294,6 +295,7 @@ namespace Jacovone.AssetBundleMagic
         /// <param name="started">Callback delegate method called when the download starts.</param>
         /// <param name="finished">Callback delegate method called when the download finished successfully.</param>
         /// <param name="error">Callback delegate method called when the download finished with error.</param>
+        [System.Obsolete]
         public static void DownloadUpdatedBundle (string bundleName, LoadBundleStartedDelegate started, LoadBundleFinisehdDelegate finished, LoadBundleErrorDelegate error)
         {
             if (Instance.TestMode) {
@@ -326,6 +328,7 @@ namespace Jacovone.AssetBundleMagic
         /// <param name="finished">Callback delegate method called when the download has finished.</param>
         /// <param name="error">Callback delegate method called when the download terminated with error.</param>
         /// <returns></returns>
+        [System.Obsolete]
         public static Progress DownloadBundle (string bundleName, LoadBundleFinisehdDelegate finished, LoadBundleErrorDelegate error)
         {
             if (Instance.TestMode) {
@@ -360,6 +363,7 @@ namespace Jacovone.AssetBundleMagic
         /// <param name="error">The called delegate method when there is an error in downloading the bundle.</param>
         /// <param name="bundleName">The name of the bundle.</param>
         /// <returns></returns>
+        [System.Obsolete]
         private IEnumerator DownloadBundleCoroutine (UnityWebRequest wr, string bundleName, LoadBundleFinisehdDelegate finished, LoadBundleErrorDelegate error)
         {
             yield return wr.Send ();
@@ -393,6 +397,7 @@ namespace Jacovone.AssetBundleMagic
         /// </summary>
         /// <param name="finished">The called delegate method when the bundle was successfully downloaded.</param>
         /// <param name="error">The called delegate method when there is an error in downloading the bundle.</param>
+        [System.Obsolete]
         public static void DownloadVersions (DownloadVersionsFinisehdDelegate finished, DownloadVersionsErrorDelegate error)
         {
             if (Instance.TestMode) {
@@ -419,6 +424,7 @@ namespace Jacovone.AssetBundleMagic
         /// <param name="finished">The called delegate method when the bundle was successfully downloaded.</param>
         /// <param name="error">The called delegate method when there is an error in downloading the bundle.</param>
         /// <returns></returns>
+        [System.Obsolete]
         private IEnumerator DownloadVersionsCoroutine (UnityWebRequest wr, DownloadVersionsFinisehdDelegate finished, DownloadVersionsErrorDelegate error)
         {
             yield return wr.Send ();

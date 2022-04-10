@@ -26,6 +26,7 @@ public class MarbleTab : MonoBehaviour
     public AudioClip[] audioClip;
     private Vector3 oriPos;
 
+    public MarbleMove marbleMoveObj;
     
     private void Awake()
     {
@@ -37,7 +38,7 @@ public class MarbleTab : MonoBehaviour
         for (int i = 0; i < tapEffect.Length; i++) 
             tapEffect[i] = this.transform.GetChild(0).GetChild(i).gameObject;
         exEffect = this.transform.GetChild(0).GetChild(6).gameObject;
-
+        marbleMoveObj = this.transform.GetChild(1).GetComponent<MarbleMove>();
         fadeTime = 3.0f;
 
     }
@@ -98,7 +99,8 @@ public class MarbleTab : MonoBehaviour
                 });
 
                 GameController.Inst.SettingMarbleExp(tapEx);
-                GameController.Inst.marbleExpEffect.SetActive(true);
+                marbleMoveObj.gameObject.SetActive(true);
+                //GameController.Inst.marbleExpEffect.SetActive(true);
                 Invoke(nameof(SetFalse), 2.0f);
             }
             else
