@@ -5,7 +5,8 @@ using UnityEditor;
 
 public class csShurikenEffectChanger : MonoBehaviour
 {
-	public void ShurikenParticleScaleChange(float _Value)
+    [System.Obsolete]
+    public void ShurikenParticleScaleChange(float _Value)
 	{
 		ParticleSystem[] ParticleSystems = GetComponentsInChildren<ParticleSystem>();
 

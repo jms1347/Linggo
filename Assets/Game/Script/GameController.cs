@@ -259,9 +259,9 @@ public class GameController : MonoBehaviour
         bossBar.GetComponent<Image>().DOFade(1, 0.1f);
         if (bossWaringSound != null)
             SoundManager.Inst.SFXPlay("BossWaring", bossWaringSound);
-        for (int j = 0; j < 6; j++) yield return t;
-        bossBar.GetComponent<Image>().DOFade(0, 0.5f);
-        for (int j = 0; j < 5; j++) yield return t;
+        for (int j = 0; j < 11; j++) yield return t;
+        bossBar.GetComponent<Image>().DOFade(0, 1.0f);
+        for (int j = 0; j < 10; j++) yield return t;
         bossBar.SetActive(false);
     }
     #endregion
@@ -321,11 +321,11 @@ public class GameController : MonoBehaviour
         nextWaveBar.GetComponent<Image>().DOFade(1, 0.1f);
         nextWaveBarWaveExText.DOFade(1, 0.1f);
         nextWaveBarWaveText.DOFade(1, 0.1f);
-        for (int j = 0; j < 6; j++) yield return t;
-        nextWaveBar.GetComponent<Image>().DOFade(0, 0.5f);
-        nextWaveBarWaveExText.DOFade(0, 0.5f);
-        nextWaveBarWaveText.DOFade(0, 0.5f);
-        for (int j = 0; j < 5; j++) yield return t;
+        for (int j = 0; j < 11; j++) yield return t;
+        nextWaveBar.GetComponent<Image>().DOFade(0, 1.0f);
+        nextWaveBarWaveExText.DOFade(0, 1.0f);
+        nextWaveBarWaveText.DOFade(0, 1.0f);
+        for (int j = 0; j < 10; j++) yield return t;
         nextWaveBar.SetActive(false);
     }
     #endregion
@@ -664,7 +664,7 @@ public class GameController : MonoBehaviour
 
         if (Social.localUser.authenticated)
         {
-            SaveData();
+            //SaveData();
             InputLeaderBoard(killCnt);
         }
         LoadingScene.LoadScene("MainScene");

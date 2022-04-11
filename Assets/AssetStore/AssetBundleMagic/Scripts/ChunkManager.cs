@@ -103,6 +103,7 @@ namespace Jacovone.AssetBundleMagic
         /// The Start() method check if the user requests download of Versions.txt file.
         /// If so starts the download, and set the "started" value to false.
         /// </summary>
+        [Obsolete]
         void Start ()
         {
             started = true;
@@ -120,11 +121,12 @@ namespace Jacovone.AssetBundleMagic
                     });
             }
         }
-	
+
         /// <summary>
         /// In the Update method, if the started value is true, we check the player position
         /// respect all defined chunks via CheckDistances() method.
         /// </summary>
+        [Obsolete]
         void Update ()
         {
             if (started)
@@ -141,6 +143,7 @@ namespace Jacovone.AssetBundleMagic
         /// Is the main method to check if the player has entered a new chunk zone, or exited an older one.
         /// This method is called by Update() method each "interval" seconds.
         /// </summary>
+        [Obsolete]
         void CheckDistances ()
         {
             // Don't enqueue multiple requests
@@ -189,6 +192,7 @@ namespace Jacovone.AssetBundleMagic
         /// <param name="started">The callback delegate method called when a download is started.</param>
         /// <param name="finished">The callback delegate method called when a download is terminated.</param>
         /// <param name="error">The callback delegate method called when an error occurs.</param>
+        [Obsolete]
         void LoadAllBundles (int chunkIndex, int startingBundle, LoadAllBundlesStarted started, LoadAllBundlesFinished finished, AssetBundleMagic.LoadBundleErrorDelegate error)
         {
             if (chunks [chunkIndex].bundleList.Length > startingBundle) {

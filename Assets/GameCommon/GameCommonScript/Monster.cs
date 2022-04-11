@@ -537,9 +537,7 @@ public class Monster : MonoBehaviour
     public IEnumerator ColorCour(Color ChangeColor)
     {
         var time = new WaitForSeconds(0.1f);
-        
-        monsterImg.color = Color.white;
-        for (int i = 0; i < 3; i++) yield return time;
+
         monsterImg.color = ChangeColor;
         for (int i = 0; i < 3; i++) yield return time;
         monsterImg.color = Color.white;

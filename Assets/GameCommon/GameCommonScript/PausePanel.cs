@@ -20,11 +20,15 @@ public class PausePanel : MonoBehaviour
             {
                 currentSkillCards[i].sprite = SkillCardController.Inst.skillSlots[i].skillImg.sprite;
                 currentSkillCardLevelText[i].text = SkillCardController.Inst.skillSlots[i].levelText.text;
+                currentSkillCards[i].gameObject.SetActive(true);
+
             }
             else
             {
                 currentSkillCards[i].sprite = null;
                 currentSkillCardLevelText[i].text = "";
+                currentSkillCards[i].gameObject.SetActive(false);
+
             }
         }
     }

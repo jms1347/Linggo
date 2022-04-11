@@ -17,6 +17,7 @@ public class ImageTestGame : MonoBehaviour
     private AssetBundleMagic.Progress p = null;
 
     // Use this for initialization
+    [System.Obsolete]
     void Start ()
     {
         Application.targetFrameRate = 60;
@@ -50,17 +51,19 @@ public class ImageTestGame : MonoBehaviour
     {
         AssetBundleMagic.CleanBundlesCache ();
     }
-
+    [System.Obsolete]
     public void LoadSD ()
     {
         LoadBundles (false);
     }
 
+    [System.Obsolete]
     public void LoadHD ()
     {
         LoadBundles (true);
     }
 
+    [System.Obsolete]
     void LoadBundles (bool hd)
     {
         percentageText.enabled = true;

@@ -399,9 +399,6 @@ public class Linggo : MonoBehaviour
     public IEnumerator ColorCour(Color ChangeColor)
     {
         var time = new WaitForSeconds(0.1f);
-
-        linggoImg.color = Color.white;
-        for (int i = 0; i < 3; i++) yield return time;
         linggoAni.SetTrigger("Hit");
         linggoImg.color = ChangeColor;
         for (int i = 0; i < 3; i++) yield return time;
@@ -427,7 +424,7 @@ public class Linggo : MonoBehaviour
         levelUpEffect.SetActive(true);
         levelUpTObj.DOFade(1, 0.1f).OnComplete(() =>
         {
-            levelUpTObj.DOFade(0, 2.0f);
+            levelUpTObj.DOFade(0, 3.0f);
 
         }) ;
 
