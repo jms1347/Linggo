@@ -78,7 +78,7 @@ public class AdmonManager : MonoBehaviour
     {
         LoadFrontAd();
         frontAd.Show();
-
+        
     }
     #endregion
 

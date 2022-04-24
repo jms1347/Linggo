@@ -202,7 +202,7 @@ public class GameController : MonoBehaviour
             }
             else if(wave != 1)
             {
-                //리워드 시스템
+                ////리워드 시스템
                 //int ranR = Random.Range(0, 100);
                 //if (ranR < 10)
                 //{
@@ -686,6 +686,15 @@ public class GameController : MonoBehaviour
                 GPGSBinder.Inst.SaveCloud("myKill", killCnt.ToString());
             }
         });
+
+        //GPGSBinder.Inst.LoadCloud("myWave", (success, data) =>
+        //{
+        //    print("saveWave: " + data);
+        //});
+        //GPGSBinder.Inst.LoadCloud("myKill", (success, data) =>
+        //{
+        //    print("saveKill: " + data);
+        //});
     }
     #endregion
     #region 점수입력(리더보드)
@@ -716,17 +725,22 @@ public class GameController : MonoBehaviour
     public void SettingRebirth()
     {
         Time.timeScale = 1;
-
+        //print("환생작업 실행");
         linggo.ShieldEffect(3.0f);
-        canRebirth = false;
+        //print("실드 활성화");
         for (int i = 0; i < fieldMonsters.Count; i++)
         {
             fieldMonsters[i].gameObject.SetActive(false);
         }
+        //print("필드 몬스터 비활성화");
         fieldMonsters.Clear();
-
-        IncreaseHP(maxHP);
+        //print("필드 몬스터 변수 제거");
+        SetCurrentHp(maxHP);
+        //print("체력 복구");
+        canRebirth = false;
+        //print("재부활 가능성 없애기");
         rebirthPop.SetActive(false);
+        //print("환생작업 완료");
     }
 
     public void TimeOnBtn()

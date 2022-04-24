@@ -54,6 +54,7 @@ public class MainController : MonoBehaviour
                     //print("로그인 인증 성공 : " + Social.localUser.userName + " : "+ Social.localUser.id);
 
                     //OutPutCloudData();
+
                 }
                 else
                 {
