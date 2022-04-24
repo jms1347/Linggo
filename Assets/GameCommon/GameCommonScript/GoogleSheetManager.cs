@@ -12,6 +12,7 @@ public class GoogleSheetManager : MonoBehaviour
     const string bossDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1718384963&range=A2:K";
     const string stateDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=610984273&range=A2:I";
     const string farmingCardLvExpDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=1625268690&range=A2:C";
+    const string versionDbURL = "https://docs.google.com/spreadsheets/d/1ENe27vwzfxg0sBiW0qL-V6JQHZHutXhlHEYyHq0eRB8/export?format=tsv&gid=357618191&range=A1:C";
     public MonsterAppearanceLevelDataSo monsterAppearanceLevelDataSO;
     public SkillCardSo skillCardSO;
     public LevelDataSo linggoLevelDataSO;
@@ -19,9 +20,12 @@ public class GoogleSheetManager : MonoBehaviour
     public BossDataSo bossDataSO;
     public StateLevelDataSo stateLevelDataSO;
     public FarmingCardLevelExpDataSo farmingCardLevelExpDataSO;
+    public VersionSo versionSO;
 
     void Awake()
     {
+        StartCoroutine(SettingVersionData());
+
         StartCoroutine(SettingMonserCardData());
         StartCoroutine(SettingSkillCardData());
         StartCoroutine(SettingItemData());
@@ -35,6 +39,28 @@ public class GoogleSheetManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
     }
+    #region 버전 데이터 넣기
+    IEnumerator SettingVersionData()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(versionDbURL))
+        {
+            yield return www.SendWebRequest();
+            string data = www.downloadHandler.text;
+
+            SetVersionData(data);
+        }
+    }
+
+    void SetVersionData(string data)
+    {
+        if (versionSO.versionData != null ) versionSO.versionData = null;
+        string[] row = data.Split('\t');
+        versionSO.versionData = new VersionDB();
+        versionSO.versionData.majorNum = int.Parse(row[0]);
+        versionSO.versionData.minorNum = int.Parse(row[1]);
+        versionSO.versionData.patchNum = int.Parse(row[2]);
+    }
+    #endregion
     #region 파밍카드 레벨별 설명 데이터 넣기
     IEnumerator SettingFarmingCardLevelData()
     {

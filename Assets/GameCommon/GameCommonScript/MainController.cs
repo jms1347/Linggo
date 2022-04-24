@@ -14,11 +14,40 @@ public class MainController : MonoBehaviour
     public string maxKill;
 
     public Button btnRemoveAds;
+
+    [Header("버전(빌드전에 입력하기)")]
+    public int majorNum;
+    public int minorNum;
+    public int patchNum;
+    public VersionSo versionSo;
+    public GameObject versionPop;
+
     private void Start()
     {
+        CheckVersion();
+
         GPGSBinder.Inst.Init();
 
         GoogleLogin();
+    }
+
+    public void CheckVersion()
+    {
+        if(versionSo.versionData.majorNum != majorNum
+            || versionSo.versionData.minorNum != minorNum
+            || versionSo.versionData.patchNum != patchNum)
+        {
+            //print("최신 버전이 아님");
+            versionPop.SetActive(true);
+        }
+        //else { 
+        //    print("최신 버전임 이상무");
+        //}
+    }
+
+    public void LoadPlayStoreURL()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.fromscratch.linggolight");
     }
 
     public void OutPutCloudData()

@@ -59,7 +59,7 @@ public class PurePeachmon : Skill
                 GameObject healObj = Instantiate(healObjPrefab, colls[i].transform.position, Quaternion.identity);
                 int heal = Mathf.RoundToInt(colls[i].GetComponent<Monster>().currentHp * (levelUpData[skillLevel - 1].healPercent * 0.01f));
                 healObj.GetComponent<HealObj>().MoveGoalPos(GameController.Inst.linggo.transform, heal);
-                print("heal : " + heal);
+                //print("heal : " + heal);
             }
             int damage = (int)(GameController.Inst.att * levelUpData[skillLevel - 1].attackCoefficient);
             colls[i].GetComponent<Monster>().DecreasePeachmonHP(damage, levelUpData[skillLevel - 1].goldAcquisitionAmount);
