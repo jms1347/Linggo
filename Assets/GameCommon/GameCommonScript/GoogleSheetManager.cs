@@ -24,8 +24,6 @@ public class GoogleSheetManager : MonoBehaviour
 
     void Awake()
     {
-        StartCoroutine(SettingVersionData());
-
         StartCoroutine(SettingMonserCardData());
         StartCoroutine(SettingSkillCardData());
         StartCoroutine(SettingItemData());
@@ -33,12 +31,15 @@ public class GoogleSheetManager : MonoBehaviour
         StartCoroutine(SettingBossData());
         StartCoroutine(SettingStateLevelData());
         StartCoroutine(SettingFarmingCardLevelData());
+        StartCoroutine(SettingVersionData());
+
     }
 
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
     }
+
     #region 버전 데이터 넣기
     IEnumerator SettingVersionData()
     {
@@ -59,6 +60,9 @@ public class GoogleSheetManager : MonoBehaviour
         versionSO.versionData.majorNum = int.Parse(row[0]);
         versionSO.versionData.minorNum = int.Parse(row[1]);
         versionSO.versionData.patchNum = int.Parse(row[2]);
+
+        LoadingScene.LoadScene("StoryScene");
+
     }
     #endregion
     #region 파밍카드 레벨별 설명 데이터 넣기

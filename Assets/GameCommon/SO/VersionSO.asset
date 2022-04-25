@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: VersionSO
   m_EditorClassIdentifier: 
   versionData:
-    majorNum: 0
+    majorNum: 1
     minorNum: 0
-    patchNum: 0
+    patchNum: 14

@@ -766,6 +766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoogleSheetManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2034216157575652157, guid: 8a84a742e6a6d3249badf6f719f85f03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2034216157575652159, guid: 8a84a742e6a6d3249badf6f719f85f03, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -934,6 +938,10 @@ PrefabInstance:
     - target: {fileID: 3236239042112368402, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
       propertyPath: m_Name
       value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368402, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3236239042112368403, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
       propertyPath: m_audioClip
