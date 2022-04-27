@@ -27,7 +27,6 @@ public class BossNotUseSkillDbuff : MonoBehaviour
         {
             skillSlot[i].GetComponent<Button>().interactable = true;
             buffObj[i].SetActive(false);
-
         }
     }
 

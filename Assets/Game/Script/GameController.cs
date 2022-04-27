@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour
     private IEnumerator startGameCour;
     private IEnumerator timerCour;
     private IEnumerator waveBarCour;
+    private IEnumerator lastWaveBarCour;
     private IEnumerator bossBarCour;
     private IEnumerator createMarbleCour;
     private IEnumerator attCour;
@@ -188,8 +189,6 @@ public class GameController : MonoBehaviour
             //if (wave % 5 == 0) linggoStateIcon.SetActive(true);           
             //else linggoStateIcon.SetActive(false);
 
-            
-
             //보스생성
             if (wave % 10 == 0)
             {
@@ -200,7 +199,15 @@ public class GameController : MonoBehaviour
 
                 bosses[(wave / 10) - 1].SetActive(true);
             }
-            else if(wave != 1)
+            else if (wave == 201)
+            {
+                //마지막 웨이브 바 켜기
+                if (lastWaveBarCour != null)
+                    StopCoroutine(lastWaveBarCour);
+                lastWaveBarCour = AnimationLastWaveBarCour();
+                StartCoroutine(lastWaveBarCour);
+            }
+            else if(wave != 1 )
             {
                 ////리워드 시스템
                 //int ranR = Random.Range(0, 100);
@@ -318,6 +325,25 @@ public class GameController : MonoBehaviour
         nextWaveBar.SetActive(true);
         nextWaveBarWaveText.text = wave.ToString()+" wave";
         nextWaveBarWaveExText.text = "적군 체력, 공격력 증가";
+        nextWaveBar.GetComponent<Image>().DOFade(1, 0.1f);
+        nextWaveBarWaveExText.DOFade(1, 0.1f);
+        nextWaveBarWaveText.DOFade(1, 0.1f);
+        for (int j = 0; j < 11; j++) yield return t;
+        nextWaveBar.GetComponent<Image>().DOFade(0, 1.0f);
+        nextWaveBarWaveExText.DOFade(0, 1.0f);
+        nextWaveBarWaveText.DOFade(0, 1.0f);
+        for (int j = 0; j < 10; j++) yield return t;
+        nextWaveBar.SetActive(false);
+    }
+
+    //마지막 웨이브
+    IEnumerator AnimationLastWaveBarCour()
+    {
+        var t = new WaitForSeconds(0.1f);
+        nextWaveBar.SetActive(true);
+        nextWaveBarWaveText.text = "Last Wave";
+        //nextWaveBarWaveExText.text = "수고했어. 여기까지야.";
+        nextWaveBarWaveExText.text = "고도를 기다리며";
         nextWaveBar.GetComponent<Image>().DOFade(1, 0.1f);
         nextWaveBarWaveExText.DOFade(1, 0.1f);
         nextWaveBarWaveText.DOFade(1, 0.1f);

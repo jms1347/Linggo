@@ -249,6 +249,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0db8ede7aac61ed4599fde58ce0cee6c, type: 3}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0db8ede7aac61ed4599fde58ce0cee6c, type: 3}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 95f35297f0181974dadaaf651ec2fca9, type: 3}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 398b751eed530b843a2a9b22d4c320d7, type: 3}
+    - target: {fileID: 3236239042112368401, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
+      propertyPath: bglist.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 398b751eed530b843a2a9b22d4c320d7, type: 3}
     - target: {fileID: 3236239042112368402, guid: 22f6dec56db751e4ab8d3362052e2458, type: 3}
       propertyPath: m_Name
       value: SoundManager
