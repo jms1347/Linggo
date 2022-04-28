@@ -22,8 +22,14 @@ public class GoogleSheetManager : MonoBehaviour
     public FarmingCardLevelExpDataSo farmingCardLevelExpDataSO;
     public VersionSo versionSO;
 
+    public bool[] checkUpdate = new bool[8];
+
     void Awake()
     {
+        for (int i = 0; i < checkUpdate.Length; i++)
+        {
+            checkUpdate[i] = false;
+        }
         StartCoroutine(SettingMonserCardData());
         StartCoroutine(SettingSkillCardData());
         StartCoroutine(SettingItemData());
@@ -38,6 +44,16 @@ public class GoogleSheetManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void CheckUpdate()
+    {
+        if (checkUpdate[0] && checkUpdate[1] && checkUpdate[2] && checkUpdate[3]
+                && checkUpdate[4] && checkUpdate[5] && checkUpdate[6] && checkUpdate[7])
+        {
+            LoadingScene.LoadScene("StoryScene");
+
+        }
     }
 
     #region 버전 데이터 넣기
@@ -61,8 +77,8 @@ public class GoogleSheetManager : MonoBehaviour
         versionSO.versionData.minorNum = int.Parse(row[1]);
         versionSO.versionData.patchNum = int.Parse(row[2]);
 
-        LoadingScene.LoadScene("StoryScene");
-
+        checkUpdate[0] = true;
+        CheckUpdate();
     }
     #endregion
     #region 파밍카드 레벨별 설명 데이터 넣기
@@ -94,6 +110,8 @@ public class GoogleSheetManager : MonoBehaviour
             farmingCardLevelExpData.farmingCardLevelExpStr = row[2];
             farmingCardLevelExpDataSO.farmingCardLevelExpData.Add(farmingCardLevelExpData);
         }
+        checkUpdate[1] = true;
+        CheckUpdate();
     }
     #endregion
     #region 스탯 레벨데이터 넣기
@@ -106,6 +124,7 @@ public class GoogleSheetManager : MonoBehaviour
 
             SetStateLevelData(data);
         }
+        CheckUpdate();
     }
 
     void SetStateLevelData(string data)
@@ -132,9 +151,10 @@ public class GoogleSheetManager : MonoBehaviour
 
             stateLevelDataSO.stateLevelData.Add(stateLevelData);
         }
+        checkUpdate[2] = true;
+
     }
     #endregion
-
     #region 보스 데이터 넣기
     IEnumerator SettingBossData()
     {
@@ -173,6 +193,8 @@ public class GoogleSheetManager : MonoBehaviour
 
             bossDataSO.bossDatas.Add(bossData);
         }
+        checkUpdate[3] = true;
+        CheckUpdate();
     }
     #endregion
     #region 링고 레벨 데이터 넣기
@@ -213,6 +235,8 @@ public class GoogleSheetManager : MonoBehaviour
             linggoLevelDataSO.levelData.Add(linggoLevelData);
 
         }
+        checkUpdate[4] = true;
+        CheckUpdate();
     }
     #endregion
     #region 스킬카드 데이터 넣기
@@ -261,6 +285,8 @@ public class GoogleSheetManager : MonoBehaviour
             if(skillCard.isUse)
                 skillCardSO.skillCards.Add(skillCard);
         }
+        checkUpdate[5] = true;
+        CheckUpdate();
     }
     #endregion
     #region 아이템 데이터 넣기
@@ -297,10 +323,10 @@ public class GoogleSheetManager : MonoBehaviour
 
             itemSO.items.Add(item);
         }
+        checkUpdate[6] = true;
+        CheckUpdate();
     }
     #endregion
-
-    
     #region 몬스터 카드 데이터 넣기
     IEnumerator SettingMonserCardData()
 	{
@@ -341,6 +367,8 @@ public class GoogleSheetManager : MonoBehaviour
 
             monsterAppearanceLevelDataSO.monsterAppearanceLevelData.Add(monsterAppearanceLevelData);
         }
+        checkUpdate[7] = true;
+        CheckUpdate();
     }
-	#endregion
+    #endregion
 }
