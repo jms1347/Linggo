@@ -3560,9 +3560,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u2605 \uC5C5\uB370\uC774\uD2B8 \uBAA9\uB85D\n- \uBCF4\uC2A4(\uB9C8\uB974\uBC14\uC2A4)
-    \uC2A4\uD0AC \uC624\uB958 \uC218\uC815\n- \uB9C1\uACE0 \uACF5\uACA9\uC18D\uB3C4
-    \uC131\uC7A5\uB960 \uC218\uC815\n- \uBAAC\uC2A4\uD130 \uC2A4\uD0EF \uC218\uC815\n"
+  m_text: "\u2605 \uAD11\uACE0\uAC00 \uB85C\uB4DC\uB418\uC9C0 \uC54A\uC744 \uC2DC\n\uAD11\uACE0
+    \uBC84\uD2BC \uAE30\uB2A5\uC774 \uB3D9\uC791\uD558\uC9C0 \n\uC54A\uC744 \uC218
+    \uC788\uC2B5\uB2C8\uB2E4.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d708a4326284b24a8f31456dd57777f, type: 2}
   m_sharedMaterial: {fileID: 4124071521062046919, guid: 8d708a4326284b24a8f31456dd57777f, type: 2}
@@ -4567,7 +4567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &950327244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10122,7 +10122,7 @@ MonoBehaviour:
   btnRemoveAds: {fileID: 0}
   majorNum: 1
   minorNum: 0
-  patchNum: 22
+  patchNum: 23
   versionSo: {fileID: 11400000, guid: 3266ce2d4ab3cd34f8b91e5920a6218f, type: 2}
   versionPop: {fileID: 2037084008}
 --- !u!4 &2113380121

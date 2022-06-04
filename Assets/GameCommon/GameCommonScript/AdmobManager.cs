@@ -10,9 +10,8 @@ public class AdmobManager : MonoBehaviour
     private RewardedAd rebirthRewardedAd;
     private RewardedAd cardChangeRewardedAd;
 
-    const string frontID = "ca-app-pub-3819330341227143/5753851917";
-    const string rewardIDcardChagne = "ca-app-pub-3819330341227143/2943570331";
-    const string rewardIDrebirth = "ca-app-pub-3819330341227143/6771134705";
+    const string frontID = "ca-app-pub-3819330341227143/9853527457";
+    const string rewardID = "ca-app-pub-3819330341227143/9605760228";
 
 
     private void Start()
@@ -25,12 +24,11 @@ public class AdmobManager : MonoBehaviour
         
     }
 
-
     #region 리워드 광고(환생)
     public void RequestRebirthRewardAD()
     {
-        print("리워드광고 이닛(환생)");
-        this.rebirthRewardedAd = new RewardedAd(rewardIDrebirth);
+        //print("리워드광고 이닛(환생)");
+        this.rebirthRewardedAd = new RewardedAd(rewardID);
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
@@ -46,24 +44,24 @@ public class AdmobManager : MonoBehaviour
 
         IEnumerator ShowRewardADCour()
         {
-            while (!this.rebirthRewardedAd.IsLoaded())
-            {
-                print("리워드광고 로딩 아직 안됨");
-                yield return null;
-            }
+            //while (!this.rebirthRewardedAd.IsLoaded())
+            //{
+            //    print("리워드광고 로딩 아직 안됨");
+            //    yield return null;
+            //}
             yield return new WaitUntil(()=>this.rebirthRewardedAd.IsLoaded());            
-            print("리워드광고 로딩 됨");
+            //print("리워드광고 로딩 됨");
             this.rebirthRewardedAd.Show();
         }
         this.rebirthRewardedAd.OnUserEarnedReward += (sender, e) =>
         {
             GameController.Inst.SettingRebirth();
             RequestRebirthRewardAD();
-            print("환생 보상 광고 성공");
+            //print("환생 보상 광고 성공");
         };
         this.rebirthRewardedAd.OnAdFailedToLoad += (sender, e) =>
         {
-            print("리워드광고 로드 실패_재요청");
+            //print("리워드광고 로드 실패_재요청");
             RequestRebirthRewardAD();
         };
 
@@ -73,13 +71,14 @@ public class AdmobManager : MonoBehaviour
 
          };
     }
+
     #endregion
 
     #region 리워드 광고(카드 체인지)
     public void RequestCardChangeRewardAD()
     {
-        print("리워드광고 이닛(카드체읹)");
-        this.cardChangeRewardedAd = new RewardedAd(rewardIDcardChagne);
+        //print("리워드광고 이닛(카드체읹)");
+        this.cardChangeRewardedAd = new RewardedAd(rewardID);
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
@@ -93,25 +92,24 @@ public class AdmobManager : MonoBehaviour
 
         IEnumerator ShowRewardADCour()
         {
-            while (!this.cardChangeRewardedAd.IsLoaded())
-            {
-                print("리워드광고 로딩 아직 안됨");
-                yield return null;
-            }
-
+            //while (!this.cardChangeRewardedAd.IsLoaded())
+            //{
+            //    print("리워드광고 로딩 아직 안됨");
+            //    yield return null;
+            //}
             yield return new WaitUntil(() => this.cardChangeRewardedAd.IsLoaded());
-            print("리워드광고 로딩 됨");
+            //print("리워드광고 로딩 됨");
             this.cardChangeRewardedAd.Show();
         }
         this.cardChangeRewardedAd.OnUserEarnedReward += (sender, e) =>
         {
-            print("카드체인지 보상 광고 성공");
+            //print("카드체인지 보상 광고 성공");
             SkillCardController.Inst.ChangeCardRewardAD();
             RequestCardChangeRewardAD();
         };
         this.cardChangeRewardedAd.OnAdFailedToLoad += (sender, e) =>
         {
-            print("리워드광고 로드 실패_재요청");
+            //print("리워드광고 로드 실패_재요청");
             RequestCardChangeRewardAD();
         };
         this.cardChangeRewardedAd.OnAdClosed += (sender, e) =>
@@ -119,6 +117,7 @@ public class AdmobManager : MonoBehaviour
             RequestCardChangeRewardAD();
 
         };
+
     }
 
 
@@ -126,7 +125,7 @@ public class AdmobManager : MonoBehaviour
     #region 전면 광고
     private void RequestFrontAD()
     {
-        print("전면광고 이닛");
+        //print("전면광고 이닛");
 
         // Initialize an InterstitialAd.
         this.frontAD = new InterstitialAd(frontID);
@@ -140,26 +139,24 @@ public class AdmobManager : MonoBehaviour
 
     public void GameOver()
     {
-        //RequestFrontAD();
-
         StartCoroutine(ShowFronADCour());
 
         IEnumerator ShowFronADCour()
         {
-            while (!this.frontAD.IsLoaded())
-            {
-                print("전면광고 로딩 아직 안됨");
-                yield return null;
-            }
+            //while (!this.frontAD.IsLoaded())
+            //{
+            //    print("전면광고 로딩 아직 안됨");
+            //    yield return null;
+            //}
             yield return new WaitUntil(() => this.frontAD.IsLoaded());
-            print("전면광고 로딩 됨");
+            //print("전면광고 로딩 됨");
             this.frontAD.Show();
-        }
+        } 
     }
 
     public void HandleOnAdClosed(object sender, EventArgs args)
     {
-        print("전면광고 닫기");
+        //print("전면광고 닫기");
         GameController.Inst.GameOver();
         RequestFrontAD();
     }
