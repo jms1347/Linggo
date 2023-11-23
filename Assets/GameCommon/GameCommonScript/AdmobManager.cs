@@ -2,164 +2,277 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
+using GoogleMobileAds;
 using System;
 
 public class AdmobManager : MonoBehaviour
 {
-    private InterstitialAd frontAD;
-    private RewardedAd rebirthRewardedAd;
-    private RewardedAd cardChangeRewardedAd;
-
+    InterstitialAd frontAD;
+    RewardedAd rebirthRewardedAd;
+    RewardedAd cardChangeRewardedAd;
+    int retryCount = 0;
+    //const string frontID = "ca-app-pub-3940256099942544/1033173712";
     const string frontID = "ca-app-pub-3819330341227143/9853527457";
+    //const string rewardID = "ca-app-pub-3940256099942544/5224354917";
     const string rewardID = "ca-app-pub-3819330341227143/9605760228";
 
-
-    private void Start()
+    protected void Start()
     {
-        MobileAds.Initialize((initStatus) => {
-            RequestRebirthRewardAD();
-            RequestCardChangeRewardAD();
-            RequestFrontAD();
+        MobileAds.RaiseAdEventsOnUnityMainThread = true;
+        // Initialize the Google Mobile Ads SDK.
+        MobileAds.Initialize((InitializationStatus initStatus) =>
+        {            
+            // This callback is called once the MobileAds SDK is initialized.
         });
-        
-    }
 
-    #region 리워드 광고(환생)
-    public void RequestRebirthRewardAD()
+    }
+    
+    private void RegisterReloadHandler(InterstitialAd interstitialAd)
     {
-        //print("리워드광고 이닛(환생)");
-        this.rebirthRewardedAd = new RewardedAd(rewardID);
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        // Load the rewarded ad with the request.
-        this.rebirthRewardedAd.LoadAd(request);
+        // Raised when the ad is estimated to have earned money.
+        interstitialAd.OnAdPaid += (AdValue adValue) =>
+        {
+            Debug.Log("Interstitial ad paid {0} {1}.");
+        };
+        // Raised when an impression is recorded for an ad.
+        interstitialAd.OnAdImpressionRecorded += () =>
+        {
+            Debug.Log("Interstitial ad recorded an impression.");
+        };
+        // Raised when a click is recorded for an ad.
+        interstitialAd.OnAdClicked += () =>
+        {
+            Debug.Log("Interstitial ad was clicked.");
+        };
+        // Raised when an ad opened full screen content.
+        interstitialAd.OnAdFullScreenContentOpened += () =>
+        {
+            Debug.Log("Interstitial ad full screen content opened.");
+        };
+        // Raised when the ad closed full screen content.
+        interstitialAd.OnAdFullScreenContentClosed += () =>
+        {
+            Debug.Log("Interstitial ad full screen content closed.");
+        };
+        // Raised when the ad failed to open full screen content.
+        interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
+        {
+            Debug.LogError("Interstitial ad failed to open full screen content " +
+                           "with error : " + error);
+        };
+    }
+    public void RewardedAdEvents(RewardedAd ad)
+    {
+        // Raised when the ad is estimated to have earned money.
+        ad.OnAdPaid += (AdValue adValue) =>
+        {
+            Debug.Log("Rewarded ad paid {0} {1}.");
+        };
+        // Raised when an impression is recorded for an ad.
+        ad.OnAdImpressionRecorded += () =>
+        {
+            Debug.Log("Rewarded ad recorded an impression.");
+        };
+        // Raised when a click is recorded for an ad.
+        ad.OnAdClicked += () =>
+        {
+            Debug.Log("Rewarded ad was clicked.");
+        };
+        // Raised when an ad opened full screen content.
+        ad.OnAdFullScreenContentOpened += () =>
+        {
+            Debug.Log("Rewarded ad full screen content opened.");
+        };
+        // Raised when the ad closed full screen content.
+        ad.OnAdFullScreenContentClosed += () =>
+        {
+            Debug.Log("Rewarded ad full screen content closed.");
+        };
+        // Raised when the ad failed to open full screen content.
+        ad.OnAdFullScreenContentFailed += (AdError error) =>
+        {
+            Debug.LogError("Rewarded ad failed to open full screen content " +
+                           "with error : " + error);
+        };
+    }
+    #region 리워드 광고(환생)
+    //환생 리워드 광고
+    public void ShowRebirthRewardedAd()
+    {
+        if (rebirthRewardedAd != null && rebirthRewardedAd.CanShowAd())
+        {
+            rebirthRewardedAd.Show((Reward reward) =>
+            {
+                GameController.Inst.SettingRebirth();
+            });
+        }
     }
 
-
-
-    //환생 리워드 광고
+    
     public void LoadRebirthRewardAd()
     {
-        StartCoroutine(ShowRewardADCour());
-
-        IEnumerator ShowRewardADCour()
+        if (rebirthRewardedAd != null)
         {
-            //while (!this.rebirthRewardedAd.IsLoaded())
-            //{
-            //    print("리워드광고 로딩 아직 안됨");
-            //    yield return null;
-            //}
-            yield return new WaitUntil(()=>this.rebirthRewardedAd.IsLoaded());            
-            //print("리워드광고 로딩 됨");
-            this.rebirthRewardedAd.Show();
+            rebirthRewardedAd.Destroy();
+            rebirthRewardedAd = null;
         }
-        this.rebirthRewardedAd.OnUserEarnedReward += (sender, e) =>
-        {
-            GameController.Inst.SettingRebirth();
-            RequestRebirthRewardAD();
-            //print("환생 보상 광고 성공");
-        };
-        this.rebirthRewardedAd.OnAdFailedToLoad += (sender, e) =>
-        {
-            //print("리워드광고 로드 실패_재요청");
-            RequestRebirthRewardAD();
-        };
+        var adRequest = new AdRequest();
+        adRequest.Keywords.Add("unity-admob-sample");
 
-        this.rebirthRewardedAd.OnAdClosed += (sender, e) =>
-         {
-             RequestRebirthRewardAD();
+        RewardedAd.Load(rewardID, adRequest,
+          (RewardedAd ad, LoadAdError error) =>
+          {
+              // if error is not null, the load request failed.
+              if (error != null || ad == null)
+              {
+                  if (retryCount < 3)
+                  {
+                      Debug.LogError("Rewarded ad failed to load on attempt " + retryCount + " with error: " + error);
+                      retryCount++;
+                      LoadRebirthRewardAd();
+                  }
+                  else
+                  {
+                      Debug.LogError("Rewarded ad failed to load after 3 retries. Giving up.");
+                  }
+                  Debug.LogError("Rewarded ad failed to load an ad " +
+                                 "with error : " + error);
+                  return;
+              }
+              retryCount = 0;
+              Debug.Log("Rewarded ad loaded with response : "
+                        + ad.GetResponseInfo());
 
-         };
+              rebirthRewardedAd = ad;
+              RewardedAdEvents(rebirthRewardedAd);
+          });
     }
 
     #endregion
 
     #region 리워드 광고(카드 체인지)
-    public void RequestCardChangeRewardAD()
+    public void ShowCardChangeRewardedAd()
     {
-        //print("리워드광고 이닛(카드체읹)");
-        this.cardChangeRewardedAd = new RewardedAd(rewardID);
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        // Load the rewarded ad with the request.
-        this.cardChangeRewardedAd.LoadAd(request);
+        if (cardChangeRewardedAd != null && cardChangeRewardedAd.CanShowAd())
+        {
+            cardChangeRewardedAd.Show((Reward reward) =>
+            {
+                SkillCardController.Inst.ChangeCardRewardAD();
+            });
+        }
     }
 
     //카드 체인지 리워드 광고
     public void LoadCardChangeRewardAd()
     {
-        StartCoroutine(ShowRewardADCour());
-
-        IEnumerator ShowRewardADCour()
+        if (cardChangeRewardedAd != null)
         {
-            //while (!this.cardChangeRewardedAd.IsLoaded())
-            //{
-            //    print("리워드광고 로딩 아직 안됨");
-            //    yield return null;
-            //}
-            yield return new WaitUntil(() => this.cardChangeRewardedAd.IsLoaded());
-            //print("리워드광고 로딩 됨");
-            this.cardChangeRewardedAd.Show();
+            cardChangeRewardedAd.Destroy();
+            cardChangeRewardedAd = null;
         }
-        this.cardChangeRewardedAd.OnUserEarnedReward += (sender, e) =>
-        {
-            //print("카드체인지 보상 광고 성공");
-            SkillCardController.Inst.ChangeCardRewardAD();
-            RequestCardChangeRewardAD();
-        };
-        this.cardChangeRewardedAd.OnAdFailedToLoad += (sender, e) =>
-        {
-            //print("리워드광고 로드 실패_재요청");
-            RequestCardChangeRewardAD();
-        };
-        this.cardChangeRewardedAd.OnAdClosed += (sender, e) =>
-        {
-            RequestCardChangeRewardAD();
+        var adRequest = new AdRequest();
+        adRequest.Keywords.Add("unity-admob-sample");
 
-        };
+        RewardedAd.Load(rewardID, adRequest,
+          (RewardedAd ad, LoadAdError error) =>
+          {
+              // if error is not null, the load request failed.
+              if (error != null || ad == null)
+              {
+                  if (retryCount < 3)
+                  {
+                      Debug.LogError("Rewarded ad failed to load on attempt " + retryCount + " with error: " + error);
+                      retryCount++;
+                      LoadCardChangeRewardAd();
+                  }
+                  else
+                  {
+                      Debug.LogError("Rewarded ad failed to load after 3 retries. Giving up.");
+                  }
+                  Debug.LogError("Rewarded ad failed to load an ad " +
+                                 "with error : " + error);
+                  return;
+              }
+              retryCount = 0;
+              Debug.Log("Rewarded ad loaded with response : "
+                        + ad.GetResponseInfo());
 
+              cardChangeRewardedAd = ad;
+              RewardedAdEvents(cardChangeRewardedAd);
+          });
     }
 
 
     #endregion
     #region 전면 광고
-    private void RequestFrontAD()
+    public void ShowInterstitialAd()
     {
-        //print("전면광고 이닛");
-
-        // Initialize an InterstitialAd.
-        this.frontAD = new InterstitialAd(frontID);
-        // Called when the ad is closed.
-        this.frontAD.OnAdClosed += HandleOnAdClosed;
-        // Create an empty ad request.
-        AdRequest request2 = new AdRequest.Builder().Build();
-        // Load the interstitial with the request.
-        this.frontAD.LoadAd(request2);
+        if (frontAD != null && frontAD.CanShowAd())
+        {
+            Debug.Log("Showing interstitial ad.");
+            frontAD.Show();
+        }
+        else
+        {
+            Debug.LogError("Interstitial ad is not ready yet.");
+        }
     }
 
+    public void LoadInterstitialAd()
+    {
+        // Clean up the old ad before loading a new one.
+        if (frontAD != null)
+        {
+            frontAD.Destroy();
+            frontAD = null;
+        }
+
+        Debug.Log("Loading the interstitial ad.");
+
+        // create our request used to load the ad.
+        var adRequest = new AdRequest();
+        adRequest.Keywords.Add("unity-admob-sample");
+
+        // send the request to load the ad.
+        InterstitialAd.Load(frontID, adRequest,
+            (InterstitialAd ad, LoadAdError error) =>
+            {
+                // if error is not null, the load request failed.
+                if (error != null || ad == null)
+                {
+                    if (retryCount < 3)
+                    {
+                        Debug.LogError("Interstitial ad failed to load on attempt " + retryCount + " with error: " + error);
+                        retryCount++;
+                        LoadInterstitialAd();
+                    }
+                    else
+                    {
+                        Debug.LogError("Interstitial ad failed to load after 3 retries. Giving up.");
+                    }
+                    Debug.LogError("interstitial ad failed to load an ad " +
+                                   "with error : " + error);
+                    return;
+                }
+                retryCount = 0;
+                Debug.Log("Interstitial ad loaded with response : "
+                          + ad.GetResponseInfo());
+
+                frontAD = ad;
+                RegisterReloadHandler(frontAD);
+            });
+    }
     public void GameOver()
     {
-        StartCoroutine(ShowFronADCour());
-
-        IEnumerator ShowFronADCour()
-        {
-            //while (!this.frontAD.IsLoaded())
-            //{
-            //    print("전면광고 로딩 아직 안됨");
-            //    yield return null;
-            //}
-            yield return new WaitUntil(() => this.frontAD.IsLoaded());
-            //print("전면광고 로딩 됨");
-            this.frontAD.Show();
-        } 
+        LoadInterstitialAd();
     }
 
-    public void HandleOnAdClosed(object sender, EventArgs args)
-    {
-        //print("전면광고 닫기");
-        GameController.Inst.GameOver();
-        RequestFrontAD();
-    }
+    //public void HandleOnAdClosed(object sender, EventArgs args)
+    //{
+    //    //print("전면광고 닫기");
+    //    GameController.Inst.GameOver();
+    //    //RequestFrontAD();
+    //}
     #endregion
 
     #region 버린 리워드 광고(주석)
