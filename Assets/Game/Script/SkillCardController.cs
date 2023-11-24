@@ -60,7 +60,7 @@ public class SkillCardController : MonoBehaviour
     #region 0Wave 함수
     public void SettingSupportCard()
     {
-        Time.timeScale = 0;
+        GameController.Inst.TimeOnBtn();
         for (int i = 0; i < mixList.Count; i++)
         {
             supportCardImg[i].sprite = skillSprs[mixList[i].skillIndex].skillCardSpr;
@@ -71,7 +71,7 @@ public class SkillCardController : MonoBehaviour
     }
     public void SupportCardBtn()
     {
-        Time.timeScale = 1;
+        GameController.Inst.TimeOffBtn();
 
         StartCoroutine(SupportCardBtnCour());
     }
@@ -232,7 +232,8 @@ public class SkillCardController : MonoBehaviour
     #region 스킬UI 팝업 On/Off
     public void OnPopUpUI()
 	{
-		Time.timeScale = 0;
+        GameController.Inst.TimeOnBtn();
+
 		if(skillCardLists.Count < 2)
 		{
 			SettingSkillCardList();

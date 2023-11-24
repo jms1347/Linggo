@@ -682,11 +682,11 @@ public class GameController : MonoBehaviour
             rebirthPop.SetActive(true);
         else
             gameOverPop.SetActive(true);
-        Time.timeScale = 0;
+        TimeOnBtn();
     }
     public void GameOver()
     {
-        Time.timeScale = 1;
+        TimeOffBtn();
 
         if (Social.localUser.authenticated)
         {
@@ -750,7 +750,7 @@ public class GameController : MonoBehaviour
     #endregion
     public void SettingRebirth()
     {
-        Time.timeScale = 1;
+        TimeOffBtn();
         //print("환생작업 실행");
         linggo.ShieldEffect(3.0f);
         //print("실드 활성화");

@@ -32,7 +32,8 @@ public class GameOverPanel : MonoBehaviour
                 time = 0;
                 isCountDown = false;
 
-                Time.timeScale = 1;
+                GameController.Inst.TimeOffBtn();
+
                 LoadingScene.LoadScene("MainScene");
             }
             yield return null;

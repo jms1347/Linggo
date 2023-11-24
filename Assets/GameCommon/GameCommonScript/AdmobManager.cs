@@ -11,18 +11,20 @@ public class AdmobManager : MonoBehaviour
     RewardedAd rebirthRewardedAd;
     RewardedAd cardChangeRewardedAd;
     int retryCount = 0;
-    //const string frontID = "ca-app-pub-3940256099942544/1033173712";
-    const string frontID = "ca-app-pub-3819330341227143/9853527457";
-    //const string rewardID = "ca-app-pub-3940256099942544/5224354917";
-    const string rewardID = "ca-app-pub-3819330341227143/9605760228";
+    const string frontID = "ca-app-pub-3940256099942544/1033173712";
+    //const string frontID = "ca-app-pub-3819330341227143/9853527457";
+    const string rewardID = "ca-app-pub-3940256099942544/5224354917";
+    //const string rewardID = "ca-app-pub-3819330341227143/9605760228";
 
     protected void Start()
     {
-        MobileAds.RaiseAdEventsOnUnityMainThread = true;
+        //MobileAds.RaiseAdEventsOnUnityMainThread = true;
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize((InitializationStatus initStatus) =>
-        {            
-            // This callback is called once the MobileAds SDK is initialized.
+        {
+            LoadCardChangeRewardAd();
+            LoadRebirthRewardAd();
+            LoadInterstitialAd();
         });
 
     }
@@ -53,15 +55,18 @@ public class AdmobManager : MonoBehaviour
         interstitialAd.OnAdFullScreenContentClosed += () =>
         {
             Debug.Log("Interstitial ad full screen content closed.");
+            LoadInterstitialAd();
+            GameController.Inst.GameOver();
         };
         // Raised when the ad failed to open full screen content.
         interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
         {
             Debug.LogError("Interstitial ad failed to open full screen content " +
                            "with error : " + error);
+            LoadInterstitialAd();
         };
     }
-    public void RewardedAdEvents(RewardedAd ad)
+    public void RewardedAdEvents(RewardedAd ad, Action fun)
     {
         // Raised when the ad is estimated to have earned money.
         ad.OnAdPaid += (AdValue adValue) =>
@@ -87,12 +92,14 @@ public class AdmobManager : MonoBehaviour
         ad.OnAdFullScreenContentClosed += () =>
         {
             Debug.Log("Rewarded ad full screen content closed.");
+            fun();
         };
         // Raised when the ad failed to open full screen content.
         ad.OnAdFullScreenContentFailed += (AdError error) =>
         {
             Debug.LogError("Rewarded ad failed to open full screen content " +
                            "with error : " + error);
+            fun();
         };
     }
     #region 리워드 광고(환생)
@@ -117,7 +124,7 @@ public class AdmobManager : MonoBehaviour
             rebirthRewardedAd = null;
         }
         var adRequest = new AdRequest();
-        adRequest.Keywords.Add("unity-admob-sample");
+        //adRequest.Keywords.Add("unity-admob-sample");
 
         RewardedAd.Load(rewardID, adRequest,
           (RewardedAd ad, LoadAdError error) =>
@@ -144,7 +151,7 @@ public class AdmobManager : MonoBehaviour
                         + ad.GetResponseInfo());
 
               rebirthRewardedAd = ad;
-              RewardedAdEvents(rebirthRewardedAd);
+              RewardedAdEvents(rebirthRewardedAd , LoadRebirthRewardAd);
           });
     }
 
@@ -158,6 +165,8 @@ public class AdmobManager : MonoBehaviour
             cardChangeRewardedAd.Show((Reward reward) =>
             {
                 SkillCardController.Inst.ChangeCardRewardAD();
+                GameController.Inst.TimeOnBtn();
+
             });
         }
     }
@@ -171,7 +180,7 @@ public class AdmobManager : MonoBehaviour
             cardChangeRewardedAd = null;
         }
         var adRequest = new AdRequest();
-        adRequest.Keywords.Add("unity-admob-sample");
+        //adRequest.Keywords.Add("unity-admob-sample");
 
         RewardedAd.Load(rewardID, adRequest,
           (RewardedAd ad, LoadAdError error) =>
@@ -196,9 +205,8 @@ public class AdmobManager : MonoBehaviour
               retryCount = 0;
               Debug.Log("Rewarded ad loaded with response : "
                         + ad.GetResponseInfo());
-
               cardChangeRewardedAd = ad;
-              RewardedAdEvents(cardChangeRewardedAd);
+              RewardedAdEvents(cardChangeRewardedAd, LoadCardChangeRewardAd);
           });
     }
 
@@ -231,7 +239,7 @@ public class AdmobManager : MonoBehaviour
 
         // create our request used to load the ad.
         var adRequest = new AdRequest();
-        adRequest.Keywords.Add("unity-admob-sample");
+        //adRequest.Keywords.Add("unity-admob-sample");
 
         // send the request to load the ad.
         InterstitialAd.Load(frontID, adRequest,
@@ -261,10 +269,6 @@ public class AdmobManager : MonoBehaviour
                 frontAD = ad;
                 RegisterReloadHandler(frontAD);
             });
-    }
-    public void GameOver()
-    {
-        LoadInterstitialAd();
     }
 
     //public void HandleOnAdClosed(object sender, EventArgs args)

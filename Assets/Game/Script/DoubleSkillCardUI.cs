@@ -126,7 +126,8 @@ public class DoubleSkillCardUI : MonoBehaviour
 
     public void SelectFarmingCard()
     {
-        Time.timeScale = 1f;
+        GameController.Inst.TimeOffBtn();
+
         SkillCardController.Inst.GetSkillCardUI.SetActive(false);
         if (selectRedBoxes[0].activeSelf)
         {
@@ -191,7 +192,8 @@ public class DoubleSkillCardUI : MonoBehaviour
 
     public void RefuseFarmingCard()
     {
-        Time.timeScale = 1f;
+        GameController.Inst.TimeOffBtn();
+
         selectRedBoxes[0].SetActive(false);
         selectRedBoxes[1].SetActive(false);
         this.gameObject.SetActive(false);
