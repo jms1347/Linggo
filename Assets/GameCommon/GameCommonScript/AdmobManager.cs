@@ -11,10 +11,10 @@ public class AdmobManager : MonoBehaviour
     RewardedAd rebirthRewardedAd;
     RewardedAd cardChangeRewardedAd;
     int retryCount = 0;
-    const string frontID = "ca-app-pub-3940256099942544/1033173712";
-    //const string frontID = "ca-app-pub-3819330341227143/9853527457";
-    const string rewardID = "ca-app-pub-3940256099942544/5224354917";
-    //const string rewardID = "ca-app-pub-3819330341227143/9605760228";
+    //const string frontID = "ca-app-pub-3940256099942544/1033173712";
+    const string frontID = "ca-app-pub-3819330341227143/9853527457";
+    //const string rewardID = "ca-app-pub-3940256099942544/5224354917";
+    const string rewardID = "ca-app-pub-3819330341227143/9605760228";
 
     protected void Start()
     {
