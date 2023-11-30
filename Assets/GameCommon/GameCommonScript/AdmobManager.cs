@@ -223,6 +223,7 @@ public class AdmobManager : MonoBehaviour
         else
         {
             Debug.LogError("Interstitial ad is not ready yet.");
+            GameController.Inst.GameOver();
         }
     }
 

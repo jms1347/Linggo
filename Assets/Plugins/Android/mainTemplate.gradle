@@ -8,6 +8,7 @@ dependencies {
     implementation 'com.google.android.ump:user-messaging-platform:2.1.0' // Assets/GoogleMobileAds/Editor/GoogleUmpDependencies.xml:7
     implementation 'com.google.games:gpgs-plugin-support:0.10.14' // Assets/GooglePlayGames/Editor/GooglePlayGamesPluginDependencies.xml:11
 // Android Resolver Dependencies End
+   constraints.implementation 'androidx.fragment:fragment:1.3.6'
 **DEPS**}
 
 // Android Resolver Exclusions Start
