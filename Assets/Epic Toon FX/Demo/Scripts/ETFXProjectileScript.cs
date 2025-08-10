@@ -24,9 +24,9 @@ using System.Collections;
 		
         void FixedUpdate()
         {	
-			if (GetComponent<Rigidbody>().velocity.magnitude != 0)
+			if (GetComponent<Rigidbody>().linearVelocity.magnitude != 0)
 			{
-			    transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity); // Sets rotation to look at direction of movement
+			    transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().linearVelocity); // Sets rotation to look at direction of movement
 			}
 			
             RaycastHit hit;
@@ -37,12 +37,12 @@ using System.Collections;
             else
                 radius = colliderRadius;
 
-            Vector3 direction = transform.GetComponent<Rigidbody>().velocity; // Gets the direction of the projectile, used for collision detection
+            Vector3 direction = transform.GetComponent<Rigidbody>().linearVelocity; // Gets the direction of the projectile, used for collision detection
             if (transform.GetComponent<Rigidbody>().useGravity)
                 direction += Physics.gravity * Time.deltaTime; // Accounts for gravity if enabled
             direction = direction.normalized;
 
-            float detectionDistance = transform.GetComponent<Rigidbody>().velocity.magnitude * Time.deltaTime; // Distance of collision detection for this frame
+            float detectionDistance = transform.GetComponent<Rigidbody>().linearVelocity.magnitude * Time.deltaTime; // Distance of collision detection for this frame
 
             if (Physics.SphereCast(transform.position, radius, direction, out hit, detectionDistance)) // Checks if collision will happen
             {

@@ -1,0 +1,5 @@
+D:/fromscratch/Linggo/.utmp/RelWithDebInfo/2w5a6b1g/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/fromscratch/Linggo/.utmp/RelWithDebInfo/2w5a6b1g/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+D:/fromscratch/Linggo/.utmp/RelWithDebInfo/2w5a6b1g/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
+D:/fromscratch/Linggo/.utmp/RelWithDebInfo/2w5a6b1g/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
+D:/fromscratch/Linggo/.utmp/RelWithDebInfo/2w5a6b1g/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir

@@ -5,9 +5,7 @@ using System;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
-using GooglePlayGames.BasicApi.Events;
-
-
+using GooglePlayGames.BasicApi.Events; 
 public class GPGSBinder
 {
     static GPGSBinder inst = new GPGSBinder();
@@ -21,7 +19,7 @@ public class GPGSBinder
     IEventsClient Events =>
         PlayGamesPlatform.Instance.Events;
 
-
+ 
 
     public void Init()
     {

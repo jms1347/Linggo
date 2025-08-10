@@ -16,7 +16,7 @@ public class Missile : MonoBehaviour
     public int penetrateCnt = 1;
     public int currentPenetrateCnt;
 
-    [Header("»ç¿îµå")]
+    [Header("ï¿½ï¿½ï¿½ï¿½")]
     public AudioClip missileHitSound;
 
 
@@ -38,7 +38,7 @@ public class Missile : MonoBehaviour
 	{
 		if (targetDir != null)
 		{
-			rigid.velocity = targetDir * missileSpeed;
+			rigid.linearVelocity = targetDir * missileSpeed;
 		}
 	}
 	private void OnEnable()

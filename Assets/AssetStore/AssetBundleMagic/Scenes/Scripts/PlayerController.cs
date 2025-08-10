@@ -39,14 +39,14 @@ public class PlayerController : MonoBehaviour {
         float z = Input.GetAxis("Vertical");
         float x = Input.GetAxis("Horizontal");
 
-        Vector3 v = player.transform.InverseTransformVector(rb.velocity);
+        Vector3 v = player.transform.InverseTransformVector(rb.linearVelocity);
 
         v = player.transform.TransformVector(new Vector3(0, v.y, z * zMultiplier * acceleration * Time.fixedDeltaTime));
 
         rb.transform.Rotate(0, x * xMultiplier * Time.fixedDeltaTime, 0);
         rb.angularVelocity = Vector3.zero;
 
-        rb.velocity = v;
+        rb.linearVelocity = v;
 
         if (jump)
         {
