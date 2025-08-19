@@ -15,12 +15,12 @@ public class Test : MonoBehaviour
         if (GUILayout.Button("ClearLog"))
             log = "";
 
-        if (GUILayout.Button("Login"))
-            GPGSBinder.Inst.Login((success, localUser) =>
-            log = $"{success}, {localUser.userName}, {localUser.id}, {localUser.state}, {localUser.underage}");
+        //if (GUILayout.Button("Login"))
+        //    GPGSBinder.Inst.Login((success, localUser) =>
+        //    log = $"{success}, {localUser.userName}, {localUser.id}, {localUser.state}, {localUser.underage}");
 
-        if (GUILayout.Button("Logout"))
-            GPGSBinder.Inst.Logout();
+        //if (GUILayout.Button("Logout"))
+        //    GPGSBinder.Inst.Logout();
 
         if (GUILayout.Button("SaveCloud"))
             GPGSBinder.Inst.SaveCloud("mysave", "want data", success => log = $"{success}");

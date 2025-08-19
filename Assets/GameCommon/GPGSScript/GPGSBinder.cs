@@ -5,13 +5,17 @@ using System;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
-using GooglePlayGames.BasicApi.Events; 
+using GooglePlayGames.BasicApi.Events;
+using Unity.Services.Core;
+using System.Security.Authentication;
+
 public class GPGSBinder
 {
     static GPGSBinder inst = new GPGSBinder();
     public static GPGSBinder Inst => inst;
 
-
+    public string Token;
+    public string Error;
 
     ISavedGameClient SavedGame =>
         PlayGamesPlatform.Instance.SavedGame;
@@ -21,32 +25,52 @@ public class GPGSBinder
 
  
 
+
     public void Init()
     {
-        // var config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
-        //var config = new PlayGamesClientConfiguration.Builder().Build();
-        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-            .EnableSavedGames()
-            .Build();
-        PlayGamesPlatform.InitializeInstance(config);
+        PlayGamesPlatform.Instance.Authenticate((success) =>
+        {
+            if (success == SignInStatus.Success)
+            {
+                Debug.Log("Login with Google Play games successful.");
+
+                PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+                {
+                    Debug.Log("Authorization code: " + code);
+                    Token = code;
+                    // This token serves as an example to be used for SignInWithGooglePlayGames
+                });
+            }
+            else
+            {
+                Error = "Failed to retrieve Google play games authorization code";
+                Debug.Log("Login Unsuccessful");
+            }
+        });
+
+        //PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+        //    .EnableSavedGames()
+        //    .Build();
+        //PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
     }
 
 
-    public void Login(Action<bool, UnityEngine.SocialPlatforms.ILocalUser> onLoginSuccess = null)
-    {
-        Init();
-        PlayGamesPlatform.Instance.Authenticate(SignInInteractivity.CanPromptAlways, (success) =>
-        {
-            onLoginSuccess?.Invoke(success == SignInStatus.Success, Social.localUser);
-        });
-    }
+    //public void Login(Action<bool, UnityEngine.SocialPlatforms.ILocalUser> onLoginSuccess = null)
+    //{
+    //    Init();
+    //    PlayGamesPlatform.Instance.Authenticate(SignInInteractivity.CanPromptAlways, (success) =>
+    //    {
+    //        onLoginSuccess?.Invoke(success == SignInStatus.Success, Social.localUser);
+    //    });
+    //}
 
-    public void Logout()
-    {
-        PlayGamesPlatform.Instance.SignOut();
-    }
+    //public void Logout()
+    //{
+    //    PlayGamesPlatform.Instance.SignOut();
+    //}
+
 
 
     public void SaveCloud(string fileName, string saveData, Action<bool> onCloudSaved = null)

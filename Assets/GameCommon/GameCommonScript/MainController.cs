@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Security.Authentication;
+using Unity.Services.Core;
+using System.Threading.Tasks;
 
 public class MainController : MonoBehaviour
 {
@@ -44,6 +47,7 @@ public class MainController : MonoBehaviour
         //    print("최신 버전임 이상무");
         //}
     }
+
 
     public void LoadPlayStoreURL()
     {
@@ -103,12 +107,15 @@ public class MainController : MonoBehaviour
 
     public void GoogleLogout()
     {
-        if (Social.localUser.authenticated)
-        {
-            GPGSBinder.Inst.Logout();
-        }
+        //if (Social.localUser.authenticated)
+        //{
+        //    GPGSBinder.Inst.Logout();
+        //}
 
     }
+
+
+
     public void StartGame()
     {
         LoadingScene.LoadScene("GameScene");
